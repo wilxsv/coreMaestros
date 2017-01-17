@@ -1,0 +1,26 @@
+{% set msg_breadcrumb = {
+    l1: { nombre: "Inicio", url: "", desc: "Inicio de sistema" },
+    l2: { nombre: "Primer Nivel", url: "", desc : "Nivel 2 de sistema" },
+    l3: { nombre: "Segundo Nivel", url: "", desc : "Nivel 3 de sistema" },
+    l4: { nombre: "Tercer Nivel", url: "", desc : "Nivel 4" }
+} %}{% if msg_breadcrumb is defined %}
+ <div class="breadcrumbs" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="icon-home home-icon"></i>
+      <a href="#">Inicio</a>
+      <span class="divider">
+        <i class="icon-angle-right arrow-icon"></i>
+      </span>
+    </li>
+    {% for item in msg_breadcrumb %}
+      <li>
+       <a href="{{ item.url }}">{{ item.nombre }}</a>
+       <span class="divider">
+        <i class="icon-angle-right arrow-icon"></i>
+       </span>
+      </li>
+    {% endfor %}
+    <!--.<li class="active">Blank Page</li>-->
+ </ul><!--.breadcrumb-->
+{% endif %}
