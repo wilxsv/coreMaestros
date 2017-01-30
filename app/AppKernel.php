@@ -16,9 +16,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new Maestro\PlantillaBundle\MaestroPlantillaBundle(),
+            new Maestro\CoreBundle\MaestroCoreBundle(),
+            new Maestro\ApiBundle\MaestroApiBundle(),
+            new Maestro\ModeloBundle\MaestroModeloBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Maestro\InsumoBundle\MaestroInsumoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

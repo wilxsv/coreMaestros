@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2197c019c094ecb127b950d9d22f864f",
-    "content-hash": "4297ac3d0c5d03a7feb3b1bf165209c1",
+    "hash": "b81d2c53f64c7b6ac986540fda0ffedb",
+    "content-hash": "dff411a11d2e4053f54bb24c1f1f2cc6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -724,12 +724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "90628acfec2dcd105f47ab6eddcf14d28f60962b"
+                "reference": "6b8828bcc64d0861b3918e1551947112d58e4d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/90628acfec2dcd105f47ab6eddcf14d28f60962b",
-                "reference": "90628acfec2dcd105f47ab6eddcf14d28f60962b",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6b8828bcc64d0861b3918e1551947112d58e4d0c",
+                "reference": "6b8828bcc64d0861b3918e1551947112d58e4d0c",
                 "shasum": ""
             },
             "require": {
@@ -792,7 +792,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-01-16 09:31:32"
+            "time": "2017-01-27 14:24:54"
         },
         {
             "name": "incenteev/composer-parameter-handler",

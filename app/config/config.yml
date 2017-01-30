@@ -9,8 +9,8 @@ parameters:
     locale: en
 
 framework:
+    translator: ~
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -34,11 +34,14 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        version: "0.1.0"
+        nombre: "establecimientos"
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_pgsql
+        driver:   "pdo_pgsql"
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"
@@ -65,6 +68,8 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    db_driver: orm
     firewall_name: main
-    user_class: Maestro\InsumoBundle\Entity\User
+    user_class: Maestro\ModeloBundle\Entity\User
+    group:
+        group_class: Maestro\ModeloBundle\Entity\Group

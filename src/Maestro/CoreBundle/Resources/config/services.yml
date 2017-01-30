@@ -1,0 +1,4 @@
+services:
+#    maestro_core.example:
+#        class: Maestro\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

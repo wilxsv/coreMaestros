@@ -1,0 +1,43 @@
+<li>
+  <a href="{{ path('homepage') }}">
+    <i class="icon-dashboard"></i>
+    <span class="menu-text"> Informacion </span>
+  </a>
+</li>
+{% if app.user %}<!--/get role-->
+<li>
+  <a href="{{ path('homepage') }}">
+    <i class="icon-building"></i>
+    <span class="menu-text"> Establecimientos </span>
+  </a>
+</li>
+
+<li>
+  <a href="" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> Localidad </span><b class="arrow icon-angle-down"></b></a>
+  <ul class="submenu">
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Cantones</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Departamentos</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Micro Red</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Municipio</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Pais</a></li>
+  </ul>
+</li>
+
+<li>
+  <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Catalogos</span><b class="arrow icon-angle-down"></b></a>
+  <ul class="submenu">
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Catalogo</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Institucion</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Ins/Establecimiento</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> RecursoHumano</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Servicios</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> SituacionLegal</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Dependencia</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Tipo Establecimiento</a></li>
+  </ul>
+</li>
+<li><a href="{{ path('maestro_core_syslog') }}"><i class="icon-bug"></i><span class="menu-text"> Eventos del sistema</span></a></li>
+<li><a href="{{ path('maestro_core_schema') }}"><i class="icon-tags "></i><span class="menu-text"> Version de la informacion</span></a></li>
+{% endif %}<!--/get role-->
+<li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
+<li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>
