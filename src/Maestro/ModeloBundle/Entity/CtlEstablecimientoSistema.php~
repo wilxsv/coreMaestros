@@ -1,0 +1,85 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlEstablecimientoSistema
+ *
+ * @ORM\Table(name="ctl_establecimiento_sistema", indexes={@ORM\Index(name="IDX_9F352DF07DFA12F6", columns={"id_establecimiento"})})
+ * @ORM\Entity
+ */
+class CtlEstablecimientoSistema
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_establecimiento_sistema_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", length=15, nullable=false)
+     */
+    private $ip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dominio_sistema", type="string", length=50, nullable=false)
+     */
+    private $dominioSistema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     */
+    private $ipUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var \CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_establecimiento", referencedColumnName="id")
+     * })
+     */
+    private $idEstablecimiento;
+
+
+}

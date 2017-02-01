@@ -1,0 +1,82 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Usuario
+ *
+ * @ORM\Table(name="usuario")
+ * @ORM\Entity
+ */
+class Usuario
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="usuario_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=true)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contrasenia", type="string", length=25, nullable=true)
+     */
+    private $contrasenia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+
+}

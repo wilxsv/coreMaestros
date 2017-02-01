@@ -1,0 +1,134 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlCanton
+ *
+ * @ORM\Table(name="ctl_canton", indexes={@ORM\Index(name="idx_cc9031f47ead49c7", columns={"id_municipio"})})
+ * @ORM\Entity
+ */
+class CtlCanton
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_canton_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=250, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_digestyc", type="string", length=5, nullable=true)
+     */
+    private $codigoDigestyc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="rural", type="boolean", nullable=true)
+     */
+    private $rural;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="digestyc2015", type="string", length=2, nullable=true)
+     */
+    private $digestyc2015;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     */
+    private $ipUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var \CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+
+}

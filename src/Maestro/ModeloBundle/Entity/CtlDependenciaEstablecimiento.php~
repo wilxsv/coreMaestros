@@ -1,0 +1,140 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlDependenciaEstablecimiento
+ *
+ * @ORM\Table(name="ctl_dependencia_establecimiento", indexes={@ORM\Index(name="idx_bc5984327dfa12f6", columns={"id_establecimiento"}), @ORM\Index(name="idx_bc5984322bf76b46", columns={"id_dependencia_padre"}), @ORM\Index(name="idx_bc598432ca22cd3f", columns={"id_dependencia_tipo"})})
+ * @ORM\Entity
+ */
+class CtlDependenciaEstablecimiento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_dependencia_establecimiento_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="date", nullable=true)
+     */
+    private $fechaFin;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="habilitado", type="boolean", nullable=true)
+     */
+    private $habilitado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     */
+    private $ipUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var \CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_establecimiento", referencedColumnName="id")
+     * })
+     */
+    private $idEstablecimiento;
+
+    /**
+     * @var \CtlDependenciaEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlDependenciaEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_dependencia_padre", referencedColumnName="id")
+     * })
+     */
+    private $idDependenciaPadre;
+
+    /**
+     * @var \CtlDependenciaTipoDependencia
+     *
+     * @ORM\ManyToOne(targetEntity="CtlDependenciaTipoDependencia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_dependencia_tipo", referencedColumnName="id")
+     * })
+     */
+    private $idDependenciaTipo;
+
+
+}

@@ -1,0 +1,123 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlProyecto
+ *
+ * @ORM\Table(name="ctl_proyecto", indexes={@ORM\Index(name="idx_622ee6ff19f7bfd", columns={"id_financiamiento"}), @ORM\Index(name="IDX_622EE6F73F8915", columns={"id_tipo_proyecto"})})
+ * @ORM\Entity
+ */
+class CtlProyecto
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_proyecto_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=150, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="date", nullable=true)
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="date", nullable=true)
+     */
+    private $fechaFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle", type="string", length=15, nullable=true)
+     */
+    private $detalle;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $monto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var \CtlProyectoFinanciamiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlProyectoFinanciamiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_financiamiento", referencedColumnName="id")
+     * })
+     */
+    private $idFinanciamiento;
+
+    /**
+     * @var \CtlTipoProyecto
+     *
+     * @ORM\ManyToOne(targetEntity="CtlTipoProyecto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_proyecto", referencedColumnName="id")
+     * })
+     */
+    private $idTipoProyecto;
+
+
+}

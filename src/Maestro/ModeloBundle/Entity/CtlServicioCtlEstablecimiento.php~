@@ -1,0 +1,69 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlServicioCtlEstablecimiento
+ *
+ * @ORM\Table(name="ctl_servicio_ctl_establecimiento")
+ * @ORM\Entity
+ */
+class CtlServicioCtlEstablecimiento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ctl_servicioid", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $ctlServicioid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ctl_establecimientoid", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $ctlEstablecimientoid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     */
+    private $ipUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+
+}

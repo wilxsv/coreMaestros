@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlcantons list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Codigodigestyc</th>
+                <th>Idusuarioreg</th>
+                <th>Fechahorareg</th>
+                <th>Idusuariomod</th>
+                <th>Fechahoramod</th>
+                <th>Rural</th>
+                <th>Digestyc2015</th>
+                <th>Activo</th>
+                <th>Iduser</th>
+                <th>Ipuser</th>
+                <th>Detalleschema</th>
+                <th>Enableschema</th>
+                <th>Estadoschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlCanton in ctlCantons %}
+            <tr>
+                <td><a href="{{ path('canton_show', { 'id': ctlCanton.id }) }}">{{ ctlCanton.id }}</a></td>
+                <td>{{ ctlCanton.nombre }}</td>
+                <td>{{ ctlCanton.codigoDigestyc }}</td>
+                <td>{{ ctlCanton.idUsuarioReg }}</td>
+                <td>{% if ctlCanton.fechaHoraReg %}{{ ctlCanton.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlCanton.idUsuarioMod }}</td>
+                <td>{% if ctlCanton.fechaHoraMod %}{{ ctlCanton.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if ctlCanton.rural %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlCanton.digestyc2015 }}</td>
+                <td>{% if ctlCanton.activo %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlCanton.idUser }}</td>
+                <td>{{ ctlCanton.ipUser }}</td>
+                <td>{{ ctlCanton.detalleSchema }}</td>
+                <td>{% if ctlCanton.enableSchema %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlCanton.estadoSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('canton_show', { 'id': ctlCanton.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('canton_edit', { 'id': ctlCanton.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('canton_new') }}">Create a new ctlCanton</a>
+        </li>
+    </ul>
+{% endblock %}
