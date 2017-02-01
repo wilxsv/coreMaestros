@@ -1,0 +1,29 @@
+establecimiento_add:
+    path:     /agrega
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:agrega" }
+    methods:  GET
+
+establecimiento_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:index" }
+    methods:  GET
+
+establecimiento_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:show" }
+    methods:  GET
+
+establecimiento_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:new" }
+    methods:  [GET, POST]
+
+establecimiento_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:edit" }
+    methods:  [GET, POST]
+
+establecimiento_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:delete" }
+    methods:  DELETE

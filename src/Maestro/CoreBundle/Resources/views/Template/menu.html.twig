@@ -6,19 +6,24 @@
 </li>
 {% if app.user %}<!--/get role-->
 <li>
-  <a href="{{ path('homepage') }}">
-    <i class="icon-building"></i>
-    <span class="menu-text"> Establecimientos </span>
-  </a>
+<a href="" class="dropdown-toggle"><i class="icon-building"></i><span class="menu-text"> Establecimientos </span><b class="arrow icon-angle-down"></b></a>
+<ul class="submenu">
+  <li><a href="{{ path('establecimiento_add') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Mapa</a></li>
+</ul>
 </li>
+<li><a href="{{ path('homepage') }}"><i class="icon-user-md"></i><span class="menu-text"> ECOS </span></a></li>
 
 <li>
   <a href="" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> Localidad </span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
-    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Cantones</a></li>
+    <li><a href="{{ path('maestro_homepage') }}"><i class="icon-double-angle-right"></i> Cantones</a></li>
     <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Departamentos</a></li>
     <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Micro Red</a></li>
-    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Municipio</a></li>
+    <li><a href="{{ path('maestro_homepage') }}"><i class="icon-double-angle-right"></i> Municipio</a></li>
     <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Pais</a></li>
   </ul>
 </li>

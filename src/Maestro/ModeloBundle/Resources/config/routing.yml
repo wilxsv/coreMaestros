@@ -1,3 +1,6 @@
+maestro_modelo_establecimiento:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlestablecimiento.yml"
+    prefix:   /establecimiento
 maestro_modelo_canton:
     resource: "@MaestroModeloBundle/Resources/config/routing/ctlcanton.yml"
     prefix:   /canton
