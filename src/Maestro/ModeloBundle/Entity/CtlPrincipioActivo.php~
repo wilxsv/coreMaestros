@@ -1,0 +1,107 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlPrincipioActivo
+ *
+ * @ORM\Table(name="ctl_principio_activo", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_principio_activo_nombre_pactivo_key", columns={"nombre_pactivo"})}, indexes={@ORM\Index(name="IDX_7AD8B1FF3F89DC5", columns={"ctl_principioid"})})
+ * @ORM\Entity
+ */
+class CtlPrincipioActivo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_principio_activo_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_pactivo", type="string", length=255, nullable=false)
+     */
+    private $nombrePactivo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlPrincipio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlPrincipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_principioid", referencedColumnName="id")
+     * })
+     */
+    private $ctlPrincipioid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlInsumo", inversedBy="ctlPrincipioActivoid")
+     * @ORM\JoinTable(name="ctl_principio_activo_ctl_insumo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_principio_activoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_insumoid", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlInsumoid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlInsumoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

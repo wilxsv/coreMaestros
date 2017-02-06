@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlformafarmaceuticas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreformafarmaceutica</th>
+                <th>Detalleformafarmaceutica</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlFormaFarmaceutica in ctlFormaFarmaceuticas %}
+            <tr>
+                <td><a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">{{ ctlFormaFarmaceutica.id }}</a></td>
+                <td>{{ ctlFormaFarmaceutica.nombreFormaFarmaceutica }}</td>
+                <td>{{ ctlFormaFarmaceutica.detalleFormaFarmaceutica }}</td>
+                <td>{% if ctlFormaFarmaceutica.registroSchema %}{{ ctlFormaFarmaceutica.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlFormaFarmaceutica.detalleSchema }}</td>
+                <td>{{ ctlFormaFarmaceutica.userIdSchema }}</td>
+                <td>{{ ctlFormaFarmaceutica.ipUserSchema }}</td>
+                <td>{{ ctlFormaFarmaceutica.estadoSchema }}</td>
+                <td>{{ ctlFormaFarmaceutica.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('formafarmaceutica_new') }}">Create a new ctlFormaFarmaceutica</a>
+        </li>
+    </ul>
+{% endblock %}

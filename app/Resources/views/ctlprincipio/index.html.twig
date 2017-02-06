@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlprincipios list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreprincipio</th>
+                <th>Tipoprincipio</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlPrincipio in ctlPrincipios %}
+            <tr>
+                <td><a href="{{ path('principio_show', { 'id': ctlPrincipio.id }) }}">{{ ctlPrincipio.id }}</a></td>
+                <td>{{ ctlPrincipio.nombrePrincipio }}</td>
+                <td>{{ ctlPrincipio.tipoPrincipio }}</td>
+                <td>{% if ctlPrincipio.registroSchema %}{{ ctlPrincipio.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlPrincipio.detalleSchema }}</td>
+                <td>{{ ctlPrincipio.userIdSchema }}</td>
+                <td>{{ ctlPrincipio.ipUserSchema }}</td>
+                <td>{{ ctlPrincipio.estadoSchema }}</td>
+                <td>{{ ctlPrincipio.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('principio_show', { 'id': ctlPrincipio.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('principio_edit', { 'id': ctlPrincipio.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('principio_new') }}">Create a new ctlPrincipio</a>
+        </li>
+    </ul>
+{% endblock %}

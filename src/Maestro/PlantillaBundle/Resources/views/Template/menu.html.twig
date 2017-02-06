@@ -1,134 +1,48 @@
 <li>
-  <a href="index.html">
+  <a href="{{ path('homepage') }}">
     <i class="icon-dashboard"></i>
-    <span class="menu-text"> Estadisticas </span>
+    <span class="menu-text"> Informacion </span>
   </a>
 </li>
-
+{% if app.user %}<!--/get role-->
 <li>
-  <a href="typography.html">
-    <i class="icon-text-width"></i>
-    <span class="menu-text"> Accesos </span>
-  </a>
+<a href="" class="dropdown-toggle"><i class="icon-building"></i><span class="menu-text"> Establecimientos </span><b class="arrow icon-angle-down"></b></a>
+<ul class="submenu">
+  <li><a href="{{ path('establecimiento_add') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Mapa</a></li>
+</ul>
 </li>
+<li><a href="{{ path('homepage') }}"><i class="icon-user-md"></i><span class="menu-text"> ECOS </span></a></li>
 
 <li>
-  <a href="#" class="dropdown-toggle">
-    <i class="icon-list"></i>
-    <span class="menu-text"> Insumos Medicos </span>
-
-    <b class="arrow icon-angle-down"></b>
-  </a>
-
+  <a href="" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> Localidad </span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
-    <li>
-      <a href="elements.html">
-        <i class="icon-double-angle-right"></i>
-        Elements
-      </a>
-    </li>
-
-    <li>
-      <a href="buttons.html">
-        <i class="icon-double-angle-right"></i>
-        Buttons &amp; Icons
-      </a>
-    </li>
-
-    <li>
-      <a href="treeview.html">
-        <i class="icon-double-angle-right"></i>
-        Treeview
-      </a>
-    </li>
-
-    <li>
-      <a href="#" class="dropdown-toggle">
-        <i class="icon-double-angle-right"></i>
-
-        Three Level Menu
-        <b class="arrow icon-angle-down"></b>
-      </a>
-
-      <ul class="submenu">
-        <li>
-          <a href="#">
-            <i class="icon-leaf"></i>
-            Item #1
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="dropdown-toggle">
-            <i class="icon-pencil"></i>
-
-            4th level
-            <b class="arrow icon-angle-down"></b>
-          </a>
-
-          <ul class="submenu">
-            <li>
-              <a href="#">
-                <i class="icon-plus"></i>
-                Add Product
-              </a>
-            </li>
-
-            <li>
-              <a href="#">
-                <i class="icon-eye-open"></i>
-                View Products
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    <li><a href="{{ path('maestro_homepage') }}"><i class="icon-double-angle-right"></i> Cantones</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Departamentos</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Micro Red</a></li>
+    <li><a href="{{ path('maestro_homepage') }}"><i class="icon-double-angle-right"></i> Municipio</a></li>
+    <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Pais</a></li>
   </ul>
 </li>
 
 <li>
-  <a href="tables.html">
-    <i class="icon-list"></i>
-    <span class="menu-text"> Insumos no medicos </span>
-  </a>
-</li>
-
-<li>
-  <a href="#" class="dropdown-toggle">
-    <i class="icon-edit"></i>
-    <span class="menu-text"> Logs sistema </span>
-
-    <b class="arrow icon-angle-down"></b>
-  </a>
-
+  <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Catalogos</span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
-    <li>
-      <a href="form-elements.html">
-        <i class="icon-double-angle-right"></i>
-        Form Elements
-      </a>
-    </li>
-
-    <li>
-      <a href="form-wizard.html">
-        <i class="icon-double-angle-right"></i>
-        Wizard &amp; Validation
-      </a>
-    </li>
-
-    <li>
-      <a href="wysiwyg.html">
-        <i class="icon-double-angle-right"></i>
-        Wysiwyg &amp; Markdown
-      </a>
-    </li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Catalogo</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Institucion</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Ins/Establecimiento</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> RecursoHumano</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Servicios</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> SituacionLegal</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Dependencia</a></li>
+  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Tipo Establecimiento</a></li>
   </ul>
 </li>
-
-<li>
-  <a href="widgets.html">
-    <i class="icon-list-alt"></i>
-    <span class="menu-text"> Eventos </span>
-  </a>
-</li>
+<li><a href="{{ path('maestro_core_syslog') }}"><i class="icon-bug"></i><span class="menu-text"> Eventos del sistema</span></a></li>
+<li><a href="{{ path('maestro_core_schema') }}"><i class="icon-tags "></i><span class="menu-text"> Version de la informacion</span></a></li>
+{% endif %}<!--/get role-->
+<li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
+<li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>

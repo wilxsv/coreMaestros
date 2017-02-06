@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlinsumo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlInsumo.id }}</td>
+            </tr>
+            <tr>
+                <th>Codigonu</th>
+                <td>{{ ctlInsumo.codigoNu }}</td>
+            </tr>
+            <tr>
+                <th>Codigosinab</th>
+                <td>{{ ctlInsumo.codigoSinab }}</td>
+            </tr>
+            <tr>
+                <th>Codigoecri</th>
+                <td>{{ ctlInsumo.codigoEcri }}</td>
+            </tr>
+            <tr>
+                <th>Codigoatc</th>
+                <td>{{ ctlInsumo.codigoAtc }}</td>
+            </tr>
+            <tr>
+                <th>Listadooficial</th>
+                <td>{{ ctlInsumo.listadoOficial }}</td>
+            </tr>
+            <tr>
+                <th>Nombrelargo</th>
+                <td>{{ ctlInsumo.nombreLargo }}</td>
+            </tr>
+            <tr>
+                <th>Registro</th>
+                <td>{% if ctlInsumo.registro %}{{ ctlInsumo.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Idusuario</th>
+                <td>{{ ctlInsumo.idUsuario }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('insumo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

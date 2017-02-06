@@ -1,0 +1,12 @@
+syslog_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:Syslog:index" }
+    methods:  GET
+
+syslog_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:Syslog:show" }
+    methods:  GET
+
+
+

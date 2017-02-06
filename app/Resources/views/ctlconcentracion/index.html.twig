@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlconcentracions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Detalleconcentracion</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlConcentracion in ctlConcentracions %}
+            <tr>
+                <td><a href="{{ path('concentracion_show', { 'id': ctlConcentracion.id }) }}">{{ ctlConcentracion.id }}</a></td>
+                <td>{{ ctlConcentracion.detalleConcentracion }}</td>
+                <td>{% if ctlConcentracion.registroSchema %}{{ ctlConcentracion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlConcentracion.detalleSchema }}</td>
+                <td>{{ ctlConcentracion.userIdSchema }}</td>
+                <td>{{ ctlConcentracion.ipUserSchema }}</td>
+                <td>{{ ctlConcentracion.estadoSchema }}</td>
+                <td>{{ ctlConcentracion.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('concentracion_show', { 'id': ctlConcentracion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('concentracion_edit', { 'id': ctlConcentracion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('concentracion_new') }}">Create a new ctlConcentracion</a>
+        </li>
+    </ul>
+{% endblock %}

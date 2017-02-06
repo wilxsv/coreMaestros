@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlsuministros list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombresuministro</th>
+                <th>Detallesuministro</th>
+                <th>Registro</th>
+                <th>Idusuario</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlSuministro in ctlSuministros %}
+            <tr>
+                <td><a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">{{ ctlSuministro.id }}</a></td>
+                <td>{{ ctlSuministro.nombreSuministro }}</td>
+                <td>{{ ctlSuministro.detalleSuministro }}</td>
+                <td>{% if ctlSuministro.registro %}{{ ctlSuministro.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlSuministro.idUsuario }}</td>
+                <td>{% if ctlSuministro.registroSchema %}{{ ctlSuministro.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlSuministro.detalleSchema }}</td>
+                <td>{{ ctlSuministro.userIdSchema }}</td>
+                <td>{{ ctlSuministro.ipUserSchema }}</td>
+                <td>{{ ctlSuministro.estadoSchema }}</td>
+                <td>{{ ctlSuministro.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('suministro_edit', { 'id': ctlSuministro.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('suministro_new') }}">Create a new ctlSuministro</a>
+        </li>
+    </ul>
+{% endblock %}

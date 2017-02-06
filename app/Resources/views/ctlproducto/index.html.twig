@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlproductos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreproducto</th>
+                <th>Detalleproducto</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlProducto in ctlProductos %}
+            <tr>
+                <td><a href="{{ path('producto_show', { 'id': ctlProducto.id }) }}">{{ ctlProducto.id }}</a></td>
+                <td>{{ ctlProducto.nombreProducto }}</td>
+                <td>{{ ctlProducto.detalleProducto }}</td>
+                <td>{% if ctlProducto.registroSchema %}{{ ctlProducto.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlProducto.detalleSchema }}</td>
+                <td>{{ ctlProducto.userIdSchema }}</td>
+                <td>{{ ctlProducto.ipUserSchema }}</td>
+                <td>{{ ctlProducto.estadoSchema }}</td>
+                <td>{{ ctlProducto.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('producto_show', { 'id': ctlProducto.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('producto_edit', { 'id': ctlProducto.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('producto_new') }}">Create a new ctlProducto</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,82 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlPresentacion
+ *
+ * @ORM\Table(name="ctl_presentacion", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_presentacion_nombre_presentacion_key", columns={"nombre_presentacion"})})
+ * @ORM\Entity
+ */
+class CtlPresentacion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_presentacion_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_presentacion", type="string", length=255, nullable=false)
+     */
+    private $nombrePresentacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_presentacion", type="string", length=255, nullable=true)
+     */
+    private $detallePresentacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+
+}

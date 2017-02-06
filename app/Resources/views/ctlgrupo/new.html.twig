@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+  <h3 class="header smaller lighter blue">Editar Grupo</h3>
+  <div class="table-header">
+  </div>
+  </p>
+  <p>
+</div>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Guardar" class="btn btn-small btn-primary"/>
+    {{ form_end(form) }}
+    <br/>
+    <a href="{{ path('grupo_index') }}" class="btn btn-small btn-info">Regresar</a>
+{% endblock %}

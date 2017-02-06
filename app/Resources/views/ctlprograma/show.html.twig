@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlprograma</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlPrograma.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombreprograma</th>
+                <td>{{ ctlPrograma.nombrePrograma }}</td>
+            </tr>
+            <tr>
+                <th>Detalleprograma</th>
+                <td>{{ ctlPrograma.detallePrograma }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlPrograma.registroSchema %}{{ ctlPrograma.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlPrograma.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlPrograma.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Ipuserschema</th>
+                <td>{{ ctlPrograma.ipUserSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlPrograma.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlPrograma.enableSchema }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('programa_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('programa_edit', { 'id': ctlPrograma.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

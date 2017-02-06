@@ -1,0 +1,29 @@
+insumo_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:index" }
+    methods:  GET
+
+insumo_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:show" }
+    methods:  GET
+
+insumo_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new" }
+    methods:  [GET, POST]
+
+insumo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:edit" }
+    methods:  [GET, POST]
+
+insumo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:delete" }
+    methods:  DELETE
+
+insumo_index_catalogo:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:catalogo" }
+    methods:  GET

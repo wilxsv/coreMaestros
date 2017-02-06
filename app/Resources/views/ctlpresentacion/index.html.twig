@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlpresentacions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombrepresentacion</th>
+                <th>Detallepresentacion</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlPresentacion in ctlPresentacions %}
+            <tr>
+                <td><a href="{{ path('presentacion_show', { 'id': ctlPresentacion.id }) }}">{{ ctlPresentacion.id }}</a></td>
+                <td>{{ ctlPresentacion.nombrePresentacion }}</td>
+                <td>{{ ctlPresentacion.detallePresentacion }}</td>
+                <td>{% if ctlPresentacion.registroSchema %}{{ ctlPresentacion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlPresentacion.detalleSchema }}</td>
+                <td>{{ ctlPresentacion.userIdSchema }}</td>
+                <td>{{ ctlPresentacion.ipUserSchema }}</td>
+                <td>{{ ctlPresentacion.estadoSchema }}</td>
+                <td>{{ ctlPresentacion.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('presentacion_show', { 'id': ctlPresentacion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('presentacion_edit', { 'id': ctlPresentacion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('presentacion_new') }}">Create a new ctlPresentacion</a>
+        </li>
+    </ul>
+{% endblock %}

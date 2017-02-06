@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlalternativos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ctlinsumoalternativo</th>
+                <th>Multiploalternativo</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlAlternativo in ctlAlternativos %}
+            <tr>
+                <td><a href="{{ path('alternativo_show', { 'id': ctlAlternativo.id }) }}">{{ ctlAlternativo.id }}</a></td>
+                <td>{{ ctlAlternativo.ctlInsumoAlternativo }}</td>
+                <td>{{ ctlAlternativo.multiploAlternativo }}</td>
+                <td>{% if ctlAlternativo.registroSchema %}{{ ctlAlternativo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlAlternativo.detalleSchema }}</td>
+                <td>{{ ctlAlternativo.userIdSchema }}</td>
+                <td>{{ ctlAlternativo.ipUserSchema }}</td>
+                <td>{{ ctlAlternativo.estadoSchema }}</td>
+                <td>{{ ctlAlternativo.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('alternativo_show', { 'id': ctlAlternativo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('alternativo_edit', { 'id': ctlAlternativo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('alternativo_new') }}">Create a new ctlAlternativo</a>
+        </li>
+    </ul>
+{% endblock %}

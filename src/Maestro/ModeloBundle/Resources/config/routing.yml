@@ -1,3 +1,58 @@
+maestro_modelo_syslog:
+    resource: "@MaestroModeloBundle/Resources/config/routing/syslog.yml"
+    prefix:   /syslog
+maestro_modelo_fos_user:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /fos_user
+maestro_modelo_fos_grupo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosgroup.yml"
+    prefix:   /fos_grupo
+maestro_modelo_unidad_medida:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlunidadmedida.yml"
+    prefix:   /unidad_medida
+maestro_modelo_suministro:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlsuministro.yml"
+    prefix:   /suministro
+maestro_modelo_schema:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlschema.yml"
+    prefix:   /schema
+maestro_modelo_programa:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlprograma.yml"
+    prefix:   /programa
+maestro_modelo_producto:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlproducto.yml"
+    prefix:   /producto
+maestro_modelo_principio_activo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlprincipioactivo.yml"
+    prefix:   /principio_activo
+maestro_modelo_principio:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlprincipio.yml"
+    prefix:   /principio
+maestro_modelo_presentacion:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlpresentacion.yml"
+    prefix:   /presentacion
+maestro_modelo_nivel_uso:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlniveluso.yml"
+    prefix:   /nivel_uso
+maestro_modelo_log:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctllog.yml"
+    prefix:   /log
+maestro_modelo_grupo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlgrupo.yml"
+    prefix:   /grupo
+maestro_modelo_formafarmaceutica:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlformafarmaceutica.yml"
+    prefix:   /formafarmaceutica
+maestro_modelo_concentracion:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlconcentracion.yml"
+    prefix:   /concentracion
+maestro_modelo_alternativo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlalternativo.yml"
+    prefix:   /alternativo
+maestro_modelo_insumo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlinsumo.yml"
+    prefix:   /insumo
+
 maestro_modelo_homepage:
     path:     /model
     defaults: { _controller: MaestroModeloBundle:Default:index }

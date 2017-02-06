@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlschema</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlSchema.id }}</td>
+            </tr>
+            <tr>
+                <th>Tablaschema</th>
+                <td>{{ ctlSchema.tablaSchema }}</td>
+            </tr>
+            <tr>
+                <th>Indextablaschema</th>
+                <td>{{ ctlSchema.indexTablaSchema }}</td>
+            </tr>
+            <tr>
+                <th>Varsschema</th>
+                <td>{{ ctlSchema.varsSchema }}</td>
+            </tr>
+            <tr>
+                <th>Tipocambioschema</th>
+                <td>{{ ctlSchema.tipoCambioSchema }}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlSchema.detalleSchema }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('schema_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

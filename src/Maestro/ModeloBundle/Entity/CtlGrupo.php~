@@ -1,0 +1,89 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlGrupo
+ *
+ * @ORM\Table(name="ctl_grupo")
+ * @ORM\Entity
+ */
+class CtlGrupo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_grupo_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_grupo", type="string", length=255, nullable=false)
+     */
+    private $nombreGrupo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_grupo", type="text", nullable=true)
+     */
+    private $detalleGrupo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="grupo_id", type="bigint", nullable=false)
+     */
+    private $grupoId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+
+}

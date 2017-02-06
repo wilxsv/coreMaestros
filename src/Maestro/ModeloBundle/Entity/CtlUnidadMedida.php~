@@ -1,0 +1,99 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlUnidadMedida
+ *
+ * @ORM\Table(name="ctl_unidad_medida", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_unidad_medida_nombre_unidad_key", columns={"nombre_unidad"})}, indexes={@ORM\Index(name="IDX_E644C424D2D8661B", columns={"ctl_unidad_medidaid"})})
+ * @ORM\Entity
+ */
+class CtlUnidadMedida
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_unidad_medida_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombre_unidad", type="bigint", nullable=false)
+     */
+    private $nombreUnidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="detalle_unidad_medida", type="bigint", nullable=true)
+     */
+    private $detalleUnidadMedida;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="unidades_unidad", type="bigint", nullable=false)
+     */
+    private $unidadesUnidad;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlUnidadMedida
+     *
+     * @ORM\ManyToOne(targetEntity="CtlUnidadMedida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_unidad_medidaid", referencedColumnName="id")
+     * })
+     */
+    private $ctlUnidadMedidaid;
+
+
+}

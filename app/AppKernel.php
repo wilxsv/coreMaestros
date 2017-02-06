@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Maestro\ApiBundle\MaestroApiBundle(),
             new Maestro\ModeloBundle\MaestroModeloBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Maestro\InsumoBundle\MaestroInsumoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

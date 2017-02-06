@@ -1,0 +1,106 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlSuministro
+ *
+ * @ORM\Table(name="ctl_suministro", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_suministro_nombre_suministro_key", columns={"nombre_suministro"})}, indexes={@ORM\Index(name="IDX_23741A44D64E375F", columns={"ctl_suministroid"})})
+ * @ORM\Entity
+ */
+class CtlSuministro
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_suministro_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_suministro", type="string", length=255, nullable=false)
+     */
+    private $nombreSuministro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_suministro", type="string", length=255, nullable=true)
+     */
+    private $detalleSuministro;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro", type="datetime", nullable=false)
+     */
+    private $registro;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_usuario", type="bigint", nullable=false)
+     */
+    private $idUsuario;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlSuministro
+     *
+     * @ORM\ManyToOne(targetEntity="CtlSuministro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_suministroid", referencedColumnName="id")
+     * })
+     */
+    private $ctlSuministroid;
+
+
+}

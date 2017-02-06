@@ -1,0 +1,92 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlAlternativo
+ *
+ * @ORM\Table(name="ctl_alternativo", uniqueConstraints={@ORM\UniqueConstraint(name="unique_mezcla", columns={"ctl_insumo", "ctl_insumo_alternativo"})}, indexes={@ORM\Index(name="IDX_2858B3F39DB3222", columns={"ctl_insumo"})})
+ * @ORM\Entity
+ */
+class CtlAlternativo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_alternativo_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ctl_insumo_alternativo", type="bigint", nullable=true)
+     */
+    private $ctlInsumoAlternativo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="multiplo_alternativo", type="bigint", nullable=false)
+     */
+    private $multiploAlternativo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlInsumo
+     *
+     * @ORM\ManyToOne(targetEntity="CtlInsumo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_insumo", referencedColumnName="id")
+     * })
+     */
+    private $ctlInsumo;
+
+
+}

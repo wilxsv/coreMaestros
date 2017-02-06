@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlalternativo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlAlternativo.id }}</td>
+            </tr>
+            <tr>
+                <th>Ctlinsumoalternativo</th>
+                <td>{{ ctlAlternativo.ctlInsumoAlternativo }}</td>
+            </tr>
+            <tr>
+                <th>Multiploalternativo</th>
+                <td>{{ ctlAlternativo.multiploAlternativo }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlAlternativo.registroSchema %}{{ ctlAlternativo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlAlternativo.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlAlternativo.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Ipuserschema</th>
+                <td>{{ ctlAlternativo.ipUserSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlAlternativo.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlAlternativo.enableSchema }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('alternativo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('alternativo_edit', { 'id': ctlAlternativo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

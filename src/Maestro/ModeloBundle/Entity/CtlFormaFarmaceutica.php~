@@ -1,0 +1,104 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlFormaFarmaceutica
+ *
+ * @ORM\Table(name="ctl_forma_farmaceutica", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_forma_farmaceutica_nombre_forma_farmaceutica_key", columns={"nombre_forma_farmaceutica"})})
+ * @ORM\Entity
+ */
+class CtlFormaFarmaceutica
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_forma_farmaceutica_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_forma_farmaceutica", type="string", length=255, nullable=false)
+     */
+    private $nombreFormaFarmaceutica;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_forma_farmaceutica", type="string", length=255, nullable=true)
+     */
+    private $detalleFormaFarmaceutica;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlInsumo", inversedBy="ctlFormaFarmaceuticaid")
+     * @ORM\JoinTable(name="ctl_unidad_dispensacion",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_forma_farmaceuticaid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_insumoid", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlInsumoid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlInsumoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

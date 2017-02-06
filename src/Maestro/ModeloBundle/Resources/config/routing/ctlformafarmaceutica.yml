@@ -1,0 +1,24 @@
+formafarmaceutica_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlFormaFarmaceutica:index" }
+    methods:  GET
+
+formafarmaceutica_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlFormaFarmaceutica:show" }
+    methods:  GET
+
+formafarmaceutica_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlFormaFarmaceutica:new" }
+    methods:  [GET, POST]
+
+formafarmaceutica_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlFormaFarmaceutica:edit" }
+    methods:  [GET, POST]
+
+formafarmaceutica_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlFormaFarmaceutica:delete" }
+    methods:  DELETE

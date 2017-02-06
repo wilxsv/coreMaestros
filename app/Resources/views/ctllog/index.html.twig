@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctllogs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombrelog</th>
+                <th>Descripcionlog</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlLog in ctlLogs %}
+            <tr>
+                <td><a href="{{ path('log_show', { 'id': ctlLog.id }) }}">{{ ctlLog.id }}</a></td>
+                <td>{{ ctlLog.nombreLog }}</td>
+                <td>{{ ctlLog.descripcionLog }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('log_show', { 'id': ctlLog.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

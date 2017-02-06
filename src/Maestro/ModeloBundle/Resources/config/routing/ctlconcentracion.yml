@@ -1,0 +1,24 @@
+concentracion_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlConcentracion:index" }
+    methods:  GET
+
+concentracion_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlConcentracion:show" }
+    methods:  GET
+
+concentracion_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlConcentracion:new" }
+    methods:  [GET, POST]
+
+concentracion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlConcentracion:edit" }
+    methods:  [GET, POST]
+
+concentracion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlConcentracion:delete" }
+    methods:  DELETE

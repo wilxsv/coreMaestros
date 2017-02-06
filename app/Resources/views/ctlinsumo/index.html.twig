@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlinsumos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigonu</th>
+                <th>Codigosinab</th>
+                <th>Codigoecri</th>
+                <th>Codigoatc</th>
+                <th>Listadooficial</th>
+                <th>Nombrelargo</th>
+                <th>Registro</th>
+                <th>Idusuario</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlInsumo in ctlInsumos %}
+            <tr>
+                <td><a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.id }}</a></td>
+                <td>{{ ctlInsumo.codigoNu }}</td>
+                <td>{{ ctlInsumo.codigoSinab }}</td>
+                <td>{{ ctlInsumo.codigoEcri }}</td>
+                <td>{{ ctlInsumo.codigoAtc }}</td>
+                <td>{{ ctlInsumo.listadoOficial }}</td>
+                <td>{{ ctlInsumo.nombreLargo }}</td>
+                <td>{% if ctlInsumo.registro %}{{ ctlInsumo.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlInsumo.idUsuario }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('insumo_new') }}">Create a new ctlInsumo</a>
+        </li>
+    </ul>
+{% endblock %}

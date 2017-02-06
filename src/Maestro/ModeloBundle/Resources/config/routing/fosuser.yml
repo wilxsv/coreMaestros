@@ -1,0 +1,12 @@
+fos_user_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:FosUser:index" }
+    methods:  GET
+
+fos_user_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:FosUser:show" }
+    methods:  GET
+
+
+

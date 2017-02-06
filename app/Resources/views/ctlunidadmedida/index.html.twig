@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlunidadmedidas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreunidad</th>
+                <th>Detalleunidadmedida</th>
+                <th>Unidadesunidad</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlUnidadMedida in ctlUnidadMedidas %}
+            <tr>
+                <td><a href="{{ path('unidad_medida_show', { 'id': ctlUnidadMedida.id }) }}">{{ ctlUnidadMedida.id }}</a></td>
+                <td>{{ ctlUnidadMedida.nombreUnidad }}</td>
+                <td>{{ ctlUnidadMedida.detalleUnidadMedida }}</td>
+                <td>{{ ctlUnidadMedida.unidadesUnidad }}</td>
+                <td>{% if ctlUnidadMedida.registroSchema %}{{ ctlUnidadMedida.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlUnidadMedida.detalleSchema }}</td>
+                <td>{{ ctlUnidadMedida.userIdSchema }}</td>
+                <td>{{ ctlUnidadMedida.ipUserSchema }}</td>
+                <td>{{ ctlUnidadMedida.estadoSchema }}</td>
+                <td>{{ ctlUnidadMedida.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('unidad_medida_show', { 'id': ctlUnidadMedida.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('unidad_medida_edit', { 'id': ctlUnidadMedida.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('unidad_medida_new') }}">Create a new ctlUnidadMedida</a>
+        </li>
+    </ul>
+{% endblock %}

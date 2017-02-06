@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlschemas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tablaschema</th>
+                <th>Indextablaschema</th>
+                <th>Varsschema</th>
+                <th>Tipocambioschema</th>
+                <th>Detalleschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlSchema in ctlSchemas %}
+            <tr>
+                <td><a href="{{ path('schema_show', { 'id': ctlSchema.id }) }}">{{ ctlSchema.id }}</a></td>
+                <td>{{ ctlSchema.tablaSchema }}</td>
+                <td>{{ ctlSchema.indexTablaSchema }}</td>
+                <td>{{ ctlSchema.varsSchema }}</td>
+                <td>{{ ctlSchema.tipoCambioSchema }}</td>
+                <td>{{ ctlSchema.detalleSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('schema_show', { 'id': ctlSchema.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

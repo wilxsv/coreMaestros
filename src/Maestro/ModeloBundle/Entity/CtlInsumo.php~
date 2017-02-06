@@ -1,0 +1,235 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlInsumo
+ *
+ * @ORM\Table(name="ctl_insumo", indexes={@ORM\Index(name="IDX_9DB3222DD0A3533", columns={"ctl_nivel_usoid"}), @ORM\Index(name="IDX_9DB32227A93ADB3", columns={"ctl_forma_farmaceutica_id"}), @ORM\Index(name="IDX_9DB3222BD744E62", columns={"ctl_presentacionid"}), @ORM\Index(name="IDX_9DB3222D2D8661B", columns={"ctl_unidad_medidaid"}), @ORM\Index(name="IDX_9DB32221F3126F0", columns={"ctl_productoid"}), @ORM\Index(name="IDX_9DB3222D64E375F", columns={"ctl_suministroid"}), @ORM\Index(name="IDX_9DB32226E936AAA", columns={"ctl_programaid"}), @ORM\Index(name="IDX_9DB322272F1374E", columns={"grupoid"})})
+ * @ORM\Entity
+ */
+class CtlInsumo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_insumo_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_nu", type="string", length=255, nullable=true)
+     */
+    private $codigoNu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_usuario", type="integer", nullable=false)
+     */
+    private $idUsuario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_sinab", type="string", length=10, nullable=false)
+     */
+    private $codigoSinab;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="codificacion_insumo", type="bigint", nullable=false)
+     */
+    private $codificacionInsumo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="codigo_sinab_ext", type="bigint", nullable=false)
+     */
+    private $codigoSinabExt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="listado_oficial", type="boolean", nullable=false)
+     */
+    private $listadoOficial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_largo_insumo", type="text", nullable=false)
+     */
+    private $nombreLargoInsumo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlNivelUso
+     *
+     * @ORM\ManyToOne(targetEntity="CtlNivelUso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_nivel_usoid", referencedColumnName="id")
+     * })
+     */
+    private $ctlNivelUsoid;
+
+    /**
+     * @var \CtlFormaFarmaceutica
+     *
+     * @ORM\ManyToOne(targetEntity="CtlFormaFarmaceutica")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_forma_farmaceutica_id", referencedColumnName="id")
+     * })
+     */
+    private $ctlFormaFarmaceutica;
+
+    /**
+     * @var \CtlPresentacion
+     *
+     * @ORM\ManyToOne(targetEntity="CtlPresentacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_presentacionid", referencedColumnName="id")
+     * })
+     */
+    private $ctlPresentacionid;
+
+    /**
+     * @var \CtlUnidadMedida
+     *
+     * @ORM\ManyToOne(targetEntity="CtlUnidadMedida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_unidad_medidaid", referencedColumnName="id")
+     * })
+     */
+    private $ctlUnidadMedidaid;
+
+    /**
+     * @var \CtlProducto
+     *
+     * @ORM\ManyToOne(targetEntity="CtlProducto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_productoid", referencedColumnName="id")
+     * })
+     */
+    private $ctlProductoid;
+
+    /**
+     * @var \CtlSuministro
+     *
+     * @ORM\ManyToOne(targetEntity="CtlSuministro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_suministroid", referencedColumnName="id")
+     * })
+     */
+    private $ctlSuministroid;
+
+    /**
+     * @var \CtlPrograma
+     *
+     * @ORM\ManyToOne(targetEntity="CtlPrograma")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_programaid", referencedColumnName="id")
+     * })
+     */
+    private $ctlProgramaid;
+
+    /**
+     * @var \CtlGrupo
+     *
+     * @ORM\ManyToOne(targetEntity="CtlGrupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="grupoid", referencedColumnName="id")
+     * })
+     */
+    private $grupoid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlConcentracion", inversedBy="ctlInsumoid")
+     * @ORM\JoinTable(name="ctl_insumo_ctl_concentracion",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_insumoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_concentracionid", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlConcentracionid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlFormaFarmaceutica", mappedBy="ctlInsumoid")
+     */
+    private $ctlFormaFarmaceuticaid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlPrincipioActivo", mappedBy="ctlInsumoid")
+     */
+    private $ctlPrincipioActivoid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlConcentracionid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlFormaFarmaceuticaid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlPrincipioActivoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

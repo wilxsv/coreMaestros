@@ -1,0 +1,24 @@
+principio_activo_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlPrincipioActivo:index" }
+    methods:  GET
+
+principio_activo_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlPrincipioActivo:show" }
+    methods:  GET
+
+principio_activo_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlPrincipioActivo:new" }
+    methods:  [GET, POST]
+
+principio_activo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlPrincipioActivo:edit" }
+    methods:  [GET, POST]
+
+principio_activo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlPrincipioActivo:delete" }
+    methods:  DELETE

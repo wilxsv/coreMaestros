@@ -1,0 +1,12 @@
+schema_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlSchema:index" }
+    methods:  GET
+
+schema_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlSchema:show" }
+    methods:  GET
+
+
+
