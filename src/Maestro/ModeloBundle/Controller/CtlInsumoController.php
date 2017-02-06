@@ -31,10 +31,12 @@ class CtlInsumoController extends Controller
      * Creates a new ctlInsumo entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $type)
     {
         $ctlInsumo = new Ctlinsumo();
         $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+        if ($type == 2){ $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo); }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,7 +47,8 @@ class CtlInsumoController extends Controller
             return $this->redirectToRoute('insumo_show', array('id' => $ctlInsumo->getId()));
         }
 
-        return $this->render('ctlinsumo/new.html.twig', array(
+        if ($type == 2){ $view = 'ctlinsumo/medicamento.html.twig'; }
+        return $this->render($view, array(
             'ctlInsumo' => $ctlInsumo,
             'form' => $form->createView(),
         ));
@@ -121,4 +124,48 @@ class CtlInsumoController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Creates a new ctlInsumo entity.
+     *
+     */
+     public function medicoAction(Request $request, $type)
+     {
+         $ctlInsumo = new Ctlinsumo();
+         $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+         $form->handleRequest($request);
+
+         if ($form->isSubmitted() && $form->isValid()) {
+             $em = $this->getDoctrine()->getManager();
+             $em->persist($ctlInsumo);
+             $em->flush($ctlInsumo);
+
+             return $this->redirectToRoute('insumo_show', array('id' => $ctlInsumo->getId()));
+         }
+
+         return $this->render('ctlinsumo/medico.html.twig', array(
+             'ctlInsumo' => $ctlInsumo,
+             'form' => $form->createView(),
+         ));
+     }
+
+   public function medicamentoAction(Request $request, $type)
+   {
+     $ctlInsumo = new Ctlinsumo();
+     $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+     $form->handleRequest($request);
+
+     if ($form->isSubmitted() && $form->isValid()) {
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($ctlInsumo);
+         $em->flush($ctlInsumo);
+
+         return $this->redirectToRoute('insumo_show', array('id' => $ctlInsumo->getId()));
+     }
+
+     return $this->render('ctlinsumo/medicamento.html.twig', array(
+        'ctlInsumo' => $ctlInsumo,
+         'form' => $form->createView(),
+     ));
+ }
 }

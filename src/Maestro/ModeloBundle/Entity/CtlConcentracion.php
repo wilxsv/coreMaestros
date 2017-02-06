@@ -90,7 +90,7 @@ class CtlConcentracion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -113,7 +113,7 @@ class CtlConcentracion
     /**
      * Get detalleConcentracion
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleConcentracion()
     {
@@ -136,7 +136,7 @@ class CtlConcentracion
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -159,7 +159,7 @@ class CtlConcentracion
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -182,7 +182,7 @@ class CtlConcentracion
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -205,7 +205,7 @@ class CtlConcentracion
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -228,7 +228,7 @@ class CtlConcentracion
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -251,7 +251,7 @@ class CtlConcentracion
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
@@ -284,10 +284,14 @@ class CtlConcentracion
     /**
      * Get ctlInsumoid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlInsumoid()
     {
         return $this->ctlInsumoid;
+    }
+
+    public function __toString(){
+      return $this->detalleConcentracion;
     }
 }

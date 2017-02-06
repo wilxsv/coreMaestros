@@ -27,3 +27,28 @@ insumo_index_catalogo:
     path:     /
     defaults: { _controller: "MaestroModeloBundle:CtlInsumo:catalogo" }
     methods:  GET
+insumo_new_medico:
+    path:     /medico/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:medico", type: 1 }
+    methods:  [GET, POST]
+insumo_new_medicamento:
+    path:     /medicamento/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new", type: 2 }
+    methods:  [GET, POST]
+insumo_new:
+    path:     /no_medico/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new", type: 3 }
+    methods:  [GET, POST]
+insumo_new_laboratorio:
+    path:     /laboratorio/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new", type: 4 }
+    methods:  [GET, POST]
+
+insumo_new_odontologico:
+    path:     /odontologico/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new", type: 5 }
+    methods:  [GET, POST]
+insumo_new_general:
+    path:     /general/agrega/{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:new", type: 6 }
+    methods:  [GET, POST]

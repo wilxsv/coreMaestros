@@ -23,23 +23,23 @@ class CtlUnidadMedida
     private $id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="nombre_unidad", type="bigint", nullable=false)
+     * @ORM\Column(name="nombre_unidad", type="text", nullable=false)
      */
     private $nombreUnidad;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="detalle_unidad_medida", type="bigint", nullable=true)
+     * @ORM\Column(name="detalle_unidad_medida", type="text", nullable=true)
      */
     private $detalleUnidadMedida;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="unidades_unidad", type="bigint", nullable=false)
+     * @ORM\Column(name="unidades_unidad", type="text", nullable=false)
      */
     private $unidadesUnidad;
 
@@ -100,7 +100,7 @@ class CtlUnidadMedida
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -123,7 +123,7 @@ class CtlUnidadMedida
     /**
      * Get nombreUnidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getNombreUnidad()
     {
@@ -146,7 +146,7 @@ class CtlUnidadMedida
     /**
      * Get detalleUnidadMedida
      *
-     * @return integer 
+     * @return integer
      */
     public function getDetalleUnidadMedida()
     {
@@ -169,7 +169,7 @@ class CtlUnidadMedida
     /**
      * Get unidadesUnidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getUnidadesUnidad()
     {
@@ -192,7 +192,7 @@ class CtlUnidadMedida
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -215,7 +215,7 @@ class CtlUnidadMedida
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -238,7 +238,7 @@ class CtlUnidadMedida
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -261,7 +261,7 @@ class CtlUnidadMedida
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -284,7 +284,7 @@ class CtlUnidadMedida
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -307,7 +307,7 @@ class CtlUnidadMedida
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
@@ -330,10 +330,14 @@ class CtlUnidadMedida
     /**
      * Get ctlUnidadMedidaid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida 
+     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida
      */
     public function getCtlUnidadMedidaid()
     {
         return $this->ctlUnidadMedidaid;
+    }
+
+    public function __toString(){
+      return $this->nombreUnidad;
     }
 }

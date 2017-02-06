@@ -105,7 +105,7 @@ class CtlFormaFarmaceutica
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -128,7 +128,7 @@ class CtlFormaFarmaceutica
     /**
      * Get nombreFormaFarmaceutica
      *
-     * @return string 
+     * @return string
      */
     public function getNombreFormaFarmaceutica()
     {
@@ -151,7 +151,7 @@ class CtlFormaFarmaceutica
     /**
      * Get detalleFormaFarmaceutica
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleFormaFarmaceutica()
     {
@@ -174,7 +174,7 @@ class CtlFormaFarmaceutica
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -197,7 +197,7 @@ class CtlFormaFarmaceutica
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -220,7 +220,7 @@ class CtlFormaFarmaceutica
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -243,7 +243,7 @@ class CtlFormaFarmaceutica
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -266,7 +266,7 @@ class CtlFormaFarmaceutica
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -289,7 +289,7 @@ class CtlFormaFarmaceutica
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
@@ -322,10 +322,14 @@ class CtlFormaFarmaceutica
     /**
      * Get ctlInsumoid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlInsumoid()
     {
         return $this->ctlInsumoid;
+    }
+
+    public function __toString(){
+      return $this->nombreFormaFarmaceutica;
     }
 }

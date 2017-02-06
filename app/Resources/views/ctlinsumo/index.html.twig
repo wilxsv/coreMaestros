@@ -9,12 +9,16 @@
                 <th>Id</th>
                 <th>Codigonu</th>
                 <th>Codigosinab</th>
-                <th>Codigoecri</th>
-                <th>Codigoatc</th>
+                <th>Codificacioninsumo</th>
+                <th>Codigosinabext</th>
                 <th>Listadooficial</th>
-                <th>Nombrelargo</th>
-                <th>Registro</th>
-                <th>Idusuario</th>
+                <th>Nombrelargoinsumo</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,12 +28,16 @@
                 <td><a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.id }}</a></td>
                 <td>{{ ctlInsumo.codigoNu }}</td>
                 <td>{{ ctlInsumo.codigoSinab }}</td>
-                <td>{{ ctlInsumo.codigoEcri }}</td>
-                <td>{{ ctlInsumo.codigoAtc }}</td>
-                <td>{{ ctlInsumo.listadoOficial }}</td>
-                <td>{{ ctlInsumo.nombreLargo }}</td>
-                <td>{% if ctlInsumo.registro %}{{ ctlInsumo.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlInsumo.idUsuario }}</td>
+                <td>{{ ctlInsumo.codificacionInsumo }}</td>
+                <td>{{ ctlInsumo.codigoSinabExt }}</td>
+                <td>{% if ctlInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
+                <td>{% if ctlInsumo.registroSchema %}{{ ctlInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlInsumo.detalleSchema }}</td>
+                <td>{{ ctlInsumo.userIdSchema }}</td>
+                <td>{{ ctlInsumo.ipUserSchema }}</td>
+                <td>{{ ctlInsumo.estadoSchema }}</td>
+                <td>{{ ctlInsumo.enableSchema }}</td>
                 <td>
                     <ul>
                         <li>

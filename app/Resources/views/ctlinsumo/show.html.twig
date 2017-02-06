@@ -14,32 +14,52 @@
                 <td>{{ ctlInsumo.codigoNu }}</td>
             </tr>
             <tr>
+                <th>Idusuario</th>
+                <td>{{ ctlInsumo.idUsuario }}</td>
+            </tr>
+            <tr>
                 <th>Codigosinab</th>
                 <td>{{ ctlInsumo.codigoSinab }}</td>
             </tr>
             <tr>
-                <th>Codigoecri</th>
-                <td>{{ ctlInsumo.codigoEcri }}</td>
+                <th>Codificacioninsumo</th>
+                <td>{{ ctlInsumo.codificacionInsumo }}</td>
             </tr>
             <tr>
-                <th>Codigoatc</th>
-                <td>{{ ctlInsumo.codigoAtc }}</td>
+                <th>Codigosinabext</th>
+                <td>{{ ctlInsumo.codigoSinabExt }}</td>
             </tr>
             <tr>
                 <th>Listadooficial</th>
-                <td>{{ ctlInsumo.listadoOficial }}</td>
+                <td>{% if ctlInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Nombrelargo</th>
-                <td>{{ ctlInsumo.nombreLargo }}</td>
+                <th>Nombrelargoinsumo</th>
+                <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
             </tr>
             <tr>
-                <th>Registro</th>
-                <td>{% if ctlInsumo.registro %}{{ ctlInsumo.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Registroschema</th>
+                <td>{% if ctlInsumo.registroSchema %}{{ ctlInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Idusuario</th>
-                <td>{{ ctlInsumo.idUsuario }}</td>
+                <th>Detalleschema</th>
+                <td>{{ ctlInsumo.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlInsumo.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Ipuserschema</th>
+                <td>{{ ctlInsumo.ipUserSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlInsumo.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlInsumo.enableSchema }}</td>
             </tr>
         </tbody>
     </table>

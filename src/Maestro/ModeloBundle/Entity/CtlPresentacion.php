@@ -83,7 +83,7 @@ class CtlPresentacion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,7 +106,7 @@ class CtlPresentacion
     /**
      * Get nombrePresentacion
      *
-     * @return string 
+     * @return string
      */
     public function getNombrePresentacion()
     {
@@ -129,7 +129,7 @@ class CtlPresentacion
     /**
      * Get detallePresentacion
      *
-     * @return string 
+     * @return string
      */
     public function getDetallePresentacion()
     {
@@ -152,7 +152,7 @@ class CtlPresentacion
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -175,7 +175,7 @@ class CtlPresentacion
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -198,7 +198,7 @@ class CtlPresentacion
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -221,7 +221,7 @@ class CtlPresentacion
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -244,7 +244,7 @@ class CtlPresentacion
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -267,10 +267,14 @@ class CtlPresentacion
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
         return $this->enableSchema;
+    }
+
+    public function __toString(){
+      return $this->nombrePresentacion;
     }
 }

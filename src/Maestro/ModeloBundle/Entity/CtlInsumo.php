@@ -30,13 +30,6 @@ class CtlInsumo
     private $codigoNu;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_usuario", type="integer", nullable=false)
-     */
-    private $idUsuario;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="codigo_sinab", type="string", length=10, nullable=false)
@@ -236,7 +229,7 @@ class CtlInsumo
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -259,7 +252,7 @@ class CtlInsumo
     /**
      * Get codigoNu
      *
-     * @return string 
+     * @return string
      */
     public function getCodigoNu()
     {
@@ -282,7 +275,7 @@ class CtlInsumo
     /**
      * Get idUsuario
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdUsuario()
     {
@@ -305,7 +298,7 @@ class CtlInsumo
     /**
      * Get codigoSinab
      *
-     * @return string 
+     * @return string
      */
     public function getCodigoSinab()
     {
@@ -328,7 +321,7 @@ class CtlInsumo
     /**
      * Get codificacionInsumo
      *
-     * @return integer 
+     * @return integer
      */
     public function getCodificacionInsumo()
     {
@@ -351,7 +344,7 @@ class CtlInsumo
     /**
      * Get codigoSinabExt
      *
-     * @return integer 
+     * @return integer
      */
     public function getCodigoSinabExt()
     {
@@ -374,7 +367,7 @@ class CtlInsumo
     /**
      * Get listadoOficial
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getListadoOficial()
     {
@@ -397,7 +390,7 @@ class CtlInsumo
     /**
      * Get nombreLargoInsumo
      *
-     * @return string 
+     * @return string
      */
     public function getNombreLargoInsumo()
     {
@@ -420,7 +413,7 @@ class CtlInsumo
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -443,7 +436,7 @@ class CtlInsumo
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -466,7 +459,7 @@ class CtlInsumo
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -489,7 +482,7 @@ class CtlInsumo
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -512,7 +505,7 @@ class CtlInsumo
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -535,7 +528,7 @@ class CtlInsumo
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
@@ -558,7 +551,7 @@ class CtlInsumo
     /**
      * Get ctlNivelUsoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso 
+     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso
      */
     public function getCtlNivelUsoid()
     {
@@ -581,7 +574,7 @@ class CtlInsumo
     /**
      * Get ctlFormaFarmaceutica
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica 
+     * @return \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica
      */
     public function getCtlFormaFarmaceutica()
     {
@@ -604,7 +597,7 @@ class CtlInsumo
     /**
      * Get ctlPresentacionid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPresentacion 
+     * @return \Maestro\ModeloBundle\Entity\CtlPresentacion
      */
     public function getCtlPresentacionid()
     {
@@ -627,7 +620,7 @@ class CtlInsumo
     /**
      * Get ctlUnidadMedidaid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida 
+     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida
      */
     public function getCtlUnidadMedidaid()
     {
@@ -650,7 +643,7 @@ class CtlInsumo
     /**
      * Get ctlProductoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlProducto 
+     * @return \Maestro\ModeloBundle\Entity\CtlProducto
      */
     public function getCtlProductoid()
     {
@@ -673,7 +666,7 @@ class CtlInsumo
     /**
      * Get ctlSuministroid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlSuministro 
+     * @return \Maestro\ModeloBundle\Entity\CtlSuministro
      */
     public function getCtlSuministroid()
     {
@@ -696,7 +689,7 @@ class CtlInsumo
     /**
      * Get ctlProgramaid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPrograma 
+     * @return \Maestro\ModeloBundle\Entity\CtlPrograma
      */
     public function getCtlProgramaid()
     {
@@ -719,7 +712,7 @@ class CtlInsumo
     /**
      * Get grupoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
+     * @return \Maestro\ModeloBundle\Entity\CtlGrupo
      */
     public function getGrupoid()
     {
@@ -752,7 +745,7 @@ class CtlInsumo
     /**
      * Get ctlConcentracionid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlConcentracionid()
     {
@@ -785,7 +778,7 @@ class CtlInsumo
     /**
      * Get ctlFormaFarmaceuticaid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlFormaFarmaceuticaid()
     {
@@ -818,7 +811,7 @@ class CtlInsumo
     /**
      * Get ctlPrincipioActivoid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlPrincipioActivoid()
     {

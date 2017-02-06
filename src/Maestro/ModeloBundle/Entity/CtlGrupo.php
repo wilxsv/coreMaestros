@@ -303,4 +303,8 @@ class CtlGrupo
     {
         return $this->enableSchema;
     }
+
+    public function __toString() {
+      return $this->nombreGrupo;
+    }
 }

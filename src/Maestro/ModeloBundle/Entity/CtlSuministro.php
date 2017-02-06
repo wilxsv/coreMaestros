@@ -39,20 +39,6 @@ class CtlSuministro
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro", type="datetime", nullable=false)
-     */
-    private $registro;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_usuario", type="bigint", nullable=false)
-     */
-    private $idUsuario;
-
-    /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
      */
     private $registroSchema;
@@ -107,7 +93,7 @@ class CtlSuministro
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +116,7 @@ class CtlSuministro
     /**
      * Get nombreSuministro
      *
-     * @return string 
+     * @return string
      */
     public function getNombreSuministro()
     {
@@ -153,7 +139,7 @@ class CtlSuministro
     /**
      * Get detalleSuministro
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSuministro()
     {
@@ -176,7 +162,7 @@ class CtlSuministro
     /**
      * Get registro
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistro()
     {
@@ -199,7 +185,7 @@ class CtlSuministro
     /**
      * Get idUsuario
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdUsuario()
     {
@@ -222,7 +208,7 @@ class CtlSuministro
     /**
      * Get registroSchema
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistroSchema()
     {
@@ -245,7 +231,7 @@ class CtlSuministro
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -268,7 +254,7 @@ class CtlSuministro
     /**
      * Get userIdSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserIdSchema()
     {
@@ -291,7 +277,7 @@ class CtlSuministro
     /**
      * Get ipUserSchema
      *
-     * @return string 
+     * @return string
      */
     public function getIpUserSchema()
     {
@@ -314,7 +300,7 @@ class CtlSuministro
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -337,7 +323,7 @@ class CtlSuministro
     /**
      * Get enableSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnableSchema()
     {
@@ -360,10 +346,14 @@ class CtlSuministro
     /**
      * Get ctlSuministroid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlSuministro 
+     * @return \Maestro\ModeloBundle\Entity\CtlSuministro
      */
     public function getCtlSuministroid()
     {
         return $this->ctlSuministroid;
+    }
+
+    public function __toString(){
+      return $this->nombreSuministro;
     }
 }

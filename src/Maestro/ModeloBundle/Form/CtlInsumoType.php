@@ -13,11 +13,8 @@ class CtlInsumoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('codigoNu')->add('codigoSinab')->add('codigoEcri')->add('codigoAtc')->add('listadoOficial')
-		->add('nombreLargo')->add('registro')->add('idUsuario')->add('ctlSuministroid')->add('ctlProductoid')
-		->add('ctlNivelUsoid')->add('ctlFormaFarmaceutica')->add('ctlPresentacionid')
-		->add('ctlProgramaid')->add('ctlUnidadMedidaid')->add('grupoid')->add('ctlPrincipioActivoid')
-		->add('ctlConcentracionid')->add('ctlFormaFarmaceuticaid')        ;
+        $builder->add('codigoNu')->add('codigoSinab')->add('codificacionInsumo')->add('codigoSinabExt')->add('listadoOficial')->add('nombreLargoInsumo')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlNivelUsoid')->add('ctlFormaFarmaceutica')
+                ->add('ctlPresentacionid')->add('ctlUnidadMedidaid')->add('ctlProductoid')->add('ctlSuministroid')->add('ctlProgramaid')->add('grupoid')->add('ctlConcentracionid')->add('ctlFormaFarmaceuticaid')->add('ctlPrincipioActivoid')        ;
     }
 
     /**
@@ -37,4 +34,6 @@ class CtlInsumoType extends AbstractType
     {
         return 'maestro_modelobundle_ctlinsumo';
     }
+
+
 }

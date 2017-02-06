@@ -9,8 +9,6 @@
                 <th>Id</th>
                 <th>Nombresuministro</th>
                 <th>Detallesuministro</th>
-                <th>Registro</th>
-                <th>Idusuario</th>
                 <th>Registroschema</th>
                 <th>Detalleschema</th>
                 <th>Useridschema</th>
@@ -26,8 +24,6 @@
                 <td><a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">{{ ctlSuministro.id }}</a></td>
                 <td>{{ ctlSuministro.nombreSuministro }}</td>
                 <td>{{ ctlSuministro.detalleSuministro }}</td>
-                <td>{% if ctlSuministro.registro %}{{ ctlSuministro.registro|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlSuministro.idUsuario }}</td>
                 <td>{% if ctlSuministro.registroSchema %}{{ ctlSuministro.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ ctlSuministro.detalleSchema }}</td>
                 <td>{{ ctlSuministro.userIdSchema }}</td>
