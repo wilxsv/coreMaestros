@@ -111,7 +111,7 @@ class CtlMicrored
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -134,7 +134,7 @@ class CtlMicrored
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -157,7 +157,7 @@ class CtlMicrored
     /**
      * Get activo
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getActivo()
     {
@@ -180,7 +180,7 @@ class CtlMicrored
     /**
      * Get idUsuarioReg
      *
-     * @return string 
+     * @return string
      */
     public function getIdUsuarioReg()
     {
@@ -203,7 +203,7 @@ class CtlMicrored
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaHoraReg()
     {
@@ -226,7 +226,7 @@ class CtlMicrored
     /**
      * Get idUsuarioMod
      *
-     * @return string 
+     * @return string
      */
     public function getIdUsuarioMod()
     {
@@ -249,7 +249,7 @@ class CtlMicrored
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaHoraMod()
     {
@@ -272,7 +272,7 @@ class CtlMicrored
     /**
      * Get codigoc3
      *
-     * @return integer 
+     * @return integer
      */
     public function getCodigoc3()
     {
@@ -295,7 +295,7 @@ class CtlMicrored
     /**
      * Get idUser
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdUser()
     {
@@ -318,7 +318,7 @@ class CtlMicrored
     /**
      * Get ipUser
      *
-     * @return string 
+     * @return string
      */
     public function getIpUser()
     {
@@ -341,7 +341,7 @@ class CtlMicrored
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -364,7 +364,7 @@ class CtlMicrored
     /**
      * Get enableSchema
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnableSchema()
     {
@@ -387,10 +387,13 @@ class CtlMicrored
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
         return $this->estadoSchema;
     }
+
+    public function __toString() { return $this->getNombre(); }
+
 }

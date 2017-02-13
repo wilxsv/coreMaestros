@@ -122,19 +122,27 @@ class CtlEstablecimientoController extends Controller
         ;
     }
 
-    /**
-     * Agrega y asocia nuevo establecimiento.
-     *
-     */
-    public function agregaAction(Request $request)
-    {
-        $ctlEstablecimiento = new Ctlestablecimiento();
-        $form = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoEcoType', $ctlEstablecimiento);
-        $form->handleRequest($request);
+        /**
+         * Creates a new ctlEstablecimiento entity.
+         *
+         */
+        public function agregaAction(Request $request)
+        {
+            $ctlEstablecimiento = new Ctlestablecimiento();
+            $form = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+            $form->handleRequest($request);
 
-        return $this->render('ctlestablecimiento/agrega.html.twig', array(
-            'ctlEstablecimiento' => $ctlEstablecimiento,
-            'form' => $form->createView(),
-        ));
-    }
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($ctlEstablecimiento);
+                $em->flush($ctlEstablecimiento);
+
+                return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId()));
+            }
+
+            return $this->render('ctlestablecimiento/agrega.html.twig', array(
+                'ctlEstablecimiento' => $ctlEstablecimiento,
+                'form' => $form->createView(),
+            ));
+        }
 }

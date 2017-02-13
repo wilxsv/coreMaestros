@@ -13,9 +13,9 @@ class CtlEstablecimientoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('direccion')->add('telefono')->add('fax')->add('latitud')->add('longitud')->add('anioApertura')->add('codestabConsumos')->add('codestabSiaf')->add('codUcsf')->add('instMortalidad')->add('digitaMortalidad')->add('cvcd4')->add('activo')->add('idUsuarioReg')->add('fechaHoraReg')->add('idUsuarioMod')->add('fechaHoraMod')->add('idestablesimow')->add('idestablevigepes')->add('estadoVigepes')->add('estadoVacunas')->add('estadoSeps')->add('estadoSimow')->add('idestablesumeve')->add('estadoSumeve')->add('cabezaMicrored')->add('hospitalizacion')->add('idUser')->add('ipUser')->add('detalleSchema')->add('enableSchema')->add('estadoSchema')->add('idmicrored')->add('idEstablecimientoPadre')->add('idTipoEstablecimiento')->add('idMunicipio')->add('idCatTipoConsumo')->add('idCatTipoFarmacia')->add('idCatTipoExpediente')->add('idCatPruebas')->add('idInstitucion')->add('idCatNivelMinsal')        ;
+        $builder->add('nombre')->add('direccion')->add('telefono')->add('fax')->add('latitud')->add('longitud')->add('anioApertura')->add('activo')->add('cabezaMicrored')->add('hospitalizacion')->add('detalleSchema')->add('idmicrored')->add('idEstablecimientoPadre')->add('idTipoEstablecimiento')->add('idMunicipio')->add('idCatTipoConsumo')->add('idCatTipoFarmacia')->add('idCatTipoExpediente')->add('idCatPruebas')->add('idInstitucion')->add('idCatNivelMinsal')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

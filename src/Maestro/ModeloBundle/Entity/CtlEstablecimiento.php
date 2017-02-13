@@ -219,20 +219,6 @@ class CtlEstablecimiento
     private $hospitalizacion;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="detalle_schema", type="text", nullable=false)
@@ -358,7 +344,7 @@ class CtlEstablecimiento
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -381,7 +367,7 @@ class CtlEstablecimiento
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -404,7 +390,7 @@ class CtlEstablecimiento
     /**
      * Get direccion
      *
-     * @return string 
+     * @return string
      */
     public function getDireccion()
     {
@@ -427,7 +413,7 @@ class CtlEstablecimiento
     /**
      * Get telefono
      *
-     * @return string 
+     * @return string
      */
     public function getTelefono()
     {
@@ -450,7 +436,7 @@ class CtlEstablecimiento
     /**
      * Get fax
      *
-     * @return string 
+     * @return string
      */
     public function getFax()
     {
@@ -473,7 +459,7 @@ class CtlEstablecimiento
     /**
      * Get latitud
      *
-     * @return string 
+     * @return string
      */
     public function getLatitud()
     {
@@ -496,7 +482,7 @@ class CtlEstablecimiento
     /**
      * Get longitud
      *
-     * @return string 
+     * @return string
      */
     public function getLongitud()
     {
@@ -519,7 +505,7 @@ class CtlEstablecimiento
     /**
      * Get anioApertura
      *
-     * @return integer 
+     * @return integer
      */
     public function getAnioApertura()
     {
@@ -542,7 +528,7 @@ class CtlEstablecimiento
     /**
      * Get codestabConsumos
      *
-     * @return string 
+     * @return string
      */
     public function getCodestabConsumos()
     {
@@ -565,7 +551,7 @@ class CtlEstablecimiento
     /**
      * Get codestabSiaf
      *
-     * @return string 
+     * @return string
      */
     public function getCodestabSiaf()
     {
@@ -588,7 +574,7 @@ class CtlEstablecimiento
     /**
      * Get codUcsf
      *
-     * @return integer 
+     * @return integer
      */
     public function getCodUcsf()
     {
@@ -611,7 +597,7 @@ class CtlEstablecimiento
     /**
      * Get instMortalidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getInstMortalidad()
     {
@@ -634,7 +620,7 @@ class CtlEstablecimiento
     /**
      * Get digitaMortalidad
      *
-     * @return integer 
+     * @return integer
      */
     public function getDigitaMortalidad()
     {
@@ -657,7 +643,7 @@ class CtlEstablecimiento
     /**
      * Get cvcd4
      *
-     * @return integer 
+     * @return integer
      */
     public function getCvcd4()
     {
@@ -680,7 +666,7 @@ class CtlEstablecimiento
     /**
      * Get activo
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getActivo()
     {
@@ -703,7 +689,7 @@ class CtlEstablecimiento
     /**
      * Get idUsuarioReg
      *
-     * @return string 
+     * @return string
      */
     public function getIdUsuarioReg()
     {
@@ -726,7 +712,7 @@ class CtlEstablecimiento
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaHoraReg()
     {
@@ -749,7 +735,7 @@ class CtlEstablecimiento
     /**
      * Get idUsuarioMod
      *
-     * @return string 
+     * @return string
      */
     public function getIdUsuarioMod()
     {
@@ -772,7 +758,7 @@ class CtlEstablecimiento
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFechaHoraMod()
     {
@@ -795,7 +781,7 @@ class CtlEstablecimiento
     /**
      * Get idestablesimow
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdestablesimow()
     {
@@ -818,7 +804,7 @@ class CtlEstablecimiento
     /**
      * Get idestablevigepes
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdestablevigepes()
     {
@@ -841,7 +827,7 @@ class CtlEstablecimiento
     /**
      * Get estadoVigepes
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoVigepes()
     {
@@ -864,7 +850,7 @@ class CtlEstablecimiento
     /**
      * Get estadoVacunas
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoVacunas()
     {
@@ -887,7 +873,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSeps
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSeps()
     {
@@ -910,7 +896,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSimow
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSimow()
     {
@@ -933,7 +919,7 @@ class CtlEstablecimiento
     /**
      * Get idestablesumeve
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdestablesumeve()
     {
@@ -956,7 +942,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSumeve
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSumeve()
     {
@@ -979,7 +965,7 @@ class CtlEstablecimiento
     /**
      * Get cabezaMicrored
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCabezaMicrored()
     {
@@ -1002,7 +988,7 @@ class CtlEstablecimiento
     /**
      * Get hospitalizacion
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHospitalizacion()
     {
@@ -1025,7 +1011,7 @@ class CtlEstablecimiento
     /**
      * Get idUser
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdUser()
     {
@@ -1048,7 +1034,7 @@ class CtlEstablecimiento
     /**
      * Get ipUser
      *
-     * @return string 
+     * @return string
      */
     public function getIpUser()
     {
@@ -1071,7 +1057,7 @@ class CtlEstablecimiento
     /**
      * Get detalleSchema
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleSchema()
     {
@@ -1094,7 +1080,7 @@ class CtlEstablecimiento
     /**
      * Get enableSchema
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnableSchema()
     {
@@ -1117,7 +1103,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSchema
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstadoSchema()
     {
@@ -1140,7 +1126,7 @@ class CtlEstablecimiento
     /**
      * Get idmicrored
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlMicrored 
+     * @return \Maestro\ModeloBundle\Entity\CtlMicrored
      */
     public function getIdmicrored()
     {
@@ -1163,7 +1149,7 @@ class CtlEstablecimiento
     /**
      * Get idEstablecimientoPadre
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento
      */
     public function getIdEstablecimientoPadre()
     {
@@ -1186,7 +1172,7 @@ class CtlEstablecimiento
     /**
      * Get idTipoEstablecimiento
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlTipoEstablecimiento 
+     * @return \Maestro\ModeloBundle\Entity\CtlTipoEstablecimiento
      */
     public function getIdTipoEstablecimiento()
     {
@@ -1209,7 +1195,7 @@ class CtlEstablecimiento
     /**
      * Get idMunicipio
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlMunicipio 
+     * @return \Maestro\ModeloBundle\Entity\CtlMunicipio
      */
     public function getIdMunicipio()
     {
@@ -1232,7 +1218,7 @@ class CtlEstablecimiento
     /**
      * Get idCatTipoConsumo
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle 
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
      */
     public function getIdCatTipoConsumo()
     {
@@ -1255,7 +1241,7 @@ class CtlEstablecimiento
     /**
      * Get idCatTipoFarmacia
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle 
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
      */
     public function getIdCatTipoFarmacia()
     {
@@ -1278,7 +1264,7 @@ class CtlEstablecimiento
     /**
      * Get idCatTipoExpediente
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle 
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
      */
     public function getIdCatTipoExpediente()
     {
@@ -1301,7 +1287,7 @@ class CtlEstablecimiento
     /**
      * Get idCatPruebas
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle 
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
      */
     public function getIdCatPruebas()
     {
@@ -1324,7 +1310,7 @@ class CtlEstablecimiento
     /**
      * Get idInstitucion
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlInstitucion 
+     * @return \Maestro\ModeloBundle\Entity\CtlInstitucion
      */
     public function getIdInstitucion()
     {
@@ -1347,10 +1333,16 @@ class CtlEstablecimiento
     /**
      * Get idCatNivelMinsal
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle 
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
      */
     public function getIdCatNivelMinsal()
     {
         return $this->idCatNivelMinsal;
     }
+
+    public function __toString()
+{
+    return $this->getNombre();
+}
+
 }
