@@ -13,7 +13,9 @@ class CtlAlternativoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('ctlInsumoAlternativo')->add('multiploAlternativo')->add('detalleSchema')->add('ctlInsumo')        ;
+        $builder->add('ctlInsumo','entity', array('label'  => 'Medicamento Original','class' => 'MaestroModeloBundle:CtlInsumo', 'required' => true))
+        ->add('ctlInsumoAlternativo','entity', array('label'  => 'Medicamento Alternativo','class' => 'MaestroModeloBundle:CtlInsumo', 'required' => true))
+        ->add('multiploAlternativo');
     }
 
     /**

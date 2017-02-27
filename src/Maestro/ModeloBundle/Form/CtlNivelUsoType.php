@@ -13,9 +13,9 @@ class CtlNivelUsoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreNivelUso')->add('detalleNivelUso')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')        ;
+        $builder->add('nombreNivelUso');
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -1,52 +1,27 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
 {% block title %}Catalogo de suministros (En esta seccion se agrega el metodo de codificacion de unidad tecnica y el extendido){% endblock %}
 {% block body %}
-
-    <table>
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombresuministro</th>
-                <th>Detallesuministro</th>
-                <th>Registroschema</th>
-                <th>Detalleschema</th>
-                <th>Useridschema</th>
-                <th>Ipuserschema</th>
-                <th>Estadoschema</th>
-                <th>Enableschema</th>
-                <th>Actions</th>
+                <th>Nombre de Suministro</th>
+                <th>Codificacion</th>
+                <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlSuministro in ctlSuministros %}
             <tr>
-                <td><a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">{{ ctlSuministro.id }}</a></td>
                 <td>{{ ctlSuministro.nombreSuministro }}</td>
-                <td>{{ ctlSuministro.detalleSuministro }}</td>
-                <td>{% if ctlSuministro.registroSchema %}{{ ctlSuministro.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlSuministro.detalleSchema }}</td>
-                <td>{{ ctlSuministro.userIdSchema }}</td>
-                <td>{{ ctlSuministro.ipUserSchema }}</td>
-                <td>{{ ctlSuministro.estadoSchema }}</td>
-                <td>{{ ctlSuministro.enableSchema }}</td>
+                <td>{{ ctlSuministro.codificacionSuministro }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('suministro_edit', { 'id': ctlSuministro.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                 <a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                 <a href="{{ path('suministro_edit', { 'id': ctlSuministro.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('suministro_new') }}">Create a new ctlSuministro</a>
-        </li>
-    </ul>
+<a href="{{ path('suministro_new') }}">Registrar nuevo producto</a>
 {% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

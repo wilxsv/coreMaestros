@@ -1,8 +1,8 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Listado de Grupos{% endblock %}
 {% block body %}
-
 <div class="row-fluid">
-  <h3 class="header smaller lighter blue">Listado de Grupos</h3>
+  <h3 class="header smaller lighter blue"></h3>
   <div class="table-header">
   </div>
 
@@ -12,7 +12,6 @@
                 <th>Nombre</th>
                 <th>Detalle grupo</th>
                 <th>Grupo superior</th>
-                <th>Habilitado</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
                 <td>{{ ctlGrupo.detalleGrupo }}</td>
                 <td>{{ ctlGrupo.grupoId }}</td>
-                <td>{% if ctlGrupo.enableSchema %}Si{% else %}No{% endif %}</td>
                 <td>
                  <a href="{{ path('grupo_show', { 'id': ctlGrupo.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                  <a href="{{ path('grupo_edit', { 'id': ctlGrupo.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

@@ -13,9 +13,11 @@ class CtlSuministroType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreSuministro')->add('detalleSuministro')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlSuministroid')        ;
+        $builder->add('nombreSuministro', 'text', array('label'  => 'Nombre de Suministro') )
+        ->add('codificacionSuministro', 'choice', array('choices'=> array('sinab' => 'SINAB', 'ATC' => 'ATC o Sistema de Clasificación Anatómica, Terapéutica, Química', 'ecri' => 'Sistema Universal de Nomenclatura de Dispositivos Médicos'), 'required'  => true, ))
+        ->add('ctlSuministroid','entity', array('label'  => 'Suministro superior','class' => 'MaestroModeloBundle:CtlSuministro', 'required' => true));
     }
-    
+
     /**
      * {@inheritdoc}
      */

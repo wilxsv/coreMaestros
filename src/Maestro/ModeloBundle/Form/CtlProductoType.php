@@ -13,7 +13,7 @@ class CtlProductoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreProducto')->add('detalleProducto')->add('detalleSchema');
+        $builder->add('nombreProducto', 'text', array('label'  => 'Unidad Logistica'))->add('detalleProducto');
     }
 
     /**

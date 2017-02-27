@@ -849,10 +849,14 @@ class CtlInsumo
     /**
      * Get detalleInsumo
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleInsumo()
     {
         return $this->detalleInsumo;
+    }
+
+    public function __toString() {
+      return $this->getNombreLargoInsumo();
     }
 }

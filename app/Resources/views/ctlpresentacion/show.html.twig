@@ -4,55 +4,12 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlPresentacion.id }}</td>
-            </tr>
-            <tr>
                 <th>Nombrepresentacion</th>
                 <td>{{ ctlPresentacion.nombrePresentacion }}</td>
-            </tr>
-            <tr>
-                <th>Detallepresentacion</th>
-                <td>{{ ctlPresentacion.detallePresentacion }}</td>
-            </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlPresentacion.registroSchema %}{{ ctlPresentacion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlPresentacion.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlPresentacion.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlPresentacion.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlPresentacion.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlPresentacion.enableSchema }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('presentacion_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('presentacion_edit', { 'id': ctlPresentacion.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a href="{{ path('presentacion_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('presentacion_edit', { 'id': ctlPresentacion.id }) }}" class="btn btn-primary">Editar</a>
 {% endblock %}

@@ -1,16 +1,10 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Registrar Nivel de uso{% endblock %}
 {% block body %}
-    <h1>Ctlniveluso creation</h1>
-
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="Agregar" class="btn btn-primary" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('nivel_uso_index') }}">Back to the list</a>
-        </li>
-    </ul>
+<a href="{{ path('nivel_uso_index') }}" class="btn">Regresar a listado</a>
 {% endblock %}

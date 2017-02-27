@@ -8,5 +8,6 @@
 /app/phpunit.xml
 /build/
 /vendor/
+!/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig
 /bin/
 /composer.phar

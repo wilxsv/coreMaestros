@@ -13,9 +13,9 @@ class CtlPrincipioActivoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombrePactivo')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlPrincipioid')->add('ctlInsumoid')        ;
+        $builder->add('nombrePactivo')->add('ctlPrincipioid')->add('ctlInsumoid')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

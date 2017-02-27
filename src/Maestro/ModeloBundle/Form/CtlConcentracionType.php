@@ -13,7 +13,9 @@ class CtlConcentracionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('detalleConcentracion')->add('detalleSchema')->add('ctlInsumoid');
+        $builder->add('detalleConcentracion', 'text', array('label'  => 'Especifique el nivel de concentracion',))
+        //->add('ctlInsumoid','entity', array('label'  => 'Medicamento','class' => 'MaestroModeloBundle:CtlInsumo', 'required' => true))
+        ;
     }
 
     /**

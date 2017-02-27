@@ -5,55 +5,12 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlFormaFarmaceutica.id }}</td>
-            </tr>
-            <tr>
                 <th>Nombreformafarmaceutica</th>
                 <td>{{ ctlFormaFarmaceutica.nombreFormaFarmaceutica }}</td>
-            </tr>
-            <tr>
-                <th>Detalleformafarmaceutica</th>
-                <td>{{ ctlFormaFarmaceutica.detalleFormaFarmaceutica }}</td>
-            </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlFormaFarmaceutica.registroSchema %}{{ ctlFormaFarmaceutica.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlFormaFarmaceutica.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlFormaFarmaceutica.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlFormaFarmaceutica.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlFormaFarmaceutica.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlFormaFarmaceutica.enableSchema }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('formafarmaceutica_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<a href="{{ path('formafarmaceutica_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}" class="btn btn-primary">Editar</a>
 {% endblock %}

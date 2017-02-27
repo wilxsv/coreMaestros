@@ -4,55 +4,16 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlPrincipio.id }}</td>
-            </tr>
-            <tr>
                 <th>Nombreprincipio</th>
                 <td>{{ ctlPrincipio.nombrePrincipio }}</td>
             </tr>
             <tr>
                 <th>Tipoprincipio</th>
-                <td>{{ ctlPrincipio.tipoPrincipio }}</td>
-            </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlPrincipio.registroSchema %}{{ ctlPrincipio.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlPrincipio.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlPrincipio.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlPrincipio.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlPrincipio.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlPrincipio.enableSchema }}</td>
+                <td>{% if ctlPrincipio.tipoPrincipio == 1 %}Natural{% elseif  ctlPrincipio.tipoPrincipio == 2 %} Sintetico{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('principio_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('principio_edit', { 'id': ctlPrincipio.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<a href="{{ path('principio_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('principio_edit', { 'id': ctlPrincipio.id }) }}" class="btn btn-primary">Editar</a>
 {% endblock %}

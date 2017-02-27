@@ -14,7 +14,7 @@
         {% for ctlPrincipio in ctlPrincipios %}
             <tr>
                 <td>{{ ctlPrincipio.nombrePrincipio }}</td>
-                <td>{{ ctlPrincipio.tipoPrincipio }}</td>
+                <td>{% if ctlPrincipio.tipoPrincipio == 1 %}Natural{% elseif  ctlPrincipio.tipoPrincipio == 2 %} Sintetico{% endif %}</td>
                 <td>
                  <a href="{{ path('principio_show', { 'id': ctlPrincipio.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                  <a href="{{ path('principio_edit', { 'id': ctlPrincipio.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

@@ -6,8 +6,6 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Detalle</th>
-                <th>Fecha de registro</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
@@ -15,8 +13,6 @@
           {% for ctlFormaFarmaceutica in ctlFormaFarmaceuticas %}
                     <tr>
                           <td>{{ ctlFormaFarmaceutica.nombreFormaFarmaceutica }}</td>
-                          <td>{{ ctlFormaFarmaceutica.detalleFormaFarmaceutica }}</td>
-                          <td>{% if ctlFormaFarmaceutica.registroSchema %}{{ ctlFormaFarmaceutica.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
                           <td>
                            <a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                            <a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

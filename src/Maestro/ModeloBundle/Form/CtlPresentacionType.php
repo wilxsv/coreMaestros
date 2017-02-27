@@ -13,7 +13,7 @@ class CtlPresentacionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombrePresentacion')->add('detallePresentacion')->add('detalleSchema');
+        $builder->add('nombrePresentacion');
     }
 
     /**

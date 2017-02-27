@@ -13,7 +13,7 @@ class CtlFormaFarmaceuticaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreFormaFarmaceutica')->add('detalleFormaFarmaceutica')->add('ctlInsumoid')->add('detalleSchema');
+        $builder->add('nombreFormaFarmaceutica')->add('ctlInsumoid');
     }
 
     /**

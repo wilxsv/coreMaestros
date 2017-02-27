@@ -13,7 +13,8 @@ class CtlGrupoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreGrupo')->add('detalleGrupo')->add('grupoId')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')        ;
+        $builder->add('nombreGrupo')->add('detalleGrupo')
+        ->add('grupoId','entity', array('label'  => 'Grupo Superior','class' => 'MaestroModeloBundle:CtlGrupo', 'required' => true));
     }
 
     /**
