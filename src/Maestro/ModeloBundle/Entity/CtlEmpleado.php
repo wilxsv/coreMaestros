@@ -72,13 +72,6 @@ class CtlEmpleado
     private $fechaHoraMod;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlCargoEmpleado
      *
      * @ORM\ManyToOne(targetEntity="CtlCargoEmpleado")
@@ -279,29 +272,6 @@ class CtlEmpleado
     public function getFechaHoraMod()
     {
         return $this->fechaHoraMod;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlEmpleado
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

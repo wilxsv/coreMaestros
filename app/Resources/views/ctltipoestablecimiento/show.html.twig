@@ -1,0 +1,19 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}{{ ctlTipoEstablecimiento.nombre }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ ctlTipoEstablecimiento.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Codigo</th>
+                <td>{{ ctlTipoEstablecimiento.codigo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipoestablecimiento_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('tipoestablecimiento_edit', { 'id': ctlTipoEstablecimiento.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

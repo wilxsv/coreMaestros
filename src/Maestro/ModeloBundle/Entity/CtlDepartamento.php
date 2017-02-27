@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlDepartamento
  *
- * @ORM\Table(name="ctl_departamento", indexes={@ORM\Index(name="idx_c3f1602bf57d32fd", columns={"id_pais"}), @ORM\Index(name="idx_ctl_departamento_nombre", columns={"nombre"})})
+ * @ORM\Table(name="ctl_departamento", indexes={@ORM\Index(name="idx_ctl_departamento_nombre", columns={"nombre"}), @ORM\Index(name="idx_c3f1602bf57d32fd", columns={"id_pais"})})
  * @ORM\Entity
  */
 class CtlDepartamento
@@ -84,20 +84,6 @@ class CtlDepartamento
      * @ORM\Column(name="iso31662", type="string", length=5, nullable=true)
      */
     private $iso31662;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
 
     /**
      * @var \CtlPais
@@ -326,52 +312,6 @@ class CtlDepartamento
     public function getIso31662()
     {
         return $this->iso31662;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlDepartamento
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean 
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlDepartamento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

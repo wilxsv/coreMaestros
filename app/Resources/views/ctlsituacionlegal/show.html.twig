@@ -1,0 +1,15 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %} Situación Legal :{{ ctlSituacionLegal.tipoSituacion }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Tiposituacion</th>
+                <td>{{ ctlSituacionLegal.tipoSituacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('situacionlegal_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('situacionlegal_edit', { 'id': ctlSituacionLegal.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

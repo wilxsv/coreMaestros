@@ -71,40 +71,180 @@ class CtlMicrored
      */
     private $codigoc3;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
+
 
     /**
-     * @var string
+     * Get id
      *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * @return integer
      */
-    private $ipUser;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var string
+     * Set nombre
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @param string $nombre
+     * @return CtlMicrored
      */
-    private $detalleSchema;
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
 
     /**
-     * @var boolean
+     * Get nombre
      *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     * @return string
      */
-    private $enableSchema;
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
 
     /**
-     * @var integer
+     * Set activo
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @param boolean $activo
+     * @return CtlMicrored
      */
-    private $estadoSchema;
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
 
+        return $this;
+    }
 
+    /**
+     * Get activo
+     *
+     * @return boolean
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * Set idUsuarioReg
+     *
+     * @param string $idUsuarioReg
+     * @return CtlMicrored
+     */
+    public function setIdUsuarioReg($idUsuarioReg)
+    {
+        $this->idUsuarioReg = $idUsuarioReg;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuarioReg
+     *
+     * @return string
+     */
+    public function getIdUsuarioReg()
+    {
+        return $this->idUsuarioReg;
+    }
+
+    /**
+     * Set fechaHoraReg
+     *
+     * @param \DateTime $fechaHoraReg
+     * @return CtlMicrored
+     */
+    public function setFechaHoraReg($fechaHoraReg)
+    {
+        $this->fechaHoraReg = $fechaHoraReg;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraReg
+     *
+     * @return \DateTime
+     */
+    public function getFechaHoraReg()
+    {
+        return $this->fechaHoraReg;
+    }
+
+    /**
+     * Set idUsuarioMod
+     *
+     * @param string $idUsuarioMod
+     * @return CtlMicrored
+     */
+    public function setIdUsuarioMod($idUsuarioMod)
+    {
+        $this->idUsuarioMod = $idUsuarioMod;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuarioMod
+     *
+     * @return string
+     */
+    public function getIdUsuarioMod()
+    {
+        return $this->idUsuarioMod;
+    }
+
+    /**
+     * Set fechaHoraMod
+     *
+     * @param \DateTime $fechaHoraMod
+     * @return CtlMicrored
+     */
+    public function setFechaHoraMod($fechaHoraMod)
+    {
+        $this->fechaHoraMod = $fechaHoraMod;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraMod
+     *
+     * @return \DateTime
+     */
+    public function getFechaHoraMod()
+    {
+        return $this->fechaHoraMod;
+    }
+
+    /**
+     * Set codigoc3
+     *
+     * @param integer $codigoc3
+     * @return CtlMicrored
+     */
+    public function setCodigoc3($codigoc3)
+    {
+        $this->codigoc3 = $codigoc3;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoc3
+     *
+     * @return integer
+     */
+    public function getCodigoc3()
+    {
+        return $this->codigoc3;
+    }
+
+    public function __toString() {
+      return $this->getNombre();
+    }
 }

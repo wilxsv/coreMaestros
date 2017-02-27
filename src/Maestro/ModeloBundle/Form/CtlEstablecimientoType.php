@@ -13,9 +13,35 @@ class CtlEstablecimientoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('direccion')->add('telefono')->add('fax')->add('latitud')->add('longitud')->add('anioApertura')->add('activo')->add('cabezaMicrored')->add('hospitalizacion')->add('detalleSchema')->add('idmicrored')->add('idEstablecimientoPadre')->add('idTipoEstablecimiento')->add('idMunicipio')->add('idCatTipoConsumo')->add('idCatTipoFarmacia')->add('idCatTipoExpediente')->add('idCatPruebas')->add('idInstitucion')->add('idCatNivelMinsal')        ;
+        $builder->add('nombre')
+        ->add('direccion')
+        ->add('telefono')
+        ->add('fax')
+        ->add('anioApertura')
+        ->add('cabezaMicrored')
+        ->add('hospitalizacion')
+        ->add('poblacionAsignana')
+        ->add('cantidadFamilia')
+        ->add('idmicrored')
+        ->add('idEstablecimientoPadre')
+        ->add('idTipoEstablecimiento')
+        ->add('idMunicipio')
+        ->add('idInstitucion')
+        ->add('idSituacionLegal')
+        ->add('ctlPrestacionid')
+        ->add('ctlRecursoHumanoid')
+        ->add('ctlServicioid');
     }
+/*
 
+->add('idCatNivelMinsal')
+->add('codUcsf')
+->add('cvcd4')
+->add('latitud')
+->add('longitud')
+->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')
+
+*/
     /**
      * {@inheritdoc}
      */

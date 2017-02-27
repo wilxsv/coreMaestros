@@ -51,13 +51,6 @@ class CtlProyectoMunicipio
     private $fechaHoraMod;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlProyecto
      *
      * @ORM\ManyToOne(targetEntity="CtlProyecto")
@@ -179,29 +172,6 @@ class CtlProyectoMunicipio
     public function getFechaHoraMod()
     {
         return $this->fechaHoraMod;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlProyectoMunicipio
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

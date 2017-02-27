@@ -65,13 +65,6 @@ class CtlCatalogoDetalle
     private $abreviatura;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlCatalogo
      *
      * @ORM\ManyToOne(targetEntity="CtlCatalogo")
@@ -232,29 +225,6 @@ class CtlCatalogoDetalle
     }
 
     /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlCatalogoDetalle
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
-    }
-
-    /**
      * Set idCatalogo
      *
      * @param \Maestro\ModeloBundle\Entity\CtlCatalogo $idCatalogo
@@ -277,5 +247,7 @@ class CtlCatalogoDetalle
         return $this->idCatalogo;
     }
 
-    public function __toString(){ return $this->getAbreviatura(); }
+    public function __toString() {
+      return $this->getDescripcion();
+    }
 }

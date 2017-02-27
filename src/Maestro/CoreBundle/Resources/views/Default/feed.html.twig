@@ -3,17 +3,20 @@
 
 <channel>
 
-<title>Sistema de Gestión de Catálogos Maestros {{nombre}} </title>
-<link>http://establecimiento.maestro.salud.gob.sv</link>
-<description>Descripción</description>
-<language>es-ES</language>
+ <title>Sistema de Gestión de Catálogos Maestros {{nombre}} </title>
+ <link>http://establecimiento.maestro.salud.gob.sv</link>
+ <description>Descripción</description>
+ <language>es-ES</language>
 
-<item><title>Prueba 1</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
-<item><title>Prueba 2</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
-<item><title>Prueba 3</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
-<item><title>Prueba 4</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
-<item><title>Prueba 5</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
-<item><title>Prueba 6</title><link>http://establecimiento.maestro.salud.gob.sv</link><description>bla, bla..</description><pubDate>Sun, 29 Jan 2017 21:01:12 +0100</pubDate><author>admin</author></item>
+ {% for ctlSchema in ctlSchemas %}
+ <item>
+  <title>{{ ctlSchema.tipoCambioSchema }}</title>
+  <link>http://establecimiento.maestro.salud.gob.sv</link>
+  <description>{{ ctlSchema.detalleSchema }}</description>
+  <pubDate>{{ ctlSchema.timeSchema }}</pubDate>
+  <author>na</author>
+ </item>
+ {% endfor %}
 
 </channel>
 </rss>

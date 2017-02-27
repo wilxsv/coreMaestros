@@ -37,46 +37,33 @@ class CtlRecursoHumano
     private $detalleRecursoHumano;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     * @ORM\ManyToMany(targetEntity="CtlEstablecimiento", inversedBy="ctlRecursoHumanoid")
+     * @ORM\JoinTable(name="ctl_recurso_humano_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_recurso_humanoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idUser;
+    private $ctlEstablecimientoid;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * Constructor
      */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
+    public function __construct()
+    {
+        $this->ctlEstablecimientoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,7 +86,7 @@ class CtlRecursoHumano
     /**
      * Get nombreRecursoHumano
      *
-     * @return string 
+     * @return string
      */
     public function getNombreRecursoHumano()
     {
@@ -122,7 +109,7 @@ class CtlRecursoHumano
     /**
      * Get detalleRecursoHumano
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleRecursoHumano()
     {
@@ -130,117 +117,39 @@ class CtlRecursoHumano
     }
 
     /**
-     * Set idUser
+     * Add ctlEstablecimientoid
      *
-     * @param integer $idUser
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
      * @return CtlRecursoHumano
      */
-    public function setIdUser($idUser)
+    public function addCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
     {
-        $this->idUser = $idUser;
+        $this->ctlEstablecimientoid[] = $ctlEstablecimientoid;
 
         return $this;
     }
 
     /**
-     * Get idUser
+     * Remove ctlEstablecimientoid
      *
-     * @return integer 
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
      */
-    public function getIdUser()
+    public function removeCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
     {
-        return $this->idUser;
+        $this->ctlEstablecimientoid->removeElement($ctlEstablecimientoid);
     }
 
     /**
-     * Set ipUser
+     * Get ctlEstablecimientoid
      *
-     * @param string $ipUser
-     * @return CtlRecursoHumano
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setIpUser($ipUser)
+    public function getCtlEstablecimientoid()
     {
-        $this->ipUser = $ipUser;
-
-        return $this;
+        return $this->ctlEstablecimientoid;
     }
 
-    /**
-     * Get ipUser
-     *
-     * @return string 
-     */
-    public function getIpUser()
-    {
-        return $this->ipUser;
-    }
-
-    /**
-     * Set detalleSchema
-     *
-     * @param string $detalleSchema
-     * @return CtlRecursoHumano
-     */
-    public function setDetalleSchema($detalleSchema)
-    {
-        $this->detalleSchema = $detalleSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleSchema
-     *
-     * @return string 
-     */
-    public function getDetalleSchema()
-    {
-        return $this->detalleSchema;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlRecursoHumano
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean 
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlRecursoHumano
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
+    public function __toString() {
+      return $this->getNombreRecursoHumano();
     }
 }

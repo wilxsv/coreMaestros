@@ -1,0 +1,11 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Agregar Servicio{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Agregar" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+<a href="{{ path('servicio_index') }}" class="btn">Regresar a listado</a>
+{% endblock %}

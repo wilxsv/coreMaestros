@@ -1,14 +1,8 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}{{ ctlCanton.nombre }}{% endblock %}
 {% block body %}
-    <h1>Ctlcanton</h1>
-
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ctlCanton.id }}</td>
-            </tr>
             <tr>
                 <th>Nombre</th>
                 <td>{{ ctlCanton.nombre }}</td>
@@ -18,24 +12,8 @@
                 <td>{{ ctlCanton.codigoDigestyc }}</td>
             </tr>
             <tr>
-                <th>Idusuarioreg</th>
-                <td>{{ ctlCanton.idUsuarioReg }}</td>
-            </tr>
-            <tr>
-                <th>Fechahorareg</th>
-                <td>{% if ctlCanton.fechaHoraReg %}{{ ctlCanton.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Idusuariomod</th>
-                <td>{{ ctlCanton.idUsuarioMod }}</td>
-            </tr>
-            <tr>
-                <th>Fechahoramod</th>
-                <td>{% if ctlCanton.fechaHoraMod %}{{ ctlCanton.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
                 <th>Rural</th>
-                <td>{% if ctlCanton.rural %}Yes{% else %}No{% endif %}</td>
+                <td>{% if ctlCanton.rural %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Digestyc2015</th>
@@ -43,42 +21,11 @@
             </tr>
             <tr>
                 <th>Activo</th>
-                <td>{% if ctlCanton.activo %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Iduser</th>
-                <td>{{ ctlCanton.idUser }}</td>
-            </tr>
-            <tr>
-                <th>Ipuser</th>
-                <td>{{ ctlCanton.ipUser }}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlCanton.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{% if ctlCanton.enableSchema %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlCanton.estadoSchema }}</td>
+                <td>{% if ctlCanton.activo %}Si{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('canton_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('canton_edit', { 'id': ctlCanton.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a href="{{ path('canton_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('canton_edit', { 'id': ctlCanton.id }) }}" class="btn btn-primary">Editar</a>
 {% endblock %}

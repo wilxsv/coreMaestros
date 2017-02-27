@@ -1,3 +1,22 @@
+
+maestro_modelo_recurso:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlrecursohumano.yml"
+    prefix:   /recurso
+maestro_modelo_servicio:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlservicio.yml"
+    prefix:   /servicio
+maestro_modelo_situacionlegal:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlsituacionlegal.yml"
+    prefix:   /situacionlegal
+maestro_modelo_tipoestablecimiento:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctltipoestablecimiento.yml"
+    prefix:   /tipoestablecimiento
+maestro_modelo_schema:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlschema.yml"
+    prefix:   /schema
+maestro_modelo_red:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlmicrored.yml"
+    prefix:   /red
 maestro_modelo_establecimiento:
     resource: "@MaestroModeloBundle/Resources/config/routing/ctlestablecimiento.yml"
     prefix:   /establecimiento

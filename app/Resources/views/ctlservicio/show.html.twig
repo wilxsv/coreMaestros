@@ -1,0 +1,15 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Servicio {{ ctlServicio.nombreServicio }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombre del servicio</th>
+                <td>{{ ctlServicio.nombreServicio }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="{{ path('servicio_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('servicio_edit', { 'id': ctlServicio.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

@@ -37,39 +37,115 @@ class CtlRecursoHumano
     private $detalleRecursoHumano;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     * @ORM\ManyToMany(targetEntity="CtlEstablecimiento", inversedBy="ctlRecursoHumanoid")
+     * @ORM\JoinTable(name="ctl_recurso_humano_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_recurso_humanoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idUser;
+    private $ctlEstablecimientoid;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * Constructor
      */
-    private $ipUser;
+    public function __construct()
+    {
+        $this->ctlEstablecimientoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
-     * @var string
+     * Get id
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @return integer 
      */
-    private $detalleSchema;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var boolean
+     * Set nombreRecursoHumano
      *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     * @param string $nombreRecursoHumano
+     * @return CtlRecursoHumano
      */
-    private $enableSchema;
+    public function setNombreRecursoHumano($nombreRecursoHumano)
+    {
+        $this->nombreRecursoHumano = $nombreRecursoHumano;
+
+        return $this;
+    }
 
     /**
-     * @var integer
+     * Get nombreRecursoHumano
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @return string 
      */
-    private $estadoSchema;
+    public function getNombreRecursoHumano()
+    {
+        return $this->nombreRecursoHumano;
+    }
 
+    /**
+     * Set detalleRecursoHumano
+     *
+     * @param string $detalleRecursoHumano
+     * @return CtlRecursoHumano
+     */
+    public function setDetalleRecursoHumano($detalleRecursoHumano)
+    {
+        $this->detalleRecursoHumano = $detalleRecursoHumano;
 
+        return $this;
+    }
+
+    /**
+     * Get detalleRecursoHumano
+     *
+     * @return string 
+     */
+    public function getDetalleRecursoHumano()
+    {
+        return $this->detalleRecursoHumano;
+    }
+
+    /**
+     * Add ctlEstablecimientoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
+     * @return CtlRecursoHumano
+     */
+    public function addCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
+    {
+        $this->ctlEstablecimientoid[] = $ctlEstablecimientoid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlEstablecimientoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
+     */
+    public function removeCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
+    {
+        $this->ctlEstablecimientoid->removeElement($ctlEstablecimientoid);
+    }
+
+    /**
+     * Get ctlEstablecimientoid
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlEstablecimientoid()
+    {
+        return $this->ctlEstablecimientoid;
+    }
 }

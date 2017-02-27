@@ -93,13 +93,6 @@ class CtlProyecto
     private $monto;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlProyectoFinanciamiento
      *
      * @ORM\ManyToOne(targetEntity="CtlProyectoFinanciamiento")
@@ -359,29 +352,6 @@ class CtlProyecto
     public function getMonto()
     {
         return $this->monto;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlProyecto
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

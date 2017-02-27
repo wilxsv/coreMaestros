@@ -44,13 +44,6 @@ class CtlEmpleadoEstablecimiento
     private $activo;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlEmpleado
      *
      * @ORM\ManyToOne(targetEntity="CtlEmpleado")
@@ -149,29 +142,6 @@ class CtlEmpleadoEstablecimiento
     public function getActivo()
     {
         return $this->activo;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlEmpleadoEstablecimiento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

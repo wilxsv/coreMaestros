@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlDependenciaEstablecimiento
  *
- * @ORM\Table(name="ctl_dependencia_establecimiento", indexes={@ORM\Index(name="idx_bc5984327dfa12f6", columns={"id_establecimiento"}), @ORM\Index(name="idx_bc5984322bf76b46", columns={"id_dependencia_padre"}), @ORM\Index(name="idx_bc598432ca22cd3f", columns={"id_dependencia_tipo"})})
+ * @ORM\Table(name="ctl_dependencia_establecimiento", indexes={@ORM\Index(name="idx_bc5984322bf76b46", columns={"id_dependencia_padre"}), @ORM\Index(name="idx_bc5984327dfa12f6", columns={"id_establecimiento"}), @ORM\Index(name="idx_bc598432ca22cd3f", columns={"id_dependencia_tipo"})})
  * @ORM\Entity
  */
 class CtlDependenciaEstablecimiento
@@ -70,41 +70,6 @@ class CtlDependenciaEstablecimiento
      * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
      */
     private $fechaHoraMod;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
 
     /**
      * @var \CtlEstablecimiento
@@ -307,121 +272,6 @@ class CtlDependenciaEstablecimiento
     public function getFechaHoraMod()
     {
         return $this->fechaHoraMod;
-    }
-
-    /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     * @return CtlDependenciaEstablecimiento
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return integer 
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Set ipUser
-     *
-     * @param string $ipUser
-     * @return CtlDependenciaEstablecimiento
-     */
-    public function setIpUser($ipUser)
-    {
-        $this->ipUser = $ipUser;
-
-        return $this;
-    }
-
-    /**
-     * Get ipUser
-     *
-     * @return string 
-     */
-    public function getIpUser()
-    {
-        return $this->ipUser;
-    }
-
-    /**
-     * Set detalleSchema
-     *
-     * @param string $detalleSchema
-     * @return CtlDependenciaEstablecimiento
-     */
-    public function setDetalleSchema($detalleSchema)
-    {
-        $this->detalleSchema = $detalleSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleSchema
-     *
-     * @return string 
-     */
-    public function getDetalleSchema()
-    {
-        return $this->detalleSchema;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlDependenciaEstablecimiento
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean 
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlDependenciaEstablecimiento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

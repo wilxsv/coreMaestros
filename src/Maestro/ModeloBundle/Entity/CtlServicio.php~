@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlServicio
  *
- * @ORM\Table(name="ctl_servicio", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_servicio_nombre_servicio_key", columns={"nombre_servicio"})})
+ * @ORM\Table(name="ctl_servicio", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_servicio_nombre_servicio_key", columns={"nombre_servicio"})}, indexes={@ORM\Index(name="IDX_A2761EFCFD3F56F4", columns={"ctl_servicioid"})})
  * @ORM\Entity
  */
 class CtlServicio
@@ -37,46 +37,152 @@ class CtlServicio
     private $detalleServicio;
 
     /**
-     * @var integer
+     * @var \CtlServicio
      *
-     * @ORM\Column(name="ctl_servicioid", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CtlServicio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     * })
      */
     private $ctlServicioid;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     * @ORM\ManyToMany(targetEntity="CtlEstablecimiento", inversedBy="ctlServicioid")
+     * @ORM\JoinTable(name="ctl_servicio_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idUser;
+    private $ctlEstablecimientoid;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * Constructor
      */
-    private $ipUser;
+    public function __construct()
+    {
+        $this->ctlEstablecimientoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
-     * @var string
+     * Get id
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @return integer
      */
-    private $detalleSchema;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var boolean
+     * Set nombreServicio
      *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     * @param string $nombreServicio
+     * @return CtlServicio
      */
-    private $enableSchema;
+    public function setNombreServicio($nombreServicio)
+    {
+        $this->nombreServicio = $nombreServicio;
+
+        return $this;
+    }
 
     /**
-     * @var integer
+     * Get nombreServicio
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @return string
      */
-    private $estadoSchema;
+    public function getNombreServicio()
+    {
+        return $this->nombreServicio;
+    }
 
+    /**
+     * Set detalleServicio
+     *
+     * @param string $detalleServicio
+     * @return CtlServicio
+     */
+    public function setDetalleServicio($detalleServicio)
+    {
+        $this->detalleServicio = $detalleServicio;
 
+        return $this;
+    }
+
+    /**
+     * Get detalleServicio
+     *
+     * @return string
+     */
+    public function getDetalleServicio()
+    {
+        return $this->detalleServicio;
+    }
+
+    /**
+     * Set ctlServicioid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
+     * @return CtlServicio
+     */
+    public function setCtlServicioid(\Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid = null)
+    {
+        $this->ctlServicioid = $ctlServicioid;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlServicioid
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlServicio
+     */
+    public function getCtlServicioid()
+    {
+        return $this->ctlServicioid;
+    }
+
+    /**
+     * Add ctlEstablecimientoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
+     * @return CtlServicio
+     */
+    public function addCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
+    {
+        $this->ctlEstablecimientoid[] = $ctlEstablecimientoid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlEstablecimientoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
+     */
+    public function removeCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
+    {
+        $this->ctlEstablecimientoid->removeElement($ctlEstablecimientoid);
+    }
+
+    /**
+     * Get ctlEstablecimientoid
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCtlEstablecimientoid()
+    {
+        return $this->ctlEstablecimientoid;
+    }
+
+    public function __toString() {
+      return $this->getNombreServicio();
+    }
 }

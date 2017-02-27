@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}establecimiento {{ ctlEstablecimiento.nombre }}{% endblock %}
 {% block body %}
-    <h1>Ctlestablecimiento</h1>
-
     <table>
         <tbody>
             <tr>
@@ -122,24 +120,36 @@
                 <td>{% if ctlEstablecimiento.hospitalizacion %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Iduser</th>
-                <td>{{ ctlEstablecimiento.idUser }}</td>
+                <th>Poblacionasignana</th>
+                <td>{{ ctlEstablecimiento.poblacionAsignana }}</td>
             </tr>
             <tr>
-                <th>Ipuser</th>
-                <td>{{ ctlEstablecimiento.ipUser }}</td>
+                <th>Cantidadfamilia</th>
+                <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlEstablecimiento.registroSchema %}{{ ctlEstablecimiento.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Detalleschema</th>
                 <td>{{ ctlEstablecimiento.detalleSchema }}</td>
             </tr>
             <tr>
-                <th>Enableschema</th>
-                <td>{% if ctlEstablecimiento.enableSchema %}Yes{% else %}No{% endif %}</td>
+                <th>Useridschema</th>
+                <td>{{ ctlEstablecimiento.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Ipuserschema</th>
+                <td>{{ ctlEstablecimiento.ipUserSchema }}</td>
             </tr>
             <tr>
                 <th>Estadoschema</th>
                 <td>{{ ctlEstablecimiento.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlEstablecimiento.enableSchema }}</td>
             </tr>
         </tbody>
     </table>

@@ -1,0 +1,24 @@
+situacionlegal_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlSituacionLegal:index" }
+    methods:  GET
+
+situacionlegal_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlSituacionLegal:show" }
+    methods:  GET
+
+situacionlegal_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlSituacionLegal:new" }
+    methods:  [GET, POST]
+
+situacionlegal_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlSituacionLegal:edit" }
+    methods:  [GET, POST]
+
+situacionlegal_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlSituacionLegal:delete" }
+    methods:  DELETE

@@ -1,0 +1,28 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Listado de Tipo de Establecimiento{% endblock %}
+{% block body %}
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Codigo</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlTipoEstablecimiento in ctlTipoEstablecimientos %}
+            <tr>
+                <td>{{ ctlTipoEstablecimiento.nombre }}</td>
+                <td>{{ ctlTipoEstablecimiento.codigo }}</td>
+                <td>
+                  <a href="{{ path('tipoestablecimiento_show', { 'id': ctlTipoEstablecimiento.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                  <a href="{{ path('tipoestablecimiento_edit', { 'id': ctlTipoEstablecimiento.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<a href="{{ path('tipoestablecimiento_new') }}">Agregar Tipo de Establecimiento</a>
+{% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

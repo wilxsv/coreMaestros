@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctldependenciaestablecimiento</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlDependenciaEstablecimiento.id }}</td>
+            </tr>
+            <tr>
+                <th>Fechainicio</th>
+                <td>{% if ctlDependenciaEstablecimiento.fechaInicio %}{{ ctlDependenciaEstablecimiento.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechafin</th>
+                <td>{% if ctlDependenciaEstablecimiento.fechaFin %}{{ ctlDependenciaEstablecimiento.fechaFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Habilitado</th>
+                <td>{% if ctlDependenciaEstablecimiento.habilitado %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Idusuarioreg</th>
+                <td>{{ ctlDependenciaEstablecimiento.idUsuarioReg }}</td>
+            </tr>
+            <tr>
+                <th>Fechahorareg</th>
+                <td>{% if ctlDependenciaEstablecimiento.fechaHoraReg %}{{ ctlDependenciaEstablecimiento.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Idusuariomod</th>
+                <td>{{ ctlDependenciaEstablecimiento.idUsuarioMod }}</td>
+            </tr>
+            <tr>
+                <th>Fechahoramod</th>
+                <td>{% if ctlDependenciaEstablecimiento.fechaHoraMod %}{{ ctlDependenciaEstablecimiento.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dependencia_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('dependencia_edit', { 'id': ctlDependenciaEstablecimiento.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

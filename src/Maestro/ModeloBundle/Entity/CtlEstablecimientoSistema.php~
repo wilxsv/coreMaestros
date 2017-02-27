@@ -37,41 +37,6 @@ class CtlEstablecimientoSistema
     private $dominioSistema;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlEstablecimiento
      *
      * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
@@ -82,4 +47,83 @@ class CtlEstablecimientoSistema
     private $idEstablecimiento;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     * @return CtlEstablecimientoSistema
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string 
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * Set dominioSistema
+     *
+     * @param string $dominioSistema
+     * @return CtlEstablecimientoSistema
+     */
+    public function setDominioSistema($dominioSistema)
+    {
+        $this->dominioSistema = $dominioSistema;
+
+        return $this;
+    }
+
+    /**
+     * Get dominioSistema
+     *
+     * @return string 
+     */
+    public function getDominioSistema()
+    {
+        return $this->dominioSistema;
+    }
+
+    /**
+     * Set idEstablecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $idEstablecimiento
+     * @return CtlEstablecimientoSistema
+     */
+    public function setIdEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $idEstablecimiento = null)
+    {
+        $this->idEstablecimiento = $idEstablecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get idEstablecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getIdEstablecimiento()
+    {
+        return $this->idEstablecimiento;
+    }
 }

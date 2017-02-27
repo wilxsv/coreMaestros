@@ -1,0 +1,28 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Listado de Micro Redes{% endblock %}
+{% block body %}
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Codigoc3</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlMicrored in ctlMicroreds %}
+            <tr>
+                <td>{{ ctlMicrored.nombre }}</td>
+                <td>{{ ctlMicrored.codigoc3 }}</td>
+                <td>
+                  <a href="{{ path('red_show', { 'id': ctlMicrored.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                  <a href="{{ path('red_edit', { 'id': ctlMicrored.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<a href="{{ path('red_new') }}">Agregar Micro red</a>
+{% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

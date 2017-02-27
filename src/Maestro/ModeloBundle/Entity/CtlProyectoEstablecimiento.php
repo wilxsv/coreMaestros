@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlProyectoEstablecimiento
  *
- * @ORM\Table(name="ctl_proyecto_establecimiento", indexes={@ORM\Index(name="idx_33f112aa7dfa12f6", columns={"id_establecimiento"}), @ORM\Index(name="idx_33f112aa3f09ee2c", columns={"id_proyecto"})})
+ * @ORM\Table(name="ctl_proyecto_establecimiento", indexes={@ORM\Index(name="idx_33f112aa3f09ee2c", columns={"id_proyecto"}), @ORM\Index(name="idx_33f112aa7dfa12f6", columns={"id_establecimiento"})})
  * @ORM\Entity
  */
 class CtlProyectoEstablecimiento
@@ -56,13 +56,6 @@ class CtlProyectoEstablecimiento
      * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
      */
     private $fechaHoraMod;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
 
     /**
      * @var \CtlProyecto
@@ -199,29 +192,6 @@ class CtlProyectoEstablecimiento
     public function getFechaHoraMod()
     {
         return $this->fechaHoraMod;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlProyectoEstablecimiento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 
     /**

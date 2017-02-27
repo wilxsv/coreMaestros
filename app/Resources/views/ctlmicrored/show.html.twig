@@ -1,0 +1,19 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Micro red: {{ ctlMicrored.nombre }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ ctlMicrored.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{% if ctlMicrored.activo %}Si{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="{{ path('red_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('red_edit', { 'id': ctlMicrored.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

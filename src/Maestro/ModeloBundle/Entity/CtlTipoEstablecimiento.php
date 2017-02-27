@@ -65,41 +65,6 @@ class CtlTipoEstablecimiento
     private $fechaHoraMod;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlInstitucion
      *
      * @ORM\ManyToOne(targetEntity="CtlInstitucion")
@@ -260,121 +225,6 @@ class CtlTipoEstablecimiento
     }
 
     /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     * @return CtlTipoEstablecimiento
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return integer
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Set ipUser
-     *
-     * @param string $ipUser
-     * @return CtlTipoEstablecimiento
-     */
-    public function setIpUser($ipUser)
-    {
-        $this->ipUser = $ipUser;
-
-        return $this;
-    }
-
-    /**
-     * Get ipUser
-     *
-     * @return string
-     */
-    public function getIpUser()
-    {
-        return $this->ipUser;
-    }
-
-    /**
-     * Set detalleSchema
-     *
-     * @param string $detalleSchema
-     * @return CtlTipoEstablecimiento
-     */
-    public function setDetalleSchema($detalleSchema)
-    {
-        $this->detalleSchema = $detalleSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleSchema
-     *
-     * @return string
-     */
-    public function getDetalleSchema()
-    {
-        return $this->detalleSchema;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlTipoEstablecimiento
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlTipoEstablecimiento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
-    }
-
-    /**
      * Set idInstitucion
      *
      * @param \Maestro\ModeloBundle\Entity\CtlInstitucion $idInstitucion
@@ -397,5 +247,8 @@ class CtlTipoEstablecimiento
         return $this->idInstitucion;
     }
 
-    public function __toString(){ return $this->getNombre(); }
+
+    public function __toString() {
+      return $this->getNombre();
+    }
 }

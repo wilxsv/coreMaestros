@@ -1,0 +1,24 @@
+recurso_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlRecursoHumano:index" }
+    methods:  GET
+
+recurso_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlRecursoHumano:show" }
+    methods:  GET
+
+recurso_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlRecursoHumano:new" }
+    methods:  [GET, POST]
+
+recurso_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlRecursoHumano:edit" }
+    methods:  [GET, POST]
+
+recurso_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlRecursoHumano:delete" }
+    methods:  DELETE

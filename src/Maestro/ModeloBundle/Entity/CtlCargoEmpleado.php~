@@ -29,12 +29,38 @@ class CtlCargoEmpleado
      */
     private $cargo;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @return integer 
      */
-    private $estadoSchema;
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set cargo
+     *
+     * @param string $cargo
+     * @return CtlCargoEmpleado
+     */
+    public function setCargo($cargo)
+    {
+        $this->cargo = $cargo;
 
+        return $this;
+    }
+
+    /**
+     * Get cargo
+     *
+     * @return string 
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
 }

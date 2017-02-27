@@ -16,11 +16,14 @@ class CtlEstablecimientoController extends Controller
      * Lists all ctlEstablecimiento entities.
      *
      */
-    public function indexAction()
+    public function indexAction($type = 0)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findAll();
+        if ($type == 3) { $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByIdTipoEstablecimiento(38); }//se muestra mapa
+        elseif ($type == 1) { $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEstadoSchema(0); }//se muestra los no verificados
+        elseif ($type == 2) { $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEstadoSchema(1); }//se muestran los no habilitados
+        elseif ($type == 0) { $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1); }//se muestran ecos
+        else { $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1); }
 
         return $this->render('ctlestablecimiento/index.html.twig', array(
             'ctlEstablecimientos' => $ctlEstablecimientos,
@@ -45,7 +48,7 @@ class CtlEstablecimientoController extends Controller
             return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId()));
         }
 
-        return $this->render('ctlestablecimiento/new.html.twig', array(
+        return $this->render('ctlestablecimiento/agrega.html.twig', array(
             'ctlEstablecimiento' => $ctlEstablecimiento,
             'form' => $form->createView(),
         ));
@@ -121,28 +124,4 @@ class CtlEstablecimientoController extends Controller
             ->getForm()
         ;
     }
-
-        /**
-         * Creates a new ctlEstablecimiento entity.
-         *
-         */
-        public function agregaAction(Request $request)
-        {
-            $ctlEstablecimiento = new Ctlestablecimiento();
-            $form = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($ctlEstablecimiento);
-                $em->flush($ctlEstablecimiento);
-
-                return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId()));
-            }
-
-            return $this->render('ctlestablecimiento/agrega.html.twig', array(
-                'ctlEstablecimiento' => $ctlEstablecimiento,
-                'form' => $form->createView(),
-            ));
-        }
 }

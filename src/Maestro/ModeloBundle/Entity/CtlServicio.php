@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlServicio
  *
- * @ORM\Table(name="ctl_servicio", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_servicio_nombre_servicio_key", columns={"nombre_servicio"})})
+ * @ORM\Table(name="ctl_servicio", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_servicio_nombre_servicio_key", columns={"nombre_servicio"})}, indexes={@ORM\Index(name="IDX_A2761EFCFD3F56F4", columns={"ctl_servicioid"})})
  * @ORM\Entity
  */
 class CtlServicio
@@ -37,53 +37,43 @@ class CtlServicio
     private $detalleServicio;
 
     /**
-     * @var integer
+     * @var \CtlServicio
      *
-     * @ORM\Column(name="ctl_servicioid", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CtlServicio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     * })
      */
     private $ctlServicioid;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
+     * @ORM\ManyToMany(targetEntity="CtlEstablecimiento", inversedBy="ctlServicioid")
+     * @ORM\JoinTable(name="ctl_servicio_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $idUser;
+    private $ctlEstablecimientoid;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * Constructor
      */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
+    public function __construct()
+    {
+        $this->ctlEstablecimientoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,7 +96,7 @@ class CtlServicio
     /**
      * Get nombreServicio
      *
-     * @return string 
+     * @return string
      */
     public function getNombreServicio()
     {
@@ -129,7 +119,7 @@ class CtlServicio
     /**
      * Get detalleServicio
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleServicio()
     {
@@ -139,10 +129,10 @@ class CtlServicio
     /**
      * Set ctlServicioid
      *
-     * @param integer $ctlServicioid
+     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
      * @return CtlServicio
      */
-    public function setCtlServicioid($ctlServicioid)
+    public function setCtlServicioid(\Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid = null)
     {
         $this->ctlServicioid = $ctlServicioid;
 
@@ -152,7 +142,7 @@ class CtlServicio
     /**
      * Get ctlServicioid
      *
-     * @return integer 
+     * @return \Maestro\ModeloBundle\Entity\CtlServicio
      */
     public function getCtlServicioid()
     {
@@ -160,117 +150,39 @@ class CtlServicio
     }
 
     /**
-     * Set idUser
+     * Add ctlEstablecimientoid
      *
-     * @param integer $idUser
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
      * @return CtlServicio
      */
-    public function setIdUser($idUser)
+    public function addCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
     {
-        $this->idUser = $idUser;
+        $this->ctlEstablecimientoid[] = $ctlEstablecimientoid;
 
         return $this;
     }
 
     /**
-     * Get idUser
+     * Remove ctlEstablecimientoid
      *
-     * @return integer 
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid
      */
-    public function getIdUser()
+    public function removeCtlEstablecimientoid(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimientoid)
     {
-        return $this->idUser;
+        $this->ctlEstablecimientoid->removeElement($ctlEstablecimientoid);
     }
 
     /**
-     * Set ipUser
+     * Get ctlEstablecimientoid
      *
-     * @param string $ipUser
-     * @return CtlServicio
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setIpUser($ipUser)
+    public function getCtlEstablecimientoid()
     {
-        $this->ipUser = $ipUser;
-
-        return $this;
+        return $this->ctlEstablecimientoid;
     }
 
-    /**
-     * Get ipUser
-     *
-     * @return string 
-     */
-    public function getIpUser()
-    {
-        return $this->ipUser;
-    }
-
-    /**
-     * Set detalleSchema
-     *
-     * @param string $detalleSchema
-     * @return CtlServicio
-     */
-    public function setDetalleSchema($detalleSchema)
-    {
-        $this->detalleSchema = $detalleSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleSchema
-     *
-     * @return string 
-     */
-    public function getDetalleSchema()
-    {
-        return $this->detalleSchema;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlServicio
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean 
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlServicio
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
+    public function __toString() {
+      return $this->getNombreServicio();
     }
 }

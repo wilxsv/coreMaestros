@@ -1,0 +1,24 @@
+dependencia_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlDependenciaEstablecimiento:index" }
+    methods:  GET
+
+dependencia_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlDependenciaEstablecimiento:show" }
+    methods:  GET
+
+dependencia_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlDependenciaEstablecimiento:new" }
+    methods:  [GET, POST]
+
+dependencia_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlDependenciaEstablecimiento:edit" }
+    methods:  [GET, POST]
+
+dependencia_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlDependenciaEstablecimiento:delete" }
+    methods:  DELETE

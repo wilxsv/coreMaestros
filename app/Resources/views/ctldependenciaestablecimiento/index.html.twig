@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctldependenciaestablecimientos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fechainicio</th>
+                <th>Fechafin</th>
+                <th>Habilitado</th>
+                <th>Idusuarioreg</th>
+                <th>Fechahorareg</th>
+                <th>Idusuariomod</th>
+                <th>Fechahoramod</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlDependenciaEstablecimiento in ctlDependenciaEstablecimientos %}
+            <tr>
+                <td><a href="{{ path('dependencia_show', { 'id': ctlDependenciaEstablecimiento.id }) }}">{{ ctlDependenciaEstablecimiento.id }}</a></td>
+                <td>{% if ctlDependenciaEstablecimiento.fechaInicio %}{{ ctlDependenciaEstablecimiento.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if ctlDependenciaEstablecimiento.fechaFin %}{{ ctlDependenciaEstablecimiento.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if ctlDependenciaEstablecimiento.habilitado %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlDependenciaEstablecimiento.idUsuarioReg }}</td>
+                <td>{% if ctlDependenciaEstablecimiento.fechaHoraReg %}{{ ctlDependenciaEstablecimiento.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlDependenciaEstablecimiento.idUsuarioMod }}</td>
+                <td>{% if ctlDependenciaEstablecimiento.fechaHoraMod %}{{ ctlDependenciaEstablecimiento.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dependencia_show', { 'id': ctlDependenciaEstablecimiento.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dependencia_edit', { 'id': ctlDependenciaEstablecimiento.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dependencia_new') }}">Create a new ctlDependenciaEstablecimiento</a>
+        </li>
+    </ul>
+{% endblock %}

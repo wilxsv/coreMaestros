@@ -1,0 +1,24 @@
+red_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlMicrored:index" }
+    methods:  GET
+
+red_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlMicrored:show" }
+    methods:  GET
+
+red_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlMicrored:new" }
+    methods:  [GET, POST]
+
+red_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlMicrored:edit" }
+    methods:  [GET, POST]
+
+red_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlMicrored:delete" }
+    methods:  DELETE

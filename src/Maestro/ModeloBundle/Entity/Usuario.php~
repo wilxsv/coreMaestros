@@ -71,12 +71,176 @@ class Usuario
      */
     private $fechaHoraMod;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @return integer 
      */
-    private $estadoSchema;
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Usuario
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
 
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Usuario
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set contrasenia
+     *
+     * @param string $contrasenia
+     * @return Usuario
+     */
+    public function setContrasenia($contrasenia)
+    {
+        $this->contrasenia = $contrasenia;
+
+        return $this;
+    }
+
+    /**
+     * Get contrasenia
+     *
+     * @return string 
+     */
+    public function getContrasenia()
+    {
+        return $this->contrasenia;
+    }
+
+    /**
+     * Set idUsuarioReg
+     *
+     * @param string $idUsuarioReg
+     * @return Usuario
+     */
+    public function setIdUsuarioReg($idUsuarioReg)
+    {
+        $this->idUsuarioReg = $idUsuarioReg;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuarioReg
+     *
+     * @return string 
+     */
+    public function getIdUsuarioReg()
+    {
+        return $this->idUsuarioReg;
+    }
+
+    /**
+     * Set fechaHoraReg
+     *
+     * @param \DateTime $fechaHoraReg
+     * @return Usuario
+     */
+    public function setFechaHoraReg($fechaHoraReg)
+    {
+        $this->fechaHoraReg = $fechaHoraReg;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraReg
+     *
+     * @return \DateTime 
+     */
+    public function getFechaHoraReg()
+    {
+        return $this->fechaHoraReg;
+    }
+
+    /**
+     * Set idUsuarioMod
+     *
+     * @param string $idUsuarioMod
+     * @return Usuario
+     */
+    public function setIdUsuarioMod($idUsuarioMod)
+    {
+        $this->idUsuarioMod = $idUsuarioMod;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuarioMod
+     *
+     * @return string 
+     */
+    public function getIdUsuarioMod()
+    {
+        return $this->idUsuarioMod;
+    }
+
+    /**
+     * Set fechaHoraMod
+     *
+     * @param \DateTime $fechaHoraMod
+     * @return Usuario
+     */
+    public function setFechaHoraMod($fechaHoraMod)
+    {
+        $this->fechaHoraMod = $fechaHoraMod;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraMod
+     *
+     * @return \DateTime 
+     */
+    public function getFechaHoraMod()
+    {
+        return $this->fechaHoraMod;
+    }
 }

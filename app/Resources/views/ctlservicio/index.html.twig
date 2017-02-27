@@ -1,0 +1,25 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Listado de servicios{% endblock %}
+{% block body %}
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nombreservicio</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlServicio in ctlServicios %}
+            <tr>
+                <td>{{ ctlServicio.nombreServicio }}</td>
+                <td>
+                  <a href="{{ path('servicio_show', { 'id': ctlServicio.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                  <a href="{{ path('servicio_edit', { 'id': ctlServicio.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<a href="{{ path('servicio_new') }}">Agregar Servicio</a>
+{% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

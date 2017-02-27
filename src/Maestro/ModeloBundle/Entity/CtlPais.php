@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlPais
  *
- * @ORM\Table(name="ctl_pais", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_pais_dominio2_key", columns={"dominio2"}), @ORM\UniqueConstraint(name="ctl_pais_isonumero_key", columns={"isonumero"}), @ORM\UniqueConstraint(name="ctl_pais_dominio3_key", columns={"dominio3"})})
+ * @ORM\Table(name="ctl_pais", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_pais_dominio2_key", columns={"dominio2"}), @ORM\UniqueConstraint(name="ctl_pais_dominio3_key", columns={"dominio3"}), @ORM\UniqueConstraint(name="ctl_pais_isonumero_key", columns={"isonumero"})})
  * @ORM\Entity
  */
 class CtlPais
@@ -84,41 +84,6 @@ class CtlPais
      * @ORM\Column(name="activo", type="boolean", nullable=false)
      */
     private $activo;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
 
 
 
@@ -337,120 +302,5 @@ class CtlPais
     public function getActivo()
     {
         return $this->activo;
-    }
-
-    /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     * @return CtlPais
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return integer 
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Set ipUser
-     *
-     * @param string $ipUser
-     * @return CtlPais
-     */
-    public function setIpUser($ipUser)
-    {
-        $this->ipUser = $ipUser;
-
-        return $this;
-    }
-
-    /**
-     * Get ipUser
-     *
-     * @return string 
-     */
-    public function getIpUser()
-    {
-        return $this->ipUser;
-    }
-
-    /**
-     * Set detalleSchema
-     *
-     * @param string $detalleSchema
-     * @return CtlPais
-     */
-    public function setDetalleSchema($detalleSchema)
-    {
-        $this->detalleSchema = $detalleSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleSchema
-     *
-     * @return string 
-     */
-    public function getDetalleSchema()
-    {
-        return $this->detalleSchema;
-    }
-
-    /**
-     * Set enableSchema
-     *
-     * @param boolean $enableSchema
-     * @return CtlPais
-     */
-    public function setEnableSchema($enableSchema)
-    {
-        $this->enableSchema = $enableSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get enableSchema
-     *
-     * @return boolean 
-     */
-    public function getEnableSchema()
-    {
-        return $this->enableSchema;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlPais
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 }

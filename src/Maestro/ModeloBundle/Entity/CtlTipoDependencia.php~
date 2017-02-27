@@ -64,40 +64,153 @@ class CtlTipoDependencia
      */
     private $activo;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
+
 
     /**
-     * @var string
+     * Get id
      *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * @return integer 
      */
-    private $ipUser;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var string
+     * Set nombre
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @param string $nombre
+     * @return CtlTipoDependencia
      */
-    private $detalleSchema;
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
 
     /**
-     * @var boolean
+     * Get nombre
      *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     * @return string 
      */
-    private $enableSchema;
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
 
     /**
-     * @var integer
+     * Set idUsuarioReg
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @param string $idUsuarioReg
+     * @return CtlTipoDependencia
      */
-    private $estadoSchema;
+    public function setIdUsuarioReg($idUsuarioReg)
+    {
+        $this->idUsuarioReg = $idUsuarioReg;
 
+        return $this;
+    }
 
+    /**
+     * Get idUsuarioReg
+     *
+     * @return string 
+     */
+    public function getIdUsuarioReg()
+    {
+        return $this->idUsuarioReg;
+    }
+
+    /**
+     * Set fechaHoraReg
+     *
+     * @param \DateTime $fechaHoraReg
+     * @return CtlTipoDependencia
+     */
+    public function setFechaHoraReg($fechaHoraReg)
+    {
+        $this->fechaHoraReg = $fechaHoraReg;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraReg
+     *
+     * @return \DateTime 
+     */
+    public function getFechaHoraReg()
+    {
+        return $this->fechaHoraReg;
+    }
+
+    /**
+     * Set idUsuarioMod
+     *
+     * @param string $idUsuarioMod
+     * @return CtlTipoDependencia
+     */
+    public function setIdUsuarioMod($idUsuarioMod)
+    {
+        $this->idUsuarioMod = $idUsuarioMod;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuarioMod
+     *
+     * @return string 
+     */
+    public function getIdUsuarioMod()
+    {
+        return $this->idUsuarioMod;
+    }
+
+    /**
+     * Set fechaHoraMod
+     *
+     * @param \DateTime $fechaHoraMod
+     * @return CtlTipoDependencia
+     */
+    public function setFechaHoraMod($fechaHoraMod)
+    {
+        $this->fechaHoraMod = $fechaHoraMod;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHoraMod
+     *
+     * @return \DateTime 
+     */
+    public function getFechaHoraMod()
+    {
+        return $this->fechaHoraMod;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return CtlTipoDependencia
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
 }

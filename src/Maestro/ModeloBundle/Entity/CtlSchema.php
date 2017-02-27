@@ -23,18 +23,18 @@ class CtlSchema
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
+     * @ORM\Column(name="tabla_schema", type="text", nullable=false)
      */
-    private $registroSchema;
+    private $tablaSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id", type="bigint", nullable=false)
+     * @ORM\Column(name="index_tabla_schema", type="bigint", nullable=false)
      */
-    private $userId;
+    private $indexTablaSchema;
 
     /**
      * @var string
@@ -46,23 +46,9 @@ class CtlSchema
     /**
      * @var integer
      *
-     * @ORM\Column(name="tipo_cambio_schema", type="smallint", nullable=false)
+     * @ORM\Column(name="tipo_cambio_schema", type="integer", nullable=false)
      */
     private $tipoCambioSchema;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_schema", type="string", nullable=false)
-     */
-    private $ipSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
 
 
 
@@ -77,49 +63,49 @@ class CtlSchema
     }
 
     /**
-     * Set registroSchema
+     * Set tablaSchema
      *
-     * @param \DateTime $registroSchema
+     * @param string $tablaSchema
      * @return CtlSchema
      */
-    public function setRegistroSchema($registroSchema)
+    public function setTablaSchema($tablaSchema)
     {
-        $this->registroSchema = $registroSchema;
+        $this->tablaSchema = $tablaSchema;
 
         return $this;
     }
 
     /**
-     * Get registroSchema
+     * Get tablaSchema
      *
-     * @return \DateTime 
+     * @return string 
      */
-    public function getRegistroSchema()
+    public function getTablaSchema()
     {
-        return $this->registroSchema;
+        return $this->tablaSchema;
     }
 
     /**
-     * Set userId
+     * Set indexTablaSchema
      *
-     * @param integer $userId
+     * @param integer $indexTablaSchema
      * @return CtlSchema
      */
-    public function setUserId($userId)
+    public function setIndexTablaSchema($indexTablaSchema)
     {
-        $this->userId = $userId;
+        $this->indexTablaSchema = $indexTablaSchema;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get indexTablaSchema
      *
      * @return integer 
      */
-    public function getUserId()
+    public function getIndexTablaSchema()
     {
-        return $this->userId;
+        return $this->indexTablaSchema;
     }
 
     /**
@@ -167,50 +153,60 @@ class CtlSchema
     {
         return $this->tipoCambioSchema;
     }
+    /**
+     * @var string
+     */
+    private $detalleSchema;
 
     /**
-     * Set ipSchema
+     * @var \DateTime
+     */
+    private $timeSchema;
+
+
+    /**
+     * Set detalleSchema
      *
-     * @param string $ipSchema
+     * @param string $detalleSchema
      * @return CtlSchema
      */
-    public function setIpSchema($ipSchema)
+    public function setDetalleSchema($detalleSchema)
     {
-        $this->ipSchema = $ipSchema;
+        $this->detalleSchema = $detalleSchema;
 
         return $this;
     }
 
     /**
-     * Get ipSchema
+     * Get detalleSchema
      *
      * @return string 
      */
-    public function getIpSchema()
+    public function getDetalleSchema()
     {
-        return $this->ipSchema;
+        return $this->detalleSchema;
     }
 
     /**
-     * Set estadoSchema
+     * Set timeSchema
      *
-     * @param integer $estadoSchema
+     * @param \DateTime $timeSchema
      * @return CtlSchema
      */
-    public function setEstadoSchema($estadoSchema)
+    public function setTimeSchema($timeSchema)
     {
-        $this->estadoSchema = $estadoSchema;
+        $this->timeSchema = $timeSchema;
 
         return $this;
     }
 
     /**
-     * Get estadoSchema
+     * Get timeSchema
      *
-     * @return integer 
+     * @return \DateTime 
      */
-    public function getEstadoSchema()
+    public function getTimeSchema()
     {
-        return $this->estadoSchema;
+        return $this->timeSchema;
     }
 }

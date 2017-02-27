@@ -23,7 +23,9 @@ class DefaultController extends Controller
 
     public function feedAction()
     {
-        return $this->render('MaestroCoreBundle:Default:feed.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $ctlSchemas = $em->getRepository('MaestroModeloBundle:CtlSchema')->findAll();
+        return $this->render('MaestroCoreBundle:Default:feed.html.twig', array('ctlSchemas' => $ctlSchemas));
     }
 
     public function syslogAction()

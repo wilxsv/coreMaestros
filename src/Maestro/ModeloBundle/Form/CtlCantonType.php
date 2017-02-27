@@ -13,9 +13,9 @@ class CtlCantonType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('codigoDigestyc')->add('idUsuarioReg')->add('fechaHoraReg')->add('idUsuarioMod')->add('fechaHoraMod')->add('rural')->add('digestyc2015')->add('activo')->add('idUser')->add('ipUser')->add('detalleSchema')->add('enableSchema')->add('estadoSchema')->add('idMunicipio')        ;
+        $builder->add('nombre')->add('codigoDigestyc')->add('rural')->add('digestyc2015')->add('activo')->add('idMunicipio')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

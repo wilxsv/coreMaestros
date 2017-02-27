@@ -36,40 +36,65 @@ class CtlSituacionLegal
      */
     private $descripcionSituacion;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
+
 
     /**
-     * @var string
+     * Get id
      *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
+     * @return integer
      */
-    private $ipUser;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var string
+     * Set tipoSituacion
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @param string $tipoSituacion
+     * @return CtlSituacionLegal
      */
-    private $detalleSchema;
+    public function setTipoSituacion($tipoSituacion)
+    {
+        $this->tipoSituacion = $tipoSituacion;
+
+        return $this;
+    }
 
     /**
-     * @var boolean
+     * Get tipoSituacion
      *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
+     * @return string
      */
-    private $enableSchema;
+    public function getTipoSituacion()
+    {
+        return $this->tipoSituacion;
+    }
 
     /**
-     * @var integer
+     * Set descripcionSituacion
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @param string $descripcionSituacion
+     * @return CtlSituacionLegal
      */
-    private $estadoSchema;
+    public function setDescripcionSituacion($descripcionSituacion)
+    {
+        $this->descripcionSituacion = $descripcionSituacion;
 
+        return $this;
+    }
 
+    /**
+     * Get descripcionSituacion
+     *
+     * @return string
+     */
+    public function getDescripcionSituacion()
+    {
+        return $this->descripcionSituacion;
+    }
+
+    public function __toString() {
+      return $this->getTipoSituacion();
+    }
 }

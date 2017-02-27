@@ -1,99 +1,29 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Listado de Establecimientos{% endblock %}
 {% block body %}
-    <h1>Ctlestablecimientos list</h1>
-
-    <table>
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nombre</th>
                 <th>Direccion</th>
                 <th>Telefono</th>
-                <th>Fax</th>
-                <th>Latitud</th>
-                <th>Longitud</th>
-                <th>Anioapertura</th>
-                <th>Codestabconsumos</th>
-                <th>Codestabsiaf</th>
-                <th>Coducsf</th>
-                <th>Instmortalidad</th>
-                <th>Digitamortalidad</th>
-                <th>Cvcd4</th>
-                <th>Activo</th>
-                <th>Idusuarioreg</th>
-                <th>Fechahorareg</th>
-                <th>Idusuariomod</th>
-                <th>Fechahoramod</th>
-                <th>Idestablesimow</th>
-                <th>Idestablevigepes</th>
-                <th>Estadovigepes</th>
-                <th>Estadovacunas</th>
-                <th>Estadoseps</th>
-                <th>Estadosimow</th>
-                <th>Idestablesumeve</th>
-                <th>Estadosumeve</th>
-                <th>Cabezamicrored</th>
-                <th>Hospitalizacion</th>
-                <th>Detalleschema</th>
-                <th>Enableschema</th>
-                <th>Estadoschema</th>
-                <th>Actions</th>
+                <th>Tipo</th>
+                <th>ECOS</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlEstablecimiento in ctlEstablecimientos %}
             <tr>
-                <td><a href="{{ path('establecimiento_show', { 'id': ctlEstablecimiento.id }) }}">{{ ctlEstablecimiento.id }}</a></td>
-                <td>{{ ctlEstablecimiento.nombre }}</td>
+                <td><a href="{{ path('establecimiento_show', { 'id': ctlEstablecimiento.id }) }}">{{ ctlEstablecimiento.nombre }}</a></td>
                 <td>{{ ctlEstablecimiento.direccion }}</td>
                 <td>{{ ctlEstablecimiento.telefono }}</td>
-                <td>{{ ctlEstablecimiento.fax }}</td>
-                <td>{{ ctlEstablecimiento.latitud }}</td>
-                <td>{{ ctlEstablecimiento.longitud }}</td>
-                <td>{{ ctlEstablecimiento.anioApertura }}</td>
-                <td>{{ ctlEstablecimiento.codestabConsumos }}</td>
-                <td>{{ ctlEstablecimiento.codestabSiaf }}</td>
-                <td>{{ ctlEstablecimiento.codUcsf }}</td>
-                <td>{{ ctlEstablecimiento.instMortalidad }}</td>
-                <td>{{ ctlEstablecimiento.digitaMortalidad }}</td>
-                <td>{{ ctlEstablecimiento.cvcd4 }}</td>
-                <td>{% if ctlEstablecimiento.activo %}Yes{% else %}No{% endif %}</td>
-                <td>{{ ctlEstablecimiento.idUsuarioReg }}</td>
-                <td>{% if ctlEstablecimiento.fechaHoraReg %}{{ ctlEstablecimiento.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlEstablecimiento.idUsuarioMod }}</td>
-                <td>{% if ctlEstablecimiento.fechaHoraMod %}{{ ctlEstablecimiento.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlEstablecimiento.idestablesimow }}</td>
-                <td>{{ ctlEstablecimiento.idestablevigepes }}</td>
-                <td>{{ ctlEstablecimiento.estadoVigepes }}</td>
-                <td>{{ ctlEstablecimiento.estadoVacunas }}</td>
-                <td>{{ ctlEstablecimiento.estadoSeps }}</td>
-                <td>{{ ctlEstablecimiento.estadoSimow }}</td>
-                <td>{{ ctlEstablecimiento.idestablesumeve }}</td>
-                <td>{{ ctlEstablecimiento.estadoSumeve }}</td>
-                <td>{% if ctlEstablecimiento.cabezaMicrored %}Yes{% else %}No{% endif %}</td>
-                <td>{% if ctlEstablecimiento.hospitalizacion %}Yes{% else %}No{% endif %}</td>
-                <td>{{ ctlEstablecimiento.detalleSchema }}</td>
-                <td>{% if ctlEstablecimiento.enableSchema %}Yes{% else %}No{% endif %}</td>
-                <td>{{ ctlEstablecimiento.estadoSchema }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('establecimiento_show', { 'id': ctlEstablecimiento.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{{ ctlEstablecimiento.idTipoEstablecimiento }}</td>
+                <td>{{ ctlEstablecimiento.hospitalizacion }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('establecimiento_new') }}">Create a new ctlEstablecimiento</a>
-        </li>
-    </ul>
+<a href="{{ path('establecimiento_new') }}">Agregar Establecimiento</a>
 {% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

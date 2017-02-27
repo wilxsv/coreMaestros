@@ -71,13 +71,6 @@ class CtlProyectoFinanciamiento
      */
     private $sigla;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
 
 
     /**
@@ -249,28 +242,5 @@ class CtlProyectoFinanciamiento
     public function getSigla()
     {
         return $this->sigla;
-    }
-
-    /**
-     * Set estadoSchema
-     *
-     * @param integer $estadoSchema
-     * @return CtlProyectoFinanciamiento
-     */
-    public function setEstadoSchema($estadoSchema)
-    {
-        $this->estadoSchema = $estadoSchema;
-
-        return $this;
-    }
-
-    /**
-     * Get estadoSchema
-     *
-     * @return integer 
-     */
-    public function getEstadoSchema()
-    {
-        return $this->estadoSchema;
     }
 }

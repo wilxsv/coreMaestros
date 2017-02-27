@@ -1,0 +1,15 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Recurso Humano: {{ ctlRecursoHumano.nombreRecursoHumano }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombrerecursohumano</th>
+                <td>{{ ctlRecursoHumano.nombreRecursoHumano }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="{{ path('recurso_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('recurso_edit', { 'id': ctlRecursoHumano.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

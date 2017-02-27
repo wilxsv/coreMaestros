@@ -1,0 +1,24 @@
+tipoestablecimiento_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlTipoEstablecimiento:index" }
+    methods:  GET
+
+tipoestablecimiento_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlTipoEstablecimiento:show" }
+    methods:  GET
+
+tipoestablecimiento_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlTipoEstablecimiento:new" }
+    methods:  [GET, POST]
+
+tipoestablecimiento_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlTipoEstablecimiento:edit" }
+    methods:  [GET, POST]
+
+tipoestablecimiento_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlTipoEstablecimiento:delete" }
+    methods:  DELETE

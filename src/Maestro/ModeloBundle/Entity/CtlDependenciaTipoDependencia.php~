@@ -23,41 +23,6 @@ class CtlDependenciaTipoDependencia
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_user", type="bigint", nullable=false)
-     */
-    private $idUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip_user", type="string", nullable=false)
-     */
-    private $ipUser;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
-     */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
-     */
-    private $estadoSchema;
-
-    /**
      * @var \CtlDependencia
      *
      * @ORM\ManyToOne(targetEntity="CtlDependencia")
@@ -78,4 +43,60 @@ class CtlDependenciaTipoDependencia
     private $idTipoDependencia;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idDependencia
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlDependencia $idDependencia
+     * @return CtlDependenciaTipoDependencia
+     */
+    public function setIdDependencia(\Maestro\ModeloBundle\Entity\CtlDependencia $idDependencia = null)
+    {
+        $this->idDependencia = $idDependencia;
+
+        return $this;
+    }
+
+    /**
+     * Get idDependencia
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlDependencia 
+     */
+    public function getIdDependencia()
+    {
+        return $this->idDependencia;
+    }
+
+    /**
+     * Set idTipoDependencia
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlTipoDependencia $idTipoDependencia
+     * @return CtlDependenciaTipoDependencia
+     */
+    public function setIdTipoDependencia(\Maestro\ModeloBundle\Entity\CtlTipoDependencia $idTipoDependencia = null)
+    {
+        $this->idTipoDependencia = $idTipoDependencia;
+
+        return $this;
+    }
+
+    /**
+     * Get idTipoDependencia
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlTipoDependencia 
+     */
+    public function getIdTipoDependencia()
+    {
+        return $this->idTipoDependencia;
+    }
 }

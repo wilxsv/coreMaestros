@@ -1,11 +1,16 @@
 establecimiento_add:
     path:     /agrega
-    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:agrega" }
-    methods:  GET
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:new" }
+    methods:  [GET, POST]
 
 establecimiento_index:
-    path:     /
-    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:index" }
+    path:     /{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:index", type: 1 }
+    methods:  GET
+
+establecimiento_mapa:
+    path:     /{type}
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:mapa" }
     methods:  GET
 
 establecimiento_show:

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlEstablecimiento
  *
- * @ORM\Table(name="ctl_establecimiento", indexes={@ORM\Index(name="idx_332bd42c7ead49c7", columns={"id_municipio"}), @ORM\Index(name="IDX_332BD42CF12084AB", columns={"idmicrored"}), @ORM\Index(name="IDX_332BD42C3544B551", columns={"id_establecimiento_padre"}), @ORM\Index(name="IDX_332BD42C4E0E50FD", columns={"id_tipo_establecimiento"}), @ORM\Index(name="IDX_332BD42C8F14B160", columns={"id_cat_tipo_consumo"}), @ORM\Index(name="IDX_332BD42C952E1FD4", columns={"id_cat_tipo_farmacia"}), @ORM\Index(name="IDX_332BD42C9E67D4BE", columns={"id_cat_tipo_expediente"}), @ORM\Index(name="IDX_332BD42CCC3EE19E", columns={"id_cat_pruebas"}), @ORM\Index(name="IDX_332BD42CEF433A34", columns={"id_institucion"}), @ORM\Index(name="IDX_332BD42CF92045C1", columns={"id_cat_nivel_minsal"})})
+ * @ORM\Table(name="ctl_establecimiento", indexes={@ORM\Index(name="idx_332bd42c7ead49c7", columns={"id_municipio"}), @ORM\Index(name="IDX_332BD42CF12084AB", columns={"idmicrored"}), @ORM\Index(name="IDX_332BD42C3544B551", columns={"id_establecimiento_padre"}), @ORM\Index(name="IDX_332BD42C4E0E50FD", columns={"id_tipo_establecimiento"}), @ORM\Index(name="IDX_332BD42C8F14B160", columns={"id_cat_tipo_consumo"}), @ORM\Index(name="IDX_332BD42C952E1FD4", columns={"id_cat_tipo_farmacia"}), @ORM\Index(name="IDX_332BD42C9E67D4BE", columns={"id_cat_tipo_expediente"}), @ORM\Index(name="IDX_332BD42CCC3EE19E", columns={"id_cat_pruebas"}), @ORM\Index(name="IDX_332BD42CEF433A34", columns={"id_institucion"}), @ORM\Index(name="IDX_332BD42CF92045C1", columns={"id_cat_nivel_minsal"}), @ORM\Index(name="IDX_332BD42C9C132991", columns={"id_situacion_legal"})})
  * @ORM\Entity
  */
 class CtlEstablecimiento
@@ -219,25 +219,60 @@ class CtlEstablecimiento
     private $hospitalizacion;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="poblacion_asignana", type="bigint", nullable=false)
      */
-    private $detalleSchema;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enable_schema", type="boolean", nullable=false)
-     */
-    private $enableSchema;
+    private $poblacionAsignana;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="cantidad_familia", type="bigint", nullable=false)
+     */
+    private $cantidadFamilia;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
+     */
+    private $enableSchema;
 
     /**
      * @var \CtlMicrored
@@ -339,6 +374,46 @@ class CtlEstablecimiento
      */
     private $idCatNivelMinsal;
 
+    /**
+     * @var \CtlSituacionLegal
+     *
+     * @ORM\ManyToOne(targetEntity="CtlSituacionLegal")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_situacion_legal", referencedColumnName="id")
+     * })
+     */
+    private $idSituacionLegal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlPrestacion", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlPrestacionid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRecursoHumano", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlRecursoHumanoid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlServicio", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlServicioid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlPrestacionid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlRecursoHumanoid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlServicioid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -996,49 +1071,72 @@ class CtlEstablecimiento
     }
 
     /**
-     * Set idUser
+     * Set poblacionAsignana
      *
-     * @param integer $idUser
+     * @param integer $poblacionAsignana
      * @return CtlEstablecimiento
      */
-    public function setIdUser($idUser)
+    public function setPoblacionAsignana($poblacionAsignana)
     {
-        $this->idUser = $idUser;
+        $this->poblacionAsignana = $poblacionAsignana;
 
         return $this;
     }
 
     /**
-     * Get idUser
+     * Get poblacionAsignana
      *
      * @return integer
      */
-    public function getIdUser()
+    public function getPoblacionAsignana()
     {
-        return $this->idUser;
+        return $this->poblacionAsignana;
     }
 
     /**
-     * Set ipUser
+     * Set cantidadFamilia
      *
-     * @param string $ipUser
+     * @param integer $cantidadFamilia
      * @return CtlEstablecimiento
      */
-    public function setIpUser($ipUser)
+    public function setCantidadFamilia($cantidadFamilia)
     {
-        $this->ipUser = $ipUser;
+        $this->cantidadFamilia = $cantidadFamilia;
 
         return $this;
     }
 
     /**
-     * Get ipUser
+     * Get cantidadFamilia
      *
-     * @return string
+     * @return integer
      */
-    public function getIpUser()
+    public function getCantidadFamilia()
     {
-        return $this->ipUser;
+        return $this->cantidadFamilia;
+    }
+
+    /**
+     * Set registroSchema
+     *
+     * @param \DateTime $registroSchema
+     * @return CtlEstablecimiento
+     */
+    public function setRegistroSchema($registroSchema)
+    {
+        $this->registroSchema = $registroSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get registroSchema
+     *
+     * @return \DateTime
+     */
+    public function getRegistroSchema()
+    {
+        return $this->registroSchema;
     }
 
     /**
@@ -1065,26 +1163,49 @@ class CtlEstablecimiento
     }
 
     /**
-     * Set enableSchema
+     * Set userIdSchema
      *
-     * @param boolean $enableSchema
+     * @param integer $userIdSchema
      * @return CtlEstablecimiento
      */
-    public function setEnableSchema($enableSchema)
+    public function setUserIdSchema($userIdSchema)
     {
-        $this->enableSchema = $enableSchema;
+        $this->userIdSchema = $userIdSchema;
 
         return $this;
     }
 
     /**
-     * Get enableSchema
+     * Get userIdSchema
      *
-     * @return boolean
+     * @return integer
      */
-    public function getEnableSchema()
+    public function getUserIdSchema()
     {
-        return $this->enableSchema;
+        return $this->userIdSchema;
+    }
+
+    /**
+     * Set ipUserSchema
+     *
+     * @param string $ipUserSchema
+     * @return CtlEstablecimiento
+     */
+    public function setIpUserSchema($ipUserSchema)
+    {
+        $this->ipUserSchema = $ipUserSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get ipUserSchema
+     *
+     * @return string
+     */
+    public function getIpUserSchema()
+    {
+        return $this->ipUserSchema;
     }
 
     /**
@@ -1108,6 +1229,29 @@ class CtlEstablecimiento
     public function getEstadoSchema()
     {
         return $this->estadoSchema;
+    }
+
+    /**
+     * Set enableSchema
+     *
+     * @param integer $enableSchema
+     * @return CtlEstablecimiento
+     */
+    public function setEnableSchema($enableSchema)
+    {
+        $this->enableSchema = $enableSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get enableSchema
+     *
+     * @return integer
+     */
+    public function getEnableSchema()
+    {
+        return $this->enableSchema;
     }
 
     /**
@@ -1340,9 +1484,129 @@ class CtlEstablecimiento
         return $this->idCatNivelMinsal;
     }
 
-    public function __toString()
-{
-    return $this->getNombre();
-}
+    /**
+     * Set idSituacionLegal
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlSituacionLegal $idSituacionLegal
+     * @return CtlEstablecimiento
+     */
+    public function setIdSituacionLegal(\Maestro\ModeloBundle\Entity\CtlSituacionLegal $idSituacionLegal = null)
+    {
+        $this->idSituacionLegal = $idSituacionLegal;
 
+        return $this;
+    }
+
+    /**
+     * Get idSituacionLegal
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlSituacionLegal
+     */
+    public function getIdSituacionLegal()
+    {
+        return $this->idSituacionLegal;
+    }
+
+    /**
+     * Add ctlPrestacionid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid
+     * @return CtlEstablecimiento
+     */
+    public function addCtlPrestacionid(\Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid)
+    {
+        $this->ctlPrestacionid[] = $ctlPrestacionid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlPrestacionid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid
+     */
+    public function removeCtlPrestacionid(\Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid)
+    {
+        $this->ctlPrestacionid->removeElement($ctlPrestacionid);
+    }
+
+    /**
+     * Get ctlPrestacionid
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCtlPrestacionid()
+    {
+        return $this->ctlPrestacionid;
+    }
+
+    /**
+     * Add ctlRecursoHumanoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid
+     * @return CtlEstablecimiento
+     */
+    public function addCtlRecursoHumanoid(\Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid)
+    {
+        $this->ctlRecursoHumanoid[] = $ctlRecursoHumanoid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlRecursoHumanoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid
+     */
+    public function removeCtlRecursoHumanoid(\Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid)
+    {
+        $this->ctlRecursoHumanoid->removeElement($ctlRecursoHumanoid);
+    }
+
+    /**
+     * Get ctlRecursoHumanoid
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCtlRecursoHumanoid()
+    {
+        return $this->ctlRecursoHumanoid;
+    }
+
+    /**
+     * Add ctlServicioid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
+     * @return CtlEstablecimiento
+     */
+    public function addCtlServicioid(\Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid)
+    {
+        $this->ctlServicioid[] = $ctlServicioid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlServicioid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
+     */
+    public function removeCtlServicioid(\Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid)
+    {
+        $this->ctlServicioid->removeElement($ctlServicioid);
+    }
+
+    /**
+     * Get ctlServicioid
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCtlServicioid()
+    {
+        return $this->ctlServicioid;
+    }
+
+    public function __toString() {
+      return $this->getNombre();
+    }
 }
