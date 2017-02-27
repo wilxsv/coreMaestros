@@ -3,6 +3,7 @@
 <li class="">
  <a class="dropdown-toggle" href="#"><i class="icon-dropbox"></i><span class="menu-text"> Insumos </span><b class="arrow icon-angle-down"></b></a>
  <ul class="submenu" style="display: none;">
+ {% if is_granted('ROLE_AGREGA') or is_granted('ROLE_ADMIN') %}
   <li class="">
 	 <a class="dropdown-toggle" href="#"><i class="icon-dropbox"></i>Solicitar <b class="arrow icon-angle-down"></b></a>
    <ul class="submenu" style="display: none;">
@@ -17,9 +18,11 @@
     <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
 	 </ul>
 	</li>
-   <li class="">
+  {% endif %}
+  {% if is_granted('ROLE_VALIDA') or is_granted('ROLE_ADMIN') %}
+  <li class="">
  	 <a class="dropdown-toggle" href="#"><i class="icon-double-angle-right"></i>Validar <b class="arrow icon-angle-down"></b></a>
-    <ul class="submenu" style="display: none;">
+   <ul class="submenu" style="display: none;">
      <li><a href="#">Medicamentos</a></li>
      <li><a href="#">Insumos Médicos (Consumibles)</a></li>
      <li><a href="#">Insumos de Odontología (Consumibles)</a></li>
@@ -31,7 +34,9 @@
      <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
  	 </ul>
  	</li>
-   <li class="">
+  {% endif %}
+  {% if is_granted('ROLE_HABILITA') or is_granted('ROLE_ADMIN') %}
+  <li class="">
  	 <a class="dropdown-toggle" href="#"><i class="icon-double-angle-right"></i>Habilitar <b class="arrow icon-angle-down"></b></a>
     <ul class="submenu" style="display: none;">
      <li><a href="#">Medicamentos</a></li>
@@ -45,6 +50,7 @@
      <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
  	 </ul>
  	</li>
+  {% endif %}
  </ul>
 </li>
 <!--
@@ -95,17 +101,22 @@
 </ul>
 </li>
 -->
+{% if is_granted('ROLE_HABILITA') or is_granted('ROLE_ADMIN') %}
 <li><a href="{{ path('unidad_medida_index') }}"><i class="icon-bar-chart"></i><span class="menu-text"> Magnitudes </span></a></li>
 <li><a href="{{ path('maestro_insumo_magnitud') }}"><i class="icon-barcode"></i><span class="menu-text"> Codificaciones </span></a></li>
+<li><a href="{{ path('producto_index') }}"><i class="icon-double-angle-right"></i> Unidad Logistica</a></li>
+{% endif %}
+{% if is_granted('ROLE_HABILITA') or is_granted('ROLE_ADMIN') %}
 <li>
   <a href="" class="dropdown-toggle"><i class="icon-gears"></i><span class="menu-text"> Generales </span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
     <li><a href="{{ path('grupo_index') }}"><i class="icon-double-angle-right"></i> Grupo</a></li>
     <li><a href="{{ path('suministro_index') }}"><i class="icon-double-angle-right"></i> Tipo Suministro</a></li>
     <li><a href="{{ path('nivel_uso_index') }}"><i class="icon-double-angle-right"></i> Nivel de uso</a></li>
-    <li><a href="{{ path('producto_index') }}"><i class="icon-double-angle-right"></i> Unidad Logistica</a></li>
   </ul>
 </li>
+{% endif %}
+{% if is_granted('ROLE_VALIDA') or is_granted('ROLE_ADMIN') %}
 <li>
   <a href="#" class="dropdown-toggle"><i class="icon-ambulance"></i><span class="menu-text">  Especificos</span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
@@ -117,6 +128,7 @@
   <li><a href="{{ path('presentacion_index') }}"><i class="icon-double-angle-right"></i> Presentación</a></li>
   </ul>
 </li>
+{% endif %}
 {% endif %}<!--/get role-->
 <li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
 <li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>
