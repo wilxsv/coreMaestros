@@ -1,35 +1,78 @@
-<li>
-  <a href="{{ path('homepage') }}">
-    <i class="icon-dashboard"></i>
-    <span class="menu-text"> Informacion </span>
-  </a>
-</li>
+<li><a href="{{ path('insumo_index_catalogo') }}"><i class="icon-sitemap"></i><span class="menu-text"> Catalogo</span></a></li>
 {% if app.user %}<!--/get role-->
+<li class="">
+ <a class="dropdown-toggle" href="#"><i class="icon-dropbox"></i><span class="menu-text"> Insumos </span><b class="arrow icon-angle-down"></b></a>
+ <ul class="submenu" style="display: none;">
+  <li class="">
+	 <a class="dropdown-toggle" href="#"><i class="icon-dropbox"></i>Solicitar <b class="arrow icon-angle-down"></b></a>
+   <ul class="submenu" style="display: none;">
+    <li><a href="{{ path('insumo_new_medicamento') }}">Medicamentos</a></li>
+    <li><a href="{{ path('insumo_new_medico') }}">">Insumos Médicos (Consumibles)</a></li>
+    <li><a href="#">Insumos de Odontología (Consumibles)</a></li>
+    <li><a href="#">Insumos de Laboratorio (Consumibles)</a></li>
+    <li><a href="#"></i>Alimentos</a></li>
+    <li><a href="{{ path('insumo_new_general', {'type': 6} ) }}"></i>Mantenimiento General</a></li>
+    <li><a href="#"></i>Suministros</a></li>
+    <li><a href="#"></i>Insumos para el Control de Vectores</a></li>
+    <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
+	 </ul>
+	</li>
+   <li class="">
+ 	 <a class="dropdown-toggle" href="#"><i class="icon-double-angle-right"></i>Validar <b class="arrow icon-angle-down"></b></a>
+    <ul class="submenu" style="display: none;">
+     <li><a href="#">Medicamentos</a></li>
+     <li><a href="#">Insumos Médicos (Consumibles)</a></li>
+     <li><a href="#">Insumos de Odontología (Consumibles)</a></li>
+     <li><a href="#">Insumos de Laboratorio (Consumibles)</a></li>
+     <li><a href="#"></i>Alimentos</a></li>
+     <li><a href="{{ path('insumo_index', {'type': 1} ) }}"></i>Mantenimiento General</a></li>
+     <li><a href="#"></i>Suministros</a></li>
+     <li><a href="#"></i>Insumos para el Control de Vectores</a></li>
+     <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
+ 	 </ul>
+ 	</li>
+   <li class="">
+ 	 <a class="dropdown-toggle" href="#"><i class="icon-double-angle-right"></i>Habilitar <b class="arrow icon-angle-down"></b></a>
+    <ul class="submenu" style="display: none;">
+     <li><a href="#">Medicamentos</a></li>
+     <li><a href="#">Insumos Médicos (Consumibles)</a></li>
+     <li><a href="#">Insumos de Odontología (Consumibles)</a></li>
+     <li><a href="#">Insumos de Laboratorio (Consumibles)</a></li>
+     <li><a href="#"></i>Alimentos</a></li>
+     <li><a href="{{ path('insumo_index', {'type': 2} ) }}"></i>Mantenimiento General</a></li>
+     <li><a href="#"></i>Suministros</a></li>
+     <li><a href="#"></i>Insumos para el Control de Vectores</a></li>
+     <li><a href="#">Insumos Instrumental Medico y Equipo</a></li>
+ 	 </ul>
+ 	</li>
+ </ul>
+</li>
+<!--
 <li>
 <a href="" class="dropdown-toggle"><i class="icon-stethoscope"></i><span class="menu-text"> Insumos Medicos </span><b class="arrow icon-angle-down"></b></a>
 <ul class="submenu">
   <li><a href="{{ path('insumo_new_medico') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 1}) }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 21}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 31}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
 </ul>
 </li>
 <li>
 <a href="" class="dropdown-toggle"><i class="icon-thermometer-full"></i><span class="menu-text"> Insumos Laboratorio </span><b class="arrow icon-angle-down"></b></a>
 <ul class="submenu">
   <li><a href="{{ path('insumo_new_laboratorio') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 4}) }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 24}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 34}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
 </ul>
 </li>
 <li>
 <a href="" class="dropdown-toggle"><i class="icon-stethoscope"></i><span class="menu-text">Ins. Odontologicos</span><b class="arrow icon-angle-down"></b></a>
 <ul class="submenu">
   <li><a href="{{ path('insumo_new_odontologico') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 5}) }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 25}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 35}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
 </ul>
 </li>
 
@@ -37,21 +80,21 @@
 <a href="" class="dropdown-toggle"><i class="icon-dropbox"></i><span class="menu-text"> Insumos No Medicos </span><b class="arrow icon-angle-down"></b></a>
 <ul class="submenu">
   <li><a href="{{ path('insumo_new_general') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 6}) }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 26}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 36}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
 </ul>
 </li>
 <li>
 <a href="" class="dropdown-toggle"><i class="icon-medkit"></i><span class="menu-text"> Medicamentos </span><b class="arrow icon-angle-down"></b></a>
 <ul class="submenu">
   <li><a href="{{ path('insumo_new_medicamento') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 2}) }}"><i class="icon-double-angle-right"></i> Habilitados</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 22}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
+  <li><a href="{{ path('insumo_index', {'type': 32}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
 </ul>
 </li>
-
+-->
 <li><a href="{{ path('unidad_medida_index') }}"><i class="icon-bar-chart"></i><span class="menu-text"> Magnitudes </span></a></li>
 <li><a href="{{ path('maestro_insumo_magnitud') }}"><i class="icon-barcode"></i><span class="menu-text"> Codificaciones </span></a></li>
 <li>
@@ -67,16 +110,14 @@
   <a href="#" class="dropdown-toggle"><i class="icon-ambulance"></i><span class="menu-text">  Especificos</span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
   <li><a href="{{ path('formafarmaceutica_index') }}"><i class="icon-double-angle-right"></i> Forma Farmacéutica</a></li>
-  <li><a href="{{ path('homepage') }}"><i class="icon-double-angle-right"></i> Unidad de dispensación</a></li>
+  <li><a href="#"><i class="icon-double-angle-right"></i> Unidad de dispensación</a></li>
   <li><a href="{{ path('alternativo_index') }}"><i class="icon-double-angle-right"></i> Alternativos</a></li>
   <li><a href="{{ path('concentracion_index') }}"><i class="icon-double-angle-right"></i> Concentración</a></li>
   <li><a href="{{ path('principio_index') }}"><i class="icon-fa-eyedropper"></i> Principio activo</a></li>
   <li><a href="{{ path('presentacion_index') }}"><i class="icon-double-angle-right"></i> Presentación</a></li>
   </ul>
 </li>
-<li><a href="{{ path('syslog_index') }}"><i class="icon-bug"></i><span class="menu-text"> Eventos del sistema</span></a></li>
-<li><a href="{{ path('maestro_core_schema') }}"><i class="icon-tags "></i><span class="menu-text"> Version de la informacion</span></a></li>
+<li><a href="{{ path('schema_ver') }}"><i class="icon-tags "></i><span class="menu-text"> Version de la informacion</span></a></li>
 {% endif %}<!--/get role-->
-<li><a href="{{ path('insumo_index_catalogo') }}"><i class="icon-sitemap"></i><span class="menu-text"> Catalogo</span></a></li>
 <li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
 <li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>

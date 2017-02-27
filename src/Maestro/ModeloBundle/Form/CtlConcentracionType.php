@@ -13,9 +13,9 @@ class CtlConcentracionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('detalleConcentracion')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlInsumoid')        ;
+        $builder->add('detalleConcentracion')->add('detalleSchema')->add('ctlInsumoid');
     }
-    
+
     /**
      * {@inheritdoc}
      */

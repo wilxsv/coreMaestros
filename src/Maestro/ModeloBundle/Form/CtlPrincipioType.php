@@ -13,9 +13,10 @@ class CtlPrincipioType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombrePrincipio')->add('tipoPrincipio')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')        ;
+        $builder->add('nombrePrincipio')->add('tipoPrincipio'
+        , 'choice', array('choices'=> array('1' => 'Natural', '2' => 'Sintetico'), 'required'  => true, ))->add('detalleSchema');
     }
-    
+
     /**
      * {@inheritdoc}
      */

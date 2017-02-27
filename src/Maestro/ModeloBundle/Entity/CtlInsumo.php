@@ -199,14 +199,14 @@ class CtlInsumo
      *   }
      * )
      */
-    private $ctlConcentracionid;
+    //private $ctlConcentracionid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="CtlFormaFarmaceutica", mappedBy="ctlInsumoid")
      */
-    private $ctlFormaFarmaceuticaid;
+    //private $ctlFormaFarmaceuticaid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -816,5 +816,43 @@ class CtlInsumo
     public function getCtlPrincipioActivoid()
     {
         return $this->ctlPrincipioActivoid;
+    }
+    /**
+     * @var string
+     */
+    private $detalleInsumo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ctlConcentracionid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ctlFormaFarmaceuticaid;
+
+
+    /**
+     * Set detalleInsumo
+     *
+     * @param string $detalleInsumo
+     * @return CtlInsumo
+     */
+    public function setDetalleInsumo($detalleInsumo)
+    {
+        $this->detalleInsumo = $detalleInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get detalleInsumo
+     *
+     * @return string 
+     */
+    public function getDetalleInsumo()
+    {
+        return $this->detalleInsumo;
     }
 }

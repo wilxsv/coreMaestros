@@ -126,7 +126,7 @@ class FosUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -149,7 +149,7 @@ class FosUser
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -172,7 +172,7 @@ class FosUser
     /**
      * Get usernameCanonical
      *
-     * @return string 
+     * @return string
      */
     public function getUsernameCanonical()
     {
@@ -195,7 +195,7 @@ class FosUser
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -218,7 +218,7 @@ class FosUser
     /**
      * Get emailCanonical
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCanonical()
     {
@@ -241,7 +241,7 @@ class FosUser
     /**
      * Get enabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnabled()
     {
@@ -264,7 +264,7 @@ class FosUser
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
@@ -287,7 +287,7 @@ class FosUser
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -310,7 +310,7 @@ class FosUser
     /**
      * Get lastLogin
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getLastLogin()
     {
@@ -333,7 +333,7 @@ class FosUser
     /**
      * Get confirmationToken
      *
-     * @return string 
+     * @return string
      */
     public function getConfirmationToken()
     {
@@ -356,7 +356,7 @@ class FosUser
     /**
      * Get passwordRequestedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPasswordRequestedAt()
     {
@@ -379,7 +379,7 @@ class FosUser
     /**
      * Get roles
      *
-     * @return array 
+     * @return array
      */
     public function getRoles()
     {
@@ -412,10 +412,14 @@ class FosUser
     /**
      * Get group
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getGroup()
     {
         return $this->group;
+    }
+
+    public function __toString(){
+      return $this->getUsername();
     }
 }

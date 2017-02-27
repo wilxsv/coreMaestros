@@ -1,53 +1,32 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Formas Fármaceuticas{% endblock %}
 {% block body %}
-    <h1>Ctlformafarmaceuticas list</h1>
-
-    <table>
+<div class="row-fluid">
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombreformafarmaceutica</th>
-                <th>Detalleformafarmaceutica</th>
-                <th>Registroschema</th>
-                <th>Detalleschema</th>
-                <th>Useridschema</th>
-                <th>Ipuserschema</th>
-                <th>Estadoschema</th>
-                <th>Enableschema</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Detalle</th>
+                <th>Fecha de registro</th>
+                <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
-        {% for ctlFormaFarmaceutica in ctlFormaFarmaceuticas %}
-            <tr>
-                <td><a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">{{ ctlFormaFarmaceutica.id }}</a></td>
-                <td>{{ ctlFormaFarmaceutica.nombreFormaFarmaceutica }}</td>
-                <td>{{ ctlFormaFarmaceutica.detalleFormaFarmaceutica }}</td>
-                <td>{% if ctlFormaFarmaceutica.registroSchema %}{{ ctlFormaFarmaceutica.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlFormaFarmaceutica.detalleSchema }}</td>
-                <td>{{ ctlFormaFarmaceutica.userIdSchema }}</td>
-                <td>{{ ctlFormaFarmaceutica.ipUserSchema }}</td>
-                <td>{{ ctlFormaFarmaceutica.estadoSchema }}</td>
-                <td>{{ ctlFormaFarmaceutica.enableSchema }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+          {% for ctlFormaFarmaceutica in ctlFormaFarmaceuticas %}
+                    <tr>
+                          <td>{{ ctlFormaFarmaceutica.nombreFormaFarmaceutica }}</td>
+                          <td>{{ ctlFormaFarmaceutica.detalleFormaFarmaceutica }}</td>
+                          <td>{% if ctlFormaFarmaceutica.registroSchema %}{{ ctlFormaFarmaceutica.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                          <td>
+                           <a href="{{ path('formafarmaceutica_show', { 'id': ctlFormaFarmaceutica.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                           <a href="{{ path('formafarmaceutica_edit', { 'id': ctlFormaFarmaceutica.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                          </td>
+                    </tr>
+          {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('formafarmaceutica_new') }}">Create a new ctlFormaFarmaceutica</a>
-        </li>
-    </ul>
+</div>
+        <br />
+        <a href="{{ path('formafarmaceutica_new') }}" class="btn btn-small btn-primary">Agregar Forma Fármaceutica</a>
 {% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

@@ -13,9 +13,9 @@ class CtlUnidadMedidaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreUnidad')->add('detalleUnidadMedida')->add('unidadesUnidad')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlUnidadMedidaid')        ;
+        $builder->add('nombreUnidad')->add('detalleUnidadMedida')->add('detalleSchema')->add('ctlUnidadMedidaid')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

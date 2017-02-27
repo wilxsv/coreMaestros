@@ -13,9 +13,9 @@ class CtlProductoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreProducto')->add('detalleProducto')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')        ;
+        $builder->add('nombreProducto')->add('detalleProducto')->add('detalleSchema');
     }
-    
+
     /**
      * {@inheritdoc}
      */

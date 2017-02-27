@@ -13,9 +13,9 @@ class CtlFormaFarmaceuticaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreFormaFarmaceutica')->add('detalleFormaFarmaceutica')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlInsumoid')        ;
+        $builder->add('nombreFormaFarmaceutica')->add('detalleFormaFarmaceutica')->add('ctlInsumoid')->add('detalleSchema');
     }
-    
+
     /**
      * {@inheritdoc}
      */

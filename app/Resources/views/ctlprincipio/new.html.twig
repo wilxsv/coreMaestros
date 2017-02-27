@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Registrar un nuevo principio activo{% endblock %}
 {% block body %}
-    <h1>Ctlprincipio creation</h1>
-
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />

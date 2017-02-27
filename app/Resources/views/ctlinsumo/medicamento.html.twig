@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{ form_start(form) }}
  <div class="page-header position-relative">
   <h1>Registro de medicamento <small>  <i class="icon-double-angle-right"></i> info adicional </small></h1>
 </div>
@@ -50,10 +49,6 @@
                <div class="control-group ">
                 {{ form_label(form.ctlProductoid) }}
                 <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlProductoid) }}</span>{{ form_errors(form.ctlProductoid) }}</div>
-               </div>
-               <div class="control-group ">
-                {{ form_label(form.ctlPrincipioActivoid) }}
-                <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlPrincipioActivoid) }}</span>{{ form_errors(form.ctlPrincipioActivoid) }}</div>
                </div>
                <div class="control-group ">
                 {{ form_label(form.ctlPresentacionid) }}
@@ -110,7 +105,6 @@
               </div>
               </div>
             </div>
-
             <hr />
             <div class="row-fluid wizard-actions">
               <button class="btn btn-prev">
@@ -133,7 +127,6 @@
 							<div id="modal-wizard" class="modal hide">
 							</div>
 <a href="{{ path('insumo_index', {'type': 2}) }}" class="btn btn-prev">Regresar al listado</a>
-    {{ form_end(form) }}
 {% endblock %}
 
 {% block footer_js %}
@@ -148,15 +141,11 @@
 
  		<script type="text/javascript">
  			$(function() {
-
  				$('[data-rel=tooltip]').tooltip();
-
  				$(".select2").css('width','150px').select2({allowClear:true})
  				.on('change', function(){
  					$(this).closest('form').validate().element($(this));
  				});
-
-
  				var $validation = false;
  				$('#fuelux-wizard').ace_wizard().on('change' , function(e, info){
  					if(info.step == 1 && $validation) {
@@ -171,8 +160,6 @@
  				}).on('stepclick', function(e){
  					//return false;//prevent clicking on steps
  				});
-
-
  				$('#validation-form').hide();
  				$('#skip-validation').removeAttr('checked').on('click', function(){
  					$validation = this.checked;
@@ -185,19 +172,12 @@
  						$('#sample-form').show();
  					}
  				});
-
-
-
  				//documentation : http://docs.jquery.com/Plugins/Validation/validate
-
-
  				$.mask.definitions['~']='[+-]';
  				$('#phone').mask('(999) 999-9999');
-
  				jQuery.validator.addMethod("phone", function (value, element) {
  					return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
  				}, "Enter a valid phone number.");
-
  				$('#validation-form').validate({
  					errorElement: 'span',
  					errorClass: 'help-inline',
@@ -242,7 +222,6 @@
  						gender: 'required',
  						agree: 'required'
  					},
-
  					messages: {
  						email: {
  							required: "Please provide a valid email.",
@@ -256,20 +235,16 @@
  						gender: "Please choose gender",
  						agree: "Please accept our policy"
  					},
-
  					invalidHandler: function (event, validator) { //display error alert on form submit
  						$('.alert-error', $('.login-form')).show();
  					},
-
  					highlight: function (e) {
  						$(e).closest('.control-group').removeClass('info').addClass('error');
  					},
-
  					success: function (e) {
  						$(e).closest('.control-group').removeClass('error').addClass('info');
  						$(e).remove();
  					},
-
  					errorPlacement: function (error, element) {
  						if(element.is(':checkbox') || element.is(':radio')) {
  							var controls = element.closest('.controls');
@@ -284,16 +259,11 @@
  						}
  						else error.insertAfter(element);
  					},
-
  					submitHandler: function (form) {
  					},
  					invalidHandler: function (form) {
  					}
  				});
-
-
-
-
  				$('#modal-wizard .modal-header').ace_wizard();
  				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
  			})

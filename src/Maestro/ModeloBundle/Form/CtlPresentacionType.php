@@ -13,9 +13,9 @@ class CtlPresentacionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombrePresentacion')->add('detallePresentacion')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')        ;
+        $builder->add('nombrePresentacion')->add('detallePresentacion')->add('detalleSchema');
     }
-    
+
     /**
      * {@inheritdoc}
      */

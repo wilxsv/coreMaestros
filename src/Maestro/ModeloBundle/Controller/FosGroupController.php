@@ -42,7 +42,7 @@ class FosGroupController extends Controller
             $em->persist($fosGroup);
             $em->flush($fosGroup);
 
-            return $this->redirectToRoute('fos_grupo_show', array('id' => $fosGroup->getId()));
+            return $this->redirectToRoute('fosgrupo_show', array('id' => $fosGroup->getId()));
         }
 
         return $this->render('fosgroup/new.html.twig', array(
@@ -78,7 +78,7 @@ class FosGroupController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('fos_grupo_edit', array('id' => $fosGroup->getId()));
+            return $this->redirectToRoute('fosgrupo_edit', array('id' => $fosGroup->getId()));
         }
 
         return $this->render('fosgroup/edit.html.twig', array(
@@ -103,7 +103,7 @@ class FosGroupController extends Controller
             $em->flush($fosGroup);
         }
 
-        return $this->redirectToRoute('fos_grupo_index');
+        return $this->redirectToRoute('fosgrupo_index');
     }
 
     /**
@@ -116,7 +116,7 @@ class FosGroupController extends Controller
     private function createDeleteForm(FosGroup $fosGroup)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('fos_grupo_delete', array('id' => $fosGroup->getId())))
+            ->setAction($this->generateUrl('fosgrupo_delete', array('id' => $fosGroup->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

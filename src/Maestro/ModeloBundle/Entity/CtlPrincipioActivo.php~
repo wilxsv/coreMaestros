@@ -104,4 +104,231 @@ class CtlPrincipioActivo
         $this->ctlInsumoid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombrePactivo
+     *
+     * @param string $nombrePactivo
+     * @return CtlPrincipioActivo
+     */
+    public function setNombrePactivo($nombrePactivo)
+    {
+        $this->nombrePactivo = $nombrePactivo;
+
+        return $this;
+    }
+
+    /**
+     * Get nombrePactivo
+     *
+     * @return string 
+     */
+    public function getNombrePactivo()
+    {
+        return $this->nombrePactivo;
+    }
+
+    /**
+     * Set registroSchema
+     *
+     * @param \DateTime $registroSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setRegistroSchema($registroSchema)
+    {
+        $this->registroSchema = $registroSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get registroSchema
+     *
+     * @return \DateTime 
+     */
+    public function getRegistroSchema()
+    {
+        return $this->registroSchema;
+    }
+
+    /**
+     * Set detalleSchema
+     *
+     * @param string $detalleSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setDetalleSchema($detalleSchema)
+    {
+        $this->detalleSchema = $detalleSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get detalleSchema
+     *
+     * @return string 
+     */
+    public function getDetalleSchema()
+    {
+        return $this->detalleSchema;
+    }
+
+    /**
+     * Set userIdSchema
+     *
+     * @param integer $userIdSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setUserIdSchema($userIdSchema)
+    {
+        $this->userIdSchema = $userIdSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get userIdSchema
+     *
+     * @return integer 
+     */
+    public function getUserIdSchema()
+    {
+        return $this->userIdSchema;
+    }
+
+    /**
+     * Set ipUserSchema
+     *
+     * @param string $ipUserSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setIpUserSchema($ipUserSchema)
+    {
+        $this->ipUserSchema = $ipUserSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get ipUserSchema
+     *
+     * @return string 
+     */
+    public function getIpUserSchema()
+    {
+        return $this->ipUserSchema;
+    }
+
+    /**
+     * Set estadoSchema
+     *
+     * @param integer $estadoSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setEstadoSchema($estadoSchema)
+    {
+        $this->estadoSchema = $estadoSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoSchema
+     *
+     * @return integer 
+     */
+    public function getEstadoSchema()
+    {
+        return $this->estadoSchema;
+    }
+
+    /**
+     * Set enableSchema
+     *
+     * @param integer $enableSchema
+     * @return CtlPrincipioActivo
+     */
+    public function setEnableSchema($enableSchema)
+    {
+        $this->enableSchema = $enableSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get enableSchema
+     *
+     * @return integer 
+     */
+    public function getEnableSchema()
+    {
+        return $this->enableSchema;
+    }
+
+    /**
+     * Set ctlPrincipioid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrincipioid
+     * @return CtlPrincipioActivo
+     */
+    public function setCtlPrincipioid(\Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrincipioid = null)
+    {
+        $this->ctlPrincipioid = $ctlPrincipioid;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlPrincipioid
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlPrincipio 
+     */
+    public function getCtlPrincipioid()
+    {
+        return $this->ctlPrincipioid;
+    }
+
+    /**
+     * Add ctlInsumoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoid
+     * @return CtlPrincipioActivo
+     */
+    public function addCtlInsumoid(\Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoid)
+    {
+        $this->ctlInsumoid[] = $ctlInsumoid;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlInsumoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoid
+     */
+    public function removeCtlInsumoid(\Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoid)
+    {
+        $this->ctlInsumoid->removeElement($ctlInsumoid);
+    }
+
+    /**
+     * Get ctlInsumoid
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlInsumoid()
+    {
+        return $this->ctlInsumoid;
+    }
 }

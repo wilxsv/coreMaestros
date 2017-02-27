@@ -1,6 +1,6 @@
 insumo_index:
     path:     /
-    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:index" }
+    defaults: { _controller: "MaestroModeloBundle:CtlInsumo:index", type: 3 }
     methods:  GET
 
 insumo_show:

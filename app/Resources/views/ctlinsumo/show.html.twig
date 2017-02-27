@@ -1,9 +1,6 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Ctlinsumo</h1>
-
-    <table>
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Inusmo [{{ ctlInsumo.nombreLargoInsumo }}]{% endblock %}
+{% block body %}    <table>
         <tbody>
             <tr>
                 <th>Id</th>
@@ -12,10 +9,6 @@
             <tr>
                 <th>Codigonu</th>
                 <td>{{ ctlInsumo.codigoNu }}</td>
-            </tr>
-            <tr>
-                <th>Idusuario</th>
-                <td>{{ ctlInsumo.idUsuario }}</td>
             </tr>
             <tr>
                 <th>Codigosinab</th>

@@ -24,7 +24,7 @@
         <tbody>
         {% for fosUser in fosUsers %}
             <tr>
-                <td><a href="{{ path('fos_user_show', { 'id': fosUser.id }) }}">{{ fosUser.id }}</a></td>
+                <td><a href="{{ path('fosuser_show', { 'id': fosUser.id }) }}">{{ fosUser.id }}</a></td>
                 <td>{{ fosUser.username }}</td>
                 <td>{{ fosUser.usernameCanonical }}</td>
                 <td>{{ fosUser.email }}</td>
@@ -39,7 +39,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('fos_user_show', { 'id': fosUser.id }) }}">show</a>
+                            <a href="{{ path('fosuser_show', { 'id': fosUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fosuser_edit', { 'id': fosUser.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -48,5 +51,9 @@
         </tbody>
     </table>
 
-    
+    <ul>
+        <li>
+            <a href="{{ path('fosuser_new') }}">Create a new fosUser</a>
+        </li>
+    </ul>
 {% endblock %}

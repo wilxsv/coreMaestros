@@ -56,3 +56,9 @@ maestro_modelo_insumo:
 maestro_modelo_homepage:
     path:     /model
     defaults: { _controller: MaestroModeloBundle:Default:index }
+maestro_modelo_fosgrupo:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosgroup.yml"
+    prefix:   /fosgrupo
+maestro_modelo_fosuser:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /fosuser

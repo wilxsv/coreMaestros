@@ -1,0 +1,64 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Registro de insumo general{% endblock %}
+{% block body %}
+ {{ form_start(form) }}
+<div class="widget-box">
+ <div class="widget-header"><h4><i class="icon-"></i>Campos requeridos</h4></div>
+ <div class="widget-body">
+	<div class="widget-main">
+   <div class="control-group ">
+    <div class="controls">Nombre de insumo: {{ form_widget(form.nombreLargoInsumo,{'attr':{'type':'text'} }) }}{{ form_errors(form.nombreLargoInsumo) }}</div>
+   </div>
+   <div class="control-group ">
+    Descripción larga del insumo
+    <div class="controls"> <textarea > </textarea></div>
+   </div>
+    <div class="control-group ">
+     <div class="controls">Producto: {{ form_widget(form.ctlProductoid) }}{{ form_errors(form.ctlProductoid) }}</div>
+    </div>
+    <div class="control-group ">
+     <div class="controls">Presentación: {{ form_widget(form.ctlPresentacionid) }}{{ form_errors(form.ctlPresentacionid) }}</div>
+    </div>
+    <div class="control-group ">
+     <div class="controls">Nivel de uso: {{ form_widget(form.ctlNivelUsoid) }}{{ form_errors(form.detalleSchema) }}</div>
+    </div>
+    <div class="control-group ">
+     <div class="controls">Unidad de medida: {{ form_widget(form.ctlUnidadMedidaid) }}{{ form_errors(form.ctlUnidadMedidaid) }}</div>
+    </div>
+    <div class="control-group ">
+      {{ form_label(form.detalleSchema) }}
+      <div class="controls">{{ form_widget(form.detalleSchema) }}{{ form_errors(form.detalleSchema) }}</div>
+    </div>
+    <button class="btn btn-success btn-next" data-last="Finish ">
+      Solicitar
+      <i class="icon-arrow-right icon-on-right"></i>
+    </button>
+	</div>
+ </div>
+</div>
+{{ form_widget(form.ctlSuministroid,{'attr':{'style':'visibility:hidden'} }) }}
+{{ form_widget(form.codigoNu,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+{{ form_widget(form.codigoSinab,{'attr':{'style':'visibility:hidden','value':'0000000000'} }) }}
+{{ form_widget(form.codificacionInsumo,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+{{ form_widget(form.codigoSinabExt,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+{{ form_widget(form.listadoOficial,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+{{ form_widget(form.ctlFormaFarmaceutica,{'attr':{'style':'visibility:hidden','value':'1'} }) }}
+{{ form_widget(form.ctlProgramaid,{'attr':{'style':'visibility:hidden','value':'1'} }) }}
+{{ form_widget(form.grupoid,{'attr':{'style':'visibility:hidden','value':7} }) }}
+{{ form_widget(form.ctlConcentracionid,{'attr':{'style':'visibility:hidden','value':'1'} }) }}
+{{ form_widget(form.ctlFormaFarmaceuticaid,{'attr':{'style':'visibility:hidden','value':'8'} }) }}
+{{ form_widget(form.estadoSchema,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+{{ form_widget(form.enableSchema,{'attr':{'style':'visibility:hidden','value':'0'} }) }}
+<input type="hidden" id="maestro_modelobundle_ctlinsumo__token" name="maestro_modelobundle_ctlinsumo[_token]" value="5K5Key3lqIr5asvge1vR3ZcKd3giDCBRzgYFitff8sU" />
+</form>
+
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+
+
+    <ul>
+        <li>
+            <a href="{{ path('insumo_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

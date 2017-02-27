@@ -13,9 +13,9 @@ class CtlAlternativoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('ctlInsumoAlternativo')->add('multiploAlternativo')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('ctlInsumo')        ;
+        $builder->add('ctlInsumoAlternativo')->add('multiploAlternativo')->add('detalleSchema')->add('ctlInsumo')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -38,4 +38,13 @@ class CtlSchemaController extends Controller
             'ctlSchema' => $ctlSchema,
         ));
     }
+
+   public function verAction()
+   {
+       $em = $this->getDoctrine()->getManager();
+
+       $ctlSchema = $em->getRepository('MaestroModeloBundle:CtlSchema')->findAll();
+
+       return $this->render('ctlschema/ver.html.twig', array('ctlSchema' => $ctlSchema,));
+   }
 }

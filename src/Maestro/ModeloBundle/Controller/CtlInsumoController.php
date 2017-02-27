@@ -16,14 +16,16 @@ class CtlInsumoController extends Controller
      * Lists all ctlInsumo entities.
      *
      */
-    public function indexAction()
+    public function indexAction($type = 3)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findAll();
+        if ($type == 0){ $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findAll(); }
+        elseif ($type == 1) { $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEstadoSchema(0); }
+        elseif ($type == 2) { $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->find('enableSchema = 0'); }
+        elseif ($type == 3) { $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1); }
 
         return $this->render('ctlinsumo/index.html.twig', array(
-            'ctlInsumos' => $ctlInsumos,
+            'ctlInsumos' => $ctlInsumos, 'type' => $type,
         ));
     }
 
@@ -31,11 +33,12 @@ class CtlInsumoController extends Controller
      * Creates a new ctlInsumo entity.
      *
      */
-    public function newAction(Request $request, $type)
+    public function newAction(Request $request, $type = 0)
     {
         $ctlInsumo = new Ctlinsumo();
         $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
         if ($type == 2){ $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo); }
+        elseif ($type == 6){ $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoGralType', $ctlInsumo); }
 
         $form->handleRequest($request);
 
@@ -44,10 +47,12 @@ class CtlInsumoController extends Controller
             $em->persist($ctlInsumo);
             $em->flush($ctlInsumo);
 
-            return $this->redirectToRoute('insumo_show', array('id' => $ctlInsumo->getId()));
-        }
+            return $this->redirectToRoute('insumo_index', array('type' => 0));
+        }//elseif ($type == 0) { return $this->redirectToRoute('insumo_index');        }
 
         if ($type == 2){ $view = 'ctlinsumo/medicamento.html.twig'; }
+        if ($type == 6){ $view = 'ctlinsumo/general.html.twig'; }
+        if ($type == 0){ $view = 'ctlinsumo/new.html.twig'; }
         return $this->render($view, array(
             'ctlInsumo' => $ctlInsumo,
             'form' => $form->createView(),
@@ -152,7 +157,7 @@ class CtlInsumoController extends Controller
    public function medicamentoAction(Request $request, $type)
    {
      $ctlInsumo = new Ctlinsumo();
-     $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+     $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoMedSolicitudType', $ctlInsumo);
      $form->handleRequest($request);
 
      if ($form->isSubmitted() && $form->isValid()) {

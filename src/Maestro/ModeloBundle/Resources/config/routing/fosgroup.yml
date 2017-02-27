@@ -1,24 +1,24 @@
-fos_grupo_index:
+fosgrupo_index:
     path:     /
     defaults: { _controller: "MaestroModeloBundle:FosGroup:index" }
     methods:  GET
 
-fos_grupo_show:
+fosgrupo_show:
     path:     /{id}/show
     defaults: { _controller: "MaestroModeloBundle:FosGroup:show" }
     methods:  GET
 
-fos_grupo_new:
+fosgrupo_new:
     path:     /new
     defaults: { _controller: "MaestroModeloBundle:FosGroup:new" }
     methods:  [GET, POST]
 
-fos_grupo_edit:
+fosgrupo_edit:
     path:     /{id}/edit
     defaults: { _controller: "MaestroModeloBundle:FosGroup:edit" }
     methods:  [GET, POST]
 
-fos_grupo_delete:
+fosgrupo_delete:
     path:     /{id}/delete
     defaults: { _controller: "MaestroModeloBundle:FosGroup:delete" }
     methods:  DELETE

@@ -1,12 +1,24 @@
-fos_user_index:
+fosuser_index:
     path:     /
     defaults: { _controller: "MaestroModeloBundle:FosUser:index" }
     methods:  GET
 
-fos_user_show:
+fosuser_show:
     path:     /{id}/show
     defaults: { _controller: "MaestroModeloBundle:FosUser:show" }
     methods:  GET
 
+fosuser_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:FosUser:new" }
+    methods:  [GET, POST]
 
+fosuser_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:FosUser:edit" }
+    methods:  [GET, POST]
 
+fosuser_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:FosUser:delete" }
+    methods:  DELETE

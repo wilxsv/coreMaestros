@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-    <title>:: {% block title %}{% endblock %} | Sistema de Administración	de Catálogos maestros :: Maestros</title>
+    <title>:: {% block title_page %}{% endblock %} | Sistema de Administración	de Catálogos maestros :: Maestros</title>
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!--basic styles-->
@@ -66,6 +66,9 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
+								<h3 class="header smaller lighter blue">
+									{% block title %}{% endblock %}
+								</h3>
 								{% block body %}
 								{% endblock %}
 							<!--PAGE CONTENT ENDS-->

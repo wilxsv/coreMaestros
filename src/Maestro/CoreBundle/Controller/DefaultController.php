@@ -2,6 +2,7 @@
 
 namespace Maestro\CoreBundle\Controller;
 
+use Maestro\ModeloBundle\Entity\CtlSchema;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -23,7 +24,9 @@ class DefaultController extends Controller
 
     public function feedAction()
     {
-        return $this->render('MaestroCoreBundle:Default:feed.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $ctlSchemas = $em->getRepository('MaestroModeloBundle:CtlSchema')->findAll();
+        return $this->render('MaestroCoreBundle:Default:feed.html.twig', array('ctlSchemas' => $ctlSchemas));
     }
 
     public function syslogAction()

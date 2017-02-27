@@ -8,5 +8,7 @@ schema_show:
     defaults: { _controller: "MaestroModeloBundle:CtlSchema:show" }
     methods:  GET
 
-
-
+schema_ver:
+    path:     /ver
+    defaults: { _controller: "MaestroModeloBundle:CtlSchema:ver" }
+    methods:  GET
