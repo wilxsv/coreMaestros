@@ -73,7 +73,7 @@ class CtlPrestacion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -96,7 +96,7 @@ class CtlPrestacion
     /**
      * Get nombrePrestacion
      *
-     * @return string 
+     * @return string
      */
     public function getNombrePrestacion()
     {
@@ -119,7 +119,7 @@ class CtlPrestacion
     /**
      * Get detallePrestacion
      *
-     * @return string 
+     * @return string
      */
     public function getDetallePrestacion()
     {
@@ -142,7 +142,7 @@ class CtlPrestacion
     /**
      * Get ctlPrestacionid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPrestacion 
+     * @return \Maestro\ModeloBundle\Entity\CtlPrestacion
      */
     public function getCtlPrestacionid()
     {
@@ -175,10 +175,14 @@ class CtlPrestacion
     /**
      * Get ctlEstablecimientoid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlEstablecimientoid()
     {
         return $this->ctlEstablecimientoid;
+    }
+
+    public function __toString() {
+      return $this->getNombrePrestacion();
     }
 }

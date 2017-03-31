@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <a href="{{ path('homepage') }}" class="brand">
         <small>
-          <i class="icon-book"></i>
+        <img src="{{ asset('assets/') }}img/logo.png" height="20" width="95" alt="" />
           Sistema de Administración	de Catálogos maestros ({{ nombre }})
         </small>
       </a><!--/.brand-->
@@ -243,7 +243,7 @@
       </ul><!--/.ace-nav-->
       {% else %}
         <ul class="nav ace-nav pull-right">
-         <li class="grey"><a href="{{ path('fos_user_security_login') }}"> <i class="icon-off"></i> Entrar al sistema.</a></li>
+         <li class="grey"><a href="{{ path('maestro_core_login') }}"> <i class="icon-off"></i> Entrar al sistema.</a></li>
         </ul>
       {% endif %}<!--/get role-->
     </div><!--/.container-fluid-->

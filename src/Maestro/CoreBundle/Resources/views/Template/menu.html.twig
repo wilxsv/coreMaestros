@@ -1,37 +1,9 @@
-<li><a href="{{ path('establecimiento_index', {'type': 0}) }}"><i class="icon-sitemap"></i><span class="menu-text"> Catalogo</span></a></li>
+<li><a href="{{ path('maestro_homepage') }}"><i class="icon-sitemap"></i><span class="menu-text"> Catalogo</span></a></li>
 <!--<li><a href="{{ path('establecimiento_index', {'type': 3}) }}"><i class="icon-user-md"></i><span class="menu-text"> ECOS </span></a></li>
 <li><a href="{{ path('establecimiento_mapa', {'type': 3}) }}"><i class="icon-map-marker"></i> Mapa</a></li>-->
 {% if app.user %}<!--/get role-->
-<li>
-<a href="" class="dropdown-toggle"><i class="icon-building"></i><span class="menu-text"> Establecimientos </span><b class="arrow icon-angle-down"></b></a>
-<ul class="submenu">
-{% if is_granted('ROLE_AGREGA') or is_granted('ROLE_ADMIN') %}
-  <li><a href="{{ path('establecimiento_add') }}"><i class="icon-double-angle-right"></i> Agregar</a></li>
-{% elseif is_granted('ROLE_VALIDA') or is_granted('ROLE_ADMIN') %}
-  <li><a href="{{ path('establecimiento_index', {'type': 1}) }}"><i class="icon-double-angle-right"></i> En revisión</a></li>
-{% elseif is_granted('ROLE_HABILITA') or is_granted('ROLE_ADMIN') %}
-  <li><a href="{{ path('establecimiento_index', {'type': 2}) }}"><i class="icon-double-angle-right"></i> No habilitados</a></li>
-{% endif %}
-</ul>
+ {{ app.session.get('menu') | raw }}
 </li>
-{% if is_granted('ROLE_HABILITA') or is_granted('ROLE_ADMIN') %}
-<li>
-  <a href="" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> Localidad </span><b class="arrow icon-angle-down"></b></a>
-  <ul class="submenu">
-    <li><a href="{{ path('red_index') }}"><i class="icon-double-angle-right"></i> Micro Red</a></li>
-  </ul>
-</li>
-
-<li>
-  <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Catalogos</span><b class="arrow icon-angle-down"></b></a>
-  <ul class="submenu">
-  <li><a href="{{ path('recurso_index') }}"><i class="icon-double-angle-right"></i> RecursoHumano</a></li>
-  <li><a href="{{ path('servicio_index') }}"><i class="icon-double-angle-right"></i> Servicios</a></li>
-  <li><a href="{{ path('situacionlegal_index') }}"><i class="icon-double-angle-right"></i> SituacionLegal</a></li>
-  <li><a href="{{ path('tipoestablecimiento_index') }}"><i class="icon-double-angle-right"></i> Tipo Establecimiento</a></li>
-  </ul>
-</li>
-{% endif %}
 {% endif %}<!--/get role-->
 <li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
 <li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>

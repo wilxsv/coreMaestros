@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Prestanción: {{ ctlPrestacion.nombrePrestacion }}{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ ctlPrestacion.nombrePrestacion }}</td>
+            </tr>
+            <tr>
+                <th>Detalle de prestación</th>
+                <td>{{ ctlPrestacion.detallePrestacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="{{ path('prestacion_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('prestacion_edit', { 'id': ctlPrestacion.id }) }}" class="btn btn-primary">Editar</a>
+{% endblock %}

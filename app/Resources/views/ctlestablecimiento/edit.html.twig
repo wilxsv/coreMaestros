@@ -1,21 +1,26 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
 {% block title %}Editar Establecimiento{% endblock %}
 {% block body %}
-    <h1>Ctlestablecimiento edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('establecimiento_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+{% if is_granted('ROLE_VALIDA') %}
+ {{ form_start(edit_form) }}
+  {{ form_row(edit_form.detalleSchema) }}
+  <div id="divCheckbox" style="display: none;">
+   {{ form_widget(edit_form) }}
+	<input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="1" />
+  </div>
+  <input type="submit" value="Enviar observación y no validar" class="btn btn-danger"> <input type="submit" value="Validar establecimiento" class="btn btn-primary">
+ </form>
+{% endif %}
+{% if is_granted('ROLE_HABILITA') %}
+ {{ form_start(delete_form) }}
+   {{ form_row(delete_form.detalleSchema) }}
+  <div id="divCheckbox" style="display: none;">
+   {{ form_widget(delete_form) }}
+	<input type="hidden" id="maestro_modelobundle_ctlestablecimiento_enableSchema" name="maestro_modelobundle_ctlestablecimiento[enableSchema]" value="1" />
+  </div>
+  <input type="submit" value="Enviar observación y no habilitar" class="btn btn-danger"> <input type="submit" value="Agregar el registro oficial" class="btn btn-primary">
+ </form>
+{% endif %}
+<br/>
+<a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {% endblock %}

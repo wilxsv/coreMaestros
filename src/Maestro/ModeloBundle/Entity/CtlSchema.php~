@@ -153,4 +153,60 @@ class CtlSchema
     {
         return $this->tipoCambioSchema;
     }
+    /**
+     * @var string
+     */
+    private $detalleSchema;
+
+    /**
+     * @var \DateTime
+     */
+    private $timeSchema;
+
+
+    /**
+     * Set detalleSchema
+     *
+     * @param string $detalleSchema
+     * @return CtlSchema
+     */
+    public function setDetalleSchema($detalleSchema)
+    {
+        $this->detalleSchema = $detalleSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get detalleSchema
+     *
+     * @return string 
+     */
+    public function getDetalleSchema()
+    {
+        return $this->detalleSchema;
+    }
+
+    /**
+     * Set timeSchema
+     *
+     * @param \DateTime $timeSchema
+     * @return CtlSchema
+     */
+    public function setTimeSchema($timeSchema)
+    {
+        $this->timeSchema = $timeSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get timeSchema
+     *
+     * @return \DateTime 
+     */
+    public function getTimeSchema()
+    {
+        return $this->timeSchema;
+    }
 }

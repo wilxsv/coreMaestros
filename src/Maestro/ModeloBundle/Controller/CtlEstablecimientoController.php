@@ -3,8 +3,10 @@
 namespace Maestro\ModeloBundle\Controller;
 
 use Maestro\ModeloBundle\Entity\CtlEstablecimiento;
+use Maestro\ModeloBundle\Entity\CtlAcceso;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Ctlestablecimiento controller.
@@ -42,6 +44,11 @@ class CtlEstablecimientoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
+            $ctlEstablecimiento->setUserIdSchema($this->getUser()->getId());
+            $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
+            $ctlEstablecimiento->setEstadoSchema(0);
+            $ctlEstablecimiento->setEnableSchema(0);
             $em->persist($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
 
@@ -60,10 +67,12 @@ class CtlEstablecimientoController extends Controller
      */
     public function showAction(CtlEstablecimiento $ctlEstablecimiento)
     {
-        $deleteForm = $this->createDeleteForm($ctlEstablecimiento);
+        $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+        $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
 
         return $this->render('ctlestablecimiento/show.html.twig', array(
             'ctlEstablecimiento' => $ctlEstablecimiento,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -74,14 +83,19 @@ class CtlEstablecimientoController extends Controller
      */
     public function editAction(Request $request, CtlEstablecimiento $ctlEstablecimiento)
     {
-        $deleteForm = $this->createDeleteForm($ctlEstablecimiento);
+        $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm->handleRequest($request);
+        $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+			/*
+            $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
+            $ctlEstablecimiento->setUserIdSchema($this->getUser()->getId());
+            $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
+            */
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('establecimiento_edit', array('id' => $ctlEstablecimiento->getId()));
+            return $this->redirectToRoute('maestro_homepage');
         }
 
         return $this->render('ctlestablecimiento/edit.html.twig', array(
@@ -124,4 +138,59 @@ class CtlEstablecimientoController extends Controller
             ->getForm()
         ;
     }
+    /**
+     * Lists all public ctlEstablecimiento.
+     *
+     */
+    public function homeAction()
+    {
+		
+        $em = $this->getDoctrine()->getManager();
+        $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
+        $pendientes = '';
+        $auth_checker = $this->get('security.authorization_checker');
+        if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$this->setMenu( $auth_checker );
+		}
+        if($auth_checker->isGranted('ROLE_VALIDA')){
+			$pendientes = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEstadoSchema(0);
+		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
+			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+			$pendientes = $query->getResult();
+			
+			//$pendientes = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findBy(array('estadoSchema' => '1 AND  = 0'));
+		} 
+ 
+        return $this->render('ctlestablecimiento/public.html.twig', array(
+            'ctlEstablecimientos' => $ctlEstablecimientos,
+            'pendientes' => $pendientes,
+        ));
+    }
+    
+    private function setMenu( $rol ){
+		$em = $this->getDoctrine()->getManager();
+        $acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));
+        $list = '';
+        $pass = '';
+        foreach ($acceso as $accesos) {
+			if( $rol->isGranted($accesos->getRolAccesoId()) ){
+				$pass = $pass.$accesos->getPathAcceso().'/';
+				if ( $accesos->getVisibleAcceso() == TRUE ){
+					$url = $this->generateUrl($accesos->getPathAcceso(), array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
+					$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos->getNombreAcceso().'</a></li>';
+				}
+			}
+		}
+		if (strlen($list) > 5 ){
+			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
+		}
+		
+		$this->get('session')->set('menu', $list);
+		$this->get('session')->set('pass', $pass);
+	}
+	
+	private function setSchema(){
+		return $data;
+	}
 }

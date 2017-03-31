@@ -1,4 +1,12 @@
-
+maestro_modelo_admin_users:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /admin/users
+maestro_modelo_prestacion:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlprestacion.yml"
+    prefix:   /prestacion
+maestro_modelo_acceso:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlacceso.yml"
+    prefix:   /admin/acceso
 maestro_modelo_recurso:
     resource: "@MaestroModeloBundle/Resources/config/routing/ctlrecursohumano.yml"
     prefix:   /recurso

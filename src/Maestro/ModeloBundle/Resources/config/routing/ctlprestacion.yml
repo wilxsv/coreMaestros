@@ -1,0 +1,24 @@
+prestacion_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlPrestacion:index" }
+    methods:  GET
+
+prestacion_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlPrestacion:show" }
+    methods:  GET
+
+prestacion_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlPrestacion:new" }
+    methods:  [GET, POST]
+
+prestacion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlPrestacion:edit" }
+    methods:  [GET, POST]
+
+prestacion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlPrestacion:delete" }
+    methods:  DELETE

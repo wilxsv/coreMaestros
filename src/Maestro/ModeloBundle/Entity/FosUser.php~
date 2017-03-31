@@ -119,10 +119,24 @@ class FosUser
      */
     public function __construct()
     {
+        $this->enabled = false;
+        $this->roles = array();
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
+    /**
+     * {@inheritdoc}
+     */
+    public function addRole($role)
+    {
+        $role = strtoupper($role);
+        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }
     /**
      * Get id
      *

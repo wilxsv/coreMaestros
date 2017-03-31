@@ -11,6 +11,8 @@
 		<link rel="stylesheet" href="{{ asset('assets/') }}css/font-awesome.min.css" />
 		<!--[if IE 7]>  <link rel="stylesheet" href="{{ asset('assets/') }}css/font-awesome-ie7.min.css" />	<![endif]-->
 		<!--page specific plugin styles-->
+		<link rel="stylesheet" href="{{ asset('assets/') }}css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="{{ asset('assets/') }}css/jquery.gritter.css" />
 		<!--fonts-->
 				<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 		<!--ace styles-->
@@ -36,7 +38,6 @@
 
 			<div class="sidebar" id="sidebar">
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					{% include 'MaestroCoreBundle::Template/shortcuts.html.twig' %}
 				</div><!--#sidebar-shortcuts-->
 
 				<ul class="nav nav-list">
@@ -52,25 +53,19 @@
 				<!-- breadcrumb -->
 					{% include 'MaestroCoreBundle::Template/breadcrumb.html.twig' %}
 				<!-- //breadcrumb -->
-					<div class="nav-search" id="nav-search">
-						<form class="form-search" />
-							<span class="input-icon">
-								<input type="text" placeholder="buscar ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
-								<i class="icon-search nav-search-icon"></i>
-							</span>
-						</form>
-					</div><!--#nav-search-->
-				</div>
-
 				<div class="page-content">
 					<div class="row-fluid">
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
-								<h3 class="header smaller lighter blue">
-									{% block title %}{% endblock %}
-								</h3>
+							{# if app.request.attributes.get('_route') in app.session.get('pass') or app.request.attributes.get('_route') == 'maestro_homepage' or app.request.attributes.get('_route') == 'maestro_core_ayuda'#}
+							  <h3 class="header smaller lighter blue">
+								{% block title %}{% endblock %}
+							  </h3>
 								{% block body %}
 								{% endblock %}
+							{#else#}
+								{#include 'MaestroCoreBundle::Template/error.html.twig'#}
+							{#endif#}
 							<!--PAGE CONTENT ENDS-->
 						</div><!--/.span-->
 					</div><!--/.row-fluid-->

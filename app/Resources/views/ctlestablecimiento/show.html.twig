@@ -4,10 +4,6 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlEstablecimiento.id }}</td>
-            </tr>
-            <tr>
                 <th>Nombre</th>
                 <td>{{ ctlEstablecimiento.nombre }}</td>
             </tr>
@@ -24,147 +20,35 @@
                 <td>{{ ctlEstablecimiento.fax }}</td>
             </tr>
             <tr>
-                <th>Latitud</th>
-                <td>{{ ctlEstablecimiento.latitud }}</td>
-            </tr>
-            <tr>
-                <th>Longitud</th>
-                <td>{{ ctlEstablecimiento.longitud }}</td>
-            </tr>
-            <tr>
-                <th>Anioapertura</th>
+                <th>Año de apertura</th>
                 <td>{{ ctlEstablecimiento.anioApertura }}</td>
             </tr>
             <tr>
-                <th>Codestabconsumos</th>
-                <td>{{ ctlEstablecimiento.codestabConsumos }}</td>
+                <th>Es cabeza de micro red</th>
+                <td>{% if ctlEstablecimiento.cabezaMicrored %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Codestabsiaf</th>
-                <td>{{ ctlEstablecimiento.codestabSiaf }}</td>
+                <th>Posee hospitalizacion</th>
+                <td>{% if ctlEstablecimiento.hospitalizacion %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Coducsf</th>
-                <td>{{ ctlEstablecimiento.codUcsf }}</td>
-            </tr>
-            <tr>
-                <th>Instmortalidad</th>
-                <td>{{ ctlEstablecimiento.instMortalidad }}</td>
-            </tr>
-            <tr>
-                <th>Digitamortalidad</th>
-                <td>{{ ctlEstablecimiento.digitaMortalidad }}</td>
-            </tr>
-            <tr>
-                <th>Cvcd4</th>
-                <td>{{ ctlEstablecimiento.cvcd4 }}</td>
-            </tr>
-            <tr>
-                <th>Activo</th>
-                <td>{% if ctlEstablecimiento.activo %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Idusuarioreg</th>
-                <td>{{ ctlEstablecimiento.idUsuarioReg }}</td>
-            </tr>
-            <tr>
-                <th>Fechahorareg</th>
-                <td>{% if ctlEstablecimiento.fechaHoraReg %}{{ ctlEstablecimiento.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Idusuariomod</th>
-                <td>{{ ctlEstablecimiento.idUsuarioMod }}</td>
-            </tr>
-            <tr>
-                <th>Fechahoramod</th>
-                <td>{% if ctlEstablecimiento.fechaHoraMod %}{{ ctlEstablecimiento.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Idestablesimow</th>
-                <td>{{ ctlEstablecimiento.idestablesimow }}</td>
-            </tr>
-            <tr>
-                <th>Idestablevigepes</th>
-                <td>{{ ctlEstablecimiento.idestablevigepes }}</td>
-            </tr>
-            <tr>
-                <th>Estadovigepes</th>
-                <td>{{ ctlEstablecimiento.estadoVigepes }}</td>
-            </tr>
-            <tr>
-                <th>Estadovacunas</th>
-                <td>{{ ctlEstablecimiento.estadoVacunas }}</td>
-            </tr>
-            <tr>
-                <th>Estadoseps</th>
-                <td>{{ ctlEstablecimiento.estadoSeps }}</td>
-            </tr>
-            <tr>
-                <th>Estadosimow</th>
-                <td>{{ ctlEstablecimiento.estadoSimow }}</td>
-            </tr>
-            <tr>
-                <th>Idestablesumeve</th>
-                <td>{{ ctlEstablecimiento.idestablesumeve }}</td>
-            </tr>
-            <tr>
-                <th>Estadosumeve</th>
-                <td>{{ ctlEstablecimiento.estadoSumeve }}</td>
-            </tr>
-            <tr>
-                <th>Cabezamicrored</th>
-                <td>{% if ctlEstablecimiento.cabezaMicrored %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Hospitalizacion</th>
-                <td>{% if ctlEstablecimiento.hospitalizacion %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Poblacionasignana</th>
+                <th>Población asignada</th>
                 <td>{{ ctlEstablecimiento.poblacionAsignana }}</td>
             </tr>
             <tr>
-                <th>Cantidadfamilia</th>
+                <th>Cantidad de familias</th>
                 <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
-            </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlEstablecimiento.registroSchema %}{{ ctlEstablecimiento.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlEstablecimiento.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlEstablecimiento.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlEstablecimiento.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlEstablecimiento.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlEstablecimiento.enableSchema }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('establecimiento_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {% if is_granted('ROLE_VALIDA') %}
+		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
+	{% endif %}
+    {% if is_granted('ROLE_HABILITA') %}
+		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
+	{% endif %}
+	
+	
+<a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {% endblock %}

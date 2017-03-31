@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Editar Prestación{% endblock %}
+{% block body %}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Actualizar" class="btn btn-primary"  />
+    {{ form_end(edit_form) }}
+ <a href="{{ path('prestacion_index') }}" class="btn">Regresar a listado</a>
+{% endblock %}

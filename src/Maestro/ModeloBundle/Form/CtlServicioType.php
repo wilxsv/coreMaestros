@@ -13,7 +13,8 @@ class CtlServicioType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreServicio')->add('detalleServicio')->add('ctlServicioid');
+        $builder->add('nombreServicio')->add('detalleServicio')
+        ->add('ctlServicioid', 'entity', array('label'  => 'Servicio que agrupa :','class' => 'MaestroModeloBundle:ctlServicio', 'required' => false));
     }
 
     /**

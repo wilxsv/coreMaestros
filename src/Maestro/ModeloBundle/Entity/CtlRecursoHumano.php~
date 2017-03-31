@@ -63,7 +63,7 @@ class CtlRecursoHumano
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -86,7 +86,7 @@ class CtlRecursoHumano
     /**
      * Get nombreRecursoHumano
      *
-     * @return string 
+     * @return string
      */
     public function getNombreRecursoHumano()
     {
@@ -109,7 +109,7 @@ class CtlRecursoHumano
     /**
      * Get detalleRecursoHumano
      *
-     * @return string 
+     * @return string
      */
     public function getDetalleRecursoHumano()
     {
@@ -142,10 +142,14 @@ class CtlRecursoHumano
     /**
      * Get ctlEstablecimientoid
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCtlEstablecimientoid()
     {
         return $this->ctlEstablecimientoid;
+    }
+
+    public function __toString() {
+      return $this->getNombreRecursoHumano();
     }
 }

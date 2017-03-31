@@ -3,125 +3,83 @@
 {% block body %}
 <div class="row-fluid">
 {{ form_start(form) }}
-  <div class="span12">
-    <div class="widget-box">
-      <div class="widget-body">
-        <div class="widget-main">
-          <div class="row-fluid">
-            <div id="fuelux-wizard" class="row-fluid hide" data-target="#step-container">
-            <ul class="wizard-steps">
-              <li data-target="#step1" class="active">
-                <span class="step">1</span>
-                <span class="title">Datos generales</span>
-              </li>
-
-              <li data-target="#step2">
-                <span class="step">2</span>
-                <span class="title">Datos administrativos</span>
-              </li>
-
-              <li data-target="#step3">
-                <span class="step">3</span>
-                <span class="title">Recurso Humano y servicios</span>
-              </li>
-
-              <li data-target="#step4">
-                <span class="step">4</span>
-                <span class="title">Localización</span>
-              </li>
-            </ul>
-            </div>
-
-            <hr />
-            <div class="step-content row-fluid position-relative" id="step-container">
-              <div class="step-pane active" id="step1">
-              <div class="control-group ">{{ form_label(form.nombre) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.nombre) }}</span>{{ form_errors(form.nombre) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.direccion) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.direccion) }}</span>{{ form_errors(form.direccion) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.telefono) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.telefono) }}</span>{{ form_errors(form.telefono) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.fax) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.fax) }}</span>{{ form_errors(form.fax) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.anioApertura) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.anioApertura) }}</span>{{ form_errors(form.anioApertura) }}</div>
-              </div>
-              </div>
-
-              <div class="step-pane" id="step4">
-              <div class="control-group ">{{ form_label(form.cabezaMicrored) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.cabezaMicrored) }}</span>{{ form_errors(form.cabezaMicrored) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idmicrored) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idmicrored) }}</span>{{ form_errors(form.idmicrored) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idMunicipio) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idMunicipio) }}</span>{{ form_errors(form.idMunicipio) }}</div>
-              </div>
-              </div>
-
-              <div class="step-pane" id="step2">
-              <div class="control-group ">{{ form_label(form.hospitalizacion) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.hospitalizacion) }}</span>{{ form_errors(form.hospitalizacion) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.poblacionAsignana) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.poblacionAsignana) }}</span>{{ form_errors(form.poblacionAsignana) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.cantidadFamilia) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.cantidadFamilia) }}</span>{{ form_errors(form.cantidadFamilia) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idEstablecimientoPadre) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idEstablecimientoPadre) }}</span>{{ form_errors(form.idEstablecimientoPadre) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idTipoEstablecimiento) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idTipoEstablecimiento) }}</span>{{ form_errors(form.idTipoEstablecimiento) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idInstitucion) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idInstitucion) }}</span>{{ form_errors(form.idInstitucion) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.idSituacionLegal) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idSituacionLegal) }}</span>{{ form_errors(form.idSituacionLegal) }}</div>
-              </div>
-              </div>
-
-              <div class="step-pane" id="step3">
-              <div class="control-group ">{{ form_label(form.ctlPrestacionid) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlPrestacionid) }}</span>{{ form_errors(form.ctlPrestacionid) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.ctlRecursoHumanoid) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlRecursoHumanoid) }}</span>{{ form_errors(form.ctlRecursoHumanoid) }}</div>
-              </div>
-              <div class="control-group ">{{ form_label(form.ctlServicioid) }}
-               <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlServicioid) }}</span>{{ form_errors(form.ctlServicioid) }}</div>
-              </div>
-              <input type="submit" value="Guardar" />
-              </div>
-            </div>
-            <hr />
-            <div class="row-fluid wizard-actions">
-              <button class="btn btn-prev">
-                <i class="icon-arrow-left"></i>
-                Anterior
-              </button>
-
-              <button class="btn btn-success btn-next" >
-                Siguiente
-                <i class="icon-arrow-right icon-on-right"></i>
-              </button>
-            </div>
-          </div>
-        </div><!--/widget-main-->
-      </div><!--/widget-body-->
+ <div class="span12">
+  <div class="tabbable tabs-left">
+   <ul class="nav nav-tabs" id="myTab3">
+    <li class="active"><a data-toggle="tab" href="#home1"><i class="icon-dashboard bigger-110"></i>Datos generales</a></li>
+    <li class=""><a data-toggle="tab" href="#home2"><i class="icon-user bigger-110"></i>Datos administrativos</a></li>
+    <li class=""><a data-toggle="tab" href="#home3"><i class="icon-user bigger-110"></i>Recurso Humano y servicios</a></li>
+    <li class=""><a data-toggle="tab" href="#home4"><i class="icon-rocket bigger-110"></i>Localización</a></li>
+   </ul>
+   <div class="tab-content">
+    <div id="home1" class="tab-pane in active">
+     <div class="control-group ">{{ form_label(form.nombre) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.nombre) }}</span>{{ form_errors(form.nombre) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.direccion) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.direccion) }}</span>{{ form_errors(form.direccion) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.telefono) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.telefono) }}</span>{{ form_errors(form.telefono) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.fax) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.fax) }}</span>{{ form_errors(form.fax) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.anioApertura) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.anioApertura) }}</span>{{ form_errors(form.anioApertura) }}</div>
+     </div>
     </div>
+    <div id="home2" class="tab-pane">
+     <div class="control-group ">{{ form_label(form.hospitalizacion) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.hospitalizacion) }}</span>{{ form_errors(form.hospitalizacion) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.poblacionAsignana) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.poblacionAsignana) }}</span>{{ form_errors(form.poblacionAsignana) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.cantidadFamilia) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.cantidadFamilia) }}</span>{{ form_errors(form.cantidadFamilia) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.idEstablecimientoPadre) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idEstablecimientoPadre) }}</span>{{ form_errors(form.idEstablecimientoPadre) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.idTipoEstablecimiento) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idTipoEstablecimiento) }}</span>{{ form_errors(form.idTipoEstablecimiento) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.idSituacionLegal) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idSituacionLegal) }}</span>{{ form_errors(form.idSituacionLegal) }}</div>
+     </div>
+    </div>
+    <div id="home3" class="tab-pane">
+     <div class="control-group ">{{ form_label(form.ctlPrestacionid) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlPrestacionid) }}</span>{{ form_errors(form.ctlPrestacionid) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.ctlRecursoHumanoid) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlRecursoHumanoid) }}</span>{{ form_errors(form.ctlRecursoHumanoid) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.ctlServicioid) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlServicioid) }}</span>{{ form_errors(form.ctlServicioid) }}</div>
+     </div>
+    </div>
+    <div id="home4" class="tab-pane">
+     <div class="control-group">{{ form_label(form.cabezaMicrored) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.cabezaMicrored) }}</span>{{ form_errors(form.cabezaMicrored) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.idmicrored) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idmicrored) }}</span>{{ form_errors(form.idmicrored) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.idMunicipio) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idMunicipio) }}</span>{{ form_errors(form.idMunicipio) }}</div>
+     </div>
+     <div class="control-group ">{{ form_label(form.detalleSchema) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.detalleSchema) }}</span>{{ form_errors(form.detalleSchema) }}</div>
+     </div>
+        <input type="submit" value="Agregar" class="btn btn-primary" />
+    </div>
+   </div>
   </div>
+ </div>
 </div>
-							<div id="modal-wizard" class="modal hide">
-							</div>
-<a href="{{ path('establecimiento_index', {'type': 2}) }}" class="btn btn-prev">Regresar al listado</a>
+<a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {{ form_end(form) }}
 {% endblock %}
 
