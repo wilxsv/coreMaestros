@@ -1,9 +1,6 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
 {% block title %}Listado de Establecimientos{% endblock %}
 {% block body %}
-{% for p in pendientes %}
- <p>Por favor verificar: <a href="{{ path('establecimiento_show', { 'id': p.id }) }}">{{ p.nombre }}</a></p>
-{% endfor %}
     <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>

@@ -9,7 +9,7 @@ parameters:
     locale: en
 
 framework:
-    translator: ~
+    translator: { fallback: es }
     #esi:             ~
     secret:          "%secret%"
     router:
@@ -62,10 +62,12 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: "smtp"
+    host:      "smtp.yandex.com"
+    username:  "todasconsultoras@yandex.com"
+    password:  "vzsxytpfomuyruxm"
+    port:      "465"
+    encryption: "tls"
     spool:     { type: memory }
 fos_user:
     db_driver: orm

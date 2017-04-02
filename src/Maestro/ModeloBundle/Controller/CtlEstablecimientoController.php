@@ -153,19 +153,29 @@ class CtlEstablecimientoController extends Controller
 			$this->setMenu( $auth_checker );
 		}
         if($auth_checker->isGranted('ROLE_VALIDA')){
-			$pendientes = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEstadoSchema(0);
+			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+			$pendientes = $query->getResult();
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+			$enviados = $query->getResult();
+			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados));
 		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
 			$pendientes = $query->getResult();
+			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes));
+		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
+			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
+			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+			$pendientes = $query->getResult();
+			$personal = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
 			
-			//$pendientes = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findBy(array('estadoSchema' => '1 AND  = 0'));
-		} 
+			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal));
+		} else
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
+		
  
-        return $this->render('ctlestablecimiento/public.html.twig', array(
-            'ctlEstablecimientos' => $ctlEstablecimientos,
-            'pendientes' => $pendientes,
-        ));
+        
     }
     
     private function setMenu( $rol ){
