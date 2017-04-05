@@ -1,0 +1,51 @@
+{% extends 'MaestroCoreBundle::login.html.twig' %}
+
+{% block fos_user_content %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<h4 class="header blue lighter bigger">
+  <i class="icon-coffee green"></i>
+  Por favor, ingrese la informacion solicitada
+</h4>
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <div class="space-6"></div>
+
+      <fieldset>
+        <label>
+          <span class="block input-icon input-icon-right">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="span12" placeholder="correo@salud.gob.sv" />
+            <i class="icon-user"></i>
+          </span>
+        </label>
+
+        <label>
+          <span class="block input-icon input-icon-right">
+            <input type="password" id="password" name="_password" required="required" class="span12" placeholder="Contraseña" />
+            <i class="icon-lock"></i>
+          </span>
+        </label>
+
+        <div class="space"></div>
+
+        <div class="clearfix">
+          <label class="inline">
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <span class="lbl"> Recordar</span>
+          </label>
+
+          <input type="submit" id="_submit" class="width-35 pull-right btn btn-small btn-primary" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        </div>
+
+        <div class="space-4"></div>
+      </fieldset>
+</form>
+{% endblock fos_user_content %}

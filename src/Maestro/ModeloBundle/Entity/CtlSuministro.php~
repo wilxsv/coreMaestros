@@ -356,4 +356,32 @@ class CtlSuministro
     public function __toString(){
       return $this->nombreSuministro;
     }
+    /**
+     * @var string
+     */
+    private $codificacionSuministro;
+
+
+    /**
+     * Set codificacionSuministro
+     *
+     * @param string $codificacionSuministro
+     * @return CtlSuministro
+     */
+    public function setCodificacionSuministro($codificacionSuministro)
+    {
+        $this->codificacionSuministro = $codificacionSuministro;
+
+        return $this;
+    }
+
+    /**
+     * Get codificacionSuministro
+     *
+     * @return string 
+     */
+    public function getCodificacionSuministro()
+    {
+        return $this->codificacionSuministro;
+    }
 }

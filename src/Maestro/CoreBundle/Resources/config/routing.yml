@@ -1,6 +1,11 @@
 maestro_core_homepage:
     path:     /core
     defaults: { _controller: MaestroCoreBundle:Default:index }
+maestro_core_login:
+    pattern: /login
+    defaults: { _controller: MaestroCoreBundle:Security:login }
+    requirements:
+        _method: GET|POST
 maestro_core_ayuda:
     path:     /ayuda
     defaults: { _controller: MaestroCoreBundle:Default:ayuda }

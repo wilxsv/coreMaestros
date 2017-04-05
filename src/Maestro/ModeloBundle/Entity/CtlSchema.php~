@@ -183,4 +183,32 @@ class CtlSchema
     {
         return $this->detalleSchema;
     }
+    /**
+     * @var \DateTime
+     */
+    private $timeschema;
+
+
+    /**
+     * Set timeschema
+     *
+     * @param \DateTime $timeschema
+     * @return CtlSchema
+     */
+    public function setTimeschema($timeschema)
+    {
+        $this->timeschema = $timeschema;
+
+        return $this;
+    }
+
+    /**
+     * Get timeschema
+     *
+     * @return \DateTime 
+     */
+    public function getTimeschema()
+    {
+        return $this->timeschema;
+    }
 }

@@ -13,7 +13,8 @@ class CtlFormaFarmaceuticaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreFormaFarmaceutica')->add('ctlInsumoid');
+        $builder->add('nombreFormaFarmaceutica')
+        ->add('ctlInsumoid', array('label'  => 'Insimo asociado','class' => 'MaestroModeloBundle:CtlInsumo', 'required' => true));
     }
 
     /**
