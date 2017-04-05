@@ -49,6 +49,7 @@ class CtlEstablecimientoController extends Controller
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setEstadoSchema(0);
             $ctlEstablecimiento->setEnableSchema(0);
+            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $ctlEstablecimiento->getDetalleSchema(), $form->get('detalleSchema')->getData() ) );
             $em->persist($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
 
@@ -89,12 +90,17 @@ class CtlEstablecimientoController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-			/*
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
-            $ctlEstablecimiento->setUserIdSchema($this->getUser()->getId());
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
+            $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
+            /*
+            $em = $this->getDoctrine()->getManager();
+            $detalle = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findById( $ctlEstablecimiento->getId() );
+			$dato = $detalle->getDetalleSchema();
             */
+            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData(), $_POST["detalle"], true ) );
             $this->getDoctrine()->getManager()->flush();
+            $this->sendMessage("Actualizacion en establecimiento [".$editForm->get('detalleSchema')->getData()."]", "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", "wilx.sv@yandex.com");
             return $this->redirectToRoute('maestro_homepage');
         }
 
@@ -202,5 +208,43 @@ class CtlEstablecimientoController extends Controller
 	
 	private function setSchema(){
 		return $data;
+	}
+	
+	private function sendMessage($titulo, $mensaje, $para){
+		$message = \Swift_Message::newInstance()
+        ->setSubject($titulo)
+        ->setFrom('todasconsultoras@yandex.com')
+        ->setTo($para)
+        ->setBody( $this->renderView( 'Emails/actualizacion.html.twig', array('mensaje' => $mensaje)), 'text/html');
+                /*
+         * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'Emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+        */
+		$this->get('mailer')->send($message);
+	}
+	
+	private function getMailbyIdUser( $idUser ){
+		$em = $this->getDoctrine()->getManager();
+		$user = $em->getRepository('MaestroModeloBundle:FosUser')->findById( $idUser );
+		return $user->getEmail();
+	}
+	
+	private function setDetalleSchema( $last, $new, $id = false){
+		$arrne['id'] = $this->getUser()->getId();
+		$arrne['detalle'] = $new;
+		if ($id){
+			$str = json_encode($last, true);
+			//array_push( $str, $arrne );	
+			return $last.$str;
+		} else {
+			return json_encode($arrne);
+		}	
+		
 	}
 }

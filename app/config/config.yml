@@ -9,7 +9,8 @@ parameters:
     locale: en
 
 framework:
-    translator: { fallback: es }
+    translator: { fallback: "%locale%" }
+    default_locale:  "%locale%"
     #esi:             ~
     secret:          "%secret%"
     router:
@@ -65,8 +66,8 @@ swiftmailer:
     transport: "smtp"
     host:      "smtp.yandex.com"
     username:  "todasconsultoras@yandex.com"
-    password:  "vzsxytpfomuyruxm"
-    port:      "465"
+    password:  "1800@todas"
+    port:      "587"
     encryption: "tls"
     spool:     { type: memory }
 fos_user:
