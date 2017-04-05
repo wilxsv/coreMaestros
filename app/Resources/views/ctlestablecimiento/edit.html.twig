@@ -10,11 +10,13 @@
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(edit_form) }}
-      <input name="detalle" required="required" type="text">
-      <div id="divCheckbox" style="dispay: none;">
+     <div class="control-group ">{{ form_label(edit_form.detalleSchema) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.detalleSchema) }}</span>{{ form_errors(edit_form.detalleSchema) }}</div>
+     </div>
+      <div id="divCheckbox" style="display: none;">
        {{ form_widget(edit_form) }}
 	  </div>
-      <input type="submit" value="Enviar observación y no validar" class="btn btn-danger"> <input type="submit" value="Validar establecimiento" class="btn btn-primary">
+      <input type="submit" value="Enviar observación y no validar" class="btn btn-danger">
       </form>
      </div>
     </div>
@@ -28,8 +30,10 @@
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(delete_form) }}
-      <input name="detalle" required="required" type="text">
-      <div id="divCheckbox" style="dispay: none;">
+     <div class="control-group ">{{ form_label(delete_form.detalleSchema) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(delete_form.detalleSchema) }}</span>{{ form_errors(delete_form.detalleSchema) }}</div>
+     </div>
+      <div id="divCheckbox" style="display: none;">
 	   {{ form_widget(delete_form) }}
 	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="1" />
 	  </div>
@@ -60,7 +64,7 @@
       {{ form_row(edit_form.detalleSchema) }}
       <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}</div>
        <input type="submit" value="Enviar observación y no habilitar" class="btn btn-danger">
-      </form>
+      </form>      
      </div>
     </div>
    </div>
@@ -73,6 +77,7 @@
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(delete_form) }}
+      {{ form_row(delete_form.detalleSchema) }}
       <div id="divCheckbox" style="display: none;">
        {{ form_widget(delete_form) }}
 	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_enableSchema" name="maestro_modelobundle_ctlestablecimiento[enableSchema]" value="1" />

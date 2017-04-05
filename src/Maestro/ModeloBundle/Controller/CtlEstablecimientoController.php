@@ -98,7 +98,7 @@ class CtlEstablecimientoController extends Controller
             $detalle = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findById( $ctlEstablecimiento->getId() );
 			$dato = $detalle->getDetalleSchema();
             */
-            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData(), $_POST["detalle"], true ) );
+            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData(), $editForm->get('detalleSchema')->getData(), true ) );
             $this->getDoctrine()->getManager()->flush();
             $this->sendMessage("Actualizacion en establecimiento [".$editForm->get('detalleSchema')->getData()."]", "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", "wilx.sv@yandex.com");
             return $this->redirectToRoute('maestro_homepage');
@@ -239,9 +239,9 @@ class CtlEstablecimientoController extends Controller
 		$arrne['id'] = $this->getUser()->getId();
 		$arrne['detalle'] = $new;
 		if ($id){
-			$str = json_encode($last, true);
+			$str = json_encode($arrne, true);
 			//array_push( $str, $arrne );	
-			return $last.$str;
+			return $str;
 		} else {
 			return json_encode($arrne);
 		}	

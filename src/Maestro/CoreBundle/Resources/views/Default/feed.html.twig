@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF8" ?>
 <rss version="0.91">
 
 <channel>
 
- <title>Sistema de Gestión de Catálogos Maestros {{nombre}} </title>
+ <title>Sistema de Gestion de Catalogos Maestros {{nombre}} </title>
  <link>http://establecimiento.maestro.salud.gob.sv</link>
- <description>Descripción</description>
+ <description>Descripcion</description>
  <language>es-ES</language>
 
  {% for ctlSchema in ctlSchemas %}
  <item>
-  <title>{{ ctlSchema.tipoCambioSchema }}</title>
+  <title>{{ ctlSchema.varsSchema }}</title>
   <link>http://establecimiento.maestro.salud.gob.sv</link>
   <description>{{ ctlSchema.detalleSchema }}</description>
   <pubDate>{{ ctlSchema.timeSchema }}</pubDate>
