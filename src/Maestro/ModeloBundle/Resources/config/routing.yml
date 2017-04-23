@@ -1,3 +1,6 @@
+maestro_modelo_admin_roles:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlrol.yml"
+    prefix:   /admin/roles
 maestro_modelo_admin_users:
     resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
     prefix:   /admin/users

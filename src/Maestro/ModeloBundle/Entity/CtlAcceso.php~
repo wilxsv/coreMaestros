@@ -3,23 +3,19 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-namespace Maestro\ModeloBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CtlAcceso
  *
  * @ORM\Table(name="ctl_acceso")
  * @ORM\Entity
- */
-
+ */ 
 class CtlAcceso
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="ctl_acceso_id_seq", allocationSize=1, initialValue=1)
@@ -28,50 +24,56 @@ class CtlAcceso
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nombre_acceso", type="string", length=250, nullable=false)
+     * 
+     * @ORM\Column(name="nombre_acceso", type="string", length=150, nullable=false)
      */
     private $nombreAcceso;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="path_acceso", type="string", length=250, nullable=false)
+     * 
+     * @ORM\Column(name="path_acceso", type="string", length=150, nullable=false)
      */
     private $pathAcceso;
 
     /**
      * @var boolean
-     *
+     * 
      * @ORM\Column(name="public_acceso", type="boolean", nullable=false)
      */
     private $publicAcceso;
 
     /**
-    *  @var integer
-    * @ORM\Column(name="orden_acceso", type="integer", nullable=false)
-    */
+     * @var integer
+     * 
+     * @ORM\Column(name="orden_acceso", type="bigint", nullable=false)
+     */
     private $ordenAcceso;
 
     /**
-     * @var \CtlAcceso
-     *
-     * @ORM\ManyToOne(targetEntity="CtlAcceso")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_acceso", referencedColumnName="id")
-     * })
+     * @var string
+     * 
+     * @ORM\Column(name="rol_acceso_id", type="string", length=250, nullable=false)
      */
+    private $rolAccesoId;
+
     /**
-     * @var \
+     * @var boolean
+     *  
+     * @ORM\Column(name="visible_acceso", type="boolean", nullable=false)
+     */
+    private $visibleAcceso;
+
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlAcceso
      */
     private $acceso;
-
 
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -94,7 +96,7 @@ class CtlAcceso
     /**
      * Get nombreAcceso
      *
-     * @return string
+     * @return string 
      */
     public function getNombreAcceso()
     {
@@ -117,7 +119,7 @@ class CtlAcceso
     /**
      * Get pathAcceso
      *
-     * @return string
+     * @return string 
      */
     public function getPathAcceso()
     {
@@ -140,7 +142,7 @@ class CtlAcceso
     /**
      * Get publicAcceso
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getPublicAcceso()
     {
@@ -163,11 +165,57 @@ class CtlAcceso
     /**
      * Get ordenAcceso
      *
-     * @return integer
+     * @return integer 
      */
     public function getOrdenAcceso()
     {
         return $this->ordenAcceso;
+    }
+
+    /**
+     * Set rolAccesoId
+     *
+     * @param string $rolAccesoId
+     * @return CtlAcceso
+     */
+    public function setRolAccesoId($rolAccesoId)
+    {
+        $this->rolAccesoId = $rolAccesoId;
+
+        return $this;
+    }
+
+    /**
+     * Get rolAccesoId
+     *
+     * @return string 
+     */
+    public function getRolAccesoId()
+    {
+        return $this->rolAccesoId;
+    }
+
+    /**
+     * Set visibleAcceso
+     *
+     * @param boolean $visibleAcceso
+     * @return CtlAcceso
+     */
+    public function setVisibleAcceso($visibleAcceso)
+    {
+        $this->visibleAcceso = $visibleAcceso;
+
+        return $this;
+    }
+
+    /**
+     * Get visibleAcceso
+     *
+     * @return boolean 
+     */
+    public function getVisibleAcceso()
+    {
+        return $this->visibleAcceso;
     }
 
     /**
@@ -186,44 +234,14 @@ class CtlAcceso
     /**
      * Get acceso
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlAcceso
+     * @return \Maestro\ModeloBundle\Entity\CtlAcceso 
      */
     public function getAcceso()
     {
         return $this->acceso;
     }
-
-
-    /**
-     * @var string
-     */
-    private $rolAccesoId;
-
-
-    /**
-     * Set rolAccesoId
-     *
-     * @param string $rolAccesoId
-     * @return CtlAcceso
-     */
-    public function setRolAccesoId($rolAccesoId)
-    {
-        $this->rolAccesoId = $rolAccesoId;
-
-        return $this;
-    }
-
-    /**
-     * Get rolAccesoId
-     *
-     * @return string
-     */
-    public function getRolAccesoId()
-    {
-        return $this->rolAccesoId;
-    }
-
+    
     public function __toString() {
-      return $this->getNombreAcceso();
+      return $this->nombreAcceso;
     }
 }

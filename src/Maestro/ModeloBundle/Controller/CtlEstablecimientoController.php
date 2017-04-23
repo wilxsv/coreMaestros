@@ -49,7 +49,7 @@ class CtlEstablecimientoController extends Controller
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setEstadoSchema(0);
             $ctlEstablecimiento->setEnableSchema(0);
-            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $ctlEstablecimiento->getDetalleSchema(), $form->get('detalleSchema')->getData() ) );
+            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $form->get('detalleSchema')->getData() ) );
             $em->persist($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
 
@@ -93,12 +93,7 @@ class CtlEstablecimientoController extends Controller
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
-            /*
-            $em = $this->getDoctrine()->getManager();
-            $detalle = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findById( $ctlEstablecimiento->getId() );
-			$dato = $detalle->getDetalleSchema();
-            */
-            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData(), $editForm->get('detalleSchema')->getData(), true ) );
+            $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
             $this->getDoctrine()->getManager()->flush();
             $this->sendMessage("Actualizacion en establecimiento [".$editForm->get('detalleSchema')->getData()."]", "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", "wilx.sv@yandex.com");
             return $this->redirectToRoute('maestro_homepage');
@@ -235,7 +230,7 @@ class CtlEstablecimientoController extends Controller
 		return $user->getEmail();
 	}
 	
-	private function setDetalleSchema( $last, $new, $id = false){
+	/*private function setDetalleSchema( $last, $new, $id = false){
 		$arrne['id'] = $this->getUser()->getId();
 		$arrne['detalle'] = $new;
 		if ($id){
@@ -246,5 +241,10 @@ class CtlEstablecimientoController extends Controller
 			return json_encode($arrne);
 		}	
 		
+	}*/
+	
+	private function setDetalleSchema( $new ){
+		$id = $this->getUser()->getId();
+		return "<nodo><id>$id</id><msg>$new</msg></nodo>";		
 	}
 }

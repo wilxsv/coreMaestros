@@ -30,9 +30,9 @@ class CtlEstablecimientoType extends AbstractType
         ->add('ctlPrestacionid', 'entity',array('label'  => 'Prestaciones: ', 'class' => 'MaestroModeloBundle:CtlPrestacion', 'required' => false, 'multiple' => true))
         ->add('ctlRecursoHumanoid', 'entity',array('label'  => 'Recurso humano asignado: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => false, 'multiple' => true))
         ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
-        ->add('detalleSchema', 'text', array('label'  => 'Observación'))
-        ->add('enableSchema', 'hidden', array('data' => 0))
-   		->add('estadoSchema', 'hidden', array('data' => 0));
+        ->add('detalleSchema', 'text', array('label'  => 'Observación', 'data' => ''))
+        ->add('enableSchema', 'hidden')
+   		->add('estadoSchema', 'hidden');//, array('data' => 0)
     }
 /*
 

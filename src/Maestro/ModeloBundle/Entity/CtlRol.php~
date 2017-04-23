@@ -5,12 +5,12 @@ namespace Maestro\ModeloBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CtlCargoEmpleado
- *
- * @ORM\Table(name="ctl_cargo_empleado")
+ * CtlRol
+ * 
+ * @ORM\Table(name="ctl_rol")
  * @ORM\Entity
  */
-class CtlCargoEmpleado
+class CtlRol
 {
     /**
      * @var integer
@@ -18,17 +18,16 @@ class CtlCargoEmpleado
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_cargo_empleado_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="ctl_rol_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="cargo", type="string", length=50, nullable=true)
+     * 
+     * @ORM\Column(name="nombre_rol", type="string", length=50, nullable=false)
      */
-    private $cargo;
-
+    private $nombreRol;
 
 
     /**
@@ -42,25 +41,25 @@ class CtlCargoEmpleado
     }
 
     /**
-     * Set cargo
+     * Set nombreRol
      *
-     * @param string $cargo
-     * @return CtlCargoEmpleado
+     * @param string $nombreRol
+     * @return CtlRol
      */
-    public function setCargo($cargo)
+    public function setNombreRol($nombreRol)
     {
-        $this->cargo = $cargo;
+        $this->nombreRol = $nombreRol;
 
         return $this;
     }
 
     /**
-     * Get cargo
+     * Get nombreRol
      *
      * @return string 
      */
-    public function getCargo()
+    public function getNombreRol()
     {
-        return $this->cargo;
+        return $this->nombreRol;
     }
 }

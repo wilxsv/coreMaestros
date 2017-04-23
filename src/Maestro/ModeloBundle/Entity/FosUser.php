@@ -432,4 +432,32 @@ class FosUser
     {
         return $this->group;
     }
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
+     */
+    private $establecimiento;
+
+
+    /**
+     * Set establecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
+     * @return FosUser
+     */
+    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
+    {
+        $this->establecimiento = $establecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get establecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getEstablecimiento()
+    {
+        return $this->establecimiento;
+    }
 }

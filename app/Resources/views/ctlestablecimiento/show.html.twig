@@ -41,12 +41,12 @@
             </tr>
         </tbody>
     </table>
-
     {% if is_granted('ROLE_VALIDA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
-	{% endif %}
-    {% if is_granted('ROLE_HABILITA') %}
+	{% elseif is_granted('ROLE_HABILITA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
+    {% elseif (ctlEstablecimiento.userIdSchema == app.user.id) %}
+		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Modificar registro de establecimiento</a>
 	{% endif %}
 	
 	

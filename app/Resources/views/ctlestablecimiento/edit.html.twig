@@ -47,12 +47,9 @@
 </div>
 
 
+{% elseif is_granted('ROLE_HABILITA') %}
 
 
-	
-
-{% endif %}
-{% if is_granted('ROLE_HABILITA') %}
 <div class="row-fluid">
  <div class="span6">
   <div class="widget-box">
@@ -90,6 +87,32 @@
   </div>
  </div>
 </div>
+
+
+{% elseif (ctlEstablecimiento.userIdSchema == app.user.id) %}
+
+
+<div class="row-fluid">
+ <div class="span6">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4></h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
+      {{ form_start(edit_form) }}
+      {{ form_widget(edit_form) }}
+      {{ form_row(edit_form.detalleSchema) }}
+      <div id="divCheckbox" style="display: none;"></div>
+       <input type="submit" value="Enviar actualilzación" class="btn btn-danger">
+      </form>      
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
 {% endif %}
 
 

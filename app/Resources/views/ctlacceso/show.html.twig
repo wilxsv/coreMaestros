@@ -28,7 +28,5 @@
 
     <a href="{{ path('acceso_index') }}" class="btn">Regresar a listado</a>
     <a href="{{ path('acceso_edit', { 'id': ctlAcceso.id }) }}" class="btn">Editar</a>
-    {{ form_start(delete_form) }}
-      <input type="submit" value="Eliminar">
-    {{ form_end(delete_form) }}
+    {{ form_start(delete_form) }}<input type="submit" value="Eliminar acceso" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
 {% endblock %}

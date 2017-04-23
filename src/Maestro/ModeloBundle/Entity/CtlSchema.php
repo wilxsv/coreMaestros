@@ -209,4 +209,60 @@ class CtlSchema
     {
         return $this->timeSchema;
     }
+    /**
+     * @var integer
+     */
+    private $userId;
+
+    /**
+     * @var string
+     */
+    private $ipSchema;
+
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     * @return CtlSchema
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * Set ipSchema
+     *
+     * @param string $ipSchema
+     * @return CtlSchema
+     */
+    public function setIpSchema($ipSchema)
+    {
+        $this->ipSchema = $ipSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get ipSchema
+     *
+     * @return string 
+     */
+    public function getIpSchema()
+    {
+        return $this->ipSchema;
+    }
 }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Listado de roles{% endblock %}
+{% block body %}
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nombre de rol</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlRol in ctlRols %}
+            <tr>
+                <td><a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">{{ ctlRol.nombreRol }}</a></td>
+                <td>
+                  <a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                  <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('acceso_new') }}" class="btn btn-primary">Agregar acceso</a>
+{% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}
