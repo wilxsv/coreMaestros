@@ -1147,8 +1147,16 @@ class CtlEstablecimiento
      */
     public function setDetalleSchema($detalleSchema)
     {
-        $this->detalleSchema = $detalleSchema;
-
+		$tmp = $this->getDetalleSchema();
+		$pos = strpos($tmp, '<nodo>');
+		if ( $pos === false )
+		  $this->detalleSchema = $detalleSchema;
+		else
+		{
+		  $pos = strripos($tmp, 'do>');
+		  $this->detalleSchema = substr($tmp, 0, $pos+3).$detalleSchema;
+		}
+		
         return $this;
     }
 

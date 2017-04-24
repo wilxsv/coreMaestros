@@ -14,8 +14,12 @@ class FosUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('enabled', 'choice', array('label'  => 'Habilitado :', 'choices'=> array(FALSE => 'No', TRUE => 'Si'), 'required'  => true, ))
-               ->add('roles', 'choice', array('choices' => $this->getRolesNames(), 'label' => 'Roles','multiple' => true,));
-        //->add('username')->add('usernameCanonical')->add('email')->add('emailCanonical')->add('salt')->add('password')->add('lastLogin')->add('confirmationToken')->add('passwordRequestedAt')->add('roles')->add('group')        ;
+          ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true,   ))
+        ->add('fullname', 'text', array('label' => 'Nombre completo', 'required'  => true ))
+//          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => false, 'multiple' => false,))
+          ->add('establecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => true, 'multiple' => false))
+             
+       ;
     }
     
     public function getRolesNames(){

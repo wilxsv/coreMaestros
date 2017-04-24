@@ -62,4 +62,8 @@ class CtlRol
     {
         return $this->nombreRol;
     }
+    
+     public function __toString() {
+      return $this->getNombreRol();
+    }
 }

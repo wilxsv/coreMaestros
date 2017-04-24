@@ -38,4 +38,62 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+    
+    
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
+     */
+    private $establecimiento;
+
+
+    /**
+     * Set establecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
+     * @return FosUser
+     */
+    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
+    {
+        $this->establecimiento = $establecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get establecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getEstablecimiento()
+    {
+        return $this->establecimiento;
+    }
+    /**
+     * @var string
+     */
+    private $fullname;
+
+
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return FosUser
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string 
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
 }

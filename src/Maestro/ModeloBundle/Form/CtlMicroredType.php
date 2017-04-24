@@ -14,8 +14,7 @@ class CtlMicroredType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nombre')
-        ->add('activo', 'choice', array('choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, ))
-        ->add('codigoc3')        ;
+        ->add('activo', 'choice', array('choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, ));
     }
 
     /**

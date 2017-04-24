@@ -6,6 +6,26 @@ use Maestro\ModeloBundle\Entity\FosUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
+use Maestro\ModeloBundle\Entity\CtlEstablecimiento;
+use Maestro\ModeloBundle\Entity\CtlAcceso;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Role\RoleInterface;
+
 /**
  * Fosuser controller.
  *
@@ -37,12 +57,14 @@ class FosUserController extends Controller
 
         $fosUser = new Fosuser();
         $form = $this->createForm('Maestro\ModeloBundle\Form\FosUserType', $fosUser);
-        
- //       ->add('roles', 'choice', array('choices' => $this->getExistingRoles(), 'data' => $group->getRoles()));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $fosUser->setRoles('');
+            $em = $this->getDoctrine()->getManager();
+         	$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find( $form->get('roles')->getData() );
+            $fosUser->addRole($rol->getNombreRol());
             $em->persist($fosUser);
             $em->flush($fosUser);
 
@@ -74,26 +96,41 @@ class FosUserController extends Controller
      *
      */
     public function editAction(Request $request, FosUser $fosUser)
-    {
-        $fosUser = new Fosuser();
-        		/*
-		$formFactory = $this->get('fos_user.group.form.factory');
-
-
-        $editForm = $this->createForm('Maestro\ModeloBundle\Form\FosUserType', $fosUser)
-        ->add('roles', 'choice', array(
-        'choices' => $this->getRolesNames(), //$this->getExistingRoles(),
-        'label' => 'Roles',
-//        'expanded' => true,
-        'multiple' => true,
-  //      'mapped' => true,
-    ));*/
-		$editForm = $this->createForm('Maestro\ModeloBundle\Form\FosUserType', $fosUser);
+    {        
+        $editForm = $this->createForm('Maestro\ModeloBundle\Form\FosUserType', $fosUser);
         $editForm->handleRequest($request);
-
+        
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+			/*
+			$em = $this->getDoctrine()->getManager();
+			$fosUser = $em->getRepository('MaestroModeloBundle:FosUser')->findByUsername( $editForm->get('username')->getData());
+			if (!$fosUser) {
+				throw $this->createNotFoundException("Error");
+			}
+			$fosUser->setFullname($editForm->get('fullname')->getData());
+            $fosUser->setEstablecimiento($editForm->get('establecimiento')->getData());
+			
+			$em->flush();
+            */
+            $em = $this->getDoctrine()->getManager();
+         	/*$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find( $editForm->get('roles')->getData() );
+         	if ( $rol->getNombreRol() != 'ROLE_DEFAULT'){
+				$fosUser->addRole($rol->getNombreRol());
+			}else {
+				$user->addRole("ROLE_U");
+			}*/
+			$fosUser->setFullname($editForm->get('fullname')->getData());
+            $fosUser->setEstablecimiento($editForm->get('establecimiento')->getData());
+            //$fosUser->setRoles("a:0:{}");
+            $em->persist($fosUser);
+            $em->flush($fosUser);
+/*            
+            $userManager = $this->get('fos_user.user_manager');
+			$user = $userManager->findUserBy(['id' => $fosUser->getId()]);
+			$user->addRole("ROLE_ADMIN");
+			$userManager->updateUser($user);
+*/            
             return $this->redirectToRoute('admin_users_edit', array('id' => $fosUser->getId()));
         }
 

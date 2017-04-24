@@ -3,6 +3,8 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CtlRol
@@ -61,5 +63,9 @@ class CtlRol
     public function getNombreRol()
     {
         return $this->nombreRol;
+    }
+    
+     public function __toString() {
+      return $this->getNombreRol();
     }
 }
