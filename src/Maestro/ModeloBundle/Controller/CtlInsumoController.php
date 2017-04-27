@@ -172,5 +172,14 @@ class CtlInsumoController extends Controller
         'ctlInsumo' => $ctlInsumo,
          'form' => $form->createView(),
      ));
- }
+    }
+    
+    public function publicAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
+
+        return $this->render('ctlinsumo/public.html.twig', array('ctlInsumos' => $ctlInsumos));
+    }
+
 }

@@ -1,0 +1,12 @@
+departamento_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlDepartamento:index" }
+    methods:  GET
+
+departamento_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlDepartamento:show" }
+    methods:  GET
+
+
+

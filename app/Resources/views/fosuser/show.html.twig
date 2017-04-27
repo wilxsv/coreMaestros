@@ -58,10 +58,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('fosuser_index') }}">Back to the list</a>
+            <a href="{{ path('admin_users_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('fosuser_edit', { 'id': fosUser.id }) }}">Edit</a>
+            <a href="{{ path('admin_users_edit', { 'id': fosUser.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

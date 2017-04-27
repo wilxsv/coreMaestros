@@ -62,3 +62,19 @@ maestro_modelo_fosgrupo:
 maestro_modelo_fosuser:
     resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
     prefix:   /fosuser
+
+maestro_modelo_departamento:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctldepartamento.yml"
+    prefix:   /departamento
+maestro_modelo_municipio:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlmunicipio.yml"
+    prefix:   /municipio
+maestro_modelo_admin_roles:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlrol.yml"
+    prefix:   /admin/roles
+maestro_modelo_acceso:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlacceso.yml"
+    prefix:   /admin/acceso
+maestro_modelo_admin_users:
+    resource: "@MaestroModeloBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /admin/users

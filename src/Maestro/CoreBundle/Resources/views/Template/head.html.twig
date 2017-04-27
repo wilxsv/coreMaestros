@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <a href="{{ path('homepage') }}" class="brand">
         <small>
-          <img src="{{ asset('assets/') }}img/logo.png" height="20" width="95" alt="" />
+        <img src="{{ asset('assets/') }}img/logo.png" height="20" width="95" alt="" />
           Sistema de Administración	de Catálogos maestros ({{ nombre }})
         </small>
       </a><!--/.brand-->
@@ -223,6 +223,19 @@
       {% endif %}
       {% set user = { username: app.session.get('username'), id: app.session.get('id'), correo: app.session.get('username'), nombre: app.session.get('name') } %}
       {% if user is defined %}
+         {% if is_granted('ROLE_ADMIN') %}
+         <li class="grey">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          <i class="icon-shield"></i><i class="icon-unlock"></i> Administracion y seguridad</a>
+          <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
+           <li class="nav-header"><i class="icon-ok"></i>configuración de seguridad</li>
+           <li><a href="{{ path('admin_roles_index') }}"><div class="clearfix"><span class="pull-left">Roles de usuaria</span></div></a></li>
+           <li><a href="{{ path('admin_users_index') }}"><div class="clearfix"><span class="pull-left">Usuarias del sistema</span></div></a></li>
+           <li><a href="{{ path('acceso_index') }}"><div class="clearfix"><span class="pull-left">Accesos a enlaces (url)</span></div></a></li>
+           <li><a href="{{ path('maestro_core_ayuda') }}#administradora"><i class="icon-medkit"></i>Ayuda en linea</a></li>
+          </ul>
+         </li>
+         {% endif %}
         <li class="light-blue">
           <a data-toggle="dropdown" href="#" class="dropdown-toggle">
             <img class="nav-user-photo" src="{{ asset('assets/') }}avatars/user.jpg" alt="Jason's Photo" />

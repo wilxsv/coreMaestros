@@ -4,7 +4,7 @@ namespace Maestro\ModeloBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FosUserControllerTest extends WebTestCase
+class CtlAccesoControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class FosUserControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/users/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/users/");
+        $crawler = $client->request('GET', '/acceso/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /acceso/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'maestro_modelobundle_fosuser[field_name]'  => 'Test',
+            'maestro_modelobundle_ctlacceso[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class FosUserControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'maestro_modelobundle_fosuser[field_name]'  => 'Foo',
+            'maestro_modelobundle_ctlacceso[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

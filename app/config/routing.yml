@@ -1,6 +1,9 @@
+#maestro_homepage:
+#    path:     /
+#    defaults: { _controller: MaestroCoreBundle:Default:index }
 maestro_homepage:
     path:     /
-    defaults: { _controller: MaestroCoreBundle:Default:index }
+    defaults: { _controller: MaestroModeloBundle:CtlInsumo:public }
 
 maestro_modelo:
     resource: "@MaestroModeloBundle/Resources/config/routing.yml"

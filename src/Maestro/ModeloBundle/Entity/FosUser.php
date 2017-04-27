@@ -422,4 +422,32 @@ class FosUser
     public function __toString(){
       return $this->getUsername();
     }
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
+     */
+    private $ctlEstablecimiento;
+
+
+    /**
+     * Set ctlEstablecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento
+     * @return FosUser
+     */
+    public function setCtlEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento = null)
+    {
+        $this->ctlEstablecimiento = $ctlEstablecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlEstablecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getCtlEstablecimiento()
+    {
+        return $this->ctlEstablecimiento;
+    }
 }

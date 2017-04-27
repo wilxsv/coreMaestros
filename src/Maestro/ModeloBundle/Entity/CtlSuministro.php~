@@ -384,4 +384,60 @@ class CtlSuministro
     {
         return $this->codificacionSuministro;
     }
+    /**
+     * @var string
+     */
+    private $rolSolicitaSuministro;
+
+    /**
+     * @var string
+     */
+    private $rolValidaSuministro;
+
+
+    /**
+     * Set rolSolicitaSuministro
+     *
+     * @param string $rolSolicitaSuministro
+     * @return CtlSuministro
+     */
+    public function setRolSolicitaSuministro($rolSolicitaSuministro)
+    {
+        $this->rolSolicitaSuministro = $rolSolicitaSuministro;
+
+        return $this;
+    }
+
+    /**
+     * Get rolSolicitaSuministro
+     *
+     * @return string 
+     */
+    public function getRolSolicitaSuministro()
+    {
+        return $this->rolSolicitaSuministro;
+    }
+
+    /**
+     * Set rolValidaSuministro
+     *
+     * @param string $rolValidaSuministro
+     * @return CtlSuministro
+     */
+    public function setRolValidaSuministro($rolValidaSuministro)
+    {
+        $this->rolValidaSuministro = $rolValidaSuministro;
+
+        return $this;
+    }
+
+    /**
+     * Get rolValidaSuministro
+     *
+     * @return string 
+     */
+    public function getRolValidaSuministro()
+    {
+        return $this->rolValidaSuministro;
+    }
 }
