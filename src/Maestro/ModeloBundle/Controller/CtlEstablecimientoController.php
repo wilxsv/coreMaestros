@@ -189,16 +189,16 @@ class CtlEstablecimientoController extends Controller
         //foreach ($roles as $item){
 	//		if( $rol->isGranted( $item->getNombreRol() ) ){
 				$acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));//'visibleAcceso' => 't'
-				$dql = "SELECT a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
+				$dql = "SELECT a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
 						 WITH a.visibleAcceso = 't'
-						GROUP BY a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
+						GROUP BY a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
 				$acceso = $em->createQuery( $dql )->getResult();
 
 
 				foreach ($acceso as $accesos) {	
 					$pass = $pass.$accesos['pathAcceso'].'/';
-					$this->get('session')->set('otro', $accesos['nombreRol']);
-					// AND					$accesos['nombreRol'] == 't'
+					$this->get('session')->set('otro', $accesos['visibleAcceso']);
+					// AND $accesos['visibleAcceso'] != 1
 					if ( $rol->isGranted( $accesos['nombreRol'] ) ){// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
 						$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
 						$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';
