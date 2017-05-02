@@ -1,39 +1,25 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Listado de roles{% endblock %}
 {% block body %}
-    <h1>Ctlrols list</h1>
-
-    <table>
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombrerol</th>
-                <th>Actions</th>
+                <th>Nombre de rol</th>
+                <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlRol in ctlRols %}
             <tr>
-                <td><a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">{{ ctlRol.id }}</a></td>
-                <td>{{ ctlRol.nombreRol }}</td>
+                <td><a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">{{ ctlRol.nombreRol }}</a></td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                  <a href="{{ path('admin_roles_show', { 'id': ctlRol.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
+                  <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_roles_new') }}">Create a new ctlRol</a>
-        </li>
-    </ul>
+    <a href="{{ path('admin_roles_new') }}" class="btn btn-primary">Agregar rol</a>
 {% endblock %}
+{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}

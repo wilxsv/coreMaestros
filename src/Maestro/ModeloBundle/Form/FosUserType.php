@@ -13,8 +13,22 @@ class FosUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username')->add('usernameCanonical')->add('email')->add('emailCanonical')->add('enabled')->add('salt')->add('password')->add('lastLogin')->add('confirmationToken')->add('passwordRequestedAt')->add('roles')->add('group')        ;
+        $builder->add('enabled', 'choice', array('label'  => 'Habilitado :', 'choices'=> array(FALSE => 'No', TRUE => 'Si'), 'required'  => true, ))
+          ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true,   ))
+        ->add('fullname', 'text', array('label' => 'Nombre completo', 'required'  => true ))
+//          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => false, 'multiple' => false,))
+          ->add('establecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => true, 'multiple' => false))
+             
+       ;
     }
+    
+    public function getRolesNames(){
+		return array(
+			"ROLE_AGREGA" => "ROLE_AGREGA",
+			"ROLE_VALIDA" => "ROLE_VALIDA",
+			"ROLE_HABILITA" => "ROLE_HABILITA",               
+		);
+	}
     
     /**
      * {@inheritdoc}

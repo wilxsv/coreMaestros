@@ -116,7 +116,7 @@
   </ul>
 </li>
 {% endif %}
-{% if is_granted('ROLE_VALIDA') or is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_MEDICAMENTO') %}
 <li>
   <a href="#" class="dropdown-toggle"><i class="icon-ambulance"></i><span class="menu-text">  Especificos</span><b class="arrow icon-angle-down"></b></a>
   <ul class="submenu">
@@ -129,6 +129,10 @@
   </ul>
 </li>
 {% endif %}
+{% endif %}<!--/get role-->
+{% if app.user %}<!--/get role-->
+ {{ app.session.get('menu') | raw }}
+</li>
 {% endif %}<!--/get role-->
 <li><a href="{{ path('maestro_core_ayuda') }}"><i class="icon-medkit"></i><span class="menu-text"> Ayuda</span></a></li>
 <li><a href="{{ path('maestro_core_feed') }}"><i class="icon-rss"></i><span class="menu-text"> feed</span></a></li>

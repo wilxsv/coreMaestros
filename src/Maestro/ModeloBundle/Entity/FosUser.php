@@ -3,14 +3,13 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * FosUser
  *
- * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"})})
+ * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})})
  * @ORM\Entity
  */
-class FosUser
+class FosUser 
 {
     /**
      * @var integer
@@ -115,18 +114,51 @@ class FosUser
     private $group;
 
     /**
+     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_establecimiento", referencedColumnName="id")
+     * })
+     */
+    private $establecimiento;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="fullname", type="string", length=255, nullable=true)
+     */
+    private $fullname;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->enabled = false;
+        $this->roles = array();
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->establecimiento = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
+    /**
+     * {@inheritdoc}
+     *//*
+    public function addRole($role)
+    {
+        $role = strtoupper($role);
+        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }*/
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -149,7 +181,7 @@ class FosUser
     /**
      * Get username
      *
-     * @return string
+     * @return string 
      */
     public function getUsername()
     {
@@ -172,7 +204,7 @@ class FosUser
     /**
      * Get usernameCanonical
      *
-     * @return string
+     * @return string 
      */
     public function getUsernameCanonical()
     {
@@ -195,7 +227,7 @@ class FosUser
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -218,7 +250,7 @@ class FosUser
     /**
      * Get emailCanonical
      *
-     * @return string
+     * @return string 
      */
     public function getEmailCanonical()
     {
@@ -241,7 +273,7 @@ class FosUser
     /**
      * Get enabled
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getEnabled()
     {
@@ -264,7 +296,7 @@ class FosUser
     /**
      * Get salt
      *
-     * @return string
+     * @return string 
      */
     public function getSalt()
     {
@@ -287,7 +319,7 @@ class FosUser
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
@@ -310,7 +342,7 @@ class FosUser
     /**
      * Get lastLogin
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getLastLogin()
     {
@@ -333,7 +365,7 @@ class FosUser
     /**
      * Get confirmationToken
      *
-     * @return string
+     * @return string 
      */
     public function getConfirmationToken()
     {
@@ -356,7 +388,7 @@ class FosUser
     /**
      * Get passwordRequestedAt
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getPasswordRequestedAt()
     {
@@ -379,7 +411,7 @@ class FosUser
     /**
      * Get roles
      *
-     * @return array
+     * @return array 
      */
     public function getRoles()
     {
@@ -412,15 +444,55 @@ class FosUser
     /**
      * Get group
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getGroup()
     {
         return $this->group;
     }
 
-    public function __toString(){
-      return $this->getUsername();
+    /**
+     * Set establecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
+     * @return FosUser
+     */
+    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
+    {
+        $this->establecimiento = $establecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get establecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getEstablecimiento()
+    {
+        return $this->establecimiento;
+    }
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return FosUser
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+    /**
+     * Get fullname
+     *
+     * @return string 
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
     }
     /**
      * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento

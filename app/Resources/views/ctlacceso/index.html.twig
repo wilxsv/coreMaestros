@@ -10,6 +10,7 @@
                 <th>Nombreacceso</th>
                 <th>Pathacceso</th>
                 <th>Publicacceso</th>
+                <th>Accesoid</th>
                 <th>Ordenacceso</th>
                 <th>Rolaccesoid</th>
                 <th>Visibleacceso</th>
@@ -23,6 +24,7 @@
                 <td>{{ ctlAcceso.nombreAcceso }}</td>
                 <td>{{ ctlAcceso.pathAcceso }}</td>
                 <td>{% if ctlAcceso.publicAcceso %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlAcceso.accesoId }}</td>
                 <td>{{ ctlAcceso.ordenAcceso }}</td>
                 <td>{{ ctlAcceso.rolAccesoId }}</td>
                 <td>{% if ctlAcceso.visibleAcceso %}Yes{% else %}No{% endif %}</td>

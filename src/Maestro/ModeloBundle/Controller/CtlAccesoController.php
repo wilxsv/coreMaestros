@@ -47,7 +47,7 @@ class CtlAccesoController extends Controller
 
         return $this->render('ctlacceso/new.html.twig', array(
             'ctlAcceso' => $ctlAcceso,
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'routes' => $this->getRutas()
         ));
     }
 
@@ -121,4 +121,13 @@ class CtlAccesoController extends Controller
             ->getForm()
         ;
     }
+    
+    function getRutas(){
+		$availableApiRoutes = [];
+		foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
+			$route = $route->compile();
+			$availableApiRoutes[] = ["name" => $name];//, "variables" => $route->getVariables()
+		}
+		return $availableApiRoutes;
+	}
 }

@@ -1,0 +1,32 @@
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Accesos al sistema{% endblock %}
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombre de acceso</th>
+                <td>{{ ctlAcceso.nombreAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ ctlAcceso.pathAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Es acceso publico</th>
+                <td>{% if ctlAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Orden en menu</th>
+                <td>{{ ctlAcceso.ordenAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ ctlAcceso.rolAccesoId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('acceso_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('acceso_edit', { 'id': ctlAcceso.id }) }}" class="btn">Editar</a>
+    {{ form_start(delete_form) }}<input type="submit" value="Eliminar acceso" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+{% endblock %}

@@ -307,4 +307,32 @@ class CtlGrupo
     public function __toString() {
       return $this->nombreGrupo;
     }
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlSuministro
+     */
+    private $suministro;
+
+
+    /**
+     * Set suministro
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlSuministro $suministro
+     * @return CtlGrupo
+     */
+    public function setSuministro(\Maestro\ModeloBundle\Entity\CtlSuministro $suministro = null)
+    {
+        $this->suministro = $suministro;
+
+        return $this;
+    }
+
+    /**
+     * Get suministro
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlSuministro 
+     */
+    public function getSuministro()
+    {
+        return $this->suministro;
+    }
 }

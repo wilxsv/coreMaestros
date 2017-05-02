@@ -273,4 +273,32 @@ class CtlPrograma
     {
         return $this->enableSchema;
     }
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlPrograma
+     */
+    private $programa;
+
+
+    /**
+     * Set programa
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlPrograma $programa
+     * @return CtlPrograma
+     */
+    public function setPrograma(\Maestro\ModeloBundle\Entity\CtlPrograma $programa = null)
+    {
+        $this->programa = $programa;
+
+        return $this;
+    }
+
+    /**
+     * Get programa
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlPrograma 
+     */
+    public function getPrograma()
+    {
+        return $this->programa;
+    }
 }

@@ -28,18 +28,6 @@ class CtlRol
      */
     private $nombreRol;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlAcceso;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -72,6 +60,20 @@ class CtlRol
     public function getNombreRol()
     {
         return $this->nombreRol;
+    }
+    
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ctlAcceso;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -110,4 +112,5 @@ class CtlRol
     public function __toString() {
 		return $this->getNombreRol();
 	}
+
 }

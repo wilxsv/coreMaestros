@@ -28,18 +28,6 @@ class CtlRol
      */
     private $nombreRol;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlAcceso;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -73,41 +61,6 @@ class CtlRol
     {
         return $this->nombreRol;
     }
-
-    /**
-     * Add ctlAcceso
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
-     * @return CtlRol
-     */
-    public function addCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
-    {
-        $this->ctlAcceso[] = $ctlAcceso;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlAcceso
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
-     */
-    public function removeCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
-    {
-        $this->ctlAcceso->removeElement($ctlAcceso);
-    }
-
-    /**
-     * Get ctlAcceso
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCtlAcceso()
-    {
-        return $this->ctlAcceso;
-    }
     
-    public function __toString() {
-		return $this->getNombreRol();
-	}
+    
 }
