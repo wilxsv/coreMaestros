@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlAcceso
  *
- * @ORM\Table(name="ctl_acceso")
+ * @ORM\Table(name="ctl_acceso", indexes={@ORM\Index(name="IDX_8566BFCE55258FE8", columns={"acceso_id"})})
  * @ORM\Entity
- */ 
+ */
 class CtlAcceso
 {
     /**
@@ -24,51 +24,71 @@ class CtlAcceso
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="nombre_acceso", type="string", length=150, nullable=false)
+     *
+     * @ORM\Column(name="nombre_acceso", type="string", length=250, nullable=false)
      */
     private $nombreAcceso;
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="path_acceso", type="string", length=150, nullable=false)
+     *
+     * @ORM\Column(name="path_acceso", type="string", length=250, nullable=false)
      */
     private $pathAcceso;
 
     /**
      * @var boolean
-     * 
+     *
      * @ORM\Column(name="public_acceso", type="boolean", nullable=false)
      */
     private $publicAcceso;
 
     /**
      * @var integer
-     * 
-     * @ORM\Column(name="orden_acceso", type="bigint", nullable=false)
+     *
+     * @ORM\Column(name="orden_acceso", type="integer", nullable=false)
      */
     private $ordenAcceso;
 
     /**
-     * @var string
-     * 
-     * @ORM\Column(name="rol_acceso_id", type="string", length=250, nullable=false)
-     */
-    private $rolAccesoId;
-
-    /**
      * @var boolean
-     *  
+     *
      * @ORM\Column(name="visible_acceso", type="boolean", nullable=false)
      */
     private $visibleAcceso;
 
     /**
-     * @var \Maestro\ModeloBundle\Entity\CtlAcceso
+     * @var \CtlAcceso
+     *
+     * @ORM\ManyToOne(targetEntity="CtlAcceso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="acceso_id", referencedColumnName="id")
+     * })
      */
     private $acceso;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRol", inversedBy="CtlAcceso")
+     * @ORM\JoinTable(name="ctl_permisos",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="acceso_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlRol;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlRol = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -173,29 +193,6 @@ class CtlAcceso
     }
 
     /**
-     * Set rolAccesoId
-     *
-     * @param string $rolAccesoId
-     * @return CtlAcceso
-     */
-    public function setRolAccesoId($rolAccesoId)
-    {
-        $this->rolAccesoId = $rolAccesoId;
-
-        return $this;
-    }
-
-    /**
-     * Get rolAccesoId
-     *
-     * @return string 
-     */
-    public function getRolAccesoId()
-    {
-        return $this->rolAccesoId;
-    }
-
-    /**
      * Set visibleAcceso
      *
      * @param boolean $visibleAcceso
@@ -241,7 +238,40 @@ class CtlAcceso
         return $this->acceso;
     }
     
-    public function __toString() {
-      return $this->nombreAcceso;
+    public function __toString(){
+		return $this->getNombreAcceso();
+	}
+
+    /**
+     * Add ctlRol
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $ctlRol
+     * @return CtlAcceso
+     */
+    public function addCtlRol(\Maestro\ModeloBundle\Entity\CtlRol $ctlRol)
+    {
+        $this->ctlRol[] = $ctlRol;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlRol
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $ctlRol
+     */
+    public function removeCtlRol(\Maestro\ModeloBundle\Entity\CtlRol $ctlRol)
+    {
+        $this->ctlRol->removeElement($ctlRol);
+    }
+
+    /**
+     * Get b
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlRol()
+    {
+        return $this->ctlRol;
     }
 }

@@ -5,7 +5,7 @@
         <tbody>
             <tr>
                 <th>Nombre de acceso</th>
-                <td>{{ ctlAcceso.nombreAcceso }}</td>
+                <td>{{ ctlAcceso.nombreAcceso | raw }}</td>
             </tr>
             <tr>
                 <th>Path</th>
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ ctlAcceso.rolAccesoId }}</td>
+                <td>{{ ctlAcceso.ctlRol | join(', ') }}</td>
             </tr>
         </tbody>
     </table>

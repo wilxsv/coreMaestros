@@ -93,7 +93,7 @@ class CtlMunicipio
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -116,7 +116,7 @@ class CtlMunicipio
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -139,7 +139,7 @@ class CtlMunicipio
     /**
      * Get codigoCnr
      *
-     * @return string
+     * @return string 
      */
     public function getCodigoCnr()
     {
@@ -162,7 +162,7 @@ class CtlMunicipio
     /**
      * Get abreviatura
      *
-     * @return string
+     * @return string 
      */
     public function getAbreviatura()
     {
@@ -185,7 +185,7 @@ class CtlMunicipio
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -208,7 +208,7 @@ class CtlMunicipio
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -231,7 +231,7 @@ class CtlMunicipio
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -254,7 +254,7 @@ class CtlMunicipio
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -277,7 +277,7 @@ class CtlMunicipio
     /**
      * Get cabecera
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getCabecera()
     {
@@ -300,14 +300,14 @@ class CtlMunicipio
     /**
      * Get idDepartamento
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlDepartamento
+     * @return \Maestro\ModeloBundle\Entity\CtlDepartamento 
      */
     public function getIdDepartamento()
     {
         return $this->idDepartamento;
     }
-
-    public function __toString() {
-      return $this->getNombre();
-    }
+    
+    public function __toString(){
+		return $this->getNombre();
+	}
 }

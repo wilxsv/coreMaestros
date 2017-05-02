@@ -125,14 +125,15 @@ class FosUserController extends Controller
             //$fosUser->setRoles("a:0:{}");
             $em->persist($fosUser);
             $em->flush($fosUser);
-/*            
-            $userManager = $this->get('fos_user.user_manager');
-			$user = $userManager->findUserBy(['id' => $fosUser->getId()]);
-			$user->addRole("ROLE_ADMIN");
-			$userManager->updateUser($user);
-*/            
+           
+            //$userManager = $this->get('fos_user.user_manager');
+            //$fosUser->addRole('ROLE_ADM');
+            //$userManager->updateUser($fosUser);
+			
             return $this->redirectToRoute('admin_users_edit', array('id' => $fosUser->getId()));
         }
+//        $editForm->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => false, 'multiple' => false,));
+        
 
         return $this->render('fosuser/edit.html.twig', array(
             'fosUser' => $fosUser,

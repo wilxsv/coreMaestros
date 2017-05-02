@@ -79,7 +79,7 @@ class CtlCatalogoDetalle
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -102,7 +102,7 @@ class CtlCatalogoDetalle
     /**
      * Get descripcion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcion()
     {
@@ -125,7 +125,7 @@ class CtlCatalogoDetalle
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -148,7 +148,7 @@ class CtlCatalogoDetalle
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -171,7 +171,7 @@ class CtlCatalogoDetalle
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -194,7 +194,7 @@ class CtlCatalogoDetalle
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -217,7 +217,7 @@ class CtlCatalogoDetalle
     /**
      * Get abreviatura
      *
-     * @return string
+     * @return string 
      */
     public function getAbreviatura()
     {
@@ -240,14 +240,10 @@ class CtlCatalogoDetalle
     /**
      * Get idCatalogo
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogo
+     * @return \Maestro\ModeloBundle\Entity\CtlCatalogo 
      */
     public function getIdCatalogo()
     {
         return $this->idCatalogo;
-    }
-
-    public function __toString() {
-      return $this->getDescripcion();
     }
 }

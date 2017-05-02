@@ -3,14 +3,24 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
+
 /**
  * FosUser
  *
- * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})})
+ * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})}, indexes={@ORM\Index(name="IDX_957A647971B61351", columns={"establecimiento_id"})})
  * @ORM\Entity
  */
 class FosUser 
 {
+    const ROLE_DEFAULT = 'ROLE_USER';
+
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     /**
      * @var integer
      *
@@ -99,6 +109,23 @@ class FosUser
     private $roles;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="fullname", type="string", nullable=true)
+     */
+    private $fullname;
+
+    /**
+     * @var \CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="establecimiento_id", referencedColumnName="id")
+     * })
+     */
+    private $establecimiento;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="FosGroup", inversedBy="user")
@@ -114,47 +141,14 @@ class FosUser
     private $group;
 
     /**
-     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
-     *
-     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="establecimiento_id", referencedColumnName="id")
-     * })
-     */
-    private $establecimiento;
-
-    /**
-     * @var string
-     * 
-     * @ORM\Column(name="fullname", type="string", length=255, nullable=true)
-     */
-    private $fullname;
-
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->enabled = false;
-        $this->roles = array();
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->establecimiento = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    /**
-     * {@inheritdoc}
-     *//*
-    public function addRole($role)
-    {
-        $role = strtoupper($role);
-        if ($role === static::ROLE_DEFAULT) {
-            return $this;
-        }
-        if (!in_array($role, $this->roles, true)) {
-            $this->roles[] = $role;
-        }
-        return $this;
-    }*/
+
+
     /**
      * Get id
      *
@@ -403,7 +397,8 @@ class FosUser
      */
     public function setRoles($roles)
     {
-        $this->roles = $roles;
+		//$this->addRole($roles);
+        //$this->roles = $roles;
 
         return $this;
     }
@@ -416,6 +411,52 @@ class FosUser
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return FosUser
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string 
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
+
+    /**
+     * Set establecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
+     * @return FosUser
+     */
+    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
+    {
+        $this->establecimiento = $establecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get establecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getEstablecimiento()
+    {
+        return $this->establecimiento;
     }
 
     /**
@@ -450,48 +491,23 @@ class FosUser
     {
         return $this->group;
     }
+    
+    
 
     /**
-     * Set establecimiento
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
-     * @return FosUser
+     * {@inheritdoc}
      */
-    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
+    public function addRole($role)
     {
-        $this->establecimiento = $establecimiento;
+        $role = strtoupper($role);
+        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
 
-        return $this;
-    }
-
-    /**
-     * Get establecimiento
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
-     */
-    public function getEstablecimiento()
-    {
-        return $this->establecimiento;
-    }
-    /**
-     * Set fullname
-     *
-     * @param string $fullname
-     * @return FosUser
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
 
         return $this;
-    }
-    /**
-     * Get fullname
-     *
-     * @return string 
-     */
-    public function getFullname()
-    {
-        return $this->fullname;
     }
 }

@@ -5,11 +5,6 @@ namespace Maestro\ModeloBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-
-use Maestro\ModeloBundle\Entity\CtlAcceso;
-use Symfony\Component\HttpFoundation\Request;
 
 class CtlAccesoType extends AbstractType
 {
@@ -23,8 +18,8 @@ class CtlAccesoType extends AbstractType
 			->add('visibleAcceso', 'choice', array('label'  => 'Aparece en el menú :', 'choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, ))
 			->add('pathAcceso', 'text', array('label'  => 'Path :', 'required'  => true, ))
 			->add('ordenAcceso','integer', array('label'  => 'Orden en menu :'))
-			->add('rolAccesoId', 'choice', array('label'  => 'Roles :', 'choices'=> array('NULL' => 'Sin rol requerido','ROLE_AGREGA' => 'ROLE_AGREGA', 'ROLE_VERIFICA' => 'ROLE_VERIFICA', 'ROLE_HABILITA' => 'ROLE_HABILITA'), 'required'  => true, ))
-			->add('acceso', 'entity', array('label'  => 'Agrupado por :','class' => 'MaestroModeloBundle:CtlAcceso', 'required' => false));
+			//->add('rolAccesoId', 'choice', array('label'  => 'Roles :', 'choices'=> array('NULL' => 'Sin rol requerido','ROLE_AGREGA' => 'ROLE_AGREGA', 'ROLE_VERIFICA' => 'ROLE_VERIFICA', 'ROLE_HABILITA' => 'ROLE_HABILITA'), 'required'  => true, ))
+			->add('acceso', 'entity', array('label'  => 'Agrupado por :','class' => 'MaestroModeloBundle:CtlAcceso', 'required' => false))->add('ctlRol');
     }
     
     /**
@@ -45,18 +40,5 @@ class CtlAccesoType extends AbstractType
         return 'maestro_modelobundle_ctlacceso';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOwnRoute()
-    {
-		$availableApiRoutes = [];
-		foreach ($this->container->get('route')->getRouteCollection()->all() as $name => $route) {
-			$route = $route->compile();
-			$availableApiRoutes[] = ["name" => $name, "variables" => $route->getVariables()];
-		}
-		
-        return $availableApiRoutes;
-    }
 
 }

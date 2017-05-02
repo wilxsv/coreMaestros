@@ -15,11 +15,11 @@
         <tbody>
         {% for ctlAcceso in ctlAccesos %}
             <tr>
-                <td><a href="{{ path('acceso_show', { 'id': ctlAcceso.id }) }}">{{ ctlAcceso.nombreAcceso }}</a></td>
+                <td><a href="{{ path('acceso_show', { 'id': ctlAcceso.id }) }}">{{ ctlAcceso.nombreAcceso | raw }}</a></td>
                 <td>{{ ctlAcceso.pathAcceso }}</td>
                 <td>{% if ctlAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
                 <td>{{ ctlAcceso.ordenAcceso }}</td>
-                <td>{{ ctlAcceso.rolAccesoId }}</td>
+                <td>{{ ctlAcceso.ctlRol | join(' | ') }}</td>
                 <td>
                   <a href="{{ path('acceso_show', { 'id': ctlAcceso.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                   <a href="{{ path('acceso_edit', { 'id': ctlAcceso.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

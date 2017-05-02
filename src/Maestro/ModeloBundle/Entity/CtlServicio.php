@@ -73,7 +73,7 @@ class CtlServicio
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -96,7 +96,7 @@ class CtlServicio
     /**
      * Get nombreServicio
      *
-     * @return string
+     * @return string 
      */
     public function getNombreServicio()
     {
@@ -119,7 +119,7 @@ class CtlServicio
     /**
      * Get detalleServicio
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleServicio()
     {
@@ -142,7 +142,7 @@ class CtlServicio
     /**
      * Get ctlServicioid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlServicio
+     * @return \Maestro\ModeloBundle\Entity\CtlServicio 
      */
     public function getCtlServicioid()
     {
@@ -175,14 +175,15 @@ class CtlServicio
     /**
      * Get ctlEstablecimientoid
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCtlEstablecimientoid()
     {
         return $this->ctlEstablecimientoid;
     }
-
-    public function __toString() {
-      return $this->getNombreServicio();
-    }
+    
+    
+    public function __toString(){
+		return $this->getNombreServicio();
+	}
 }

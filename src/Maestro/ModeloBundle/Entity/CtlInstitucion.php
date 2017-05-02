@@ -107,7 +107,7 @@ class CtlInstitucion
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -130,7 +130,7 @@ class CtlInstitucion
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -153,7 +153,7 @@ class CtlInstitucion
     /**
      * Get logo
      *
-     * @return string
+     * @return string 
      */
     public function getLogo()
     {
@@ -176,7 +176,7 @@ class CtlInstitucion
     /**
      * Get rectora
      *
-     * @return string
+     * @return string 
      */
     public function getRectora()
     {
@@ -199,7 +199,7 @@ class CtlInstitucion
     /**
      * Get categoria
      *
-     * @return integer
+     * @return integer 
      */
     public function getCategoria()
     {
@@ -222,7 +222,7 @@ class CtlInstitucion
     /**
      * Get sigla
      *
-     * @return string
+     * @return string 
      */
     public function getSigla()
     {
@@ -245,7 +245,7 @@ class CtlInstitucion
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -268,7 +268,7 @@ class CtlInstitucion
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -291,7 +291,7 @@ class CtlInstitucion
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -314,7 +314,7 @@ class CtlInstitucion
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -337,7 +337,7 @@ class CtlInstitucion
     /**
      * Get estado
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstado()
     {
@@ -360,14 +360,10 @@ class CtlInstitucion
     /**
      * Get idPais
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPais
+     * @return \Maestro\ModeloBundle\Entity\CtlPais 
      */
     public function getIdPais()
     {
         return $this->idPais;
-    }
-
-    public function __toString() {
-      return $this->getNombre();
     }
 }

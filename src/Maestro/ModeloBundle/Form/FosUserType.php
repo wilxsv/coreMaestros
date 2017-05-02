@@ -16,7 +16,7 @@ class FosUserType extends AbstractType
         $builder->add('enabled', 'choice', array('label'  => 'Habilitado :', 'choices'=> array(FALSE => 'No', TRUE => 'Si'), 'required'  => true, ))
           ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true,   ))
         ->add('fullname', 'text', array('label' => 'Nombre completo', 'required'  => true ))
-//          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => false, 'multiple' => false,))
+          //->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false,))
           ->add('establecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => true, 'multiple' => false))
              
        ;

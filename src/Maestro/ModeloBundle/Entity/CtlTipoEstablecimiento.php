@@ -79,7 +79,7 @@ class CtlTipoEstablecimiento
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -102,7 +102,7 @@ class CtlTipoEstablecimiento
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -125,7 +125,7 @@ class CtlTipoEstablecimiento
     /**
      * Get codigo
      *
-     * @return string
+     * @return string 
      */
     public function getCodigo()
     {
@@ -148,7 +148,7 @@ class CtlTipoEstablecimiento
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -171,7 +171,7 @@ class CtlTipoEstablecimiento
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -194,7 +194,7 @@ class CtlTipoEstablecimiento
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -217,7 +217,7 @@ class CtlTipoEstablecimiento
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -240,15 +240,14 @@ class CtlTipoEstablecimiento
     /**
      * Get idInstitucion
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlInstitucion
+     * @return \Maestro\ModeloBundle\Entity\CtlInstitucion 
      */
     public function getIdInstitucion()
     {
         return $this->idInstitucion;
     }
-
-
-    public function __toString() {
-      return $this->getNombre();
-    }
+    
+    public function __toString(){
+		return $this->getNombre();
+	}
 }

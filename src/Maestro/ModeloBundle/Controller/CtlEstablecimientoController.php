@@ -181,18 +181,46 @@ class CtlEstablecimientoController extends Controller
     
     private function setMenu( $rol ){
 		$em = $this->getDoctrine()->getManager();
-        $acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));
+        $roles = $em->getRepository('MaestroModeloBundle:CtlRol')->findAll();
+
         $list = '';
         $pass = '';
+        
+        //foreach ($roles as $item){
+	//		if( $rol->isGranted( $item->getNombreRol() ) ){
+				$acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));//'visibleAcceso' => 't'
+				$dql = "SELECT a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
+						 WITH a.visibleAcceso = 't'
+						GROUP BY a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
+				$acceso = $em->createQuery( $dql )->getResult();
+
+
+				foreach ($acceso as $accesos) {	
+					$pass = $pass.$accesos['pathAcceso'].'/';
+					$this->get('session')->set('otro', $accesos['nombreRol']);
+					// AND					$accesos['nombreRol'] == 't'
+					if ( $rol->isGranted( $accesos['nombreRol'] ) ){// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
+						$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
+						$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';
+					}
+				}
+			//}
+		//}
+		/*
         foreach ($acceso as $accesos) {
-			if( $rol->isGranted($accesos->getRolAccesoId()) ){
+			$url = $this->generateUrl($accesos->getPathAcceso(), array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
+			$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos->getNombreAcceso().'</a></li>';
+				
+				/*
+			
+			if( $rol->isGranted($accesos->getNombreRol()) ){
 				$pass = $pass.$accesos->getPathAcceso().'/';
 				if ( $accesos->getVisibleAcceso() == TRUE ){
 					$url = $this->generateUrl($accesos->getPathAcceso(), array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
 					$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos->getNombreAcceso().'</a></li>';
 				}
-			}
-		}
+			}*/
+		//}
 		if (strlen($list) > 5 ){
 			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
 		}

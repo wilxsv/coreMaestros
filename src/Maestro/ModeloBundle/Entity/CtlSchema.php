@@ -50,6 +50,34 @@ class CtlSchema
      */
     private $tipoCambioSchema;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_schema", type="datetime", nullable=true)
+     */
+    private $timeSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="bigint", nullable=false)
+     */
+    private $userId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_schema", type="string", nullable=false)
+     */
+    private $ipSchema;
+
 
 
     /**
@@ -153,16 +181,6 @@ class CtlSchema
     {
         return $this->tipoCambioSchema;
     }
-    /**
-     * @var string
-     */
-    private $detalleSchema;
-
-    /**
-     * @var \DateTime
-     */
-    private $timeSchema;
-
 
     /**
      * Set detalleSchema
@@ -209,16 +227,6 @@ class CtlSchema
     {
         return $this->timeSchema;
     }
-    /**
-     * @var integer
-     */
-    private $userId;
-
-    /**
-     * @var string
-     */
-    private $ipSchema;
-
 
     /**
      * Set userId

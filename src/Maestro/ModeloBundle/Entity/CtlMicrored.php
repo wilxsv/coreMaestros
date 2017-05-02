@@ -76,7 +76,7 @@ class CtlMicrored
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -99,7 +99,7 @@ class CtlMicrored
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -122,7 +122,7 @@ class CtlMicrored
     /**
      * Get activo
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getActivo()
     {
@@ -145,7 +145,7 @@ class CtlMicrored
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -168,7 +168,7 @@ class CtlMicrored
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -191,7 +191,7 @@ class CtlMicrored
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -214,7 +214,7 @@ class CtlMicrored
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -237,14 +237,14 @@ class CtlMicrored
     /**
      * Get codigoc3
      *
-     * @return integer
+     * @return integer 
      */
     public function getCodigoc3()
     {
         return $this->codigoc3;
     }
-
-    public function __toString() {
-      return $this->getNombre();
-    }
+    
+    public function __toString(){
+		return $this->getNombre();
+	}
 }

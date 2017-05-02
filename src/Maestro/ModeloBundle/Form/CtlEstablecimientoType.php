@@ -23,7 +23,7 @@ class CtlEstablecimientoType extends AbstractType
         ->add('poblacionAsignana', 'integer', array('label'  => 'Población asignada'))
         ->add('cantidadFamilia', 'integer', array('label'  => 'Cantidad de familias asignadas: '))
         ->add('idmicrored', 'entity',array('label'  => 'Micro red a la que pertenece: ', 'class' => 'MaestroModeloBundle:CtlMicrored', 'required' => true))
-        ->add('idEstablecimientoPadre', 'entity',array('label'  => 'si es un eco selecciones al establecimiento que pertenece: ', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => false))
+        ->add('idEstablecimientoPadre', 'entity',array('label'  => 'Seleccione el establecimiento al que pertenece su administración: ', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => false))
         ->add('idTipoEstablecimiento', 'entity',array('label'  => 'Tipo de establecimiento: ', 'class' => 'MaestroModeloBundle:CtlTipoEstablecimiento', 'required' => true))
         ->add('idMunicipio', 'entity',array('label'  => 'Municipio: ', 'class' => 'MaestroModeloBundle:CtlMunicipio', 'required' => true))
         ->add('idSituacionLegal', 'entity',array('label'  => 'Situación legal del inmueble: ', 'class' => 'MaestroModeloBundle:CtlSituacionLegal', 'required' => true))

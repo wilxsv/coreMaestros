@@ -3,13 +3,11 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\RoleInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CtlRol
- * 
- * @ORM\Table(name="ctl_rol")
+ *
+ * @ORM\Table(name="ctl_rol", uniqueConstraints={@ORM\UniqueConstraint(name="un_nombre_rol", columns={"nombre_rol"})})
  * @ORM\Entity
  */
 class CtlRol
@@ -17,7 +15,7 @@ class CtlRol
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="ctl_rol_id_seq", allocationSize=1, initialValue=1)
@@ -26,11 +24,10 @@ class CtlRol
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(name="nombre_rol", type="string", length=50, nullable=false)
      */
     private $nombreRol;
-
 
     /**
      * Get id
@@ -65,7 +62,58 @@ class CtlRol
         return $this->nombreRol;
     }
     
-     public function __toString() {
-      return $this->getNombreRol();
+		
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlAcceso", mappedBy="CtlRol")
+     * @ORM\JoinTable(name="ctl_permisos")
+     *  
+     */
+    private $ctlAcceso;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    /**
+     * Add ctlAcceso
+     *
+     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
+     * @return CtlRol
+     */
+    public function addCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso[] = $ctlAcceso;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlAcceso
+     *
+     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
+     */
+    public function removeCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso->removeElement($ctlAcceso);
+    }
+
+    /**
+     * Get ctlAcceso
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlAcceso()
+    {
+        return $this->ctlAcceso;
+    }
+    
+    public function __toString(){
+		return $this->getNombreRol();
+	}
 }

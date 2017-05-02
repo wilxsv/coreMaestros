@@ -41,7 +41,7 @@ class CtlSituacionLegal
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -64,7 +64,7 @@ class CtlSituacionLegal
     /**
      * Get tipoSituacion
      *
-     * @return string
+     * @return string 
      */
     public function getTipoSituacion()
     {
@@ -87,14 +87,14 @@ class CtlSituacionLegal
     /**
      * Get descripcionSituacion
      *
-     * @return string
+     * @return string 
      */
     public function getDescripcionSituacion()
     {
         return $this->descripcionSituacion;
     }
-
-    public function __toString() {
-      return $this->getTipoSituacion();
-    }
+    
+    public function __toString(){
+		return $this->getTipoSituacion();
+	}
 }
