@@ -70,11 +70,13 @@ class CtlEstablecimientoController extends Controller
     {
         $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+        $denegaForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
 
         return $this->render('ctlestablecimiento/show.html.twig', array(
             'ctlEstablecimiento' => $ctlEstablecimiento,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'denega_form' => $denegaForm->createView(),
         ));
     }
 
@@ -86,16 +88,17 @@ class CtlEstablecimientoController extends Controller
     {
         $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+        $denegaForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm->handleRequest($request);
+        $denegaForm->handleRequest($request);
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
             $this->getDoctrine()->getManager()->flush();
-            $this->sendMessage("Actualizacion en establecimiento [".$editForm->get('detalleSchema')->getData()."]", "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", "wilx.sv@yandex.com");
+            $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
             return $this->redirectToRoute('maestro_homepage');
         }
 
@@ -103,6 +106,7 @@ class CtlEstablecimientoController extends Controller
             'ctlEstablecimiento' => $ctlEstablecimiento,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'denega_form' => $deleteForm->createView(),
         ));
     }
 
@@ -148,30 +152,32 @@ class CtlEstablecimientoController extends Controller
 		
         $em = $this->getDoctrine()->getManager();
         $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
+        $denegados = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(-1);
         $pendientes = '';
         $auth_checker = $this->get('security.authorization_checker');
         if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$this->setMenu( $auth_checker );
 		}
+		
         if($auth_checker->isGranted('ROLE_VALIDA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
 			$pendientes = $query->getResult();
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
 			$enviados = $query->getResult();
-			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados));
+			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados));
 		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
 			$pendientes = $query->getResult();
-			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes));
+			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados));
 		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
 			$pendientes = $query->getResult();
 			$personal = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
 			
-			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal));
+			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
 		} else
 			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
 		
@@ -185,42 +191,19 @@ class CtlEstablecimientoController extends Controller
 
         $list = '';
         $pass = '';
-        
-        //foreach ($roles as $item){
-	//		if( $rol->isGranted( $item->getNombreRol() ) ){
-				$acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));//'visibleAcceso' => 't'
-				$dql = "SELECT a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
-						 WITH a.visibleAcceso = 't'
-						GROUP BY a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
-				$acceso = $em->createQuery( $dql )->getResult();
-
-
-				foreach ($acceso as $accesos) {	
-					$pass = $pass.$accesos['pathAcceso'].'/';
-					$this->get('session')->set('otro', $accesos['visibleAcceso']);
-					// AND $accesos['visibleAcceso'] != 1
-					if ( $rol->isGranted( $accesos['nombreRol'] ) ){// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
-						$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
-						$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';
-					}
-				}
-			//}
-		//}
-		/*
-        foreach ($acceso as $accesos) {
-			$url = $this->generateUrl($accesos->getPathAcceso(), array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
-			$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos->getNombreAcceso().'</a></li>';
-				
-				/*
-			
-			if( $rol->isGranted($accesos->getNombreRol()) ){
-				$pass = $pass.$accesos->getPathAcceso().'/';
-				if ( $accesos->getVisibleAcceso() == TRUE ){
-					$url = $this->generateUrl($accesos->getPathAcceso(), array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
-					$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos->getNombreAcceso().'</a></li>';
-				}
-			}*/
-		//}
+        $acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));//'visibleAcceso' => 't'
+		$dql = "SELECT a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
+				 WITH a.visibleAcceso = 't'
+				GROUP BY a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
+		$acceso = $em->createQuery( $dql )->getResult();
+		foreach ($acceso as $accesos) {	
+			$pass = $pass.$accesos['pathAcceso'].'/';
+			$this->get('session')->set('otro', $accesos['visibleAcceso']);
+			if ( $rol->isGranted( $accesos['nombreRol'] ) ){// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
+				$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
+				$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';
+			}
+		}
 		if (strlen($list) > 5 ){
 			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
 		}
@@ -255,24 +238,14 @@ class CtlEstablecimientoController extends Controller
 	private function getMailbyIdUser( $idUser ){
 		$em = $this->getDoctrine()->getManager();
 		$user = $em->getRepository('MaestroModeloBundle:FosUser')->findById( $idUser );
-		return $user->getEmail();
+		foreach ($user as $u) {	
+			return $u->getEmailCanonical();//;
+		}
+		return "admin@salud.gob.sv";
 	}
-	
-	/*private function setDetalleSchema( $last, $new, $id = false){
-		$arrne['id'] = $this->getUser()->getId();
-		$arrne['detalle'] = $new;
-		if ($id){
-			$str = json_encode($arrne, true);
-			//array_push( $str, $arrne );	
-			return $str;
-		} else {
-			return json_encode($arrne);
-		}	
-		
-	}*/
 	
 	private function setDetalleSchema( $new ){
 		$id = $this->getUser()->getId();
-		return "<nodo><id>$id</id><msg>$new</msg></nodo>";		
+		return "<nodo><id>$id</id><msg>$new</msg><fecha>".date("Y-m-d H:i:s")."</fecha></nodo>";		
 	}
 }

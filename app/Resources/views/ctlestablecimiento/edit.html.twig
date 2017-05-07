@@ -3,7 +3,7 @@
 {% block body %}
 {% if is_granted('ROLE_VALIDA') %}
 <div class="row-fluid">
- <div class="span6">
+ <div class="span4">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Enviar comentarios</h4></div>
    <div class="widget-body">
@@ -16,14 +16,14 @@
       <div id="divCheckbox" style="display: none;">
        {{ form_widget(edit_form) }}
 	  </div>
-      <input type="submit" value="Enviar observación y no validar" class="btn btn-danger">
+      <input type="submit" value="Enviar observación y no validar" class="btn btn-inverse">
       </form>
      </div>
     </div>
    </div>
   </div>
  </div>
- <div class="span6">
+ <div class="span4">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Aprobar</h4></div>
    <div class="widget-body">
@@ -51,7 +51,7 @@
 
 
 <div class="row-fluid">
- <div class="span6">
+ <div class="span4">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Enviar comentarios</h4></div>
    <div class="widget-body">
@@ -60,24 +60,26 @@
       {{ form_start(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}
       <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}</div>
-       <input type="submit" value="Enviar observación y no habilitar" class="btn btn-danger">
+       <input type="submit" value="Enviar observación y no habilitar" class="btn btn-inverse">
       </form>      
      </div>
     </div>
    </div>
   </div>
  </div>
- <div class="span6">
+ <div class="span4">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Aprobar</h4></div>
    <div class="widget-body">
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(delete_form) }}
+      <div class="control-group ">{{ form_label(delete_form.enableSchema) }}
+       <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(delete_form.enableSchema) }}</span>{{ form_errors(delete_form.enableSchema) }}</div>
+      </div>
       {{ form_row(delete_form.detalleSchema) }}
       <div id="divCheckbox" style="display: none;">
        {{ form_widget(delete_form) }}
-	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_enableSchema" name="maestro_modelobundle_ctlestablecimiento[enableSchema]" value="1" />
       </div>
       <input type="submit" value="Habilitar establecimiento" class="btn btn-primary">
       </form>

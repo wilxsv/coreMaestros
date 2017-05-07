@@ -1147,7 +1147,7 @@ class CtlEstablecimiento
      */
     public function setDetalleSchema($detalleSchema)
     {
-        $this->detalleSchema = $detalleSchema;
+        $this->detalleSchema = $this->getDetalleSchema().$detalleSchema;
 
         return $this;
     }
@@ -1239,7 +1239,14 @@ class CtlEstablecimiento
      */
     public function setEnableSchema($enableSchema)
     {
-        $this->enableSchema = $enableSchema;
+		if ($enableSchema < -1){
+			$this->enableSchema = -1;
+			$this->estadoSchema = -1;
+		}
+		else
+		{
+			$this->enableSchema = $enableSchema;
+		}
 
         return $this;
     }

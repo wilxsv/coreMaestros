@@ -31,7 +31,8 @@ class CtlEstablecimientoType extends AbstractType
         ->add('ctlRecursoHumanoid', 'entity',array('label'  => 'Recurso humano asignado: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => false, 'multiple' => true))
         ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
         ->add('detalleSchema', 'text', array('label'  => 'Observación', 'data' => ''))
-        ->add('enableSchema', 'hidden')
+        ->add('enableSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('-1' => 'Denegar establecimiento', '1' => 'Habilitar establecimiento'), 'required'  => true, ))
+        //->add('enableSchema', 'hidden')
    		->add('estadoSchema', 'hidden');//, array('data' => 0)
     }
 /*
