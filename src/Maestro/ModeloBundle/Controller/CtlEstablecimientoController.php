@@ -7,6 +7,7 @@ use Maestro\ModeloBundle\Entity\CtlAcceso;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Ctlestablecimiento controller.
@@ -188,28 +189,63 @@ class CtlEstablecimientoController extends Controller
     
     private function setMenu( $rol ){
 		$em = $this->getDoctrine()->getManager();
-        $roles = $em->getRepository('MaestroModeloBundle:CtlRol')->findAll();
-
+        
         $list = '';
         $pass = '';
-        $acceso = $em->getRepository('MaestroModeloBundle:CtlAcceso')->findBy(array(), array('ordenAcceso' => 'ASC'));//'visibleAcceso' => 't'
-		$dql = "SELECT a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol FROM MaestroModeloBundle:CtlAcceso a INNER JOIN MaestroModeloBundle:CtlRol r
-				 WITH a.visibleAcceso = 't'
-				GROUP BY a.visibleAcceso, a.nombreAcceso, a.pathAcceso, r.nombreRol, a.ordenAcceso ORDER BY a.ordenAcceso";
-		$acceso = $em->createQuery( $dql )->getResult();
+		$sql = "SELECT c0_.visible_acceso AS visible_acceso0, c0_.nombre_acceso AS nombre_acceso1, c0_.path_acceso AS path_acceso2, c1_.nombre_rol AS nombre_rol3 
+				FROM ctl_acceso c0_ INNER JOIN ctl_permisos AS p ON (c0_.id = p.acceso_id) INNER JOIN ctl_rol AS c1_ ON (c1_.id = p.rol_id) 
+				GROUP BY c0_.visible_acceso, c0_.nombre_acceso, c0_.path_acceso, c1_.nombre_rol, c0_.orden_acceso ORDER BY c0_.orden_acceso ASC";
+		
+		$rsm = new ResultSetMapping;
+		$rsm->addEntityResult('MaestroModeloBundle:CtlAcceso', 'a');
+		$rsm->addFieldResult('a','path_acceso','pathAcceso');
+		$rsm->addFieldResult('a','id','id');
+		$rsm->addFieldResult('a','visible_acceso','visibleAcceso');
+		$rsm->addFieldResult('a','orden_acceso','ordenAcceso');
+		$rsm->addFieldResult('a','nombre_acceso','nombreAcceso');
+		
+		//$rsm->addJoinedEntityResult('MaestroModeloBundle:CtlRol', 'r', 'a', 'ctlRol');
+		//$rsm->addFieldResult('r','id','id');
+		//$rsm->addFieldResult('a','nombre_rol','nombre_rol');
+		$nq = $this->getDoctrine()->getManager()
+    ->createNativeQuery('
+        SELECT a.path_acceso, a.visible_acceso, a.orden_acceso, r.id , a.nombre_acceso
+		FROM ctl_acceso a INNER JOIN ctl_permisos AS p ON (a.id = p.acceso_id) INNER JOIN ctl_rol AS r ON (r.id = p.rol_id) ORDER BY a.orden_acceso ASC;
+		',
+        $rsm
+    );//    $em->getResult();
+    $acceso = $nq->getArrayResult();//->getResult();
+
+
+
+		//$query = $em->createQuery('SELECT u.id FROM MaestroModeloBundle:CtlPais u WHERE (u.id > :mail)')->setParameters(array('mail' => 1));
+      //  $query->getResult();
+		$i = 0;
 		foreach ($acceso as $accesos) {	
-			$pass = $pass.$accesos['pathAcceso'].'/';
-			$this->get('session')->set('otro', $accesos['visibleAcceso']);
-			if ( $rol->isGranted( $accesos['nombreRol'] ) ){// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
-				$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
-				$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';
+			$pass = $pass.$accesos['pathAcceso'].'/';//->getPathAcceso().'/#'.$accesos->getId();//['pathAcceso'];
+			$roles = $em->getRepository('MaestroModeloBundle:CtlRol')->findById($accesos['id']);
+			foreach ($roles as $rolt) {	
+			$i++;
+				if ( $rol->isGranted( $rolt->getNombreRol() ) ){
+					$pass = $pass.$rolt->getNombreRol().'/';
+					$url = $this->generateUrl($accesos['pathAcceso'], array());//$this->generateUrl($accesos->getPathAcceso(), UrlGeneratorInterface::ABSOLUTE_URL);
+					$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';	
+				}
 			}
+			//$this->get('session')->set('otro', $accesos['nombre_rol'] );
+			/*// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
+				
+				
+			}*/
+			$i++;
+			
 		}
+		$this->get('session')->set('numero', $i );
 		if (strlen($list) > 5 ){
 			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
 		}
 		
-		$this->get('session')->set('menu', $list);
+		$this->get('session')->set('menu', $list."ss");
 		$this->get('session')->set('pass', $pass);
 	}
 	
