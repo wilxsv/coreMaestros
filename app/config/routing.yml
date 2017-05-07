@@ -2,7 +2,10 @@ maestro_homepage:
     path:     /
     defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:home" }
     methods:  GET
-    
+maestro_homepage_anonimo:
+    path:     /catalogo
+    defaults: { _controller: "MaestroModeloBundle:CtlEstablecimiento:home" }
+    methods:  GET
 maestro_modelo:
     resource: "@MaestroModeloBundle/Resources/config/routing.yml"
     prefix:   /

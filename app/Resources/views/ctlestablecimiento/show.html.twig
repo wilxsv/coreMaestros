@@ -39,18 +39,20 @@
                 <th>Cantidad de familias</th>
                 <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
             </tr>
-            <tr>
+            {% if app.user %}
+              <tr>
                 <th>Registro</th>
                 {% set id = ctlEstablecimiento.id %}
                 <td>{{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','fecha>': 'b>','id>': 'id>', id : "" }) | raw }}</td>
-            </tr>
+              </tr>
+            {% endif %}
         </tbody>
     </table>
     {% if is_granted('ROLE_VALIDA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
 	{% elseif is_granted('ROLE_HABILITA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
-    {% elseif (ctlEstablecimiento.userIdSchema == app.user.id) %}
+    {% elseif app.user and ctlEstablecimiento.userIdSchema == app.user.id %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Modificar registro de establecimiento</a>
 	{% endif %}
 	

@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
  * Ctlestablecimiento controller.
  *
@@ -148,6 +150,9 @@ class CtlEstablecimientoController extends Controller
     /**
      * Lists all public ctlEstablecimiento.
      *
+     */
+    /**
+     *  @Security("has_role('IS_AUTHENTICATED_ANONYMOUSLY')")
      */
     public function homeAction()
     {
