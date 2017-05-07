@@ -1,5 +1,5 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Editar Establecimiento{% endblock %}
+{% block title %}Editar Establecimiento :: [{{ nombre }}]{% endblock %}
 {% block body %}
 {% if is_granted('ROLE_VALIDA') %}
 <div class="row-fluid">
@@ -15,6 +15,7 @@
      </div>
       <div id="divCheckbox" style="display: none;">
        {{ form_widget(edit_form) }}
+	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="0" />
 	  </div>
       <input type="submit" value="Enviar observación y no validar" class="btn btn-inverse">
       </form>
@@ -59,7 +60,10 @@
      <div class="row-fluid">
       {{ form_start(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}
-      <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}</div>
+      <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}
+      	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="1" />
+      	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_enableSchema" name="maestro_modelobundle_ctlestablecimiento[enableSchema]" value="0" />
+      </div>
        <input type="submit" value="Enviar observación y no habilitar" class="btn btn-inverse">
       </form>      
      </div>

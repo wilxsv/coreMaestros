@@ -39,6 +39,11 @@
                 <th>Cantidad de familias</th>
                 <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
             </tr>
+            <tr>
+                <th>Registro</th>
+                {% set id = ctlEstablecimiento.id %}
+                <td>{{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','fecha>': 'b>','id>': 'id>', id : "" }) | raw }}</td>
+            </tr>
         </tbody>
     </table>
     {% if is_granted('ROLE_VALIDA') %}

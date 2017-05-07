@@ -107,6 +107,7 @@ class CtlEstablecimientoController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'denega_form' => $deleteForm->createView(),
+            'nombre' => $ctlEstablecimiento->getNombre()
         ));
     }
 
@@ -246,6 +247,6 @@ class CtlEstablecimientoController extends Controller
 	
 	private function setDetalleSchema( $new ){
 		$id = $this->getUser()->getId();
-		return "<nodo><id>$id</id><msg>$new</msg><fecha>".date("Y-m-d H:i:s")."</fecha></nodo>";		
+		return "<nodo><id>$id</id><fecha>".date("Y-m-d H:i:s")."</fecha><msg>$new</msg></nodo>";		
 	}
 }
