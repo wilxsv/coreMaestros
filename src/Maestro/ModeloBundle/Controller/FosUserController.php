@@ -6,6 +6,22 @@ use Maestro\ModeloBundle\Entity\FosUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 /**
  * Fosuser controller.
  *
@@ -78,13 +94,43 @@ class FosUserController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_users_edit', array('id' => $fosUser->getId()));
+            return $this->render('fosuser/show.html.twig', array(
+            'fosUser' => $fosUser,
+            'delete_form' => $deleteForm->createView(),
+        ));
         }
 
         return $this->render('fosuser/edit.html.twig', array(
             'fosUser' => $fosUser,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+ 
+    public function rolesAction(Request $request, FosUser $fosUser)
+    {
+        $editForm = $this->createForm('Maestro\ModeloBundle\Form\RolesAddType', $fosUser);
+        $editForm->handleRequest($request);
+
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+			if ($editForm->get('roles')->getData() == FALSE){
+				
+			} elseif ($editForm->get('roles')->getData() == TRUE ){
+				$em = $this->getDoctrine()->getManager();
+				$fosUser = $em->getRepository('MaestroModeloBundle:FosUser')->findById( $fosUser->getId() );
+				$userManager = $this->get('fos_user.user_manager');
+				//$fosUser->addRole('ROLE_ADM');
+				//$userManager->updateUser($fosUser);
+			}
+			
+            return $this->redirectToRoute('admin_users_index');
+        }
+        
+
+        return $this->render('fosuser/roles.html.twig', array(
+            'fosUser' => $fosUser,
+            'edit_form' => $editForm->createView(),
         ));
     }
 

@@ -6,14 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CtlRol
- * @ORM\Table(name="ctl_rol")
+ *
+ * @ORM\Table(name="ctl_rol", uniqueConstraints={@ORM\UniqueConstraint(name="un_nombre_rol", columns={"nombre_rol"})})
  * @ORM\Entity
  */
 class CtlRol
 {
     /**
      * @var integer
-     * 
+     *
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -23,23 +24,10 @@ class CtlRol
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="nombre_rol", type="string", length=255, nullable=false)
+     *
+     * @ORM\Column(name="nombre_rol", type="string", length=50, nullable=false)
      */
     private $nombreRol;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlAcceso;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -73,14 +61,32 @@ class CtlRol
     {
         return $this->nombreRol;
     }
+    
+		
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlAcceso", mappedBy="CtlRol")
+     * @ORM\JoinTable(name="ctl_permisos")
+     *  
+     */
+    private $ctlAcceso;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Add ctlAcceso
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
      * @return CtlRol
      */
-    public function addCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    public function addCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
     {
         $this->ctlAcceso[] = $ctlAcceso;
 
@@ -90,9 +96,9 @@ class CtlRol
     /**
      * Remove ctlAcceso
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
      */
-    public function removeCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    public function removeCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
     {
         $this->ctlAcceso->removeElement($ctlAcceso);
     }
@@ -107,7 +113,7 @@ class CtlRol
         return $this->ctlAcceso;
     }
     
-    public function __toString() {
+    public function __toString(){
 		return $this->getNombreRol();
 	}
 }

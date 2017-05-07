@@ -6,32 +6,23 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CtlRolType extends AbstractType
+class RolesAddType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreRol')        ;
+        $builder->add('enabled', 'choice', array('label'  => 'Accion :', 'choices'=> array(FALSE => 'Eliminar', TRUE => 'Agregar'), 'required'  => true, ))
+          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => true, 'multiple' => false,));
     }
     
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Maestro\ModeloBundle\Entity\CtlRol'
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
-        return 'maestro_modelobundle_ctlrol';
+        return 'maestro_modelobundle_add_rol';
     }
 
 

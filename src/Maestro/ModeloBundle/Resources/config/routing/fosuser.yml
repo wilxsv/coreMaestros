@@ -17,6 +17,11 @@ admin_users_edit:
     path:     /{id}/edit
     defaults: { _controller: "MaestroModeloBundle:FosUser:edit" }
     methods:  [GET, POST]
+    
+admin_users_roles:
+    path:     /{id}/roles
+    defaults: { _controller: "MaestroModeloBundle:FosUser:roles" }
+    methods:  [GET, POST]
 
 admin_users_delete:
     path:     /{id}/delete

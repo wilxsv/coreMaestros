@@ -36,6 +36,13 @@ class CtlAccesoController extends Controller
         $ctlAcceso = new Ctlacceso();
         $form = $this->createForm('Maestro\ModeloBundle\Form\CtlAccesoType', $ctlAcceso);
         $form->handleRequest($request);
+        
+                
+        $availableApiRoutes = [];
+		foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
+			$route = $route->compile();
+			$availableApiRoutes[] = ["name" => $name];//, "variables" => $route->getVariables()
+		}
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -47,7 +54,7 @@ class CtlAccesoController extends Controller
 
         return $this->render('ctlacceso/new.html.twig', array(
             'ctlAcceso' => $ctlAcceso,
-            'form' => $form->createView(), 'routes' => $this->getRutas()
+            'form' => $form->createView(), 'routes' => $availableApiRoutes,
         ));
     }
 
@@ -121,13 +128,4 @@ class CtlAccesoController extends Controller
             ->getForm()
         ;
     }
-    
-    function getRutas(){
-		$availableApiRoutes = [];
-		foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
-			$route = $route->compile();
-			$availableApiRoutes[] = ["name" => $name];//, "variables" => $route->getVariables()
-		}
-		return $availableApiRoutes;
-	}
 }

@@ -1,56 +1,32 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Accesos al sistema{% endblock %}
 {% block body %}
-    <h1>Ctlacceso</h1>
-
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlAcceso.id }}</td>
+                <th>Nombre de acceso</th>
+                <td>{{ ctlAcceso.nombreAcceso | raw }}</td>
             </tr>
             <tr>
-                <th>Nombreacceso</th>
-                <td>{{ ctlAcceso.nombreAcceso }}</td>
-            </tr>
-            <tr>
-                <th>Pathacceso</th>
+                <th>Path</th>
                 <td>{{ ctlAcceso.pathAcceso }}</td>
             </tr>
             <tr>
-                <th>Publicacceso</th>
-                <td>{% if ctlAcceso.publicAcceso %}Yes{% else %}No{% endif %}</td>
+                <th>Es acceso publico</th>
+                <td>{% if ctlAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Accesoid</th>
-                <td>{{ ctlAcceso.accesoId }}</td>
-            </tr>
-            <tr>
-                <th>Ordenacceso</th>
+                <th>Orden en menu</th>
                 <td>{{ ctlAcceso.ordenAcceso }}</td>
             </tr>
             <tr>
-                <th>Rolaccesoid</th>
-                <td>{{ ctlAcceso.rolAccesoId }}</td>
-            </tr>
-            <tr>
-                <th>Visibleacceso</th>
-                <td>{% if ctlAcceso.visibleAcceso %}Yes{% else %}No{% endif %}</td>
+                <th>Roles</th>
+                <td>{{ ctlAcceso.ctlRol | join(', ') }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('acceso_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('acceso_edit', { 'id': ctlAcceso.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a href="{{ path('acceso_index') }}" class="btn">Regresar a listado</a>
+    <a href="{{ path('acceso_edit', { 'id': ctlAcceso.id }) }}" class="btn">Editar</a>
+    {{ form_start(delete_form) }}<input type="submit" value="Eliminar acceso" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
 {% endblock %}
