@@ -10,10 +10,10 @@
 
  {% for ctlSchema in ctlSchemas %}
  <item>
-  <title>{{ ctlSchema.varsSchema }}</title>
+  <title>Cambio # {{ ctlSchema.id }}</title>
   <link>http://establecimiento.maestro.salud.gob.sv</link>
   <description>{{ ctlSchema.detalleSchema }}</description>
-  <pubDate>{{ ctlSchema.timeSchema }}</pubDate>
+  <pubDate>{{ ctlSchema.timeSchema |date('Y-m-d H:M:s') }} }}</pubDate>
   <author>na</author>
  </item>
  {% endfor %}
