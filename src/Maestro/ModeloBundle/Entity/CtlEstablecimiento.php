@@ -1624,4 +1624,9 @@ class CtlEstablecimiento
     public function __toString(){
 		return $this->getNombre();
 	}
+  
+    public function getCtlSibasi(){
+		return $this->getNombre();
+	}	
+	
 }

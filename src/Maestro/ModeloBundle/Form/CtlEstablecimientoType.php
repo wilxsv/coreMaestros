@@ -5,6 +5,8 @@ namespace Maestro\ModeloBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CtlEstablecimientoType extends AbstractType
 {
@@ -29,7 +31,9 @@ class CtlEstablecimientoType extends AbstractType
         ->add('idSituacionLegal', 'entity',array('label'  => 'Situación legal del inmueble: ', 'class' => 'MaestroModeloBundle:CtlSituacionLegal', 'required' => true))
         ->add('ctlPrestacionid', 'entity',array('label'  => 'Prestaciones: ', 'class' => 'MaestroModeloBundle:CtlPrestacion', 'required' => false, 'multiple' => true))
         ->add('ctlRecursoHumanoid', 'entity',array('label'  => 'Recurso humano asignado: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => false, 'multiple' => true))
-        ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
+        ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta:', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
+        ->add('ctlSibasi', EntityType::class, array('label'  => 'SIBASI al que pertenece:', 'class' => 'MaestroModeloBundle:CtlEstablecimiento',
+						'query_builder' => function (EntityRepository $er) { return $er->createQueryBuilder('e')->where('e.id BETWEEN 6 AND 21')->orderBy('e.nombre', 'ASC');},'choice_label' => 'nombre', 'required' => true, 'multiple' => false))
         ->add('detalleSchema', 'text', array('label'  => 'Observación', 'data' => ''))
         ->add('estadoSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'No validar','-1' => 'Denegar establecimiento', '1' => 'Validar establecimiento'), 'required'  => true, ))
         ->add('enableSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'No habilitar','-1' => 'Denegar establecimiento', '1' => 'Habilitar establecimiento'), 'required'  => true, ))
