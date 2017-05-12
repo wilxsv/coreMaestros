@@ -151,16 +151,15 @@ class CtlEstablecimientoController extends Controller
      * Lists all public ctlEstablecimiento.
      *
      */
-    /**
-     *  @Security("has_role('IS_AUTHENTICATED_ANONYMOUSLY')")
-     */
     public function homeAction()
     {
 		
         $em = $this->getDoctrine()->getManager();
         $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
-        $denegados = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(-1);
-        $pendientes = '';
+        $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
+		$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = -1 OR p.enableSchema = -1')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
+		$denegados = $query->getResult();
+		$pendientes = '';
         $auth_checker = $this->get('security.authorization_checker');
         if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$this->setMenu( $auth_checker );
@@ -168,21 +167,24 @@ class CtlEstablecimientoController extends Controller
 		
         if($auth_checker->isGranted('ROLE_VALIDA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$enviados = $query->getResult();
 			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados));
 		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
 			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados));
 		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
-			$personal = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
+			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
+			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId())->addOrderBy('p.registroSchema', 'ASC')->getQuery();
+			$personal = $query->getResult();
+			//$ = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
 			
 			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
 		} else
@@ -250,7 +252,7 @@ class CtlEstablecimientoController extends Controller
 			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
 		}
 		
-		$this->get('session')->set('menu', $list."ss");
+		$this->get('session')->set('menu', $list);
 		$this->get('session')->set('pass', $pass);
 	}
 	
@@ -288,6 +290,6 @@ class CtlEstablecimientoController extends Controller
 	
 	private function setDetalleSchema( $new ){
 		$id = $this->getUser()->getId();
-		return "<nodo><id>$id</id><fecha>".date("Y-m-d H:i:s")."</fecha><msg>$new</msg></nodo>";		
+		return "<nodo><id>$id</id><fecha>".date("d-m-Y h:i:s A")."</fecha><msg>$new</msg></nodo>";		
 	}
 }

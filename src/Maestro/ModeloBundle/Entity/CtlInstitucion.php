@@ -366,4 +366,8 @@ class CtlInstitucion
     {
         return $this->idPais;
     }
+    
+    public function __toString(){
+		return $this->getNombre();
+	}
 }

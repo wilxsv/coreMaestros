@@ -14,7 +14,6 @@ class CtlTipoEstablecimientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nombre')
-        ->add('codigo')
         ->add('idInstitucion','entity', array('label'  => 'Institución :','class' => 'MaestroModeloBundle:CtlInstitucion', 'required' => true));
     }
 

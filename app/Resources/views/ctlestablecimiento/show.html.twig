@@ -41,9 +41,9 @@
             </tr>
             {% if app.user %}
               <tr>
-                <th>Registro</th>
-                {% set id = ctlEstablecimiento.id %}
-                <td>{{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','fecha>': 'b>','id>': 'id>', id : "" }) | raw }}</td>
+                <td colspan="2"><b>Registro</b><hr/>
+                {{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
+                </td>
               </tr>
             {% endif %}
         </tbody>

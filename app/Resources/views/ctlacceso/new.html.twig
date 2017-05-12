@@ -2,7 +2,9 @@
 {% block title %}Agregar Acceso{% endblock %}
 {% block body %}
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        <div class="control-group ">{{ form_label(form.nombreAcceso) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.nombreAcceso) }}</span>{{ form_errors(form.nombreAcceso) }}</div>
+        </div>
 		<div class="control-group ">{{ form_label(form.pathAcceso) }}
          <div class="controls">
           <span class="span12 input-icon input-icon-right">
@@ -14,8 +16,24 @@
           </span>
           </div>
         </div>
+        <div class="control-group ">{{ form_label(form.publicAcceso) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.publicAcceso) }}</span>{{ form_errors(form.publicAcceso) }}</div>
+        </div>
+        <div class="control-group ">{{ form_label(form.visibleAcceso) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.visibleAcceso) }}</span>{{ form_errors(form.visibleAcceso) }}</div>
+        </div>
+        <div class="control-group ">{{ form_label(form.ordenAcceso) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ordenAcceso) }}</span>{{ form_errors(form.ordenAcceso) }}</div>
+        </div>
+        <div class="control-group ">{{ form_label(form.acceso) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.acceso) }}</span>{{ form_errors(form.acceso) }}</div>
+        </div>
+        <div class="control-group ">{{ form_label(form.ctlRol) }}
+         <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlRol) }}</span>{{ form_errors(form.ctlRol) }}</div>
+        </div>
+        <input type="hidden" id="maestro_modelobundle_ctlacceso__token" name="maestro_modelobundle_ctlacceso[_token]" value="5gW7YPmMN6aJFWmgv15MNjhcHkIlf3DBqxhB_y1IyYc" />
         <input type="submit" value="Agregar" class="btn btn-primary" />
-</form>
+    </form>
 <a href="{{ path('acceso_index') }}" class="btn">Regresar a listado</a>
 
 

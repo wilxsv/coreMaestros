@@ -5,7 +5,7 @@
 <div class="row-fluid">
  <div class="span4">
   <div class="widget-box">
-   <div class="widget-header widget-header-flat"><h4>Acciones a tomar</h4></div>
+   <div class="widget-header widget-header-flat"><h4>Enviar comentarios</h4></div>
    <div class="widget-body">
     <div class="widget-main">
      <div class="row-fluid">
@@ -13,14 +13,32 @@
      <div class="control-group ">{{ form_label(edit_form.detalleSchema) }}
       <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.detalleSchema) }}</span>{{ form_errors(edit_form.detalleSchema) }}</div>
      </div>
-     <div class="control-group ">{{ form_label(edit_form.estadoSchema) }}
-      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.estadoSchema) }}</span>{{ form_errors(edit_form.estadoSchema) }}</div>
-     </div>
       <div id="divCheckbox" style="display: none;">
        {{ form_widget(edit_form) }}
 	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="0" />
 	  </div>
       <input type="submit" value="Enviar observación y no validar" class="btn btn-inverse">
+      </form>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="span4">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4>Aprobar</h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
+      {{ form_start(delete_form) }}
+     <div class="control-group ">{{ form_label(delete_form.detalleSchema) }}
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(delete_form.detalleSchema) }}</span>{{ form_errors(delete_form.detalleSchema) }}</div>
+     </div>
+      <div id="divCheckbox" style="display: none;">
+	   {{ form_widget(delete_form) }}
+	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="1" />
+	  </div>
+      <input type="submit" value="Validar establecimiento" class="btn btn-primary">
       </form>
      </div>
     </div>
@@ -36,18 +54,39 @@
 <div class="row-fluid">
  <div class="span4">
   <div class="widget-box">
-   <div class="widget-header widget-header-flat"><h4>Opciones a tomar</h4></div>
+   <div class="widget-header widget-header-flat"><h4>Enviar comentarios</h4></div>
    <div class="widget-body">
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}
-      {{ form_row(edit_form.enableSchema) }}
       <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}
       	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="1" />
+      	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_enableSchema" name="maestro_modelobundle_ctlestablecimiento[enableSchema]" value="0" />
       </div>
        <input type="submit" value="Enviar observación y no habilitar" class="btn btn-inverse">
       </form>      
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="span4">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4>Aprobar</h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
+      {{ form_start(delete_form) }}
+      <div class="control-group ">{{ form_label(delete_form.enableSchema) }}
+       <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(delete_form.enableSchema) }}</span>{{ form_errors(delete_form.enableSchema) }}</div>
+      </div>
+      {{ form_row(delete_form.detalleSchema) }}
+      <div id="divCheckbox" style="display: none;">
+       {{ form_widget(delete_form) }}
+      </div>
+      <input type="submit" value="Habilitar establecimiento" class="btn btn-primary">
+      </form>
      </div>
     </div>
    </div>
@@ -62,17 +101,14 @@
 <div class="row-fluid">
  <div class="span6">
   <div class="widget-box">
-   <div class="widget-header widget-header-flat"><h4>Modificar</h4></div>
+   <div class="widget-header widget-header-flat"><h4></h4></div>
    <div class="widget-body">
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(edit_form) }}
-      <div id="divCheckbox" style="display: none;">
-       {{ form_row(edit_form.estadoSchema) }}
-       {{ form_row(edit_form.enableSchema) }}
-      </div>
       {{ form_widget(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}
+      <div id="divCheckbox" style="display: none;"></div>
        <input type="submit" value="Enviar actualilzación" class="btn btn-danger">
       </form>      
      </div>
