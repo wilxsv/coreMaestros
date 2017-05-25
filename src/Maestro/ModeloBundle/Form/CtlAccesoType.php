@@ -19,7 +19,9 @@ class CtlAccesoType extends AbstractType
 			->add('pathAcceso', 'text', array('label'  => 'Path :', 'required'  => true, ))
 			->add('ordenAcceso','integer', array('label'  => 'Orden en menu :', 'attr' => array('min' => '0', 'max' => '10',)))
 			//->add('rolAccesoId', 'choice', array('label'  => 'Roles :', 'choices'=> array('NULL' => 'Sin rol requerido','ROLE_AGREGA' => 'ROLE_AGREGA', 'ROLE_VERIFICA' => 'ROLE_VERIFICA', 'ROLE_HABILITA' => 'ROLE_HABILITA'), 'required'  => true, ))
-			->add('acceso', 'entity', array('label'  => 'Agrupado por :','class' => 'MaestroModeloBundle:CtlAcceso', 'required' => false))->add('ctlRol');
+			//->add('acceso', 'entity', array('label'  => 'Agrupado por :','class' => 'MaestroModeloBundle:CtlAcceso', 'required' => false))
+			
+			->add('ctlRol');
     }
     
     /**
