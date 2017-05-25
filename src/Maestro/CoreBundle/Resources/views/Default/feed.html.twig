@@ -10,9 +10,8 @@
 
  {% for ctlSchema in ctlSchemas %}
  <item>
-  <title>Cambio # {{ ctlSchema.id }}</title>
-  <link>http://establecimiento.maestro.salud.gob.sv</link>
-  <description>{{ ctlSchema.detalleSchema }}</description>
+  <title>Cambio # {{ ctlSchema.id }} - {{ ctlSchema.detalleSchema }}3</title>
+  <link>http://establecimiento.maestro.salud.gob.sv/</link>
   <pubDate>{{ ctlSchema.timeSchema |date('Y-m-d H:M:s') }} }}</pubDate>
   <author>na</author>
  </item>
