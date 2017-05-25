@@ -39,9 +39,6 @@
      <div class="control-group ">{{ form_label(form.cantidadFamilia) }}
       <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.cantidadFamilia) }}</span>{{ form_errors(form.cantidadFamilia) }}</div>
      </div>
-     <div class="control-group">{{ form_label(form.ctlSibasi) }}
-      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.ctlSibasi) }}</span>{{ form_errors(form.ctlSibasi) }}</div>
-     </div>
      <div class="control-group ">{{ form_label(form.idEstablecimientoPadre) }}
       <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.idEstablecimientoPadre) }}</span>{{ form_errors(form.idEstablecimientoPadre) }}</div>
      </div>
@@ -81,6 +78,8 @@
    </div>
   </div>
  </div>
+</div>
+<div id="divCheckbox" style="display: none;">{{ form_end(form) }}
 </div>
 <a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {{ form_end(form) }}
