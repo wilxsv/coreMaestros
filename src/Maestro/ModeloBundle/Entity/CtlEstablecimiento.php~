@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlEstablecimiento
  *
- * @ORM\Table(name="ctl_establecimiento", indexes={@ORM\Index(name="idx_332bd42c7ead49c7", columns={"id_municipio"}), @ORM\Index(name="IDX_332BD42CF12084AB", columns={"idmicrored"}), @ORM\Index(name="IDX_332BD42C3544B551", columns={"id_establecimiento_padre"}), @ORM\Index(name="IDX_332BD42C4E0E50FD", columns={"id_tipo_establecimiento"}), @ORM\Index(name="IDX_332BD42C8F14B160", columns={"id_cat_tipo_consumo"}), @ORM\Index(name="IDX_332BD42C952E1FD4", columns={"id_cat_tipo_farmacia"}), @ORM\Index(name="IDX_332BD42C9E67D4BE", columns={"id_cat_tipo_expediente"}), @ORM\Index(name="IDX_332BD42CCC3EE19E", columns={"id_cat_pruebas"}), @ORM\Index(name="IDX_332BD42CEF433A34", columns={"id_institucion"}), @ORM\Index(name="IDX_332BD42CF92045C1", columns={"id_cat_nivel_minsal"}), @ORM\Index(name="IDX_332BD42C9C132991", columns={"id_situacion_legal"})})
+ * @ORM\Table(name="ctl_establecimiento", indexes={@ORM\Index(name="IDX_332BD42C7EAD49C7", columns={"id_municipio"})})
  * @ORM\Entity
  */
 class CtlEstablecimiento
@@ -21,6 +21,13 @@ class CtlEstablecimiento
      * @ORM\SequenceGenerator(sequenceName="ctl_establecimiento_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_tipo_establecimiento", type="integer", nullable=true)
+     */
+    private $idTipoEstablecimiento;
 
     /**
      * @var string
@@ -67,9 +74,23 @@ class CtlEstablecimiento
     /**
      * @var integer
      *
+     * @ORM\Column(name="id_institucion", type="integer", nullable=true)
+     */
+    private $idInstitucion;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="anio_apertura", type="integer", nullable=true)
      */
     private $anioApertura;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cat_nivel_minsal", type="integer", nullable=true)
+     */
+    private $idCatNivelMinsal;
 
     /**
      * @var string
@@ -95,6 +116,27 @@ class CtlEstablecimiento
     /**
      * @var integer
      *
+     * @ORM\Column(name="id_cat_tipo_expediente", type="integer", nullable=true)
+     */
+    private $idCatTipoExpediente;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cat_tipo_farmacia", type="integer", nullable=true)
+     */
+    private $idCatTipoFarmacia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cat_tipo_consumo", type="integer", nullable=true)
+     */
+    private $idCatTipoConsumo;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="inst_mortalidad", type="integer", nullable=true)
      */
     private $instMortalidad;
@@ -114,11 +156,25 @@ class CtlEstablecimiento
     private $cvcd4;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cat_pruebas", type="integer", nullable=true)
+     */
+    private $idCatPruebas;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="activo", type="boolean", nullable=true)
      */
     private $activo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_establecimiento_padre", type="integer", nullable=true)
+     */
+    private $idEstablecimientoPadre;
 
     /**
      * @var string
@@ -221,6 +277,13 @@ class CtlEstablecimiento
     /**
      * @var integer
      *
+     * @ORM\Column(name="idmicrored", type="integer", nullable=true)
+     */
+    private $idmicrored;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="poblacion_asignana", type="bigint", nullable=false)
      */
     private $poblacionAsignana;
@@ -231,6 +294,13 @@ class CtlEstablecimiento
      * @ORM\Column(name="cantidad_familia", type="bigint", nullable=false)
      */
     private $cantidadFamilia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_situacion_legal", type="bigint", nullable=false)
+     */
+    private $idSituacionLegal;
 
     /**
      * @var \DateTime
@@ -275,30 +345,6 @@ class CtlEstablecimiento
     private $enableSchema;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idmicrored")
-     */
-    private $idmicrored;
-
-    /**
-     * @var \CtlEstablecimiento
-     *
-     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_establecimiento_padre", referencedColumnName="id")
-     * })
-     */
-    private $idEstablecimientoPadre;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_tipo_establecimiento")
-     */
-    private $idTipoEstablecimiento;
-
-    /**
      * @var \CtlMunicipio
      *
      * @ORM\ManyToOne(targetEntity="CtlMunicipio")
@@ -308,88 +354,39 @@ class CtlEstablecimiento
      */
     private $idMunicipio;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_cat_tipo_consumo")
-     */
-    private $idCatTipoConsumo;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_cat_tipo_farmacia")
-     */
-    private $idCatTipoFarmacia;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_cat_tipo_expediente")
-     */
-    private $idCatTipoExpediente;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_cat_pruebas")
-     */
-    private $idCatPruebas;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_institucion")
-     */
-    private $idInstitucion;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_cat_nivel_minsal")
-     */
-    private $idCatNivelMinsal;
-
-    /**
-     * @var \integer
-     *
-     * @ORM\Column(name="id_situacion_legal")
-     */
-    private $idSituacionLegal;
-
-    /**
-     * 
-     */
-    private $ctlPrestacionid;
-
-    /**
-     * 
-     * 
-     */
-    private $ctlRecursoHumanoid;
-
-    /**
-     * 
-     */
-    private $ctlServicioid;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-		
-    }
 
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set idTipoEstablecimiento
+     *
+     * @param integer $idTipoEstablecimiento
+     * @return CtlEstablecimiento
+     */
+    public function setIdTipoEstablecimiento($idTipoEstablecimiento)
+    {
+        $this->idTipoEstablecimiento = $idTipoEstablecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get idTipoEstablecimiento
+     *
+     * @return integer 
+     */
+    public function getIdTipoEstablecimiento()
+    {
+        return $this->idTipoEstablecimiento;
     }
 
     /**
@@ -408,7 +405,7 @@ class CtlEstablecimiento
     /**
      * Get nombre
      *
-     * @return string
+     * @return string 
      */
     public function getNombre()
     {
@@ -431,7 +428,7 @@ class CtlEstablecimiento
     /**
      * Get direccion
      *
-     * @return string
+     * @return string 
      */
     public function getDireccion()
     {
@@ -454,7 +451,7 @@ class CtlEstablecimiento
     /**
      * Get telefono
      *
-     * @return string
+     * @return string 
      */
     public function getTelefono()
     {
@@ -477,7 +474,7 @@ class CtlEstablecimiento
     /**
      * Get fax
      *
-     * @return string
+     * @return string 
      */
     public function getFax()
     {
@@ -500,7 +497,7 @@ class CtlEstablecimiento
     /**
      * Get latitud
      *
-     * @return string
+     * @return string 
      */
     public function getLatitud()
     {
@@ -523,11 +520,34 @@ class CtlEstablecimiento
     /**
      * Get longitud
      *
-     * @return string
+     * @return string 
      */
     public function getLongitud()
     {
         return $this->longitud;
+    }
+
+    /**
+     * Set idInstitucion
+     *
+     * @param integer $idInstitucion
+     * @return CtlEstablecimiento
+     */
+    public function setIdInstitucion($idInstitucion)
+    {
+        $this->idInstitucion = $idInstitucion;
+
+        return $this;
+    }
+
+    /**
+     * Get idInstitucion
+     *
+     * @return integer 
+     */
+    public function getIdInstitucion()
+    {
+        return $this->idInstitucion;
     }
 
     /**
@@ -546,11 +566,34 @@ class CtlEstablecimiento
     /**
      * Get anioApertura
      *
-     * @return integer
+     * @return integer 
      */
     public function getAnioApertura()
     {
         return $this->anioApertura;
+    }
+
+    /**
+     * Set idCatNivelMinsal
+     *
+     * @param integer $idCatNivelMinsal
+     * @return CtlEstablecimiento
+     */
+    public function setIdCatNivelMinsal($idCatNivelMinsal)
+    {
+        $this->idCatNivelMinsal = $idCatNivelMinsal;
+
+        return $this;
+    }
+
+    /**
+     * Get idCatNivelMinsal
+     *
+     * @return integer 
+     */
+    public function getIdCatNivelMinsal()
+    {
+        return $this->idCatNivelMinsal;
     }
 
     /**
@@ -569,7 +612,7 @@ class CtlEstablecimiento
     /**
      * Get codestabConsumos
      *
-     * @return string
+     * @return string 
      */
     public function getCodestabConsumos()
     {
@@ -592,7 +635,7 @@ class CtlEstablecimiento
     /**
      * Get codestabSiaf
      *
-     * @return string
+     * @return string 
      */
     public function getCodestabSiaf()
     {
@@ -615,11 +658,80 @@ class CtlEstablecimiento
     /**
      * Get codUcsf
      *
-     * @return integer
+     * @return integer 
      */
     public function getCodUcsf()
     {
         return $this->codUcsf;
+    }
+
+    /**
+     * Set idCatTipoExpediente
+     *
+     * @param integer $idCatTipoExpediente
+     * @return CtlEstablecimiento
+     */
+    public function setIdCatTipoExpediente($idCatTipoExpediente)
+    {
+        $this->idCatTipoExpediente = $idCatTipoExpediente;
+
+        return $this;
+    }
+
+    /**
+     * Get idCatTipoExpediente
+     *
+     * @return integer 
+     */
+    public function getIdCatTipoExpediente()
+    {
+        return $this->idCatTipoExpediente;
+    }
+
+    /**
+     * Set idCatTipoFarmacia
+     *
+     * @param integer $idCatTipoFarmacia
+     * @return CtlEstablecimiento
+     */
+    public function setIdCatTipoFarmacia($idCatTipoFarmacia)
+    {
+        $this->idCatTipoFarmacia = $idCatTipoFarmacia;
+
+        return $this;
+    }
+
+    /**
+     * Get idCatTipoFarmacia
+     *
+     * @return integer 
+     */
+    public function getIdCatTipoFarmacia()
+    {
+        return $this->idCatTipoFarmacia;
+    }
+
+    /**
+     * Set idCatTipoConsumo
+     *
+     * @param integer $idCatTipoConsumo
+     * @return CtlEstablecimiento
+     */
+    public function setIdCatTipoConsumo($idCatTipoConsumo)
+    {
+        $this->idCatTipoConsumo = $idCatTipoConsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get idCatTipoConsumo
+     *
+     * @return integer 
+     */
+    public function getIdCatTipoConsumo()
+    {
+        return $this->idCatTipoConsumo;
     }
 
     /**
@@ -638,7 +750,7 @@ class CtlEstablecimiento
     /**
      * Get instMortalidad
      *
-     * @return integer
+     * @return integer 
      */
     public function getInstMortalidad()
     {
@@ -661,7 +773,7 @@ class CtlEstablecimiento
     /**
      * Get digitaMortalidad
      *
-     * @return integer
+     * @return integer 
      */
     public function getDigitaMortalidad()
     {
@@ -684,11 +796,34 @@ class CtlEstablecimiento
     /**
      * Get cvcd4
      *
-     * @return integer
+     * @return integer 
      */
     public function getCvcd4()
     {
         return $this->cvcd4;
+    }
+
+    /**
+     * Set idCatPruebas
+     *
+     * @param integer $idCatPruebas
+     * @return CtlEstablecimiento
+     */
+    public function setIdCatPruebas($idCatPruebas)
+    {
+        $this->idCatPruebas = $idCatPruebas;
+
+        return $this;
+    }
+
+    /**
+     * Get idCatPruebas
+     *
+     * @return integer 
+     */
+    public function getIdCatPruebas()
+    {
+        return $this->idCatPruebas;
     }
 
     /**
@@ -707,11 +842,34 @@ class CtlEstablecimiento
     /**
      * Get activo
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getActivo()
     {
         return $this->activo;
+    }
+
+    /**
+     * Set idEstablecimientoPadre
+     *
+     * @param integer $idEstablecimientoPadre
+     * @return CtlEstablecimiento
+     */
+    public function setIdEstablecimientoPadre($idEstablecimientoPadre)
+    {
+        $this->idEstablecimientoPadre = $idEstablecimientoPadre;
+
+        return $this;
+    }
+
+    /**
+     * Get idEstablecimientoPadre
+     *
+     * @return integer 
+     */
+    public function getIdEstablecimientoPadre()
+    {
+        return $this->idEstablecimientoPadre;
     }
 
     /**
@@ -730,7 +888,7 @@ class CtlEstablecimiento
     /**
      * Get idUsuarioReg
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioReg()
     {
@@ -753,7 +911,7 @@ class CtlEstablecimiento
     /**
      * Get fechaHoraReg
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraReg()
     {
@@ -776,7 +934,7 @@ class CtlEstablecimiento
     /**
      * Get idUsuarioMod
      *
-     * @return string
+     * @return string 
      */
     public function getIdUsuarioMod()
     {
@@ -799,7 +957,7 @@ class CtlEstablecimiento
     /**
      * Get fechaHoraMod
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getFechaHoraMod()
     {
@@ -822,7 +980,7 @@ class CtlEstablecimiento
     /**
      * Get idestablesimow
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdestablesimow()
     {
@@ -845,7 +1003,7 @@ class CtlEstablecimiento
     /**
      * Get idestablevigepes
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdestablevigepes()
     {
@@ -868,7 +1026,7 @@ class CtlEstablecimiento
     /**
      * Get estadoVigepes
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoVigepes()
     {
@@ -891,7 +1049,7 @@ class CtlEstablecimiento
     /**
      * Get estadoVacunas
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoVacunas()
     {
@@ -914,7 +1072,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSeps
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSeps()
     {
@@ -937,7 +1095,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSimow
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSimow()
     {
@@ -960,7 +1118,7 @@ class CtlEstablecimiento
     /**
      * Get idestablesumeve
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdestablesumeve()
     {
@@ -983,7 +1141,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSumeve
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSumeve()
     {
@@ -1006,7 +1164,7 @@ class CtlEstablecimiento
     /**
      * Get cabezaMicrored
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getCabezaMicrored()
     {
@@ -1029,11 +1187,34 @@ class CtlEstablecimiento
     /**
      * Get hospitalizacion
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getHospitalizacion()
     {
         return $this->hospitalizacion;
+    }
+
+    /**
+     * Set idmicrored
+     *
+     * @param integer $idmicrored
+     * @return CtlEstablecimiento
+     */
+    public function setIdmicrored($idmicrored)
+    {
+        $this->idmicrored = $idmicrored;
+
+        return $this;
+    }
+
+    /**
+     * Get idmicrored
+     *
+     * @return integer 
+     */
+    public function getIdmicrored()
+    {
+        return $this->idmicrored;
     }
 
     /**
@@ -1052,7 +1233,7 @@ class CtlEstablecimiento
     /**
      * Get poblacionAsignana
      *
-     * @return integer
+     * @return integer 
      */
     public function getPoblacionAsignana()
     {
@@ -1075,11 +1256,34 @@ class CtlEstablecimiento
     /**
      * Get cantidadFamilia
      *
-     * @return integer
+     * @return integer 
      */
     public function getCantidadFamilia()
     {
         return $this->cantidadFamilia;
+    }
+
+    /**
+     * Set idSituacionLegal
+     *
+     * @param integer $idSituacionLegal
+     * @return CtlEstablecimiento
+     */
+    public function setIdSituacionLegal($idSituacionLegal)
+    {
+        $this->idSituacionLegal = $idSituacionLegal;
+
+        return $this;
+    }
+
+    /**
+     * Get idSituacionLegal
+     *
+     * @return integer 
+     */
+    public function getIdSituacionLegal()
+    {
+        return $this->idSituacionLegal;
     }
 
     /**
@@ -1098,7 +1302,7 @@ class CtlEstablecimiento
     /**
      * Get registroSchema
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getRegistroSchema()
     {
@@ -1113,23 +1317,15 @@ class CtlEstablecimiento
      */
     public function setDetalleSchema($detalleSchema)
     {
-		$tmp = $this->getDetalleSchema();
-		$pos = strpos($tmp, '<nodo>');
-		if ( $pos === false )
-		  $this->detalleSchema = $detalleSchema;
-		else
-		{
-		  $pos = strripos($tmp, 'do>');
-		  $this->detalleSchema = substr($tmp, 0, $pos+3).$detalleSchema;
-		}
-		
+        $this->detalleSchema = $detalleSchema;
+
         return $this;
     }
 
     /**
      * Get detalleSchema
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSchema()
     {
@@ -1152,7 +1348,7 @@ class CtlEstablecimiento
     /**
      * Get userIdSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getUserIdSchema()
     {
@@ -1175,7 +1371,7 @@ class CtlEstablecimiento
     /**
      * Get ipUserSchema
      *
-     * @return string
+     * @return string 
      */
     public function getIpUserSchema()
     {
@@ -1198,7 +1394,7 @@ class CtlEstablecimiento
     /**
      * Get estadoSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSchema()
     {
@@ -1221,79 +1417,11 @@ class CtlEstablecimiento
     /**
      * Get enableSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEnableSchema()
     {
         return $this->enableSchema;
-    }
-
-    /**
-     * Set idmicrored
-     *
-     * @return CtlEstablecimiento
-     */
-    public function setIdmicrored( $idmicrored)
-    {
-        $this->idmicrored = $idmicrored;
-
-        return $this;
-    }
-
-    /**
-     * Get idmicrored
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlMicrored
-     */
-    public function getIdmicrored()
-    {
-        return $this->idmicrored;
-    }
-
-    /**
-     * Set idEstablecimientoPadre
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $idEstablecimientoPadre
-     * @return CtlEstablecimiento
-     */
-    public function setIdEstablecimientoPadre( $idEstablecimientoPadre = null)
-    {
-        $this->idEstablecimientoPadre = $idEstablecimientoPadre;
-
-        return $this;
-    }
-
-    /**
-     * Get idEstablecimientoPadre
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento
-     */
-    public function getIdEstablecimientoPadre()
-    {
-        return $this->idEstablecimientoPadre;
-    }
-
-    /**
-     * Set idTipoEstablecimiento
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlTipoEstablecimiento $idTipoEstablecimiento
-     * @return CtlEstablecimiento
-     */
-    public function setIdTipoEstablecimiento($idTipoEstablecimiento = null)
-    {
-        $this->idTipoEstablecimiento = $idTipoEstablecimiento;
-
-        return $this;
-    }
-
-    /**
-     * Get idTipoEstablecimiento
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlTipoEstablecimiento
-     */
-    public function getIdTipoEstablecimiento()
-    {
-        return $this->idTipoEstablecimiento;
     }
 
     /**
@@ -1302,7 +1430,7 @@ class CtlEstablecimiento
      * @param \Maestro\ModeloBundle\Entity\CtlMunicipio $idMunicipio
      * @return CtlEstablecimiento
      */
-    public function setIdMunicipio( $idMunicipio = null)
+    public function setIdMunicipio(\Maestro\ModeloBundle\Entity\CtlMunicipio $idMunicipio = null)
     {
         $this->idMunicipio = $idMunicipio;
 
@@ -1312,274 +1440,10 @@ class CtlEstablecimiento
     /**
      * Get idMunicipio
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlMunicipio
+     * @return \Maestro\ModeloBundle\Entity\CtlMunicipio 
      */
     public function getIdMunicipio()
     {
         return $this->idMunicipio;
-    }
-
-    /**
-     * Set idCatTipoConsumo
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle $idCatTipoConsumo
-     * @return CtlEstablecimiento
-     */
-    public function setIdCatTipoConsumo($idCatTipoConsumo = null)
-    {
-        $this->idCatTipoConsumo = $idCatTipoConsumo;
-
-        return $this;
-    }
-
-    /**
-     * Get idCatTipoConsumo
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
-     */
-    public function getIdCatTipoConsumo()
-    {
-        return $this->idCatTipoConsumo;
-    }
-
-    /**
-     * Set idCatTipoFarmacia
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle $idCatTipoFarmacia
-     * @return CtlEstablecimiento
-     */
-    public function setIdCatTipoFarmacia($idCatTipoFarmacia = null)
-    {
-        $this->idCatTipoFarmacia = $idCatTipoFarmacia;
-
-        return $this;
-    }
-
-    /**
-     * Get idCatTipoFarmacia
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
-     */
-    public function getIdCatTipoFarmacia()
-    {
-        return $this->idCatTipoFarmacia;
-    }
-
-    /**
-     * Set idCatTipoExpediente
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle $idCatTipoExpediente
-     * @return CtlEstablecimiento
-     */
-    public function setIdCatTipoExpediente($idCatTipoExpediente = null)
-    {
-        $this->idCatTipoExpediente = $idCatTipoExpediente;
-
-        return $this;
-    }
-
-    /**
-     * Get idCatTipoExpediente
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
-     */
-    public function getIdCatTipoExpediente()
-    {
-        return $this->idCatTipoExpediente;
-    }
-
-    /**
-     * Set idCatPruebas
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle $idCatPruebas
-     * @return CtlEstablecimiento
-     */
-    public function setIdCatPruebas($idCatPruebas = null)
-    {
-        $this->idCatPruebas = $idCatPruebas;
-
-        return $this;
-    }
-
-    /**
-     * Get idCatPruebas
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
-     */
-    public function getIdCatPruebas()
-    {
-        return $this->idCatPruebas;
-    }
-
-    /**
-     * Set idInstitucion
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlInstitucion $idInstitucion
-     * @return CtlEstablecimiento
-     */
-    public function setIdInstitucion($idInstitucion = null)
-    {
-        $this->idInstitucion = $idInstitucion;
-
-        return $this;
-    }
-
-    /**
-     * Get idInstitucion
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlInstitucion
-     */
-    public function getIdInstitucion()
-    {
-        return $this->idInstitucion;
-    }
-
-    /**
-     * Set idCatNivelMinsal
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle $idCatNivelMinsal
-     * @return CtlEstablecimiento
-     */
-    public function setIdCatNivelMinsal($idCatNivelMinsal = null)
-    {
-        $this->idCatNivelMinsal = $idCatNivelMinsal;
-
-        return $this;
-    }
-
-    /**
-     * Get idCatNivelMinsal
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlCatalogoDetalle
-     */
-    public function getIdCatNivelMinsal()
-    {
-        return $this->idCatNivelMinsal;
-    }
-
-    /**
-     * Set idSituacionLegal
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlSituacionLegal $idSituacionLegal
-     * @return CtlEstablecimiento
-     */
-    public function setIdSituacionLegal($idSituacionLegal = null)
-    {
-        $this->idSituacionLegal = $idSituacionLegal;
-
-        return $this;
-    }
-
-    /**
-     * Get idSituacionLegal
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlSituacionLegal
-     */
-    public function getIdSituacionLegal()
-    {
-        return $this->idSituacionLegal;
-    }
-
-    /**
-     * Add ctlPrestacionid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid
-     * @return CtlEstablecimiento
-     */
-    public function addCtlPrestacionid($ctlPrestacionid)
-    {
-        $this->ctlPrestacionid[] = $ctlPrestacionid;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlPrestacionid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlPrestacion $ctlPrestacionid
-     */
-    public function removeCtlPrestacionid($ctlPrestacionid)
-    {
-        $this->ctlPrestacionid->removeElement($ctlPrestacionid);
-    }
-
-    /**
-     * Get ctlPrestacionid
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCtlPrestacionid()
-    {
-        return $this->ctlPrestacionid;
-    }
-
-    /**
-     * Add ctlRecursoHumanoid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid
-     * @return CtlEstablecimiento
-     */
-    public function addCtlRecursoHumanoid($ctlRecursoHumanoid)
-    {
-        $this->ctlRecursoHumanoid[] = $ctlRecursoHumanoid;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlRecursoHumanoid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $ctlRecursoHumanoid
-     */
-    public function removeCtlRecursoHumanoid($ctlRecursoHumanoid)
-    {
-        $this->ctlRecursoHumanoid->removeElement($ctlRecursoHumanoid);
-    }
-
-    /**
-     * Get ctlRecursoHumanoid
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCtlRecursoHumanoid()
-    {
-        return $this->ctlRecursoHumanoid;
-    }
-
-    /**
-     * Add ctlServicioid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
-     * @return CtlEstablecimiento
-     */
-    public function addCtlServicioid($ctlServicioid)
-    {
-        $this->ctlServicioid[] = $ctlServicioid;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlServicioid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlServicio $ctlServicioid
-     */
-    public function removeCtlServicioid($ctlServicioid)
-    {
-        $this->ctlServicioid->removeElement($ctlServicioid);
-    }
-
-    /**
-     * Get ctlServicioid
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCtlServicioid()
-    {
-        return $this->ctlServicioid;
-    }
-
-    public function __toString() {
-      return $this->getNombre();
     }
 }

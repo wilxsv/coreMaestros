@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlAlternativo
  *
- * @ORM\Table(name="ctl_alternativo", uniqueConstraints={@ORM\UniqueConstraint(name="unique_mezcla", columns={"ctl_insumo", "ctl_insumo_alternativo"})}, indexes={@ORM\Index(name="IDX_2858B3F39DB3222", columns={"ctl_insumo"})})
+ * @ORM\Table(name="ctl_alternativo", uniqueConstraints={@ORM\UniqueConstraint(name="unique_mezcla", columns={"ctl_insumo", "ctl_insumo_alternativo"})}, indexes={@ORM\Index(name="IDX_2858B3F39DB3222", columns={"ctl_insumo"}), @ORM\Index(name="IDX_2858B3F33FC97345", columns={"ctl_insumo_alternativo"})})
  * @ORM\Entity
  */
 class CtlAlternativo
@@ -25,13 +25,6 @@ class CtlAlternativo
     /**
      * @var integer
      *
-     * @ORM\Column(name="ctl_insumo_alternativo", type="bigint", nullable=true)
-     */
-    private $ctlInsumoAlternativo;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="multiplo_alternativo", type="bigint", nullable=false)
      */
     private $multiploAlternativo;
@@ -39,42 +32,42 @@ class CtlAlternativo
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
 
@@ -88,6 +81,16 @@ class CtlAlternativo
      */
     private $ctlInsumo;
 
+    /**
+     * @var \CtlInsumo
+     *
+     * @ORM\ManyToOne(targetEntity="CtlInsumo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_insumo_alternativo", referencedColumnName="id")
+     * })
+     */
+    private $ctlInsumoAlternativo;
+
 
 
     /**
@@ -98,29 +101,6 @@ class CtlAlternativo
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set ctlInsumoAlternativo
-     *
-     * @param integer $ctlInsumoAlternativo
-     * @return CtlAlternativo
-     */
-    public function setCtlInsumoAlternativo($ctlInsumoAlternativo)
-    {
-        $this->ctlInsumoAlternativo = $ctlInsumoAlternativo;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlInsumoAlternativo
-     *
-     * @return integer 
-     */
-    public function getCtlInsumoAlternativo()
-    {
-        return $this->ctlInsumoAlternativo;
     }
 
     /**
@@ -305,5 +285,28 @@ class CtlAlternativo
     public function getCtlInsumo()
     {
         return $this->ctlInsumo;
+    }
+
+    /**
+     * Set ctlInsumoAlternativo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoAlternativo
+     * @return CtlAlternativo
+     */
+    public function setCtlInsumoAlternativo(\Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumoAlternativo = null)
+    {
+        $this->ctlInsumoAlternativo = $ctlInsumoAlternativo;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlInsumoAlternativo
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlInsumo 
+     */
+    public function getCtlInsumoAlternativo()
+    {
+        return $this->ctlInsumoAlternativo;
     }
 }

@@ -39,42 +39,42 @@ class CtlPrincipio
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
 

@@ -3,10 +3,6 @@
 {% block body %}    <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlInsumo.id }}</td>
-            </tr>
-            <tr>
                 <th>Codigonu</th>
                 <td>{{ ctlInsumo.codigoNu }}</td>
             </tr>
@@ -24,50 +20,21 @@
             </tr>
             <tr>
                 <th>Listadooficial</th>
-                <td>{% if ctlInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
+                <td>{% if ctlInsumo.listadoOficial %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Nombrelargoinsumo</th>
                 <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
             </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlInsumo.registroSchema %}{{ ctlInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlInsumo.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlInsumo.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlInsumo.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlInsumo.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlInsumo.enableSchema }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('insumo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {% if is_granted('ROLE_HABILITA') %}
+		<a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}" class="btn btn-primary">Validar / Habilitar o comentar registro de insumo</a>
+    {% elseif app.user and ctlInsumo.userIdSchema == app.user.id %}
+		<a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}" class="btn btn-primary">Modificar registro de insumo</a>
+	{% endif %}
+		
+    <br />
+    <a href="{{ path('insumo_index') }}"  class="btn btn-grey">Regresar a la lista</a>
 {% endblock %}

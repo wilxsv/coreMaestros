@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CtlRol
+ *
  * @ORM\Table(name="ctl_rol")
  * @ORM\Entity
  */
@@ -13,7 +14,7 @@ class CtlRol
 {
     /**
      * @var integer
-     * 
+     *
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -23,10 +24,41 @@ class CtlRol
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="nombre_rol", type="string", length=255, nullable=false)
+     *
+     * @ORM\Column(name="nombre_rol", type="string", length=50, nullable=false)
      */
     private $nombreRol;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlAcceso", mappedBy="rol")
+     */
+    private $acceso;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlAcceso", inversedBy="ctlRole")
+     * @ORM\JoinTable(name="role_acceso",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_role_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_acceso_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlAcceso;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->acceso = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -61,6 +93,70 @@ class CtlRol
     {
         return $this->nombreRol;
     }
-    
-    
+
+    /**
+     * Add acceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $acceso
+     * @return CtlRol
+     */
+    public function addAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $acceso)
+    {
+        $this->acceso[] = $acceso;
+
+        return $this;
+    }
+
+    /**
+     * Remove acceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $acceso
+     */
+    public function removeAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $acceso)
+    {
+        $this->acceso->removeElement($acceso);
+    }
+
+    /**
+     * Get acceso
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAcceso()
+    {
+        return $this->acceso;
+    }
+
+    /**
+     * Add ctlAcceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     * @return CtlRol
+     */
+    public function addCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso[] = $ctlAcceso;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlAcceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     */
+    public function removeCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso->removeElement($ctlAcceso);
+    }
+
+    /**
+     * Get ctlAcceso
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlAcceso()
+    {
+        return $this->ctlAcceso;
+    }
 }

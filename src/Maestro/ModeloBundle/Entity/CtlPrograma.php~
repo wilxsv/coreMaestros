@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlPrograma
  *
- * @ORM\Table(name="ctl_programa", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_programa_nombre_programa_key", columns={"nombre_programa"})})
+ * @ORM\Table(name="ctl_programa", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_programa_nombre_programa_key", columns={"nombre_programa"})}, indexes={@ORM\Index(name="IDX_6B00F8DBFD8A7328", columns={"programa_id"})})
  * @ORM\Entity
  */
 class CtlPrograma
@@ -39,44 +39,54 @@ class CtlPrograma
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
+
+    /**
+     * @var \CtlPrograma
+     *
+     * @ORM\ManyToOne(targetEntity="CtlPrograma")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="programa_id", referencedColumnName="id")
+     * })
+     */
+    private $programa;
 
 
 
@@ -272,5 +282,28 @@ class CtlPrograma
     public function getEnableSchema()
     {
         return $this->enableSchema;
+    }
+
+    /**
+     * Set programa
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlPrograma $programa
+     * @return CtlPrograma
+     */
+    public function setPrograma(\Maestro\ModeloBundle\Entity\CtlPrograma $programa = null)
+    {
+        $this->programa = $programa;
+
+        return $this;
+    }
+
+    /**
+     * Get programa
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlPrograma 
+     */
+    public function getPrograma()
+    {
+        return $this->programa;
     }
 }

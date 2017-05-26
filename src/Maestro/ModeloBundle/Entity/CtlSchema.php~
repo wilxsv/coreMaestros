@@ -57,6 +57,13 @@ class CtlSchema
      */
     private $detalleSchema;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timeSchema", type="datetime", nullable=true)
+     */
+    private $timeschema;
+
 
 
     /**
@@ -183,11 +190,6 @@ class CtlSchema
     {
         return $this->detalleSchema;
     }
-    /**
-     * @var \DateTime
-     */
-    private $timeschema;
-
 
     /**
      * Set timeschema

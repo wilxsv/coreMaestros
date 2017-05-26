@@ -52,6 +52,9 @@ maestro_modelo_alternativo:
 maestro_modelo_insumo:
     resource: "@MaestroModeloBundle/Resources/config/routing/ctlinsumo.yml"
     prefix:   /insumo
+maestro_modelo_codificacion:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlcodificacion.yml"
+    prefix:   /codificacion
 
 maestro_modelo_homepage:
     path:     /model

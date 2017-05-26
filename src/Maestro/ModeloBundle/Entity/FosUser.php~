@@ -3,13 +3,14 @@
 namespace Maestro\ModeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * FosUser
  *
- * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})})
+ * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"})}, indexes={@ORM\Index(name="IDX_957A6479332BD42C", columns={"ctl_establecimiento"})})
  * @ORM\Entity
  */
-class FosUser 
+class FosUser
 {
     /**
      * @var integer
@@ -99,6 +100,23 @@ class FosUser
     private $roles;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="fullname", type="string", nullable=true)
+     */
+    private $fullname;
+
+    /**
+     * @var \CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_establecimiento", referencedColumnName="id")
+     * })
+     */
+    private $ctlEstablecimiento;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="FosGroup", inversedBy="user")
@@ -114,47 +132,14 @@ class FosUser
     private $group;
 
     /**
-     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
-     *
-     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_establecimiento", referencedColumnName="id")
-     * })
-     */
-    private $establecimiento;
-
-    /**
-     * @var string
-     * 
-     * @ORM\Column(name="fullname", type="string", length=255, nullable=true)
-     */
-    private $fullname;
-
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->enabled = false;
-        $this->roles = array();
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->establecimiento = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    /**
-     * {@inheritdoc}
-     *//*
-    public function addRole($role)
-    {
-        $role = strtoupper($role);
-        if ($role === static::ROLE_DEFAULT) {
-            return $this;
-        }
-        if (!in_array($role, $this->roles, true)) {
-            $this->roles[] = $role;
-        }
-        return $this;
-    }*/
+
+
     /**
      * Get id
      *
@@ -419,6 +404,52 @@ class FosUser
     }
 
     /**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return FosUser
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string 
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
+
+    /**
+     * Set ctlEstablecimiento
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento
+     * @return FosUser
+     */
+    public function setCtlEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento = null)
+    {
+        $this->ctlEstablecimiento = $ctlEstablecimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlEstablecimiento
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getCtlEstablecimiento()
+    {
+        return $this->ctlEstablecimiento;
+    }
+
+    /**
      * Add group
      *
      * @param \Maestro\ModeloBundle\Entity\FosGroup $group
@@ -449,77 +480,5 @@ class FosUser
     public function getGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * Set establecimiento
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento
-     * @return FosUser
-     */
-    public function setEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $establecimiento = null)
-    {
-        $this->establecimiento = $establecimiento;
-
-        return $this;
-    }
-
-    /**
-     * Get establecimiento
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
-     */
-    public function getEstablecimiento()
-    {
-        return $this->establecimiento;
-    }
-    /**
-     * Set fullname
-     *
-     * @param string $fullname
-     * @return FosUser
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-    /**
-     * Get fullname
-     *
-     * @return string 
-     */
-    public function getFullname()
-    {
-        return $this->fullname;
-    }
-    /**
-     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
-     */
-    private $ctlEstablecimiento;
-
-
-    /**
-     * Set ctlEstablecimiento
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento
-     * @return FosUser
-     */
-    public function setCtlEstablecimiento(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $ctlEstablecimiento = null)
-    {
-        $this->ctlEstablecimiento = $ctlEstablecimiento;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlEstablecimiento
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
-     */
-    public function getCtlEstablecimiento()
-    {
-        return $this->ctlEstablecimiento;
     }
 }

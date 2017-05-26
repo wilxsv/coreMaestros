@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ctl_acceso")
  * @ORM\Entity
- */ 
+ */
 class CtlAcceso
 {
     /**
@@ -24,50 +24,76 @@ class CtlAcceso
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="nombre_acceso", type="string", length=150, nullable=false)
+     *
+     * @ORM\Column(name="nombre_acceso", type="string", length=250, nullable=false)
      */
     private $nombreAcceso;
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="path_acceso", type="string", length=150, nullable=false)
+     *
+     * @ORM\Column(name="path_acceso", type="string", length=250, nullable=false)
      */
     private $pathAcceso;
 
     /**
      * @var boolean
-     * 
+     *
      * @ORM\Column(name="public_acceso", type="boolean", nullable=false)
      */
     private $publicAcceso;
 
     /**
      * @var integer
-     * 
-     * @ORM\Column(name="orden_acceso", type="bigint", nullable=false)
+     *
+     * @ORM\Column(name="acceso_id", type="bigint", nullable=true)
+     */
+    private $accesoId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="orden_acceso", type="integer", nullable=false)
      */
     private $ordenAcceso;
 
     /**
-     * @var string
-     * 
-     * @ORM\Column(name="rol_acceso_id", type="string", length=250, nullable=false)
-     */
-    private $rolAccesoId;
-
-    /**
      * @var boolean
-     *  
+     *
      * @ORM\Column(name="visible_acceso", type="boolean", nullable=false)
      */
     private $visibleAcceso;
 
     /**
-     * @var \Maestro\ModeloBundle\Entity\CtlAcceso
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRol", inversedBy="acceso")
+     * @ORM\JoinTable(name="ctl_permisos",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="acceso_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $acceso;
+    private $rol;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRol", mappedBy="ctlAcceso")
+     */
+    private $ctlRole;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rol = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlRole = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -150,6 +176,29 @@ class CtlAcceso
     }
 
     /**
+     * Set accesoId
+     *
+     * @param integer $accesoId
+     * @return CtlAcceso
+     */
+    public function setAccesoId($accesoId)
+    {
+        $this->accesoId = $accesoId;
+
+        return $this;
+    }
+
+    /**
+     * Get accesoId
+     *
+     * @return integer 
+     */
+    public function getAccesoId()
+    {
+        return $this->accesoId;
+    }
+
+    /**
      * Set ordenAcceso
      *
      * @param integer $ordenAcceso
@@ -170,29 +219,6 @@ class CtlAcceso
     public function getOrdenAcceso()
     {
         return $this->ordenAcceso;
-    }
-
-    /**
-     * Set rolAccesoId
-     *
-     * @param string $rolAccesoId
-     * @return CtlAcceso
-     */
-    public function setRolAccesoId($rolAccesoId)
-    {
-        $this->rolAccesoId = $rolAccesoId;
-
-        return $this;
-    }
-
-    /**
-     * Get rolAccesoId
-     *
-     * @return string 
-     */
-    public function getRolAccesoId()
-    {
-        return $this->rolAccesoId;
     }
 
     /**
@@ -219,70 +245,36 @@ class CtlAcceso
     }
 
     /**
-     * Set acceso
+     * Add rol
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $acceso
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rol
      * @return CtlAcceso
      */
-    public function setAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $acceso = null)
+    public function addRol(\Maestro\ModeloBundle\Entity\CtlRol $rol)
     {
-        $this->acceso = $acceso;
+        $this->rol[] = $rol;
 
         return $this;
     }
 
     /**
-     * Get acceso
+     * Remove rol
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlAcceso 
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rol
      */
-    public function getAcceso()
+    public function removeRol(\Maestro\ModeloBundle\Entity\CtlRol $rol)
     {
-        return $this->acceso;
+        $this->rol->removeElement($rol);
     }
-    
-    public function __toString() {
-      return $this->nombreAcceso;
-    }
-    /**
-     * @var integer
-     */
-    private $accesoId;
-
 
     /**
-     * Set accesoId
+     * Get rol
      *
-     * @param integer $accesoId
-     * @return CtlAcceso
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setAccesoId($accesoId)
+    public function getRol()
     {
-        $this->accesoId = $accesoId;
-
-        return $this;
-    }
-
-    /**
-     * Get accesoId
-     *
-     * @return integer 
-     */
-    public function getAccesoId()
-    {
-        return $this->accesoId;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlRole;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ctlRole = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->rol;
     }
 
     /**

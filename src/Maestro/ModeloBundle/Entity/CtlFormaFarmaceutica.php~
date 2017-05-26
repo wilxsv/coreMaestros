@@ -25,7 +25,7 @@ class CtlFormaFarmaceutica
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_forma_farmaceutica", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nombre_forma_farmaceutica", type="string", length=255, nullable=true)
      */
     private $nombreFormaFarmaceutica;
 
@@ -39,42 +39,42 @@ class CtlFormaFarmaceutica
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
 
@@ -105,7 +105,7 @@ class CtlFormaFarmaceutica
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -128,7 +128,7 @@ class CtlFormaFarmaceutica
     /**
      * Get nombreFormaFarmaceutica
      *
-     * @return string
+     * @return string 
      */
     public function getNombreFormaFarmaceutica()
     {
@@ -151,7 +151,7 @@ class CtlFormaFarmaceutica
     /**
      * Get detalleFormaFarmaceutica
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleFormaFarmaceutica()
     {
@@ -174,7 +174,7 @@ class CtlFormaFarmaceutica
     /**
      * Get registroSchema
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getRegistroSchema()
     {
@@ -197,7 +197,7 @@ class CtlFormaFarmaceutica
     /**
      * Get detalleSchema
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSchema()
     {
@@ -220,7 +220,7 @@ class CtlFormaFarmaceutica
     /**
      * Get userIdSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getUserIdSchema()
     {
@@ -243,7 +243,7 @@ class CtlFormaFarmaceutica
     /**
      * Get ipUserSchema
      *
-     * @return string
+     * @return string 
      */
     public function getIpUserSchema()
     {
@@ -266,7 +266,7 @@ class CtlFormaFarmaceutica
     /**
      * Get estadoSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSchema()
     {
@@ -289,7 +289,7 @@ class CtlFormaFarmaceutica
     /**
      * Get enableSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEnableSchema()
     {
@@ -322,14 +322,10 @@ class CtlFormaFarmaceutica
     /**
      * Get ctlInsumoid
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCtlInsumoid()
     {
         return $this->ctlInsumoid;
-    }
-
-    public function __toString(){
-      return $this->nombreFormaFarmaceutica;
     }
 }

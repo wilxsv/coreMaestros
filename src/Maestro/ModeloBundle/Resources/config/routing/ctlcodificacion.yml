@@ -1,0 +1,24 @@
+codificacion_index:
+    path:     /
+    defaults: { _controller: "MaestroModeloBundle:CtlCodificacion:index" }
+    methods:  GET
+
+codificacion_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaestroModeloBundle:CtlCodificacion:show" }
+    methods:  GET
+
+codificacion_new:
+    path:     /new
+    defaults: { _controller: "MaestroModeloBundle:CtlCodificacion:new" }
+    methods:  [GET, POST]
+
+codificacion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaestroModeloBundle:CtlCodificacion:edit" }
+    methods:  [GET, POST]
+
+codificacion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaestroModeloBundle:CtlCodificacion:delete" }
+    methods:  DELETE

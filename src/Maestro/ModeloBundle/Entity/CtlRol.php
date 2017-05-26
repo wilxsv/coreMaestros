@@ -77,30 +77,7 @@ class CtlRol
      */
     public function __construct()
     {
-        $this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add ctlAcceso
-     *
-     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
-     * @return CtlRol
-     */
-    public function addCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
-    {
-        $this->ctlAcceso[] = $ctlAcceso;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlAcceso
-     *
-     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
-     */
-    public function removeCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
-    {
-        $this->ctlAcceso->removeElement($ctlAcceso);
+        //$this->ctlAcceso = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

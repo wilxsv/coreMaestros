@@ -9,6 +9,7 @@
                 <th># ATC</th>
                 <th># ONU</th>
                 <th>Unidad de medida</th>
+                <th>Codificacion 128</th>
             </tr>
         </thead>
         <tbody>
@@ -19,11 +20,28 @@
                 <td>{{ ctlInsumo.codigoNu }}</td>
                 <td>{{ ctlInsumo.codificacionInsumo }}</td>
                 <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
+                <td><div>
+		<img id="barcode1"/>
+		<script>JsBarcode("#barcode1", "Hi!");</script>
+	</div></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
 {% endblock %}
-
+<div>
+		<img id="barcode1"/>
+		<script>JsBarcode("#barcode1", "Hi!");</script>
+	</div>
 {% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}
+
+{% block head_js %}
+  <script src="{{ asset('assets/') }}js/barcode/JsBarcode.all.js"></script>
+  <script>
+		Number.prototype.zeroPadding = function(){
+			var ret = "" + this.valueOf();
+			return ret.length == 1 ? "0" + ret : ret;
+		};
+  </script>
+{% endblock %}

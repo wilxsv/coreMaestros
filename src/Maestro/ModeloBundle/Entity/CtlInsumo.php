@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlInsumo
  *
- * @ORM\Table(name="ctl_insumo", indexes={@ORM\Index(name="IDX_9DB3222DD0A3533", columns={"ctl_nivel_usoid"}), @ORM\Index(name="IDX_9DB32227A93ADB3", columns={"ctl_forma_farmaceutica_id"}), @ORM\Index(name="IDX_9DB3222BD744E62", columns={"ctl_presentacionid"}), @ORM\Index(name="IDX_9DB3222D2D8661B", columns={"ctl_unidad_medidaid"}), @ORM\Index(name="IDX_9DB32221F3126F0", columns={"ctl_productoid"}), @ORM\Index(name="IDX_9DB3222D64E375F", columns={"ctl_suministroid"}), @ORM\Index(name="IDX_9DB32226E936AAA", columns={"ctl_programaid"}), @ORM\Index(name="IDX_9DB322272F1374E", columns={"grupoid"})})
+ * @ORM\Table(name="ctl_insumo", indexes={@ORM\Index(name="IDX_9DB3222DD0A3533", columns={"ctl_nivel_usoid"}), @ORM\Index(name="IDX_9DB3222BD744E62", columns={"ctl_presentacionid"}), @ORM\Index(name="IDX_9DB3222D2D8661B", columns={"ctl_unidad_medidaid"}), @ORM\Index(name="IDX_9DB32221F3126F0", columns={"ctl_productoid"}), @ORM\Index(name="IDX_9DB3222D64E375F", columns={"ctl_suministroid"}), @ORM\Index(name="IDX_9DB32226E936AAA", columns={"ctl_programaid"}), @ORM\Index(name="IDX_9DB32227A93ADB3", columns={"ctl_forma_farmaceutica_id"}), @ORM\Index(name="IDX_9DB322272F1374E", columns={"grupoid"})})
  * @ORM\Entity
  */
 class CtlInsumo
@@ -60,51 +60,58 @@ class CtlInsumo
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_largo_insumo", type="text", nullable=false)
+     * @ORM\Column(name="nombre_largo_insumo", type="text", nullable=true)
      */
     private $nombreLargoInsumo;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_insumo", type="text", nullable=true)
+     */
+    private $detalleInsumo;
 
     /**
      * @var \CtlNivelUso
@@ -115,16 +122,6 @@ class CtlInsumo
      * })
      */
     private $ctlNivelUsoid;
-
-    /**
-     * @var \CtlFormaFarmaceutica
-     *
-     * @ORM\ManyToOne(targetEntity="CtlFormaFarmaceutica")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_forma_farmaceutica_id", referencedColumnName="id")
-     * })
-     */
-    private $ctlFormaFarmaceutica;
 
     /**
      * @var \CtlPresentacion
@@ -157,16 +154,6 @@ class CtlInsumo
     private $ctlProductoid;
 
     /**
-     * @var \CtlSuministro
-     *
-     * @ORM\ManyToOne(targetEntity="CtlSuministro")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_suministroid", referencedColumnName="id")
-     * })
-     */
-    private $ctlSuministroid;
-
-    /**
      * @var \CtlPrograma
      *
      * @ORM\ManyToOne(targetEntity="CtlPrograma")
@@ -175,6 +162,16 @@ class CtlInsumo
      * })
      */
     private $ctlProgramaid;
+
+    /**
+     * @var \CtlFormaFarmaceutica
+     *
+     * @ORM\ManyToOne(targetEntity="CtlFormaFarmaceutica")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_forma_farmaceutica_id", referencedColumnName="id")
+     * })
+     */
+    private $ctlFormaFarmaceutica;
 
     /**
      * @var \CtlGrupo
@@ -199,14 +196,14 @@ class CtlInsumo
      *   }
      * )
      */
-    //private $ctlConcentracionid;
+    private $ctlConcentracionid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="CtlFormaFarmaceutica", mappedBy="ctlInsumoid")
      */
-    //private $ctlFormaFarmaceuticaid;
+    private $ctlFormaFarmaceuticaid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -220,16 +217,19 @@ class CtlInsumo
      */
     public function __construct()
     {
-        $this->ctlConcentracionid = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ctlFormaFarmaceuticaid = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ctlPrincipioActivoid = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->ctlConcentracionid = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->ctlFormaFarmaceuticaid = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->ctlPrincipioActivoid = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
+    public function __toString(){
+		return $this->getNombreLargoInsumo();
+	}
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -252,34 +252,11 @@ class CtlInsumo
     /**
      * Get codigoNu
      *
-     * @return string
+     * @return string 
      */
     public function getCodigoNu()
     {
         return $this->codigoNu;
-    }
-
-    /**
-     * Set idUsuario
-     *
-     * @param integer $idUsuario
-     * @return CtlInsumo
-     */
-    public function setIdUsuario($idUsuario)
-    {
-        $this->idUsuario = $idUsuario;
-
-        return $this;
-    }
-
-    /**
-     * Get idUsuario
-     *
-     * @return integer
-     */
-    public function getIdUsuario()
-    {
-        return $this->idUsuario;
     }
 
     /**
@@ -298,7 +275,7 @@ class CtlInsumo
     /**
      * Get codigoSinab
      *
-     * @return string
+     * @return string 
      */
     public function getCodigoSinab()
     {
@@ -321,7 +298,7 @@ class CtlInsumo
     /**
      * Get codificacionInsumo
      *
-     * @return integer
+     * @return integer 
      */
     public function getCodificacionInsumo()
     {
@@ -344,7 +321,7 @@ class CtlInsumo
     /**
      * Get codigoSinabExt
      *
-     * @return integer
+     * @return integer 
      */
     public function getCodigoSinabExt()
     {
@@ -367,7 +344,7 @@ class CtlInsumo
     /**
      * Get listadoOficial
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getListadoOficial()
     {
@@ -390,7 +367,7 @@ class CtlInsumo
     /**
      * Get nombreLargoInsumo
      *
-     * @return string
+     * @return string 
      */
     public function getNombreLargoInsumo()
     {
@@ -413,7 +390,7 @@ class CtlInsumo
     /**
      * Get registroSchema
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getRegistroSchema()
     {
@@ -436,7 +413,7 @@ class CtlInsumo
     /**
      * Get detalleSchema
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSchema()
     {
@@ -459,7 +436,7 @@ class CtlInsumo
     /**
      * Get userIdSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getUserIdSchema()
     {
@@ -482,7 +459,7 @@ class CtlInsumo
     /**
      * Get ipUserSchema
      *
-     * @return string
+     * @return string 
      */
     public function getIpUserSchema()
     {
@@ -505,7 +482,7 @@ class CtlInsumo
     /**
      * Get estadoSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSchema()
     {
@@ -528,11 +505,34 @@ class CtlInsumo
     /**
      * Get enableSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEnableSchema()
     {
         return $this->enableSchema;
+    }
+
+    /**
+     * Set detalleInsumo
+     *
+     * @param string $detalleInsumo
+     * @return CtlInsumo
+     */
+    public function setDetalleInsumo($detalleInsumo)
+    {
+        $this->detalleInsumo = $detalleInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get detalleInsumo
+     *
+     * @return string 
+     */
+    public function getDetalleInsumo()
+    {
+        return $this->detalleInsumo;
     }
 
     /**
@@ -551,34 +551,11 @@ class CtlInsumo
     /**
      * Get ctlNivelUsoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso
+     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso 
      */
     public function getCtlNivelUsoid()
     {
         return $this->ctlNivelUsoid;
-    }
-
-    /**
-     * Set ctlFormaFarmaceutica
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica $ctlFormaFarmaceutica
-     * @return CtlInsumo
-     */
-    public function setCtlFormaFarmaceutica(\Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica $ctlFormaFarmaceutica = null)
-    {
-        $this->ctlFormaFarmaceutica = $ctlFormaFarmaceutica;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlFormaFarmaceutica
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica
-     */
-    public function getCtlFormaFarmaceutica()
-    {
-        return $this->ctlFormaFarmaceutica;
     }
 
     /**
@@ -597,7 +574,7 @@ class CtlInsumo
     /**
      * Get ctlPresentacionid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPresentacion
+     * @return \Maestro\ModeloBundle\Entity\CtlPresentacion 
      */
     public function getCtlPresentacionid()
     {
@@ -620,7 +597,7 @@ class CtlInsumo
     /**
      * Get ctlUnidadMedidaid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida
+     * @return \Maestro\ModeloBundle\Entity\CtlUnidadMedida 
      */
     public function getCtlUnidadMedidaid()
     {
@@ -643,34 +620,11 @@ class CtlInsumo
     /**
      * Get ctlProductoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlProducto
+     * @return \Maestro\ModeloBundle\Entity\CtlProducto 
      */
     public function getCtlProductoid()
     {
         return $this->ctlProductoid;
-    }
-
-    /**
-     * Set ctlSuministroid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlSuministro $ctlSuministroid
-     * @return CtlInsumo
-     */
-    public function setCtlSuministroid(\Maestro\ModeloBundle\Entity\CtlSuministro $ctlSuministroid = null)
-    {
-        $this->ctlSuministroid = $ctlSuministroid;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlSuministroid
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlSuministro
-     */
-    public function getCtlSuministroid()
-    {
-        return $this->ctlSuministroid;
     }
 
     /**
@@ -689,11 +643,34 @@ class CtlInsumo
     /**
      * Get ctlProgramaid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPrograma
+     * @return \Maestro\ModeloBundle\Entity\CtlPrograma 
      */
     public function getCtlProgramaid()
     {
         return $this->ctlProgramaid;
+    }
+
+    /**
+     * Set ctlFormaFarmaceutica
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica $ctlFormaFarmaceutica
+     * @return CtlInsumo
+     */
+    public function setCtlFormaFarmaceutica(\Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica $ctlFormaFarmaceutica = null)
+    {
+        $this->ctlFormaFarmaceutica = $ctlFormaFarmaceutica;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlFormaFarmaceutica
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlFormaFarmaceutica 
+     */
+    public function getCtlFormaFarmaceutica()
+    {
+        return $this->ctlFormaFarmaceutica;
     }
 
     /**
@@ -712,7 +689,7 @@ class CtlInsumo
     /**
      * Get grupoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlGrupo
+     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
      */
     public function getGrupoid()
     {
@@ -745,7 +722,7 @@ class CtlInsumo
     /**
      * Get ctlConcentracionid
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCtlConcentracionid()
     {
@@ -778,7 +755,7 @@ class CtlInsumo
     /**
      * Get ctlFormaFarmaceuticaid
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCtlFormaFarmaceuticaid()
     {
@@ -811,52 +788,10 @@ class CtlInsumo
     /**
      * Get ctlPrincipioActivoid
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCtlPrincipioActivoid()
     {
         return $this->ctlPrincipioActivoid;
-    }
-    /**
-     * @var string
-     */
-    private $detalleInsumo;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlConcentracionid;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlFormaFarmaceuticaid;
-
-
-    /**
-     * Set detalleInsumo
-     *
-     * @param string $detalleInsumo
-     * @return CtlInsumo
-     */
-    public function setDetalleInsumo($detalleInsumo)
-    {
-        $this->detalleInsumo = $detalleInsumo;
-
-        return $this;
-    }
-
-    /**
-     * Get detalleInsumo
-     *
-     * @return string
-     */
-    public function getDetalleInsumo()
-    {
-        return $this->detalleInsumo;
-    }
-
-    public function __toString() {
-      return $this->getNombreLargoInsumo();
     }
 }

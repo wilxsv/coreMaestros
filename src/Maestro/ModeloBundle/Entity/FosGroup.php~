@@ -55,7 +55,7 @@ class FosGroup
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class FosGroup
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -101,7 +101,7 @@ class FosGroup
     /**
      * Get roles
      *
-     * @return array
+     * @return array 
      */
     public function getRoles()
     {
@@ -134,14 +134,10 @@ class FosGroup
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUser()
     {
         return $this->user;
-    }
-
-    public function __toString(){
-      return $this->getName();
     }
 }

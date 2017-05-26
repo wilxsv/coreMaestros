@@ -301,4 +301,8 @@ class CtlPrograma
     {
         return $this->programa;
     }
+    
+    public function __toString(){
+		return $this->getNombrePrograma();
+	}
 }

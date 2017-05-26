@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlSuministro
  *
- * @ORM\Table(name="ctl_suministro", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_suministro_nombre_suministro_key", columns={"nombre_suministro"})}, indexes={@ORM\Index(name="IDX_23741A44D64E375F", columns={"ctl_suministroid"})})
+ * @ORM\Table(name="ctl_suministro", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_suministro_nombre_suministro_key", columns={"nombre_suministro"})}, indexes={@ORM\Index(name="IDX_23741A44D64E375F", columns={"ctl_suministroid"}), @ORM\Index(name="IDX_23741A44A9C99084", columns={"codificacion_suministro"}), @ORM\Index(name="IDX_23741A44DF5CB336", columns={"rol_solicita_suministro"}), @ORM\Index(name="IDX_23741A446EB0AB02", columns={"rol_valida_suministro"})})
  * @ORM\Entity
  */
 class CtlSuministro
@@ -39,42 +39,42 @@ class CtlSuministro
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
      */
     private $registroSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
      */
     private $detalleSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
      */
     private $userIdSchema;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
      */
     private $estadoSchema;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
      */
     private $enableSchema;
 
@@ -88,12 +88,42 @@ class CtlSuministro
      */
     private $ctlSuministroid;
 
+    /**
+     * @var \CtlCodificacion
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCodificacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="codificacion_suministro", referencedColumnName="id")
+     * })
+     */
+    private $codificacionSuministro;
+
+    /**
+     * @var \CtlRol
+     *
+     * @ORM\ManyToOne(targetEntity="CtlRol")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="rol_solicita_suministro", referencedColumnName="id")
+     * })
+     */
+    private $rolSolicitaSuministro;
+
+    /**
+     * @var \CtlRol
+     *
+     * @ORM\ManyToOne(targetEntity="CtlRol")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="rol_valida_suministro", referencedColumnName="id")
+     * })
+     */
+    private $rolValidaSuministro;
+
 
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -116,7 +146,7 @@ class CtlSuministro
     /**
      * Get nombreSuministro
      *
-     * @return string
+     * @return string 
      */
     public function getNombreSuministro()
     {
@@ -139,57 +169,11 @@ class CtlSuministro
     /**
      * Get detalleSuministro
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSuministro()
     {
         return $this->detalleSuministro;
-    }
-
-    /**
-     * Set registro
-     *
-     * @param \DateTime $registro
-     * @return CtlSuministro
-     */
-    public function setRegistro($registro)
-    {
-        $this->registro = $registro;
-
-        return $this;
-    }
-
-    /**
-     * Get registro
-     *
-     * @return \DateTime
-     */
-    public function getRegistro()
-    {
-        return $this->registro;
-    }
-
-    /**
-     * Set idUsuario
-     *
-     * @param integer $idUsuario
-     * @return CtlSuministro
-     */
-    public function setIdUsuario($idUsuario)
-    {
-        $this->idUsuario = $idUsuario;
-
-        return $this;
-    }
-
-    /**
-     * Get idUsuario
-     *
-     * @return integer
-     */
-    public function getIdUsuario()
-    {
-        return $this->idUsuario;
     }
 
     /**
@@ -208,7 +192,7 @@ class CtlSuministro
     /**
      * Get registroSchema
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getRegistroSchema()
     {
@@ -231,7 +215,7 @@ class CtlSuministro
     /**
      * Get detalleSchema
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSchema()
     {
@@ -254,7 +238,7 @@ class CtlSuministro
     /**
      * Get userIdSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getUserIdSchema()
     {
@@ -277,7 +261,7 @@ class CtlSuministro
     /**
      * Get ipUserSchema
      *
-     * @return string
+     * @return string 
      */
     public function getIpUserSchema()
     {
@@ -300,7 +284,7 @@ class CtlSuministro
     /**
      * Get estadoSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSchema()
     {
@@ -323,7 +307,7 @@ class CtlSuministro
     /**
      * Get enableSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEnableSchema()
     {
@@ -346,29 +330,20 @@ class CtlSuministro
     /**
      * Get ctlSuministroid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlSuministro
+     * @return \Maestro\ModeloBundle\Entity\CtlSuministro 
      */
     public function getCtlSuministroid()
     {
         return $this->ctlSuministroid;
     }
 
-    public function __toString(){
-      return $this->nombreSuministro;
-    }
-    /**
-     * @var string
-     */
-    private $codificacionSuministro;
-
-
     /**
      * Set codificacionSuministro
      *
-     * @param string $codificacionSuministro
+     * @param \Maestro\ModeloBundle\Entity\CtlCodificacion $codificacionSuministro
      * @return CtlSuministro
      */
-    public function setCodificacionSuministro($codificacionSuministro)
+    public function setCodificacionSuministro(\Maestro\ModeloBundle\Entity\CtlCodificacion $codificacionSuministro = null)
     {
         $this->codificacionSuministro = $codificacionSuministro;
 
@@ -378,30 +353,20 @@ class CtlSuministro
     /**
      * Get codificacionSuministro
      *
-     * @return string 
+     * @return \Maestro\ModeloBundle\Entity\CtlCodificacion 
      */
     public function getCodificacionSuministro()
     {
         return $this->codificacionSuministro;
     }
-    /**
-     * @var string
-     */
-    private $rolSolicitaSuministro;
-
-    /**
-     * @var string
-     */
-    private $rolValidaSuministro;
-
 
     /**
      * Set rolSolicitaSuministro
      *
-     * @param string $rolSolicitaSuministro
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rolSolicitaSuministro
      * @return CtlSuministro
      */
-    public function setRolSolicitaSuministro($rolSolicitaSuministro)
+    public function setRolSolicitaSuministro(\Maestro\ModeloBundle\Entity\CtlRol $rolSolicitaSuministro = null)
     {
         $this->rolSolicitaSuministro = $rolSolicitaSuministro;
 
@@ -411,7 +376,7 @@ class CtlSuministro
     /**
      * Get rolSolicitaSuministro
      *
-     * @return string 
+     * @return \Maestro\ModeloBundle\Entity\CtlRol 
      */
     public function getRolSolicitaSuministro()
     {
@@ -421,10 +386,10 @@ class CtlSuministro
     /**
      * Set rolValidaSuministro
      *
-     * @param string $rolValidaSuministro
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rolValidaSuministro
      * @return CtlSuministro
      */
-    public function setRolValidaSuministro($rolValidaSuministro)
+    public function setRolValidaSuministro(\Maestro\ModeloBundle\Entity\CtlRol $rolValidaSuministro = null)
     {
         $this->rolValidaSuministro = $rolValidaSuministro;
 
@@ -434,10 +399,14 @@ class CtlSuministro
     /**
      * Get rolValidaSuministro
      *
-     * @return string 
+     * @return \Maestro\ModeloBundle\Entity\CtlRol 
      */
     public function getRolValidaSuministro()
     {
         return $this->rolValidaSuministro;
     }
+    
+    public function __toString(){
+		return $this->getNombreSuministro();
+	}
 }

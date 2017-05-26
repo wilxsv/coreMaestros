@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlcodificacions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombrecodificacion</th>
+                <th>Metodocodificacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlCodificacion in ctlCodificacions %}
+            <tr>
+                <td><a href="{{ path('codificacion_show', { 'id': ctlCodificacion.id }) }}">{{ ctlCodificacion.id }}</a></td>
+                <td>{{ ctlCodificacion.nombreCodificacion }}</td>
+                <td>{{ ctlCodificacion.metodoCodificacion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('codificacion_show', { 'id': ctlCodificacion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('codificacion_edit', { 'id': ctlCodificacion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('codificacion_new') }}">Create a new ctlCodificacion</a>
+        </li>
+    </ul>
+{% endblock %}
