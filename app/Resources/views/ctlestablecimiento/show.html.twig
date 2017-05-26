@@ -1,12 +1,16 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
 {% block title %}establecimiento {{ ctlEstablecimiento.nombre }}{% endblock %}
 {% block body %}
+
+<div class="row-fluid">
+ <div class="span6">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4>Establecimiento: {{ ctlEstablecimiento.nombre }}</h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
     <table>
         <tbody>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ ctlEstablecimiento.nombre }}</td>
-            </tr>
             <tr>
                 <th>Direccion</th>
                 <td>{{ ctlEstablecimiento.direccion }}</td>
@@ -39,15 +43,30 @@
                 <th>Cantidad de familias</th>
                 <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
             </tr>
-            {% if app.user %}
-              <tr>
-                <td colspan="2"><b>Registro</b><hr/>
-                {{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
-                </td>
-              </tr>
-            {% endif %}
         </tbody>
     </table>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="span6">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4>Historial de cambios</h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
+     
+            {% if app.user %}
+                {{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
+            {% endif %}
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
     {% if is_granted('ROLE_VALIDA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
 	{% elseif is_granted('ROLE_HABILITA') %}

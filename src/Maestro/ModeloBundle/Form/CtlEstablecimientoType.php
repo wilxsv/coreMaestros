@@ -17,9 +17,9 @@ class CtlEstablecimientoType extends AbstractType
     {
         $builder->add('nombre', 'text', array('label'  => 'Nombre del establecimiento'))
         ->add('direccion', 'text', array('label'  => 'Dirección'))
-        ->add('telefono', 'integer', array('label'  => 'Telefono', 'attr' => array('min' => '20000000', 'max' => '79999999', 'maxlength' => '8' )))
-        ->add('fax', 'integer', array('label'  => 'Fax', 'attr' => array('min' => '20000000', 'max' => '79999999', 'maxlength' => '8' )))
-        ->add('anioApertura', 'integer', array('label'  => 'Año de apertura #### :','attr'=>  array('maxlength' => '4', 'max' => '2017', 'min' => '1990', 'placeholder' => '2017', 'value' => '2017')))
+        ->add('telefono', 'integer', array('label'  => 'Telefono', 'attr' => array('min' => '20000000', 'max' => '79999999', 'maxlength' => '8', 'onkeypress' => 'return (event.charCode >= 48 && event.charCode <= 57) || (event.keyCode === 8) || (event.keyCode === 46) || (event.keyCode === 37) || (event.keyCode === 39) && document.maestro_modelobundle_ctlestablecimiento.maestro_modelobundle_ctlestablecimiento_telefono.value.length<=8' )))
+        ->add('fax', 'integer', array('label'  => 'Fax', 'attr' => array('min' => '20000000', 'max' => '79999999', 'maxlength' => '8', 'onkeypress' => 'return (event.charCode >= 48 && event.charCode <= 57) || (event.keyCode === 8) || (event.keyCode === 46) || (event.keyCode === 37) || (event.keyCode === 39) && document.maestro_modelobundle_ctlestablecimiento.maestro_modelobundle_ctlestablecimiento_fax.value.length<=8')))
+        ->add('anioApertura', 'integer', array('label'  => 'Año de apertura #### :','attr'=>  array('maxlength' => '4', 'max' => '2017', 'min' => '1990', 'placeholder' => '2017', 'value' => '2017', )))
         ->add('cabezaMicrored', 'choice', array('label'  => 'Es cabeza de micro red :', 'choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, ))
         ->add('hospitalizacion', 'choice', array('label'  => 'Posee hospitalización :', 'choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, ))
         ->add('poblacionAsignana', 'integer', array('label'  => 'Población asignada', 'attr' => array('min' => '10', 'max' => '79999999')))
@@ -32,8 +32,8 @@ class CtlEstablecimientoType extends AbstractType
         ->add('ctlPrestacionid', 'entity',array('label'  => 'Prestaciones: ', 'class' => 'MaestroModeloBundle:CtlPrestacion', 'required' => false, 'multiple' => true))
         ->add('ctlRecursoHumanoid', 'entity',array('label'  => 'Recurso humano asignado: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => false, 'multiple' => true))
         ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta:', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
-        ->add('ctlSibasi', EntityType::class, array('label'  => 'SIBASI al que pertenece:', 'class' => 'MaestroModeloBundle:CtlEstablecimiento',
-						'query_builder' => function (EntityRepository $er) { return $er->createQueryBuilder('e')->where('e.id BETWEEN 6 AND 21')->orderBy('e.nombre', 'ASC');},'choice_label' => 'nombre', 'required' => true, 'multiple' => false))
+//        ->add('ctlSibasi', EntityType::class, array('label'  => 'SIBASI al que pertenece:', 'class' => 'MaestroModeloBundle:CtlEstablecimiento',
+//						'query_builder' => function (EntityRepository $er) { return $er->createQueryBuilder('e')->where('e.id BETWEEN 6 AND 21')->orderBy('e.nombre', 'ASC');},'choice_label' => 'nombre', 'required' => true, 'multiple' => false))
         ->add('detalleSchema', 'text', array('label'  => 'Observación', 'data' => ''))
         ->add('estadoSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'No validar','-1' => 'Denegar establecimiento', '1' => 'Validar establecimiento'), 'required'  => true, ))
         ->add('enableSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'No habilitar','-1' => 'Denegar establecimiento', '1' => 'Habilitar establecimiento'), 'required'  => true, ))

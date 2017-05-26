@@ -83,10 +83,10 @@ class CtlRol
     /**
      * Add ctlAcceso
      *
-     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
      * @return CtlRol
      */
-    public function addCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
+    public function addCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
     {
         $this->ctlAcceso[] = $ctlAcceso;
 
@@ -96,9 +96,9 @@ class CtlRol
     /**
      * Remove ctlAcceso
      *
-     * @param \AppBundle\Entity\CtlAcceso $ctlAcceso
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
      */
-    public function removeCtlAcceso(\AppBundle\Entity\CtlAcceso $ctlAcceso)
+    public function removeCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
     {
         $this->ctlAcceso->removeElement($ctlAcceso);
     }

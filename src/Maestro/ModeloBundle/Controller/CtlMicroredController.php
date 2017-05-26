@@ -39,6 +39,13 @@ class CtlMicroredController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $ctlMicrored->SetIdUsuarioReg($this->getUser()->getId());
+            $ctlMicrored->SetIdUsuarioMod($this->getUser()->getId());
+            $ctlMicrored->SetFechaHoraReg(new \DateTime('now'));
+            $ctlMicrored->SetFechaHoraMod(new \DateTime('now'));
+            $ctlMicrored->SetCodigoc3(0);
+            
             $em->persist($ctlMicrored);
             $em->flush($ctlMicrored);
 

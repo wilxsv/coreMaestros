@@ -1627,6 +1627,9 @@ class CtlEstablecimiento
   
     public function getCtlSibasi(){
 		return $this->getNombre();
-	}	
-	
+	}
+	public function addCtlSibasus(){	}
+	public function removeCtlSibasus(){	}
+	public function setCtlSibasi(){	}
+	public function ctlSibasi(){	}
 }

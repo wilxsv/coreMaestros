@@ -249,7 +249,7 @@ class CtlEstablecimientoController extends Controller
 		}
 		$this->get('session')->set('numero', $i );
 		if (strlen($list) > 5 ){
-			$list = '<li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">  Opciones</span><b class="arrow icon-angle-down"></b></a><ul class="submenu">'.$list.'</ul></li>';
+			$list = ''.$list.'';
 		}
 		
 		$this->get('session')->set('menu', $list);
