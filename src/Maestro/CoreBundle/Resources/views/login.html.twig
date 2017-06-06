@@ -1,49 +1,83 @@
-{% extends 'MaestroCoreBundle::login.html.twig' %}
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Ingreso al sistema</title>
 
-{% block fos_user_content %}
-{% trans_default_domain 'FOSUserBundle' %}
+		<meta name="description" content="User login page" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<h4 class="header blue lighter bigger">
-  <i class="icon-coffee green"></i>
-  Por favor, ingrese la informacion solicitada
-</h4>
-{% if error %}
-    <div>Error en las credenciales, verifique su usuario y clave</div>
-{% endif %}
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    {% endif %}
+    <!--basic styles-->
+		<link href="{{ asset('assets/') }}css/bootstrap.min.css" rel="stylesheet" />
+		<link href="{{ asset('assets/') }}css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="{{ asset('assets/') }}css/font-awesome.min.css" />
 
-    <div class="space-6"></div>
+    <!--[if IE 7]>  <link rel="stylesheet" href="{{ asset('assets/') }}css/font-awesome-ie7.min.css" />	<![endif]-->
+    <!--page specific plugin styles-->
+    <!--fonts-->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+    <!--ace styles-->
+    <link rel="stylesheet" href="{{ asset('assets/') }}css/ace.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/') }}css/ace-responsive.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/') }}css/ace-skins.min.css" />
+    <!--[if lte IE 8]> <link rel="stylesheet" href="{{ asset('assets/') }}css/ace-ie.min.css" /> <![endif]-->
+    <!--inline styles related to this page-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
 
-      <fieldset>
-        <label>
-          <span class="block input-icon input-icon-right">
-            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="span12" placeholder="correo@salud.gob.sv" />
-            <i class="icon-user"></i>
-          </span>
-        </label>
+	<body class="login-layout light-login">
+		<div class="main-container container-fluid">
+			<div class="main-content">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="login-container">
+							<div class="row-fluid">
+								<div class="center">
+									<h1>
+										<img src="{{ asset('assets/') }}img/logo.png"alt="" />
+									</h1>
+									<h4 class="blue">Sistema de Administración	de Catálogos maestros ({{ nombre }})</h4>
+								</div>
+							</div>
 
-        <label>
-          <span class="block input-icon input-icon-right">
-            <input type="password" id="password" name="_password" required="required" class="span12" placeholder="Contraseña" />
-            <i class="icon-lock"></i>
-          </span>
-        </label>
+							<div class="space-6"></div>
 
-        <div class="space"></div>
+							<div class="row-fluid">
+								<div class="position-relative">
+									<div id="login-box" class="login-box visible widget-box no-border">
+										<div class="widget-body">
+											<div class="widget-main">
+                        {% if app.request.hasPreviousSession %}
+                            {% for type, messages in app.session.flashbag.all() %}
+                                {% for message in messages %}
+                                    <div class="flash-{{ type }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
 
-        <div class="clearfix">
-          <label class="inline">
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            <span class="lbl"> Recordar</span>
-          </label>
+                        <div>
+                            {% block fos_user_content %}
+                            {% endblock fos_user_content %}
+                        </div>
 
-          <input type="submit" id="_submit" class="width-35 pull-right btn btn-small btn-primary" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-        </div>
 
-        <div class="space-4"></div>
-      </fieldset>
-</form>
-{% endblock fos_user_content %}
+											</div><!--/widget-main-->
+											<div class="toolbar clearfix">
+											</div>
+										</div><!--/widget-body-->
+									</div><!--/login-box-->
+								</div><!--/position-relative-->
+							</div>
+						</div>
+					</div><!--/.span-->
+				</div><!--/.row-fluid-->
+			</div>
+		</div><!--/.main-container-->
+        <!--inline scripts related to this page-->
+        <!-- footer -->
+        <!-- //footer -->
+        {% block footer_js %}{% endblock %}
+    	</body>
+    </html>
