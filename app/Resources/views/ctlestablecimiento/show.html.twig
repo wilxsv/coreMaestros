@@ -51,15 +51,37 @@
   </div>
  </div>
  <div class="span6">
-  <div class="widget-box">
-   <div class="widget-header widget-header-flat"><h4>Historial de cambios</h4></div>
-   <div class="widget-body">
-    <div class="widget-main">
-     <div class="row-fluid">
-     
-            {% if app.user %}
-                {{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
-            {% endif %}
+  <div class="row-fluid"></div>
+  <div class="span12 widget-container-span ui-sortable">
+   <div class="widget-box">
+    <div class="widget-header widget-header-flat"><h4>Ecos registrados a este establecimiento</h4></div>
+    <div class="widget-body">
+     <div class="widget-main">
+      <div class="row-fluid">
+       <p>eco 1</p><p>eco 2</p><p>eco 3</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div> 
+  <div class="span12 widget-container-span ui-sortable">
+   <div class="widget-box collapsed">
+    <div class="widget-header">
+     <h4>Historial de cambios</h4>
+     <div class="widget-toolbar">
+      <a href="#" data-action="settings"><i class="icon-cog"></i></a>
+      <a href="#" data-action="reload"><i class="icon-refresh"></i></a>
+      <a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a>
+      <a href="#" data-action="close"><i class="icon-remove"></i></a>
+     </div>
+    </div>
+    <div class="widget-body">
+     <div class="widget-body-inner" style="display: block;">
+      <div class="widget-main">
+       {% if app.user %}
+         {{ ctlEstablecimiento.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
+       {% endif %}
+      </div>
      </div>
     </div>
    </div>
@@ -67,7 +89,9 @@
  </div>
 </div>
 
-    {% if is_granted('ROLE_VALIDA') %}
+    {% if is_granted('ROLE_AGREGA') %}
+		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Agregar ECO</a>
+    {% elseif is_granted('ROLE_VALIDA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
 	{% elseif is_granted('ROLE_HABILITA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>

@@ -3,7 +3,7 @@
 {% block body %}
 {% if is_granted('ROLE_VALIDA') %}
 <div class="row-fluid">
- <div class="span4">
+ <div class="span12">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Acciones a tomar</h4></div>
    <div class="widget-body">
@@ -20,7 +20,7 @@
        {{ form_widget(edit_form) }}
 	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="0" />
 	  </div>
-      <input type="submit" value="Enviar observación y no validar" class="btn btn-inverse">
+      <input type="submit" value="Guardar cambios en establecimiento" class="btn btn-inverse">
       </form>
      </div>
     </div>
@@ -34,7 +34,7 @@
 
 
 <div class="row-fluid">
- <div class="span4">
+ <div class="span12">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Opciones a tomar</h4></div>
    <div class="widget-body">
@@ -60,7 +60,7 @@
 
 
 <div class="row-fluid">
- <div class="span6">
+ <div class="span12">
   <div class="widget-box">
    <div class="widget-header widget-header-flat"><h4>Modificar</h4></div>
    <div class="widget-body">
