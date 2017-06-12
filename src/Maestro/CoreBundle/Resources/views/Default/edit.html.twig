@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}Editar preferencias{% endblock %}
 {% block body %}
-	{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="Editar preferencias del perfil" class=" btn btn-primary"/>
-    </div>
-{{ form_end(form) }}
+	
+     <div class="control-group ">Nombre de usuario
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.username) }}</span></div>
+     </div>
+     <div class="control-group ">Correo asociado
+      <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(form.email) }}</span></div>
+     </div>
 {% endblock %}

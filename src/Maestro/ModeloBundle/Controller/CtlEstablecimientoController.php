@@ -50,7 +50,7 @@ class CtlEstablecimientoController extends Controller
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setUserIdSchema($this->getUser()->getId());
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
-            $ctlEstablecimiento->setEstadoSchema(0);
+            $ctlEstablecimiento->setEstadoSchema(1);
             $ctlEstablecimiento->setEnableSchema(0);
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $form->get('detalleSchema')->getData() ) );
             $em->persist($ctlEstablecimiento);
@@ -97,9 +97,23 @@ class CtlEstablecimientoController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+			
+			/*if ($editForm->get('enableSchema')->getData() == 1 || $editForm->get('estadoSchema')->getData() == 1)
+				exit(0);
+			*/
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
+            if ($editForm->get('estadoSchema')->getData() == 1){
+				$ctlEstablecimiento->setEstadoSchema( 1 );
+				$ctlEstablecimiento->setEnableSchema( 0 );
+			}elseif ($editForm->get('enableSchema')->getData() == 1){
+				$ctlEstablecimiento->setEstadoSchema( 1 );
+				$ctlEstablecimiento->setEnableSchema( 1 );
+			}elseif ($editForm->get('enableSchema')->getData() == -1 OR $editForm->get('estadoSchema')->getData() == -1){
+				$ctlEstablecimiento->setEstadoSchema( -1 );
+				$ctlEstablecimiento->setEnableSchema( -1 );
+			}
             $this->getDoctrine()->getManager()->flush();
             $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
             return $this->redirectToRoute('maestro_homepage');
@@ -153,8 +167,28 @@ class CtlEstablecimientoController extends Controller
      */
     public function homeAction()
     {
-		
         $em = $this->getDoctrine()->getManager();
+        //Para la parte publica
+		$sql = "WITH RECURSIVE path(nombre, path, parent, id, parent_id, direccion, telefono) AS (
+		 SELECT nombre, '/', NULL, id, id_establecimiento_padre, direccion, telefono FROM ctl_establecimiento WHERE id = 1038
+		 UNION
+		 SELECT ctl_establecimiento.nombre, parentpath.path || CASE parentpath.path WHEN '/' THEN '' ELSE '/' END || ctl_establecimiento.nombre, parentpath.path, ctl_establecimiento.id, ctl_establecimiento.id_establecimiento_padre, ctl_establecimiento.direccion, ctl_establecimiento.telefono
+		 FROM ctl_establecimiento, path as parentpath
+		 WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id)
+		SELECT * FROM path";
+		$rsm = new ResultSetMapping;
+		$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
+		$rsm->addFieldResult('e','nombre','nombre');
+		$rsm->addFieldResult('e','path','direccion');
+		$rsm->addFieldResult('e','telefono','telefono');
+		$rsm->addFieldResult('e','codestab_consumos','codestabConsumos');
+		$rsm->addFieldResult('e','id','id');
+		$rsm->addFieldResult('e','idmicrored','idmicrored');
+		$rsm->addFieldResult('e','id_establecimiento_padre','idEstablecimientoPadre');
+		$nq = $this->getDoctrine()->getManager()->createNativeQuery($sql, $rsm);
+		$establecimientos = $nq->getArrayResult();
+		
+		
         $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
         $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 		$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = -1 OR p.enableSchema = -1')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
@@ -184,11 +218,9 @@ class CtlEstablecimientoController extends Controller
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId())->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$personal = $query->getResult();
-			//$ = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
-			
 			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'listado' => $establecimientos));
 		
  
         
@@ -199,10 +231,6 @@ class CtlEstablecimientoController extends Controller
         
         $list = '';
         $pass = '';
-		$sql = "SELECT c0_.visible_acceso AS visible_acceso0, c0_.nombre_acceso AS nombre_acceso1, c0_.path_acceso AS path_acceso2, c1_.nombre_rol AS nombre_rol3 
-				FROM ctl_acceso c0_ INNER JOIN ctl_permisos AS p ON (c0_.id = p.acceso_id) INNER JOIN ctl_rol AS c1_ ON (c1_.id = p.rol_id) 
-				GROUP BY c0_.visible_acceso, c0_.nombre_acceso, c0_.path_acceso, c1_.nombre_rol, c0_.orden_acceso ORDER BY c0_.orden_acceso ASC";
-		
 		$rsm = new ResultSetMapping;
 		$rsm->addEntityResult('MaestroModeloBundle:CtlAcceso', 'a');
 		$rsm->addFieldResult('a','path_acceso','pathAcceso');
@@ -210,26 +238,17 @@ class CtlEstablecimientoController extends Controller
 		$rsm->addFieldResult('a','visible_acceso','visibleAcceso');
 		$rsm->addFieldResult('a','orden_acceso','ordenAcceso');
 		$rsm->addFieldResult('a','nombre_acceso','nombreAcceso');
-		
-		//$rsm->addJoinedEntityResult('MaestroModeloBundle:CtlRol', 'r', 'a', 'ctlRol');
-		//$rsm->addFieldResult('r','id','id');
-		//$rsm->addFieldResult('a','nombre_rol','nombre_rol');
 		$nq = $this->getDoctrine()->getManager()
     ->createNativeQuery('
         SELECT a.path_acceso, a.visible_acceso, a.orden_acceso, r.id , a.nombre_acceso
 		FROM ctl_acceso a INNER JOIN ctl_permisos AS p ON (a.id = p.acceso_id) INNER JOIN ctl_rol AS r ON (r.id = p.rol_id) ORDER BY a.orden_acceso ASC;
 		',
         $rsm
-    );//    $em->getResult();
-    $acceso = $nq->getArrayResult();//->getResult();
-
-
-
-		//$query = $em->createQuery('SELECT u.id FROM MaestroModeloBundle:CtlPais u WHERE (u.id > :mail)')->setParameters(array('mail' => 1));
-      //  $query->getResult();
+    );
+    $acceso = $nq->getArrayResult();
 		$i = 0;
 		foreach ($acceso as $accesos) {	
-			$pass = $pass.$accesos['pathAcceso'].'/';//->getPathAcceso().'/#'.$accesos->getId();//['pathAcceso'];
+			$pass = $pass.$accesos['pathAcceso'].'/';
 			$roles = $em->getRepository('MaestroModeloBundle:CtlRol')->findById($accesos['id']);
 			foreach ($roles as $rolt) {	
 			$i++;
@@ -239,11 +258,6 @@ class CtlEstablecimientoController extends Controller
 					$list = $list.'<li><a href="'.$url.'"><i class="icon-double-angle-right"></i> '.$accesos['nombreAcceso'].'</a></li>';	
 				}
 			}
-			//$this->get('session')->set('otro', $accesos['nombre_rol'] );
-			/*// && ( strpos((string)$accesos->getCtlRol(), $item->getNombreRol()) !== false ) ){
-				
-				
-			}*/
 			$i++;
 			
 		}
@@ -266,16 +280,6 @@ class CtlEstablecimientoController extends Controller
         ->setFrom('todasconsultoras@yandex.com')
         ->setTo($para)
         ->setBody( $this->renderView( 'Emails/actualizacion.html.twig', array('mensaje' => $mensaje)), 'text/html');
-                /*
-         * If you also want to include a plaintext version of the message
-        ->addPart(
-            $this->renderView(
-                'Emails/registration.txt.twig',
-                array('name' => $name)
-            ),
-            'text/plain'
-        )
-        */
 		$this->get('mailer')->send($message);
 	}
 	
