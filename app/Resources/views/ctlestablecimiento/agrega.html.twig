@@ -83,6 +83,13 @@
 </div>
 <a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {{ form_end(form) }}
+<div class="tags">
+ <button type="button" class="close">×</button></span>
+ <input name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." style="display: none;" type="text">
+ <input placeholder="Enter tags ..." type="text">
+ <ul class="typeahead dropdown-menu" style="top: 86.25px; left: 19px; display: none;"><li data-value="Arkansas" class="active"><a href="#">Arkan<strong>sa</strong>s</a></li><li data-value="Kansas"><a href="#">Kan<strong>sa</strong>s</a></li><li data-value="Massachusetts"><a href="#">Mas<strong>sa</strong>chusetts</a></li></ul>
+</div>
+<input type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." />
 {% endblock %}
 
 {% block footer_js %}
@@ -103,6 +110,15 @@
  				});
  				$('#modal-wizard .modal-header').ace_wizard();
  				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+ 				
+ 				var tag_input = $('#maestro_modelobundle_ctlestablecimiento_telefono');
+				if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) ) 
+					tag_input.tag({placeholder:tag_input.attr('placeholder')});
+				else {
+					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+					//$('#form-field-tags').autosize({append: "\n"});
+				}
  			})
  		</script>
 {% endblock %}
@@ -262,6 +278,157 @@
     $( "#maestro_modelobundle_ctlestablecimiento_idEstablecimientoPadre" ).combobox();
     $( "#toggle" ).on( "click", function() {
       $( "#maestro_modelobundle_ctlestablecimiento_idEstablecimientoPadre" ).toggle();
+    });
+  } );
+  </script>
+
+<script type="text/javascript">
+ function disableRed(a){
+    var e = document.getElementById("maestro_modelobundle_ctlestablecimiento_idTipoEstablecimiento");
+    var id = e.options[e.selectedIndex].value;
+    if ( id == 8 || id == 9){
+      document.getElementById("maestro_modelobundle_ctlestablecimiento_ctlServicioid").disabled = true;
+    }
+//      document.getElementById("maestro_modelobundle_ctlestablecimiento_ctlServicioid").disabled = true;
+ }
+</script>
+
+
+  <script>
+  $( function($, undefined) {
+    $.widget( "custom.combobox", {
+      _create: function() {
+        this.wrapper = $( "<span>" )
+          .addClass( "custom-combobox" )
+          .insertAfter( this.element );
+ 
+        this.element.hide();
+        this._createAutocomplete();
+        this._createShowAllButton();
+      },
+ 
+      _createAutocomplete: function() {
+        var selected = this.element.children( ":selected" ),
+          value = selected.val() ? selected.text() : "";
+ 
+        this.input = $( "<input>" )
+          .appendTo( this.wrapper )
+          .val( value )
+          .attr( "title", "" )
+          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .autocomplete({
+            delay: 0,
+            minLength: 0,
+            source: $.proxy( this, "_source" )
+          })
+          .tooltip({
+            classes: {
+              "ui-tooltip": "ui-state-highlight"
+            }
+          });
+ 
+        this._on( this.input, {
+          autocompleteselect: function( event, ui ) {
+            ui.item.option.selected = true;
+            this._trigger( "select", event, {
+              item: ui.item.option
+            });
+          },
+ 
+          autocompletechange: "_removeIfInvalid"
+        });
+      },
+ 
+      _createShowAllButton: function() {
+        var input = this.input,
+          wasOpen = false;
+ 
+        $( "<a>" )
+          .attr( "tabIndex", -1 )
+          .attr( "title", "Show All Items" )
+          .tooltip()
+          .appendTo( this.wrapper )
+          .button({
+            icons: {
+              primary: "ui-icon-triangle-1-s"
+            },
+            text: false
+          })
+          .removeClass( "ui-corner-all" )
+          .addClass( "custom-combobox-toggle ui-corner-right" )
+          .on( "mousedown", function() {
+            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+          })
+          .on( "click", function() {
+            input.trigger( "focus" );
+ 
+            // Close if already visible
+            if ( wasOpen ) {
+              return;
+            }
+ 
+            // Pass empty string as value to search for, displaying all results
+            input.autocomplete( "search", "" );
+          });
+      },
+ 
+      _source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+      },
+ 
+      _removeIfInvalid: function( event, ui ) {
+ 
+        // Selected an item, nothing to do
+        if ( ui.item ) {
+          return;
+        }
+ 
+        // Search for a match (case-insensitive)
+        var value = this.input.val(),
+          valueLowerCase = value.toLowerCase(),
+          valid = false;
+        this.element.children( "option" ).each(function() {
+          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+            this.selected = valid = true;
+            return false;
+          }
+        });
+ 
+        // Found a match, nothing to do
+        if ( valid ) {
+          return;
+        }
+ 
+        // Remove invalid value
+        this.input
+          .val( "" )
+          .attr( "title", value + " didn't match any item" )
+          .tooltip( "open" );
+        this.element.val( "" );
+        this._delay(function() {
+          this.input.tooltip( "close" ).attr( "title", "" );
+        }, 2500 );
+        this.input.autocomplete( "instance" ).term = "";
+      },
+ 
+      _destroy: function() {
+        this.wrapper.remove();
+        this.element.show();
+      }
+    });
+ 
+    $( "#maestro_modelobundle_ctlestablecimiento_idTipoEstablecimiento" ).combobox();
+    $( "#toggle" ).on( "click", function() {
+      $( "#maestro_modelobundle_ctlestablecimiento_idTipoEstablecimiento" ).toggle();
     });
   } );
   </script>

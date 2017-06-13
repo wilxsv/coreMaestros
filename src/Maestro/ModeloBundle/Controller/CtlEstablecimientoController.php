@@ -56,12 +56,13 @@ class CtlEstablecimientoController extends Controller
             $em->persist($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
 
-            return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId()));
+            return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId(), 'tmp' => 1 ));
         }
 
         return $this->render('ctlestablecimiento/agrega.html.twig', array(
             'ctlEstablecimiento' => $ctlEstablecimiento,
             'form' => $form->createView(),
+            
         ));
     }
 
@@ -69,17 +70,24 @@ class CtlEstablecimientoController extends Controller
      * Finds and displays a ctlEstablecimiento entity.
      *
      */
-    public function showAction(CtlEstablecimiento $ctlEstablecimiento)
+    public function showAction(CtlEstablecimiento $ctlEstablecimiento, $tmp=0 )
     {
         $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $denegaForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+        if ( isset($_GET["tmp"]) ){
+			$tmp = $_GET["tmp"];
+		} else {
+			$tmp = FALSE;
+		}
+        
 
         return $this->render('ctlestablecimiento/show.html.twig', array(
             'ctlEstablecimiento' => $ctlEstablecimiento,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'denega_form' => $denegaForm->createView(),
+            'tmp' => $tmp,
         ));
     }
 
@@ -97,10 +105,6 @@ class CtlEstablecimientoController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-			
-			/*if ($editForm->get('enableSchema')->getData() == 1 || $editForm->get('estadoSchema')->getData() == 1)
-				exit(0);
-			*/
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
@@ -113,6 +117,9 @@ class CtlEstablecimientoController extends Controller
 			}elseif ($editForm->get('enableSchema')->getData() == -1 OR $editForm->get('estadoSchema')->getData() == -1){
 				$ctlEstablecimiento->setEstadoSchema( -1 );
 				$ctlEstablecimiento->setEnableSchema( -1 );
+			}
+			if ( $editForm->get('userIdSchema')->getData() == $this->getUser()->getId() ){
+				$ctlEstablecimiento->setEnableSchema( 0 );
 			}
             $this->getDoctrine()->getManager()->flush();
             $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
@@ -169,27 +176,30 @@ class CtlEstablecimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         //Para la parte publica
-		$sql = "WITH RECURSIVE path(nombre, path, parent, id, parent_id, direccion, telefono) AS (
-		 SELECT nombre, '/', NULL, id, id_establecimiento_padre, direccion, telefono FROM ctl_establecimiento WHERE id = 1038
-		 UNION
-		 SELECT ctl_establecimiento.nombre, parentpath.path || CASE parentpath.path WHEN '/' THEN '' ELSE '/' END || ctl_establecimiento.nombre, parentpath.path, ctl_establecimiento.id, ctl_establecimiento.id_establecimiento_padre, ctl_establecimiento.direccion, ctl_establecimiento.telefono
-		 FROM ctl_establecimiento, path as parentpath
-		 WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id)
-		SELECT * FROM path";
+		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, e.id_tipo_establecimiento, e.idmicrored
+				FROM (
+					WITH RECURSIVE path(nombre, path, parent, id, parent_id, id_tipo_establecimiento, idmicrored) AS (
+						SELECT nombre, '/', NULL, id, id_establecimiento_padre, id_tipo_establecimiento, idmicrored FROM ctl_establecimiento WHERE id = 1038 AND enable_schema = 1
+						UNION
+						SELECT ctl_establecimiento.nombre, parentpath.path || CASE parentpath.path WHEN '/' THEN '' ELSE '/' END || ctl_establecimiento.nombre, parentpath.path, ctl_establecimiento.id, ctl_establecimiento.id_establecimiento_padre, ctl_establecimiento.id_tipo_establecimiento, ctl_establecimiento.idmicrored
+						FROM ctl_establecimiento, path as parentpath
+						WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id
+					)
+					SELECT * FROM path
+				) AS e";
 		$rsm = new ResultSetMapping;
 		$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
 		$rsm->addFieldResult('e','nombre','nombre');
 		$rsm->addFieldResult('e','path','direccion');
-		$rsm->addFieldResult('e','telefono','telefono');
-		$rsm->addFieldResult('e','codestab_consumos','codestabConsumos');
+		$rsm->addFieldResult('e','parent','telefono');
 		$rsm->addFieldResult('e','id','id');
-		$rsm->addFieldResult('e','idmicrored','idmicrored');
-		$rsm->addFieldResult('e','id_establecimiento_padre','idEstablecimientoPadre');
+		$rsm->addFieldResult('e','idmicrored','idestablesumeve');
+		$rsm->addFieldResult('e','id_tipo_establecimiento','poblacionAsignana');
 		$nq = $this->getDoctrine()->getManager()->createNativeQuery($sql, $rsm);
-		$establecimientos = $nq->getArrayResult();
+		$ctlEstablecimientos = $nq->getArrayResult();
 		
 		
-        $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
+        //$ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
         $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 		$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = -1 OR p.enableSchema = -1')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 		$denegados = $query->getResult();
@@ -213,14 +223,14 @@ class CtlEstablecimientoController extends Controller
 			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados));
 		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId())->addOrderBy('p.registroSchema', 'ASC')->getQuery();
+			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$personal = $query->getResult();
 			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'listado' => $establecimientos));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
 		
  
         

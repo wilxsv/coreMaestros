@@ -12,21 +12,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for ctlEstablecimiento in ctlEstablecimientos %}
+        {% for e in ctlEstablecimientos %}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="{{ path('establecimiento_show', { 'id': ctlEstablecimiento.id }) }}">{{ ctlEstablecimiento.nombre }}</a></td>
-                <td></td>
-            </tr>
-        {% endfor %}
-        
-        {% for e in listado %}
-            <tr>
-                <td>{{ e.direccion|join('/') }}</td>
-                <td></td>
-                <td></td>
+                <td>{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}</td>
+                <td>{{ e.telefono }}</td>
+                <td>{{ e.idestablesumeve }}</td>
                 <td><a href="{{ path('establecimiento_show', { 'id': e.id }) }}">{{ e.nombre }}</a></td>
                 <td></td>
             </tr>

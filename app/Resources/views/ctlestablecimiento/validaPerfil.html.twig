@@ -13,24 +13,26 @@
   <div class="tab-content">
    <div id="oficial" class="tab-pane active">
     <table id="sample-table" class="table table-striped table-bordered table-hover">
-     <thead>
-      <tr>
-       <th>Nombre</th>
-       <th>Direccion</th>
-       <th>Telefono</th>
-       <th>Tipo</th>
-      </tr>
-     </thead>
-     <tbody>
-      {% for ctlEstablecimiento in ctlEstablecimientos %}
-       <tr>
-        <td><a href="{{ path('establecimiento_show', { 'id': ctlEstablecimiento.id }) }}">{{ ctlEstablecimiento.nombre }}</a></td>
-        <td>{{ ctlEstablecimiento.direccion }}</td>
-        <td>{{ ctlEstablecimiento.telefono }}</td>
-        <td>{{ ctlEstablecimiento.idTipoEstablecimiento }}</td>
-       </tr>
-      {% endfor %}
-     </tbody>
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>SIBASI</th>
+                <th>Micro Red</th>
+                <th>Establecimiento</th>
+                <th>ECOS</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for e in ctlEstablecimientos %}
+            <tr>
+                <td>{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}</td>
+                <td>{{ e.telefono }}</td>
+                <td>{{ e.idestablesumeve }}</td>
+                <td><a href="{{ path('establecimiento_show', { 'id': e.id }) }}">{{ e.nombre }}</a></td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
    </div>
    <div id="denegados" class="tab-pane">
