@@ -199,7 +199,8 @@ class CtlEstablecimientoController extends Controller
 		$ctlEstablecimientos = $nq->getArrayResult();
 		
 		
-        //$ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
+        $red = $em->getRepository('MaestroModeloBundle:CtlMicrored')->findAll();
+        $eco = $em->getRepository('MaestroModeloBundle:CtlEquipo')->findAll();
         $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 		$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = -1 OR p.enableSchema = -1')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 		$denegados = $query->getResult();
@@ -215,12 +216,12 @@ class CtlEstablecimientoController extends Controller
 			$pendientes = $query->getResult();
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$enviados = $query->getResult();
-			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados));
+			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
-			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados));
+			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
@@ -228,9 +229,9 @@ class CtlEstablecimientoController extends Controller
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$personal = $query->getResult();
-			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
+			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red));
 		
  
         

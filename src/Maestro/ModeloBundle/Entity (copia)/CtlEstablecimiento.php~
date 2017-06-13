@@ -1,0 +1,418 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlEstablecimiento
+ *
+ * @ORM\Table(name="ctl_establecimiento", indexes={@ORM\Index(name="idx_332bd42c7ead49c7", columns={"id_municipio"}), @ORM\Index(name="IDX_332BD42CF12084AB", columns={"idmicrored"}), @ORM\Index(name="IDX_332BD42C3544B551", columns={"id_establecimiento_padre"}), @ORM\Index(name="IDX_332BD42C4E0E50FD", columns={"id_tipo_establecimiento"}), @ORM\Index(name="IDX_332BD42C8F14B160", columns={"id_cat_tipo_consumo"}), @ORM\Index(name="IDX_332BD42C952E1FD4", columns={"id_cat_tipo_farmacia"}), @ORM\Index(name="IDX_332BD42C9E67D4BE", columns={"id_cat_tipo_expediente"}), @ORM\Index(name="IDX_332BD42CCC3EE19E", columns={"id_cat_pruebas"}), @ORM\Index(name="IDX_332BD42CEF433A34", columns={"id_institucion"}), @ORM\Index(name="IDX_332BD42CF92045C1", columns={"id_cat_nivel_minsal"}), @ORM\Index(name="IDX_332BD42C9C132991", columns={"id_situacion_legal"})})
+ * @ORM\Entity
+ */
+class CtlEstablecimiento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_establecimiento_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=150, nullable=true)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=300, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=15, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="string", length=15, nullable=true)
+     */
+    private $fax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="latitud", type="decimal", precision=13, scale=8, nullable=true)
+     */
+    private $latitud;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="longitud", type="decimal", precision=13, scale=8, nullable=true)
+     */
+    private $longitud;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anio_apertura", type="integer", nullable=true)
+     */
+    private $anioApertura;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codestab_consumos", type="string", length=18, nullable=true)
+     */
+    private $codestabConsumos;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codestab_siaf", type="string", length=4, nullable=true)
+     */
+    private $codestabSiaf;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cod_ucsf", type="integer", nullable=true)
+     */
+    private $codUcsf;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inst_mortalidad", type="integer", nullable=true)
+     */
+    private $instMortalidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="digita_mortalidad", type="integer", nullable=true)
+     */
+    private $digitaMortalidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cvcd4", type="integer", nullable=true)
+     */
+    private $cvcd4;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idestablesimow", type="integer", nullable=true)
+     */
+    private $idestablesimow;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idestablevigepes", type="integer", nullable=true)
+     */
+    private $idestablevigepes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_vigepes", type="integer", nullable=true)
+     */
+    private $estadoVigepes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_vacunas", type="integer", nullable=true)
+     */
+    private $estadoVacunas;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_seps", type="integer", nullable=true)
+     */
+    private $estadoSeps;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_simow", type="integer", nullable=true)
+     */
+    private $estadoSimow;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idestablesumeve", type="integer", nullable=true)
+     */
+    private $idestablesumeve;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_sumeve", type="integer", nullable=true)
+     */
+    private $estadoSumeve;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="cabeza_microred", type="boolean", nullable=true)
+     */
+    private $cabezaMicrored;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="hospitalizacion", type="boolean", nullable=true)
+     */
+    private $hospitalizacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="poblacion_asignana", type="bigint", nullable=false)
+     */
+    private $poblacionAsignana;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_familia", type="bigint", nullable=false)
+     */
+    private $cantidadFamilia;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
+     */
+    private $registroSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_schema", type="text", nullable=true)
+     */
+    private $detalleSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id_schema", type="bigint", nullable=true)
+     */
+    private $userIdSchema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_user_schema", type="string", nullable=true)
+     */
+    private $ipUserSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado_schema", type="integer", nullable=true)
+     */
+    private $estadoSchema;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="enable_schema", type="integer", nullable=true)
+     */
+    private $enableSchema;
+
+    /**
+     * @var \CtlMicrored
+     *
+     * @ORM\ManyToOne(targetEntity="CtlMicrored")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idmicrored", referencedColumnName="id")
+     * })
+     */
+    private $idmicrored;
+
+    /**
+     * @var \CtlEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_establecimiento_padre", referencedColumnName="id")
+     * })
+     */
+    private $idEstablecimientoPadre;
+
+    /**
+     * @var \CtlTipoEstablecimiento
+     *
+     * @ORM\ManyToOne(targetEntity="CtlTipoEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_establecimiento", referencedColumnName="id")
+     * })
+     */
+    private $idTipoEstablecimiento;
+
+    /**
+     * @var \CtlMunicipio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlMunicipio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_municipio", referencedColumnName="id")
+     * })
+     */
+    private $idMunicipio;
+
+    /**
+     * @var \CtlCatalogoDetalle
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogoDetalle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cat_tipo_consumo", referencedColumnName="id")
+     * })
+     */
+    private $idCatTipoConsumo;
+
+    /**
+     * @var \CtlCatalogoDetalle
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogoDetalle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cat_tipo_farmacia", referencedColumnName="id")
+     * })
+     */
+    private $idCatTipoFarmacia;
+
+    /**
+     * @var \CtlCatalogoDetalle
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogoDetalle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cat_tipo_expediente", referencedColumnName="id")
+     * })
+     */
+    private $idCatTipoExpediente;
+
+    /**
+     * @var \CtlCatalogoDetalle
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogoDetalle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cat_pruebas", referencedColumnName="id")
+     * })
+     */
+    private $idCatPruebas;
+
+    /**
+     * @var \CtlInstitucion
+     *
+     * @ORM\ManyToOne(targetEntity="CtlInstitucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_institucion", referencedColumnName="id")
+     * })
+     */
+    private $idInstitucion;
+
+    /**
+     * @var \CtlCatalogoDetalle
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogoDetalle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cat_nivel_minsal", referencedColumnName="id")
+     * })
+     */
+    private $idCatNivelMinsal;
+
+    /**
+     * @var \CtlSituacionLegal
+     *
+     * @ORM\ManyToOne(targetEntity="CtlSituacionLegal")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_situacion_legal", referencedColumnName="id")
+     * })
+     */
+    private $idSituacionLegal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlPrestacion", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlPrestacionid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRecursoHumano", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlRecursoHumanoid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlServicio", mappedBy="ctlEstablecimientoid")
+     */
+    private $ctlServicioid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlPrestacionid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlRecursoHumanoid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlServicioid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

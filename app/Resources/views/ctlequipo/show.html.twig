@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}ECO {{ ctlEquipo.nombreEquipo }}{% endblock %}
+
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombreequipo</th>
+                <td>{{ ctlEquipo.nombreEquipo }}</td>
+            </tr>
+            <tr>
+                <th>Tipoequipo</th>
+                <td>{% if ctlEquipo.tipoEquipo == 0 %}ECO Familiar{% else %}ECO Especializado{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>    
+
+<a href="{{ path('eco_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('eco_edit', { 'id': ctlEquipo.id }) }}" class="btn btn-primary">Editar</a>
+{{ form_start(delete_form) }}<input type="submit" value="Eliminar servicio" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+{% endblock %}

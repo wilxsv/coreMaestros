@@ -83,13 +83,6 @@
 </div>
 <a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {{ form_end(form) }}
-<div class="tags">
- <button type="button" class="close">×</button></span>
- <input name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." style="display: none;" type="text">
- <input placeholder="Enter tags ..." type="text">
- <ul class="typeahead dropdown-menu" style="top: 86.25px; left: 19px; display: none;"><li data-value="Arkansas" class="active"><a href="#">Arkan<strong>sa</strong>s</a></li><li data-value="Kansas"><a href="#">Kan<strong>sa</strong>s</a></li><li data-value="Massachusetts"><a href="#">Mas<strong>sa</strong>chusetts</a></li></ul>
-</div>
-<input type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." />
 {% endblock %}
 
 {% block footer_js %}
@@ -117,6 +110,14 @@
 				else {
 					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
 					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+					//$('#form-field-tags').autosize({append: "\n"});
+				}
+				var tag_inputf = $('#maestro_modelobundle_ctlestablecimiento_fax');
+				if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) ) 
+					tag_inputf.tag({placeholder:tag_inputf.attr('placeholder')});
+				else {
+					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+					tag_inputf.after('<textarea id="'+tag_inputf.attr('id')+'" name="'+tag_inputf.attr('name')+'" rows="3">'+tag_inputf.val()+'</textarea>').remove();
 					//$('#form-field-tags').autosize({append: "\n"});
 				}
  			})

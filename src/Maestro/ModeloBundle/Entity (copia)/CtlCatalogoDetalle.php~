@@ -1,0 +1,78 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlCatalogoDetalle
+ *
+ * @ORM\Table(name="ctl_catalogo_detalle", indexes={@ORM\Index(name="IDX_6D553C5CB77787D0", columns={"id_catalogo"})})
+ * @ORM\Entity
+ */
+class CtlCatalogoDetalle
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_catalogo_detalle_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=100, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_reg", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioReg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_reg", type="datetime", nullable=true)
+     */
+    private $fechaHoraReg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_usuario_mod", type="string", length=50, nullable=true)
+     */
+    private $idUsuarioMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora_mod", type="datetime", nullable=true)
+     */
+    private $fechaHoraMod;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="abreviatura", type="string", length=10, nullable=true)
+     */
+    private $abreviatura;
+
+    /**
+     * @var \CtlCatalogo
+     *
+     * @ORM\ManyToOne(targetEntity="CtlCatalogo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_catalogo", referencedColumnName="id")
+     * })
+     */
+    private $idCatalogo;
+
+
+}

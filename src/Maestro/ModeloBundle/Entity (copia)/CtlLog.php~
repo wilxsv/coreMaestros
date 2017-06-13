@@ -1,0 +1,40 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlLog
+ *
+ * @ORM\Table(name="ctl_log")
+ * @ORM\Entity
+ */
+class CtlLog
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_log_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_log", type="string", length=255, nullable=false)
+     */
+    private $nombreLog;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion_log", type="text", nullable=true)
+     */
+    private $descripcionLog;
+
+
+}

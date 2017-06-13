@@ -1,3 +1,6 @@
+maestro_modelo_eco:
+    resource: "@MaestroModeloBundle/Resources/config/routing/ctlequipo.yml"
+    prefix:   /eco
 maestro_modelo_admin_roles:
     resource: "@MaestroModeloBundle/Resources/config/routing/ctlrol.yml"
     prefix:   /admin/roles

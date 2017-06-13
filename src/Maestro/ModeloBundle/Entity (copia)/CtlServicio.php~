@@ -1,0 +1,72 @@
+<?php
+
+namespace Maestro\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CtlServicio
+ *
+ * @ORM\Table(name="ctl_servicio", uniqueConstraints={@ORM\UniqueConstraint(name="ctl_servicio_nombre_servicio_key", columns={"nombre_servicio"})}, indexes={@ORM\Index(name="IDX_A2761EFCFD3F56F4", columns={"ctl_servicioid"})})
+ * @ORM\Entity
+ */
+class CtlServicio
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ctl_servicio_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_servicio", type="string", length=255, nullable=false)
+     */
+    private $nombreServicio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle_servicio", type="text", nullable=true)
+     */
+    private $detalleServicio;
+
+    /**
+     * @var \CtlServicio
+     *
+     * @ORM\ManyToOne(targetEntity="CtlServicio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     * })
+     */
+    private $ctlServicioid;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlEstablecimiento", inversedBy="ctlServicioid")
+     * @ORM\JoinTable(name="ctl_servicio_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ctlEstablecimientoid;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlEstablecimientoid = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

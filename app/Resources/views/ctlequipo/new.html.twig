@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Agregar ECO {{ app.session.get('nombre') }}{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Agregar" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+<a href="{{ path('eco_index') }}" class="btn">Regresar a listado</a>
+{% endblock %}

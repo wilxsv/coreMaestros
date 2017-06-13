@@ -16,9 +16,17 @@
             <tr>
                 <td>{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}</td>
                 <td>{{ e.telefono }}</td>
-                <td>{{ e.idestablesumeve }}</td>
+                <td>
+                 {% for r in red %}
+                   {% if e.idestablesumeve == r.id %}{{ r.nombre }}{% endif %}
+                 {% endfor %}
+                </td>
                 <td><a href="{{ path('establecimiento_show', { 'id': e.id }) }}">{{ e.nombre }}</a></td>
-                <td></td>
+                <td>
+                 {% for m in eco %}
+                   {% if e.id == m.establecimiento %}{{ m.nombreEquipo }}, {% endif %}
+                 {% endfor %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

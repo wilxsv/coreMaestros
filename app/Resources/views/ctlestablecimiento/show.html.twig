@@ -95,7 +95,9 @@
 </div>
 
     {% if is_granted('ROLE_AGREGA') %}
-		<a href="#" class="btn btn-primary">Agregar ECO</a>
+		{{ app.session.set('id', ctlEstablecimiento.id) }}
+		{{ app.session.set('nombre', ctlEstablecimiento.nombre) }}
+		<a href="{{ path('eco_new') }}" class="btn btn-primary">Agregar ECO</a>
 		{% if (ctlEstablecimiento.userIdSchema == app.user.id) %}
 			<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Modificar registro de establecimiento</a>
 		{% endif %}
