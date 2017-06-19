@@ -247,4 +247,39 @@ class CtlMicrored
     public function __toString(){
 		return $this->getNombre();
 	}
+	
+	
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlEstablecimiento
+     * 
+     * @ORM\ManyToOne(targetEntity="CtlEstablecimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sibasi_id", referencedColumnName="id")
+     * })
+     */
+    private $sibasi;
+
+
+    /**
+     * Set sibasi
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlEstablecimiento $sibasi
+     * @return CtlMicrored
+     */
+    public function setSibasi(\Maestro\ModeloBundle\Entity\CtlEstablecimiento $sibasi = null)
+    {
+        $this->sibasi = $sibasi;
+
+        return $this;
+    }
+
+    /**
+     * Get sibasi
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlEstablecimiento 
+     */
+    public function getSibasi()
+    {
+        return $this->sibasi;
+    }
 }

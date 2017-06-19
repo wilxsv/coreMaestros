@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Establecimiento cabeza de red</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
@@ -12,6 +13,7 @@
         {% for ctlMicrored in ctlMicroreds %}
             <tr>
                 <td>{{ ctlMicrored.nombre }}</td>
+                <td>{{ ctlMicrored.sibasi }}</td>
                 <td>
                   <a href="{{ path('red_show', { 'id': ctlMicrored.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                   <a href="{{ path('red_edit', { 'id': ctlMicrored.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

@@ -75,6 +75,10 @@ class CtlEstablecimientoController extends Controller
         $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $denegaForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
+        
+        $em = $this->getDoctrine()->getManager();
+        $eco = $em->getRepository('MaestroModeloBundle:CtlEquipo')->findAll();
+        
         if ( isset($_GET["tmp"]) ){
 			$tmp = $_GET["tmp"];
 		} else {
@@ -87,7 +91,7 @@ class CtlEstablecimientoController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'denega_form' => $denegaForm->createView(),
-            'tmp' => $tmp,
+            'tmp' => $tmp, 'eco' => $eco,
         ));
     }
 
@@ -231,7 +235,7 @@ class CtlEstablecimientoController extends Controller
 			$personal = $query->getResult();
 			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red, 'eco' => $eco));
 		
  
         

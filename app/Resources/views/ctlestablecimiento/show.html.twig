@@ -63,7 +63,7 @@
     <div class="widget-body">
      <div class="widget-main">
       <div class="row-fluid">
-       <p>eco 1</p><p>eco 2</p><p>eco 3</p>
+       {% for m in eco %}{% if ctlEstablecimiento.id == m.establecimiento %}<p>{{ m.nombreEquipo }}</p>{% endif %}{% endfor %}
       </div>
      </div>
     </div>
