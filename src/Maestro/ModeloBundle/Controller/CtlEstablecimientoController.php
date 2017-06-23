@@ -194,7 +194,7 @@ class CtlEstablecimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         //Para la parte publica
-		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, e.id_tipo_establecimiento, m.nombre AS idmicrored
+		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, t.nombre AS id_tipo_establecimiento, m.nombre AS idmicrored
 				FROM ctl_microred AS m FULL OUTER JOIN (
 					WITH RECURSIVE path(nombre, path, parent, id, parent_id, id_tipo_establecimiento, idmicrored) AS (
 						SELECT nombre, '/', NULL, id, id_establecimiento_padre, id_tipo_establecimiento, idmicrored FROM ctl_establecimiento WHERE id = 1038 AND enable_schema = 1
@@ -204,7 +204,8 @@ class CtlEstablecimientoController extends Controller
 						WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id
 					)
 					SELECT * FROM path
-				) AS e  ON e.idmicrored = m.id";
+				) AS e  ON e.idmicrored = m.id
+				FULL OUTER JOIN ctl_tipo_establecimiento AS t ON e.id_tipo_establecimiento = t.id";
 		$rsm = new ResultSetMapping;
 		$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
 		$rsm->addFieldResult('e','nombre','nombre');
@@ -219,6 +220,7 @@ class CtlEstablecimientoController extends Controller
 		
         $red = $em->getRepository('MaestroModeloBundle:CtlMicrored')->findAll();
         $eco = $em->getRepository('MaestroModeloBundle:CtlEquipo')->findAll();
+        $tipo = $em->getRepository('MaestroModeloBundle:CtlTipoEstablecimiento')->findAll();
         $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 		$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = -1 OR p.enableSchema = -1')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 		$denegados = $query->getResult();
@@ -249,7 +251,7 @@ class CtlEstablecimientoController extends Controller
 			$personal = $query->getResult();
 			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red, 'eco' => $eco));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red, 'eco' => $eco, 'tipo' => $tipo));
 		
  
         

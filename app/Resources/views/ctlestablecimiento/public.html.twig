@@ -16,7 +16,8 @@ var data = [
 		sibasi:'{{e.telefono}}', 
 		red:'{{e.fax}}', 
 		nombre: '{{e.nombre}}', 
-		eco:{% set t = false %}{% for m in eco %}{% if e.id == m.establecimiento %}{% set t = true %}{% endif %}{% endfor %}{% if t%}true{% else %}false{% endif %} 
+		eco:{% set t = false %}{% for m in eco %}{% if e.id == m.establecimiento %}{% set t = true %}{% endif %}{% endfor %}{% if t%}true{% else %}false{% endif %},
+		tipo:'{{e.poblacionAsignana}}'
 	},
 	{% endfor %} 
 ];
@@ -28,7 +29,7 @@ new FancyGrid({
   i18n: 'es',
   //grouping: { by: 'region' },
   renderTo: 'tabla',
-  height: 500,
+  height: 400,
   paging: true,
   data: data,
   selModel: 'row',
@@ -38,21 +39,20 @@ new FancyGrid({
     sortable: true,
     resizable: true,    
     editable: false,
-    width: 180,
     filter: { header: true }
   },
   columns: [
-	{index: 'region',title: 'Region'},
-	{index: 'sibasi', title: 'SIBASI' },
-	{index: 'red', title: 'Micro Red', type: 'combo', data: [''{% for e in red %},'{{e.nombre}}'{% endfor %}] },
-	{index: 'nombre', title: 'Nombre',width: 400 },
-	{index: 'eco', width: 100, title: 'Posee ECO', type: 'checkbox' }]
+	{index: 'region',title: 'Region',width: 200},
+	{index: 'sibasi', title: 'SIBASI',width: 200 },
+	{index: 'red', title: 'Micro Red', type: 'combo', data: [''{% for e in red %},'{{e.nombre}}'{% endfor %}],width: 200 },
+	{index: 'nombre', title: 'Nombre',flex: 1 },
+	{index: 'tipo', title: 'Tipo de establecimiento', type: 'combo', data: [''{% for e in tipo %},'{{e.nombre}}'{% endfor %}],width: 300 },
+	{index: 'eco', width: 100, title: 'Posee ECO', type: 'checkbox',
+      flex: 1 }]
 });
 
 };
 </script>
-
-    
 {% if is_granted('ROLE_AGREGA') %}
 <a href="{{ path('establecimiento_add') }}" class="btn btn-primary">Agregar Establecimiento</a>
 {% endif %}
