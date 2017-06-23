@@ -384,24 +384,50 @@ class CtlEstablecimiento
      */
     private $idSituacionLegal;
 
+
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CtlPrestacion", mappedBy="ctlEstablecimientoid")
+     * @ORM\ManyToMany(targetEntity="CtlPrestacion", inversedBy="CtlEstablecimiento")
+     * @ORM\JoinTable(name="ctl_prestacion_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_prestacionid", referencedColumnName="id")
+     *   }
+     * )
      */
     private $ctlPrestacionid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CtlRecursoHumano", mappedBy="ctlEstablecimientoid")
+     * @ORM\ManyToMany(targetEntity="CtlRecursoHumano", inversedBy="CtlEstablecimiento")
+     * @ORM\JoinTable(name="ctl_recurso_humano_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_recurso_humanoid", referencedColumnName="id")
+     *   }
+     * )
      */
     private $ctlRecursoHumanoid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CtlServicio", mappedBy="ctlEstablecimientoid")
+     * @ORM\ManyToMany(targetEntity="CtlServicio", inversedBy="CtlEstablecimiento")
+     * @ORM\JoinTable(name="ctl_servicio_ctl_establecimiento",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_establecimientoid", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_servicioid", referencedColumnName="id")
+     *   }
+     * )
      */
     private $ctlServicioid;
 

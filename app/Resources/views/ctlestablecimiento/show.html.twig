@@ -14,42 +14,46 @@
    <div class="widget-body">
     <div class="widget-main">
      <div class="row-fluid">
-    <table>
-        <tbody>
-            <tr>
-                <th>Direccion</th>
-                <td>{{ ctlEstablecimiento.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Telefono</th>
-                <td>{{ ctlEstablecimiento.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Fax</th>
-                <td>{{ ctlEstablecimiento.fax }}</td>
-            </tr>
-            <tr>
-                <th>Año de apertura</th>
-                <td>{{ ctlEstablecimiento.anioApertura }}</td>
-            </tr>
-            <tr>
-                <th>Es cabeza de micro red</th>
-                <td>{% if ctlEstablecimiento.cabezaMicrored %}Si{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Posee hospitalizacion</th>
-                <td>{% if ctlEstablecimiento.hospitalizacion %}Si{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Población asignada</th>
-                <td>{{ ctlEstablecimiento.poblacionAsignana }}</td>
-            </tr>
-            <tr>
-                <th>Cantidad de familias</th>
-                <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
-            </tr>
-        </tbody>
-    </table>
+     
+     
+ <div >
+  <div class="tabbable tabs-left">
+   <ul class="nav nav-tabs" id="myTab3">
+    <li class="active"><a data-toggle="tab" href="#home1"><i class="icon-dashboard bigger-110"></i>Datos generales</a></li>
+    <li class=""><a data-toggle="tab" href="#home2"><i class="icon-user bigger-110"></i>Datos administrativos</a></li>
+    <li class=""><a data-toggle="tab" href="#home3"><i class="icon-user bigger-110"></i>Recurso Humano y servicios</a></li>
+    <li class=""><a data-toggle="tab" href="#home4"><i class="icon-rocket bigger-110"></i>Localización</a></li>
+   </ul>
+   <div class="tab-content">
+    <div id="home1" class="tab-pane in active">
+     <p>Nombre: {{ ctlEstablecimiento.nombre }}</p>
+     <p>Dirección: {{ ctlEstablecimiento.direccion }}</p>
+     <p>Telefonos: {{ ctlEstablecimiento.telefono }}</p>
+     <p>Fax: {{ ctlEstablecimiento.fax }}</p>
+     <p>Año de apertura: {{ ctlEstablecimiento.anioApertura }}</p>
+    </div>
+    <div id="home2" class="tab-pane">
+     <p>Posee hospitalizacion: {% if ctlEstablecimiento.hospitalizacion %}Si{% else %}No{% endif %}</p>
+     <p>Población asignada: {{ ctlEstablecimiento.poblacionAsignana }}</p>
+     <p>Familias asignadas: {{ ctlEstablecimiento.cantidadFamilia }}</p>
+     <p>Administración: {{ ctlEstablecimiento.idEstablecimientoPadre }} </p>
+     <p>Tipo de establecimiento: {{ ctlEstablecimiento.idTipoEstablecimiento }}</p>
+     <p>Situación Legal: {{ ctlEstablecimiento.idSituacionLegal }}</p>
+    </div>
+    <div id="home3" class="tab-pane">
+     <p>Prestaciones: {{ ctlEstablecimiento.ctlPrestacionid | join(' | ') }}</p>
+     <p>Recurso Humano: {{ ctlEstablecimiento.ctlRecursoHumanoid | join(' | ') }} </p>
+     <p>Servicios: {{ ctlEstablecimiento.ctlServicioid | join(' | ') }} </p>
+    </div>
+    <div id="home4" class="tab-pane">
+     <p>Latitud: {{ ctlEstablecimiento.latitud }}</p>
+     <p>Longitud: {{ ctlEstablecimiento.longitud }} </p>
+     <p>Micro Red: {{ ctlEstablecimiento.idmicrored }} </p>
+     <p>Municipio {{ ctlEstablecimiento.idMunicipio }} </p>
+    </div>
+   </div>
+  </div>
+ </div>
      </div>
     </div>
    </div>
@@ -63,7 +67,11 @@
     <div class="widget-body">
      <div class="widget-main">
       <div class="row-fluid">
-       {% for m in eco %}{% if ctlEstablecimiento.id == m.establecimiento %}<p>{{ m.nombreEquipo }}</p>{% endif %}{% endfor %}
+       {% for m in eco %}
+		{% if ctlEstablecimiento.id == m.establecimiento %}
+			<p><a href="{{ path('eco_show', { 'id': m.id }) }}">{{ m.nombreEquipo }}<i class="icon-show bigger-120"></i></a> {{ m.recurso | join(' | ') }}</p>
+		{% endif %}
+	   {% endfor %}
       </div>
      </div>
     </div>

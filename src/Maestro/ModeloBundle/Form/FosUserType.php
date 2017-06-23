@@ -13,10 +13,13 @@ class FosUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('enabled', 'choice', array('label'  => 'Habilitado :', 'choices'=> array(FALSE => 'No', TRUE => 'Si'), 'required'  => true, ))
+        $builder
+		  ->add('enabled', 'choice', array('label'  => 'Habilitado :', 'choices'=> array(FALSE => 'No', TRUE => 'Si'), 'required'  => true, ))
+          ->add('email', 'email', array('label' => 'Correo de usuaria', 'required'  => true,   ))
           ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true,   ))
-        ->add('fullname', 'text', array('label' => 'Nombre completo', 'required'  => true ))
-          //->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false,))
+          ->add('fullname', 'text', array('label' => 'Nombre completo', 'required'  => true ))
+          ->add('password', 'password', array('label' => 'Nombre completo', 'required'  => true ))
+          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false,))
           ->add('establecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => true, 'multiple' => false))
              
        ;

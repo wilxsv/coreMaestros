@@ -15,7 +15,7 @@ class CtlEquipoType extends AbstractType
     {
         $builder
 			->add('nombreEquipo', 'text', array('label'  => 'Nombre del ECO'))
-			->add('tipoEquipo', 'choice', array('label'  => 'Tipo de ECO :', 'choices'=> array('0' => 'ECO Familiar', '1' => 'ECO Especializado'), 'required'  => true, ))
+			->add('tipoEquipo', 'choice', array('label'  => 'Tipo de ECO :', 'choices'=> array('0' => 'ECO Basico', '1' => 'ECO Especializado'), 'required'  => true, ))
 			->add('recurso', 'entity',array('label'  => 'Recurso humano asignado al ECO: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => TRUE, 'multiple' => true));
     }
     

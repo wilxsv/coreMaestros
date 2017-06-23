@@ -52,9 +52,7 @@
                 <td>{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}</td>
                 <td>{{ e.telefono }}</td>
                 <td>
-                 {% for r in red %}
-                   {% if e.idestablesumeve == r.id %}{{ r.nombre }}{% endif %}
-                 {% endfor %}
+                 
                 </td>
                 <td><a href="{{ path('establecimiento_show', { 'id': e.id }) }}">{{ e.nombre }}</a></td>
                 <td>

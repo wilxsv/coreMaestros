@@ -58,22 +58,28 @@ class FosUserController extends Controller
         $fosUser = new Fosuser();
         $form = $this->createForm('Maestro\ModeloBundle\Form\FosUserType', $fosUser);
         $form->handleRequest($request);
+        $tmp = '';
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {/*
             $em = $this->getDoctrine()->getManager();
             $fosUser->setRoles('');
             $em = $this->getDoctrine()->getManager();
          	$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find( $form->get('roles')->getData() );
             $fosUser->addRole($rol->getNombreRol());
             $em->persist($fosUser);
-            $em->flush($fosUser);
+            $em->flush($fosUser);*/
 
-            return $this->redirectToRoute('admin_users_show', array('id' => $fosUser->getId()));
+            //return $this->redirectToRoute('admin_users_show', array('id' => $fosUser->getId())); php app/console fos:user:promote testuser ROLE_ADMIN
+            $last_line = system('cd .. && php app/console fos:user:create '.$form->get('username')->getData().' '.$form->get('email')->getData().' '.$form->get('password')->getData() , $retval);
+            $tmp = '<hr />Last line of the output: ' . $last_line . '<hr />Return value: ' 	;
+            if (!$retval){
+//	         $last_line = system('cd .. && php app/console fos:user:create '.$form->get('username')->getData().' '.$form->get('email')->getData().' '.$form->get('password')->getData() , $retval);
+			}
         }
 
         return $this->render('fosuser/new.html.twig', array(
             'fosUser' => $fosUser,
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'tmp' => $tmp 
         ));
     }
 
@@ -159,9 +165,11 @@ class FosUserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($fosUser);
-            $em->flush($fosUser);
+            $last_line = system('cd .. && php app/console fos:user:deactivate '.$form->get('username')->getData() , $retval);
+            //$tmp = '<hr />Last line of the output: ' . $last_line . '<hr />Return value: ' . $retval;
+            if (!$retval){
+				
+			}
         }
 
         return $this->redirectToRoute('admin_users_index');

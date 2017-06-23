@@ -70,7 +70,7 @@ class CtlEstablecimientoController extends Controller
      * Finds and displays a ctlEstablecimiento entity.
      *
      */
-    public function showAction(CtlEstablecimiento $ctlEstablecimiento, $tmp=0 )
+    public function showAction(CtlEstablecimiento $ctlEstablecimiento )
     {
         $deleteForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlEstablecimientoType', $ctlEstablecimiento);
@@ -126,8 +126,8 @@ class CtlEstablecimientoController extends Controller
 				$ctlEstablecimiento->setEnableSchema( 0 );
 			}
             $this->getDoctrine()->getManager()->flush();
-            $url =  'http://localhost:8080/v1/info/enviar';
-            $url = $this->container->getParameter('database_name');
+            /*$url =  'http://localhost:8080/v1/info/enviar';
+            //$url = $this->container->getParameter('database_name');
             $data = array('tocken' => 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'maestro' => 'establecimiento');
             $options = array(
 				'http' => array(
@@ -138,7 +138,7 @@ class CtlEstablecimientoController extends Controller
 			);
             $context  = stream_context_create($options);
             $result = file_get_contents($url, false, $context);
-            if ($result === FALSE) { /* Handle error */ }
+            if ($result === FALSE) { /* Handle error */ //}
 
             $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
             return $this->redirectToRoute('maestro_homepage');
@@ -186,15 +186,12 @@ class CtlEstablecimientoController extends Controller
             ->getForm()
         ;
     }
-    /**
-     * Lists all public ctlEstablecimiento.
-     *
-     */
-    public function homeAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        //Para la parte publica
-		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, t.nombre AS id_tipo_establecimiento, m.nombre AS idmicrored
+    
+    public function getEstablecimientos( $all ){
+		$em = $this->getDoctrine()->getManager();
+		if ( $all ){
+			//Para la parte publica
+			$sql = "SELECT e.id as id, e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.parent_id, t.nombre AS id_tipo_establecimiento, m.nombre AS idmicrored
 				FROM ctl_microred AS m FULL OUTER JOIN (
 					WITH RECURSIVE path(nombre, path, parent, id, parent_id, id_tipo_establecimiento, idmicrored) AS (
 						SELECT nombre, '/', NULL, id, id_establecimiento_padre, id_tipo_establecimiento, idmicrored FROM ctl_establecimiento WHERE id = 1038 AND enable_schema = 1
@@ -206,16 +203,47 @@ class CtlEstablecimientoController extends Controller
 					SELECT * FROM path
 				) AS e  ON e.idmicrored = m.id
 				FULL OUTER JOIN ctl_tipo_establecimiento AS t ON e.id_tipo_establecimiento = t.id";
-		$rsm = new ResultSetMapping;
-		$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
-		$rsm->addFieldResult('e','nombre','nombre');
-		$rsm->addFieldResult('e','path','direccion');
-		$rsm->addFieldResult('e','parent','telefono');
-		$rsm->addFieldResult('e','id','id');
-		$rsm->addFieldResult('e','idmicrored','fax');
-		$rsm->addFieldResult('e','id_tipo_establecimiento','poblacionAsignana');
+			$rsm = new ResultSetMapping;
+			$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
+			$rsm->addFieldResult('e','id','id');
+			$rsm->addFieldResult('e','nombre','nombre');
+			$rsm->addFieldResult('e','path','direccion');
+			$rsm->addFieldResult('e','parent','telefono');
+			$rsm->addFieldResult('e','idmicrored','fax');
+			$rsm->addFieldResult('e','id_tipo_establecimiento','poblacionAsignana');
+		} else {
+			$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, e.id_tipo_establecimiento, e.idmicrored
+				FROM (
+					WITH RECURSIVE path(nombre, path, parent, id, parent_id, id_tipo_establecimiento, idmicrored) AS (
+						SELECT nombre, '/', NULL, id, id_establecimiento_padre, id_tipo_establecimiento, idmicrored FROM ctl_establecimiento WHERE id = 1038 AND enable_schema = 1
+						UNION
+						SELECT ctl_establecimiento.nombre, parentpath.path || CASE parentpath.path WHEN '/' THEN '' ELSE '/' END || ctl_establecimiento.nombre, parentpath.path, ctl_establecimiento.id, ctl_establecimiento.id_establecimiento_padre, ctl_establecimiento.id_tipo_establecimiento, ctl_establecimiento.idmicrored
+						FROM ctl_establecimiento, path as parentpath
+						WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id
+					)
+					SELECT * FROM path
+				) AS e";
+			$rsm = new ResultSetMapping;
+			$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
+			$rsm->addFieldResult('e','nombre','nombre');
+			$rsm->addFieldResult('e','path','direccion');
+			$rsm->addFieldResult('e','parent','telefono');
+			$rsm->addFieldResult('e','id','id');
+			$rsm->addFieldResult('e','idmicrored','idestablesumeve');
+			$rsm->addFieldResult('e','id_tipo_establecimiento','poblacionAsignana');
+		}
+        
 		$nq = $this->getDoctrine()->getManager()->createNativeQuery($sql, $rsm);
-		$ctlEstablecimientos = $nq->getArrayResult();
+		
+		return $ctlEstablecimientos = $nq->getArrayResult();
+	}
+    /**
+     * Lists all public ctlEstablecimiento.
+     *
+     */
+    public function homeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 		
 		
         $red = $em->getRepository('MaestroModeloBundle:CtlMicrored')->findAll();
@@ -236,12 +264,13 @@ class CtlEstablecimientoController extends Controller
 			$pendientes = $query->getResult();
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$enviados = $query->getResult();
-			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
+			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $this->getEstablecimientos(false),'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
+			//$ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findAll();
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$pendientes = $query->getResult();
-			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
+			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $this->getEstablecimientos(false),'pendientes' => $pendientes, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 1 AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
@@ -249,9 +278,9 @@ class CtlEstablecimientoController extends Controller
 			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
 			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.enableSchema = 0')->addOrderBy('p.registroSchema', 'ASC')->getQuery();
 			$personal = $query->getResult();
-			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
+			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $this->getEstablecimientos(false),'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados, 'red' => $red, 'eco' => $eco));
 		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos, 'red' => $red, 'eco' => $eco, 'tipo' => $tipo));
+			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $this->getEstablecimientos(true), 'red' => $red, 'eco' => $eco, 'tipo' => $tipo));
 		
  
         
