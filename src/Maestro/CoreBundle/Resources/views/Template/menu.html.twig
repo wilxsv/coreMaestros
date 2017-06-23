@@ -1,6 +1,4 @@
 <li><a href="{{ path('maestro_homepage') }}"><i class="icon-sitemap"></i><span class="menu-text"> Catalogo</span></a></li>
-<!--<li><a href="{{ path('establecimiento_index', {'type': 3}) }}"><i class="icon-user-md"></i><span class="menu-text"> ECOS </span></a></li>
-<li><a href="{{ path('establecimiento_mapa', {'type': 3}) }}"><i class="icon-map-marker"></i> Mapa</a></li>-->
 {% if app.user %}<!--/get role-->
  {{ app.session.get('menu') | raw }}
 </li>

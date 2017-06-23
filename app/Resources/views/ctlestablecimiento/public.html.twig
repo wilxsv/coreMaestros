@@ -1,36 +1,58 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
 {% block title %}Listado de Establecimientos{% endblock %}
 {% block body %}
- <div id="tabla"></div>   
+<div style="margin: 5px auto 5px;width: 100%;">
+  <div style="position:relative">
+    <div id="grid" style=""></div>
+  </div>
+</div>
+
+ <div id="tabla"></div> 
 <script>
-$("#tabla").jsGrid({
-    width: "100%",
-    height: "400px",
-    filtering: true,
-    editing: false,
-    inserting: false,
-    sorting: true,
-    paging: true,
-    autoload: true,
-    pageSize: 15,
-    pageButtonCount: 5,
-    paging: true,
-    pageNextText: "Siguiente",
-    pagePrevText: "Anterior",
-    pageFirstText: "Primeros",
-    pageLastText: "Ultimos",
+var data = [
+	{% for e in ctlEstablecimientos %}
+	{
+		region:'{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}', 
+		sibasi:'{{e.telefono}}', 
+		red:'{{e.fax}}', 
+		nombre: '{{e.nombre}}', 
+		eco:{% set t = false %}{% for m in eco %}{% if e.id == m.establecimiento %}{% set t = true %}{% endif %}{% endfor %}{% if t%}true{% else %}false{% endif %} 
+	},
+	{% endfor %} 
+];
 
-    data: db.todos,
+window.onload = function(){
 
-    fields: [
-        { name: "Region", type: "text", width: 100 },
-        { name: "SIBASI", type: "text", width: 100 },
-        { name: "Red", type: "select", items: db.red, valueField: "id", textField: "nombre" },
-        { name: "Establecimiento", type: "text", width: 200 },
-        { name: "ECOS", type: "text", width: "5" }
-    ]
+new FancyGrid({
+  title: 'Establecimientos',
+  i18n: 'es',
+  //grouping: { by: 'region' },
+  renderTo: 'tabla',
+  height: 500,
+  paging: true,
+  data: data,
+  selModel: 'row',
+  trackOver: true,
+  defaults: {
+    type: 'string',
+    sortable: true,
+    resizable: true,    
+    editable: false,
+    width: 180,
+    filter: { header: true }
+  },
+  columns: [
+	{index: 'region',title: 'Region'},
+	{index: 'sibasi', title: 'SIBASI' },
+	{index: 'red', title: 'Micro Red', type: 'combo', data: [''{% for e in red %},'{{e.nombre}}'{% endfor %}] },
+	{index: 'nombre', title: 'Nombre',width: 400 },
+	{index: 'eco', width: 100, title: 'Posee ECO', type: 'checkbox' }]
 });
-    </script>
+
+};
+</script>
+
+    
 {% if is_granted('ROLE_AGREGA') %}
 <a href="{{ path('establecimiento_add') }}" class="btn btn-primary">Agregar Establecimiento</a>
 {% endif %}
@@ -38,57 +60,4 @@ $("#tabla").jsGrid({
 {% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}
 
 {% block head_css %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/') }}css/grid/jsgrid.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/') }}css/grid/theme.css" />
-    <script type="text/javascript">
-
-    (function() {
-
-    var db = {
-
-        loadData: function(filter) {
-            return $.grep(this.clients, function(client) {
-                return (!filter.Name || client.Name.indexOf(filter.Name) > -1)
-                    && (filter.Age === undefined || client.Age === filter.Age)
-                    && (!filter.Address || client.Address.indexOf(filter.Address) > -1)
-                    && (!filter.Country || client.Country === filter.Country)
-                    && (filter.Married === undefined || client.Married === filter.Married);
-            });
-        },
-
-        insertItem: function(insertingClient) {
-            this.clients.push(insertingClient);
-        },
-
-        updateItem: function(updatingClient) { },
-
-        deleteItem: function(deletingClient) {
-            var clientIndex = $.inArray(deletingClient, this.clients);
-            this.clients.splice(clientIndex, 1);
-        }
-
-    };
-
-    window.db = db;
-
-    db.red = [ { nombre: "", id: 0 }{% for e in red %},{ nombre: "{{e.nombre}}", id:{{e.id}}  }{% endfor %} ];
-	
-    db.todos = [ { nombre: "", id: 0 }
-		{% for e in ctlEstablecimientos %},
-			{ Region:"{% if 'Re' in e.direccion %}{{ e.direccion }}{% endif %}", SIBASI:"{{e.telefono}}", Red:{% if e.idestablesumeve > 0 %}{{e.idestablesumeve}}{% else %}0{% endif %}, Establecimiento: "{{e.nombre}}", ECOS:"{% set t = false %}{% for m in eco %}{% if e.id == m.establecimiento %}{% set t = true %}{% endif %}{% endfor %}{% if t%}Si{% else %}No{% endif %}"  }
-		{% endfor %} ];
-
-
-}());
-    </script>
-    <script src="{{ asset('assets/') }}js/grid/src/jsgrid.core.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/jsgrid.load-indicator.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/jsgrid.load-strategies.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/jsgrid.sort-strategies.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/jsgrid.field.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/fields/jsgrid.field.text.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/fields/jsgrid.field.number.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/fields/jsgrid.field.select.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/fields/jsgrid.field.checkbox.js"></script>
-    <script src="{{ asset('assets/') }}js/grid/src/fields/jsgrid.field.control.js"></script>
 {% endblock %}

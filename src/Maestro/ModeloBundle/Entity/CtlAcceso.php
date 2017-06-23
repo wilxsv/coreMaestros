@@ -266,7 +266,7 @@ class CtlAcceso
     }
 
     /**
-     * Get b
+     * Get ctlRol
      *
      * @return \Doctrine\Common\Collections\Collection 
      */

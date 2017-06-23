@@ -5,6 +5,8 @@
         <thead>
             <tr>
                 <th>Establecimiento</th>
+                <th>Establecimiento</th>
+                <th>Establecimiento</th>
                 <th>Usuaria</th>
                 <th>Habilitado</th>
                 <th>Ingreso</th>
@@ -15,6 +17,8 @@
         <tbody>
         {% for fosUser in fosUsers %}
             <tr>
+                <td><a href="{{ path('admin_users_show', { 'id': fosUser.id }) }}">{{ fosUser.usernameCanonical }}</a></td>
+                <td>{{ fosUser.fullname }}</td>
                 <td>{{ fosUser.establecimiento }}</td>
                 <td><a href="{{ path('admin_users_show', { 'id': fosUser.id }) }}">{{ fosUser.fullname }} / {{ fosUser.usernameCanonical }}</a></td>
                 <td>{% if fosUser.enabled %}Si{% else %}No{% endif %}</td>

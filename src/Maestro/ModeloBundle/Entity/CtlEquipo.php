@@ -42,6 +42,16 @@ class CtlEquipo
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRecursoHumano", inversedBy="CtlEquipo")
+     * @ORM\JoinTable(name="pertenece",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="equipo_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="recurso_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $recurso;
 
@@ -169,4 +179,29 @@ class CtlEquipo
     public function __toString(){
 		return $this->getNombreEquipo();
 	}
+	
+	
+    /**
+     * Add ctlRecursoHumano
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $recurso
+     * @return CtlRecursoHumano
+     */
+    public function addCtlRecursoHumano(\Maestro\ModeloBundle\Entity\CtlRecursoHumano $recurso)
+    {
+        $this->recurso[] = $recurso;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlRecursoHumano
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRecursoHumano $recurso
+     */
+    public function removeCtlRecursoHumano(\Maestro\ModeloBundle\Entity\CtlRecursoHumano $recurso)
+    {
+        $this->recurso->removeElement($recurso);
+    }
+
 }

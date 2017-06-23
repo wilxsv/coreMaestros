@@ -126,6 +126,20 @@ class CtlEstablecimientoController extends Controller
 				$ctlEstablecimiento->setEnableSchema( 0 );
 			}
             $this->getDoctrine()->getManager()->flush();
+            $url =  'http://localhost:8080/v1/info/enviar';
+            $url = $this->container->getParameter('database_name');
+            $data = array('tocken' => 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'maestro' => 'establecimiento');
+            $options = array(
+				'http' => array(
+					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method'  => 'POST',
+					'content' => http_build_query($data)
+				)
+			);
+            $context  = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+            if ($result === FALSE) { /* Handle error */ }
+
             $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
             return $this->redirectToRoute('maestro_homepage');
         }
@@ -180,8 +194,8 @@ class CtlEstablecimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         //Para la parte publica
-		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, e.id_tipo_establecimiento, e.idmicrored
-				FROM (
+		$sql = "SELECT e.nombre, split_part(e.path, '/', 2)  as path, split_part(e.parent, '/', 3)  as parent, e.id, e.parent_id, e.id_tipo_establecimiento, m.nombre AS idmicrored
+				FROM ctl_microred AS m FULL OUTER JOIN (
 					WITH RECURSIVE path(nombre, path, parent, id, parent_id, id_tipo_establecimiento, idmicrored) AS (
 						SELECT nombre, '/', NULL, id, id_establecimiento_padre, id_tipo_establecimiento, idmicrored FROM ctl_establecimiento WHERE id = 1038 AND enable_schema = 1
 						UNION
@@ -190,14 +204,14 @@ class CtlEstablecimientoController extends Controller
 						WHERE ctl_establecimiento.id_establecimiento_padre = parentpath.id
 					)
 					SELECT * FROM path
-				) AS e";
+				) AS e  ON e.idmicrored = m.id";
 		$rsm = new ResultSetMapping;
 		$rsm->addEntityResult('MaestroModeloBundle:CtlEstablecimiento', 'e');
 		$rsm->addFieldResult('e','nombre','nombre');
 		$rsm->addFieldResult('e','path','direccion');
 		$rsm->addFieldResult('e','parent','telefono');
 		$rsm->addFieldResult('e','id','id');
-		$rsm->addFieldResult('e','idmicrored','idestablesumeve');
+		$rsm->addFieldResult('e','idmicrored','fax');
 		$rsm->addFieldResult('e','id_tipo_establecimiento','poblacionAsignana');
 		$nq = $this->getDoctrine()->getManager()->createNativeQuery($sql, $rsm);
 		$ctlEstablecimientos = $nq->getArrayResult();

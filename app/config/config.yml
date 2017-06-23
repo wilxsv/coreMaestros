@@ -38,6 +38,8 @@ twig:
     globals:
         version: "0.1.0"
         nombre: "establecimientos"
+        tocken: "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+        api: "http://localhost:8080/v1/info/enviar"
 
 # Doctrine Configuration
 doctrine:
