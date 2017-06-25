@@ -62,6 +62,18 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
+							{% if app.session.flashBag.has('success') %}
+							<div  class="alert alert-block alert-success">
+								<button class="close" type="button" data-dismiss="alert">
+									<i class="icon-remove"></i>
+								</button>
+								<p>
+								{% for msg in app.session.flashBag.get('success') %}
+								<i class="icon-bullhorn"></i>{{ msg }}
+								{% endfor %}
+								</p>
+							</div>
+							{% endif %}
 							{# if app.request.attributes.get('_route') in app.session.get('pass') or app.request.attributes.get('_route') == 'maestro_homepage' or app.request.attributes.get('_route') == 'maestro_core_ayuda'#}
 							  <h3 class="header smaller lighter blue">
 								{% block title %}{% endblock %}
