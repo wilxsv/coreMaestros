@@ -41,6 +41,7 @@ class CtlTipoEstablecimientoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlTipoEstablecimiento);
             $em->flush($ctlTipoEstablecimiento);
+            $request->getSession()->getFlashBag()->add('success', 'Tipo de Establecimiento creado');
 
             return $this->redirectToRoute('tipoestablecimiento_show', array('id' => $ctlTipoEstablecimiento->getId()));
         }
@@ -77,6 +78,7 @@ class CtlTipoEstablecimientoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Tipo de Establecimiento actualizado');
 
             return $this->redirectToRoute('tipoestablecimiento_edit', array('id' => $ctlTipoEstablecimiento->getId()));
         }

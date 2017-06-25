@@ -41,6 +41,7 @@ class CtlServicioController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlServicio);
             $em->flush($ctlServicio);
+            $request->getSession()->getFlashBag()->add('success', 'Servicio creado');
 
             return $this->redirectToRoute('servicio_show', array('id' => $ctlServicio->getId()));
         }
@@ -77,6 +78,7 @@ class CtlServicioController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Servicio actualizado');
 
             return $this->redirectToRoute('servicio_edit', array('id' => $ctlServicio->getId()));
         }
@@ -101,6 +103,7 @@ class CtlServicioController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlServicio);
             $em->flush($ctlServicio);
+            $request->getSession()->getFlashBag()->add('error', 'Servicio eliminado');
         }
 
         return $this->redirectToRoute('servicio_index');

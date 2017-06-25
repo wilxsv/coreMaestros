@@ -41,6 +41,7 @@ class CtlRecursoHumanoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlRecursoHumano);
             $em->flush($ctlRecursoHumano);
+            $request->getSession()->getFlashBag()->add('success', 'Recurso Humano creado');
 
             return $this->redirectToRoute('recurso_show', array('id' => $ctlRecursoHumano->getId()));
         }
@@ -77,6 +78,7 @@ class CtlRecursoHumanoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Recurso Humano actualizado');
 
             return $this->redirectToRoute('recurso_edit', array('id' => $ctlRecursoHumano->getId()));
         }
@@ -101,6 +103,7 @@ class CtlRecursoHumanoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlRecursoHumano);
             $em->flush($ctlRecursoHumano);
+            $request->getSession()->getFlashBag()->add('error', 'Recurso Humano eliminado');
         }
 
         return $this->redirectToRoute('recurso_index');

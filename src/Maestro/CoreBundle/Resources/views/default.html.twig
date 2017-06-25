@@ -64,14 +64,18 @@
 							<!--PAGE CONTENT BEGINS-->
 							{% if app.session.flashBag.has('success') %}
 							<div  class="alert alert-block alert-success">
-								<button class="close" type="button" data-dismiss="alert">
-									<i class="icon-remove"></i>
-								</button>
-								<p>
-								{% for msg in app.session.flashBag.get('success') %}
-								<i class="icon-bullhorn"></i>{{ msg }}
-								{% endfor %}
-								</p>
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('success') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
+							</div>
+							{% elseif app.session.flashBag.has('error') %}
+							<div class="alert alert-error">
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('error') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
+							</div>
+							{% elseif app.session.flashBag.has('warning') %}
+							<div class="alert alert-warning">
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('warning') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
 							</div>
 							{% endif %}
 							{# if app.request.attributes.get('_route') in app.session.get('pass') or app.request.attributes.get('_route') == 'maestro_homepage' or app.request.attributes.get('_route') == 'maestro_core_ayuda'#}

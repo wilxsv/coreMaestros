@@ -41,6 +41,7 @@ class CtlSituacionLegalController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlSituacionLegal);
             $em->flush($ctlSituacionLegal);
+            $request->getSession()->getFlashBag()->add('success', 'Situacion Legal creada');
 
             return $this->redirectToRoute('situacionlegal_show', array('id' => $ctlSituacionLegal->getId()));
         }
@@ -77,6 +78,7 @@ class CtlSituacionLegalController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Situacion Legal actualizada');
 
             return $this->redirectToRoute('situacionlegal_edit', array('id' => $ctlSituacionLegal->getId()));
         }
@@ -101,6 +103,7 @@ class CtlSituacionLegalController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlSituacionLegal);
             $em->flush($ctlSituacionLegal);
+            $request->getSession()->getFlashBag()->add('error', 'Situacion Legal eliminada');
         }
 
         return $this->redirectToRoute('situacionlegal_index');

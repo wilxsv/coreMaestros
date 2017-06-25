@@ -55,6 +55,7 @@ class CtlEstablecimientoController extends Controller
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $form->get('detalleSchema')->getData() ) );
             $em->persist($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
+            $request->getSession()->getFlashBag()->add('success', 'Establecimiento solicitado');
 
             return $this->redirectToRoute('establecimiento_show', array('id' => $ctlEstablecimiento->getId(), 'tmp' => 1 ));
         }
@@ -118,14 +119,14 @@ class CtlEstablecimientoController extends Controller
 			}elseif ($editForm->get('enableSchema')->getData() == 1){
 				$ctlEstablecimiento->setEstadoSchema( 1 );
 				$ctlEstablecimiento->setEnableSchema( 1 );
+				$request->getSession()->getFlashBag()->add('success', 'Establecimiento habilitado en catalogo oficial');
 			}elseif ($editForm->get('enableSchema')->getData() == -1 OR $editForm->get('estadoSchema')->getData() == -1){
 				$ctlEstablecimiento->setEstadoSchema( -1 );
 				$ctlEstablecimiento->setEnableSchema( -1 );
-			}
-			if ( $editForm->get('userIdSchema')->getData() == $this->getUser()->getId() ){
-				$ctlEstablecimiento->setEnableSchema( 0 );
+				$request->getSession()->getFlashBag()->add('error', 'Establecimiento desabilitado del catalogo oficial');
 			}
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Establecimiento actualizado');
             /*$url =  'http://localhost:8080/v1/info/enviar';
             //$url = $this->container->getParameter('database_name');
             $data = array('tocken' => 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'maestro' => 'establecimiento');
@@ -166,6 +167,7 @@ class CtlEstablecimientoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlEstablecimiento);
             $em->flush($ctlEstablecimiento);
+            $request->getSession()->getFlashBag()->add('error', 'Establecimiento eliminado');
         }
 
         return $this->redirectToRoute('establecimiento_index');

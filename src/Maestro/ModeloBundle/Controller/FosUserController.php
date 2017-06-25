@@ -77,6 +77,7 @@ class FosUserController extends Controller
 				}
 				$last_line = system('cd .. && php app/console fos:user:promote '.$form->get('username')->getData().' '.$rol->getNombreRol() , $retval);
 				$em->flush();
+				$request->getSession()->getFlashBag()->add('success', 'Rol agregado');
 				return $this->redirectToRoute('admin_users_show', array('id' => $user->getId() ) );
 			}
         }
@@ -112,39 +113,14 @@ class FosUserController extends Controller
         
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-			/*
-			$em = $this->getDoctrine()->getManager();
-			$fosUser = $em->getRepository('MaestroModeloBundle:FosUser')->findByUsername( $editForm->get('username')->getData());
-			if (!$fosUser) {
-				throw $this->createNotFoundException("Error");
-			}
-			$fosUser->setFullname($editForm->get('fullname')->getData());
-            $fosUser->setEstablecimiento($editForm->get('establecimiento')->getData());
-			
-			$em->flush();
-            */
             $em = $this->getDoctrine()->getManager();
-         	/*$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find( $editForm->get('roles')->getData() );
-         	if ( $rol->getNombreRol() != 'ROLE_DEFAULT'){
-				$fosUser->addRole($rol->getNombreRol());
-			}else {
-				$user->addRole("ROLE_U");
-			}*/
 			$fosUser->setFullname($editForm->get('fullname')->getData());
             $fosUser->setEstablecimiento($editForm->get('establecimiento')->getData());
-            //$fosUser->setRoles("a:0:{}");
             $em->persist($fosUser);
             $em->flush($fosUser);
-           
-            //$userManager = $this->get('fos_user.user_manager');
-            //$fosUser->addRole('ROLE_ADM');
-            //$userManager->updateUser($fosUser);
-			
+            $request->getSession()->getFlashBag()->add('success', 'Usuario Actualizado');
             return $this->redirectToRoute('admin_users_edit', array('id' => $fosUser->getId()));
         }
-//        $editForm->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MaestroModeloBundle:CtlRol', 'required' => false, 'multiple' => false,));
-        
-
         return $this->render('fosuser/edit.html.twig', array(
             'fosUser' => $fosUser,
             'edit_form' => $editForm->createView(),
@@ -170,9 +146,8 @@ class FosUserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $last_line = system('cd .. && php app/console fos:user:deactivate '.$form->get('username')->getData() , $retval);
-            //$tmp = '<hr />Last line of the output: ' . $last_line . '<hr />Return value: ' . $retval;
             if (!$retval){
-				
+				$request->getSession()->getFlashBag()->add('error', 'Usuario Inhabilitado');
 			}
         }
 

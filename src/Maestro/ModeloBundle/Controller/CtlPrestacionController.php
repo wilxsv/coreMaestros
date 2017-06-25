@@ -41,6 +41,7 @@ class CtlPrestacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlPrestacion);
             $em->flush($ctlPrestacion);
+            $request->getSession()->getFlashBag()->add('success', 'Prestación creada');
 
             return $this->redirectToRoute('prestacion_show', array('id' => $ctlPrestacion->getId()));
         }
@@ -77,6 +78,7 @@ class CtlPrestacionController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Prestacion Actualizada');
 
             return $this->redirectToRoute('prestacion_edit', array('id' => $ctlPrestacion->getId()));
         }
@@ -101,6 +103,7 @@ class CtlPrestacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlPrestacion);
             $em->flush($ctlPrestacion);
+            $request->getSession()->getFlashBag()->add('error', 'Prestacion eliminada');
         }
 
         return $this->redirectToRoute('prestacion_index');

@@ -49,6 +49,7 @@ class CtlEquipoController extends Controller
             $ctlEquipo->setEstablecimiento( $session->get('id') );
             $em->persist($ctlEquipo);
             $em->flush($ctlEquipo);
+            $request->getSession()->getFlashBag()->add('success', 'Equipo creado');
 
             return $this->redirectToRoute('eco_show', array('id' => $ctlEquipo->getId()));
         }
@@ -85,6 +86,7 @@ class CtlEquipoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Equipo actualizado');
 
             return $this->redirectToRoute('eco_edit', array('id' => $ctlEquipo->getId()));
         }
@@ -109,6 +111,7 @@ class CtlEquipoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlEquipo);
             $em->flush($ctlEquipo);
+            $request->getSession()->getFlashBag()->add('error', 'Equipo eliminado');
         }
 
         return $this->redirectToRoute('eco_index');

@@ -48,6 +48,7 @@ class CtlAccesoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlAcceso);
             $em->flush($ctlAcceso);
+            $request->getSession()->getFlashBag()->add('success', 'Acceso creado');
 
             return $this->redirectToRoute('acceso_show', array('id' => $ctlAcceso->getId()));
         }
@@ -84,6 +85,7 @@ class CtlAccesoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Acceso actualizado');
 
             return $this->redirectToRoute('acceso_edit', array('id' => $ctlAcceso->getId()));
         }
@@ -108,6 +110,7 @@ class CtlAccesoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlAcceso);
             $em->flush($ctlAcceso);
+            $request->getSession()->getFlashBag()->add('error', 'Acceso eliminado');
         }
 
         return $this->redirectToRoute('acceso_index');

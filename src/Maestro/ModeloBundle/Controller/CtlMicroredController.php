@@ -45,6 +45,7 @@ class CtlMicroredController extends Controller
             $ctlMicrored->SetFechaHoraReg(new \DateTime('now'));
             $ctlMicrored->SetFechaHoraMod(new \DateTime('now'));
             $ctlMicrored->SetCodigoc3(0);
+            $request->getSession()->getFlashBag()->add('success', 'Micro Red Creada');
             
             $em->persist($ctlMicrored);
             $em->flush($ctlMicrored);
@@ -84,6 +85,7 @@ class CtlMicroredController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Micro Red Actualizada');
 
             return $this->redirectToRoute('red_edit', array('id' => $ctlMicrored->getId()));
         }
@@ -108,6 +110,7 @@ class CtlMicroredController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlMicrored);
             $em->flush($ctlMicrored);
+            $request->getSession()->getFlashBag()->add('error', 'Micro Red eliminada');
         }
 
         return $this->redirectToRoute('red_index');
