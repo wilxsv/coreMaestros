@@ -110,26 +110,25 @@ class CtlEstablecimientoController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $request->getSession()->getFlashBag()->add('success', 'Establecimiento actualizado');
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
-            if ($editForm->get('estadoSchema')->getData() == 1){
-				$ctlEstablecimiento->setEstadoSchema( 1 );
-				$ctlEstablecimiento->setEnableSchema( 0 );
-			}elseif ($editForm->get('enableSchema')->getData() == 1){
+			if ($editForm->get('enableSchema')->getData() == 1){
 				$ctlEstablecimiento->setEstadoSchema( 1 );
 				$ctlEstablecimiento->setEnableSchema( 1 );
 				$request->getSession()->getFlashBag()->add('success', 'Establecimiento habilitado en catalogo oficial');
+			}elseif ($editForm->get('estadoSchema')->getData() == 1){
+				$ctlEstablecimiento->setEstadoSchema( 1 );
+				$ctlEstablecimiento->setEnableSchema( 0 );
 			}elseif ($editForm->get('enableSchema')->getData() == -1 OR $editForm->get('estadoSchema')->getData() == -1){
 				$ctlEstablecimiento->setEstadoSchema( -1 );
 				$ctlEstablecimiento->setEnableSchema( -1 );
 				$request->getSession()->getFlashBag()->add('error', 'Establecimiento desabilitado del catalogo oficial');
 			}
             $this->getDoctrine()->getManager()->flush();
-            $request->getSession()->getFlashBag()->add('success', 'Establecimiento actualizado');
-            /*$url =  'http://localhost:8080/v1/info/enviar';
-            //$url = $this->container->getParameter('database_name');
-            $data = array('tocken' => 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'maestro' => 'establecimiento');
+            /*$url = $this->container->getParameter('api');
+            $data = array('tocken' => '$this->container->getParameter('tocken')', 'maestro' => 'establecimiento');
             $options = array(
 				'http' => array(
 					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
