@@ -49,7 +49,7 @@
       <div class="row-fluid">
       {% if app.session.get('accion') == 'valida' and app.session.get('suministro') == 'Medicamentos' %}
     {{ form_start(edit_form) }}
-        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}</div>
+        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}{{ form_widget(edit_form.codigoSinab) }}</div>
         {{ form_widget(edit_form) }}
         <input type="submit" value="Actualizar" class="btn btn-primary"/>
     {{ form_end(edit_form) }}
