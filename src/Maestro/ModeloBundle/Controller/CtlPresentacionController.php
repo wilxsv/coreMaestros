@@ -41,6 +41,7 @@ class CtlPresentacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlPresentacion);
             $em->flush($ctlPresentacion);
+            $request->getSession()->getFlashBag()->add('success', 'Presentación creada');
 
             return $this->redirectToRoute('presentacion_show', array('id' => $ctlPresentacion->getId()));
         }
@@ -77,6 +78,7 @@ class CtlPresentacionController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Presentación actualizada');
 
             return $this->redirectToRoute('presentacion_edit', array('id' => $ctlPresentacion->getId()));
         }
@@ -101,6 +103,7 @@ class CtlPresentacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlPresentacion);
             $em->flush($ctlPresentacion);
+            $request->getSession()->getFlashBag()->add('error', 'Presentacion Eliminada');
         }
 
         return $this->redirectToRoute('presentacion_index');

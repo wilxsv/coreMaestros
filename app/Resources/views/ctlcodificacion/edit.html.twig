@@ -1,21 +1,13 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'MaestroCoreBundle::default.html.twig' %}
+{% block title %}Editar Codificacion{% endblock %}
 {% block body %}
-    <h1>Ctlcodificacion edit</h1>
-
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Actualizar" class="btn btn-primary" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('codificacion_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+<a href="{{ path('codificacion_index') }}" class="btn">Regresar a listado</a>
+    {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

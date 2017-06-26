@@ -1,16 +1,83 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Catalogo de productos{% endblock %}
+{% block title %}Catalogo de productos {% endblock %}
 {% block body %}
-{% if app.user %}<div class="row-fluid">
+<div class="row-fluid">
  <div class="span12">
   <div class="tabbable">
    <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a data-toggle="tab" href="#oficial"><i class="green icon-home bigger-110"></i>Listado Oficial </a></li>
-    <li class=""><a data-toggle="tab" href="#validar">Pendientes de ser validados</a></li>
+    {% if accion == 'agrega' %}
+	<li class=""><a data-toggle="tab" href="#validar">Pendientes de ser validados</a></li>
+    <li class=""><a data-toggle="tab" href="#denegados"> Denegados <span class="badge badge-important">X</span></a></li>
+    {% endif %}
+    {% if accion == 'valida' %}
+	<li class=""><a data-toggle="tab" href="#validar">Pendientes de ser validados</a></li>
     <li class=""><a data-toggle="tab" href="#habilitar">Pendientes de ser habilitados </a></li>
     <li class=""><a data-toggle="tab" href="#denegados"> Denegados <span class="badge badge-important">X</span></a></li>
+    {% endif %}
+    {% if accion == 'habilita' %}
+    <li class=""><a data-toggle="tab" href="#habilitar">Pendientes de ser habilitados </a></li>
+    <li class=""><a data-toggle="tab" href="#denegados"> Denegados <span class="badge badge-important">X</span></a></li>
+    {% endif %}
    </ul>
   <div class="tab-content">
+    {% if accion == 'habilita' or accion == 'valida' %}
+   <!-- habilita --------------------------------------------------------------------------------------------------------->
+   <div id="habilitar" class="tab-pane">
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+     <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Nombre</th>
+                <th>Unidad de medida</th>
+                <th>Nivel de uso</th>
+                <th>Codificacion</th>
+            </tr>
+     </thead>
+     <tbody>
+        {% for p in procesar %}
+            <tr>
+                <td>{{ p.grupoid }}</td>
+                <td><a href="{{ path('insumo_show', { 'id': p.id }) }}">{{ p.nombreLargoInsumo }}</a></td>
+                <td>{{ p.ctlUnidadMedidaid }}</td>
+                <td>{{ p.ctlNivelUsoid }}</td>
+                <td>{{ p.codigoSinab }}</td>
+            </tr>
+        {% endfor %}
+     </tbody>
+    </table>
+   </div>
+   <!-- /habilita --------------------------------------------------------------------------------------------------------->
+    {% endif %}
+    {% if accion == 'agrega' or accion == 'valida' %}
+   <!--  agrega o valida --------------------------------------------------------------------------------------------------------->
+   <div id="validar" class="tab-pane">
+    <table id="sample-table" class="table table-striped table-bordered table-hover">
+     <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Nombre</th>
+                <th>Unidad de medida</th>
+                <th>Nivel de uso</th>
+                <th>Codificacion</th>
+            </tr>
+     </thead>
+     <tbody>
+        {% for p in personal %}
+            <tr>
+                <td>{{ p.grupoid }}</td>
+                <td><a href="{{ path('insumo_show', { 'id': p.id }) }}">{{ p.nombreLargoInsumo }}</a></td>
+                <td>{{ p.ctlUnidadMedidaid }}</td>
+                <td>{{ p.ctlNivelUsoid }}</td>
+                <td>{{ p.codigoSinab }}</td>
+            </tr>
+        {% endfor %}
+     </tbody>
+    </table>
+   </div>
+   <!-- /agrega o valida --------------------------------------------------------------------------------------------------------->
+    {% endif %}
+   {% if accion  %}
    <div id="denegados" class="tab-pane">
     <table id="sample-table" class="table table-striped table-bordered table-hover">
      <thead>
@@ -18,7 +85,7 @@
                 <th># SINAB</th>
                 <th>Nombre</th>
                 <th>Unidad de medida</th>
-                <th>Clase de insumo</th>
+                <th>Nivel de uso</th>
             </tr>
      </thead>
      <tbody>
@@ -26,35 +93,39 @@
             <tr>
                 <td>{{ ctlInsumo.codigoSinab }}</td>
                 <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
                 <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
+                <td>{{ ctlInsumo.ctlNivelUsoid }}</td>
             </tr>
         {% endfor %}
      </tbody>
     </table>
    </div>
+   <!-- /accion por defecto --------------------------------------------------------------------------------------------------------->
+   {% endif %}
    <div id="oficial" class="tab-pane active">
     <table id="sample-table" class="table table-striped table-bordered table-hover">
      <thead>
             <tr>
-                <th># SINAB</th>
+                <th>Suministro</th>
+                <th>Grupo</th>
                 <th>Nombre</th>
                 <th>Unidad de medida</th>
-                <th>Clase de insumo</th>
-                <th>Codificacion 128</th>
+                <th>Nivel de uso</th>
+                <th>Codificacion</th>
             </tr>
      </thead>
      <tbody>
         {% for ctlInsumo in ctlInsumos %}
             <tr>
-                <td><a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.codigoSinab }} <i class="icon-show bigger-120"></i></a></td>
+                <td></td>
+                <td>{{ ctlInsumo.grupoid }}</td>
                 <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
                 <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
+                <td>{{ ctlInsumo.ctlNivelUsoid }}</td>
                 <td>
                  <div>
                   <img id="barcode{{ctlInsumo.id}}"/>
-                  <script>JsBarcode("#barcode{{ctlInsumo.id}}", "{{ ctlInsumo.codigoSinab }}", {  displayValue: false });</script>
+                  <script>JsBarcode("#barcode{{ctlInsumo.id}}", "{{ ctlInsumo.codigoSinab }}", {  displayValue: true });</script>
                  </div>
                 </td>
             </tr>
@@ -63,89 +134,13 @@
      </tbody>
     </table>
    </div>
-   <div id="habilitar" class="tab-pane">
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
-     <thead>
-            <tr>
-                <th># SINAB</th>
-                <th>Nombre</th>
-                <th>Unidad de medida</th>
-                <th>Clase de insumo</th>
-                <th>Codificacion 128</th>
-            </tr>
-     </thead>
-     <tbody>
-        {% for ctlInsumo in denegados %}
-            <tr>
-                <td><a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.codigoSinab }} <i class="icon-show bigger-120"></i></a></td>
-                <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
-                <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
-            </tr>
-        {% endfor %}
-     </tbody>
-    </table>
-   </div>
-   <div id="validar" class="tab-pane">
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
-     <thead>
-            <tr>
-                <th># SINAB</th>
-                <th>Nombre</th>
-                <th>Unidad de medida</th>
-                <th>Clase de insumo</th>
-                <th>Codificacion 128</th>
-            </tr>
-     </thead>
-     <tbody>
-        {% for ctlInsumo in habilita %}
-            <tr>
-                <td><a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.codigoSinab }} <i class="icon-show bigger-120"></i></a></td>
-                <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
-                <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
-                <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
-            </tr>
-        {% endfor %}
-     </tbody>
-    </table>
-   </div>
+   {% if accion == 'habilita' %}
+  {% endif %}
   </div>
  </div>
 </div>
-{% else  %}
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th># SINAB</th>
-                <th>Nombre</th>
-                <th>Unidad de medida</th>
-                <th>Clase de insumo</th>
-                <th>Codificacion 128</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ctlInsumo in ctlInsumos %}
-            <tr>
-                <td>{{ ctlInsumo.codigoSinab }}</td><!--<a href="{{ path('insumo_show', { 'id': ctlInsumo.id }) }}">{{ ctlInsumo.nombreLargoInsumo }} <i class="icon-show bigger-120"></i></a>-->
-                <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
-                <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
-                <td>
-                 <div>
-                  <img id="barcode{{ctlInsumo.id}}"/>
-                  <script>JsBarcode("#barcode{{ctlInsumo.id}}", "{{ ctlInsumo.codigoSinab }}", {  displayValue: false });</script>
-                 </div>
-                </td>
-            </tr>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <section id="container" class="container">
-      <div id="result_strip"><ul class="thumbnails"></ul><ul class="collector"></ul></div>
-      <div id="interactive" class="viewport"></div>
-    </section>
+{% if accion == 'agrega' %}
+	<a href="{{ path('insumo_new') }}" class="btn btn-primary">Solicitar Producto</a>
 {% endif %}
 {% endblock %}
 {% block footer_js %}

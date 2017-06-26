@@ -4,59 +4,21 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlUnidadMedida.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombreunidad</th>
+                <th>Nombre de la unidadad</th>
                 <td>{{ ctlUnidadMedida.nombreUnidad }}</td>
             </tr>
-            <tr>
-                <th>Detalleunidadmedida</th>
+			<tr>
+				<th>Descipción</th>
                 <td>{{ ctlUnidadMedida.detalleUnidadMedida }}</td>
             </tr>
             <tr>
-                <th>Unidadesunidad</th>
+                <th>Unidades contenidas</th>
                 <td>{{ ctlUnidadMedida.unidadesUnidad }}</td>
             </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if ctlUnidadMedida.registroSchema %}{{ ctlUnidadMedida.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlUnidadMedida.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlUnidadMedida.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlUnidadMedida.ipUserSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlUnidadMedida.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlUnidadMedida.enableSchema }}</td>
-            </tr>
-        </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('unidad_medida_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('unidad_medida_edit', { 'id': ctlUnidadMedida.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<a href="{{ path('unidad_medida_index') }}" class="btn">Regresar a listado</a>
+<a href="{{ path('unidad_medida_edit', { 'id': ctlUnidadMedida.id }) }}" class="btn btn-primary">Editar</a>
+
+{{ form_start(delete_form) }}<input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
 {% endblock %}

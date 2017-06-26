@@ -41,6 +41,7 @@ class CtlUnidadMedidaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlUnidadMedida);
             $em->flush($ctlUnidadMedida);
+            $request->getSession()->getFlashBag()->add('success', 'Unidad de medida creada');
 
             return $this->redirectToRoute('unidad_medida_show', array('id' => $ctlUnidadMedida->getId()));
         }
@@ -77,6 +78,7 @@ class CtlUnidadMedidaController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Unidad de Medida actualizada');
 
             return $this->redirectToRoute('unidad_medida_edit', array('id' => $ctlUnidadMedida->getId()));
         }
@@ -101,6 +103,7 @@ class CtlUnidadMedidaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlUnidadMedida);
             $em->flush($ctlUnidadMedida);
+            $request->getSession()->getFlashBag()->add('error', 'Unidad de medida eliminada');
         }
 
         return $this->redirectToRoute('unidad_medida_index');

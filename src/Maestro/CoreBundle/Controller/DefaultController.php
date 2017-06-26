@@ -25,7 +25,10 @@ class DefaultController extends Controller
     public function feedAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $ctlSchemas = $em->getRepository('MaestroModeloBundle:CtlSchema')->findAll();
+        $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlSchema');
+		$query = $repository->createQueryBuilder('p')->where('p.id > 1')->addOrderBy('p.id', 'DESC')->getQuery();
+		$ctlSchemas = $query->getResult();
+		
         return $this->render('MaestroCoreBundle:Default:feed.html.twig', array('ctlSchemas' => $ctlSchemas));
     }
 

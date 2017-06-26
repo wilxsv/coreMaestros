@@ -41,6 +41,7 @@ class CtlProductoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlProducto);
             $em->flush($ctlProducto);
+            $request->getSession()->getFlashBag()->add('success', 'Unidad logistica creada');
 
             return $this->redirectToRoute('producto_show', array('id' => $ctlProducto->getId()));
         }
@@ -77,6 +78,7 @@ class CtlProductoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Unidad Logistica actualizada');
 
             return $this->redirectToRoute('producto_edit', array('id' => $ctlProducto->getId()));
         }
@@ -101,6 +103,7 @@ class CtlProductoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlProducto);
             $em->flush($ctlProducto);
+            $request->getSession()->getFlashBag()->add('error', 'Unidad Logistica eliminada');
         }
 
         return $this->redirectToRoute('producto_index');

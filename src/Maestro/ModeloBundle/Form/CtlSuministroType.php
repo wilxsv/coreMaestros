@@ -13,7 +13,12 @@ class CtlSuministroType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreSuministro')->add('detalleSuministro')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('ipUserSchema')->add('estadoSchema')->add('enableSchema')->add('rolSolicitaSuministro')->add('rolValidaSuministro')->add('ctlSuministroid')->add('codificacionSuministro')        ;
+        $builder
+			->add('nombreSuministro', 'textarea', array('label'  => 'Nombre del Suministro', 'required'  => true))
+			->add('detalleSchema', 'textarea', array('label'  => 'Observacion', 'required'  => true))
+			->add('rolSolicitaSuministro','entity', array('label'  => 'Quien puede solicitar este suministro','class' => 'MaestroModeloBundle:CtlRol', 'required' => true))
+			->add('rolValidaSuministro','entity', array('label'  => 'Quien valida la informacion de este suministro','class' => 'MaestroModeloBundle:CtlRol', 'required' => true))
+			->add('codificacionSuministro','entity', array('label'  => 'Que codificacion posee este suministro','class' => 'MaestroModeloBundle:CtlCodificacion', 'required' => true));
     }
     
     /**

@@ -39,7 +39,10 @@ class CtlGrupo
     /**
      * @var integer
      *
-     * @ORM\Column(name="grupo_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CtlGrupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
+     * })
      */
     private $grupoId;
 
@@ -305,10 +308,15 @@ class CtlGrupo
     }
 
     public function __toString() {
-      return $this->nombreGrupo;
+      return $this->getNombreGrupo();
     }
     /**
      * @var \Maestro\ModeloBundle\Entity\CtlSuministro
+     *      
+     * @ORM\ManyToOne(targetEntity="CtlSuministro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="suministro_id", referencedColumnName="id")
+     * })
      */
     private $suministro;
 
@@ -335,4 +343,5 @@ class CtlGrupo
     {
         return $this->suministro;
     }
+    
 }

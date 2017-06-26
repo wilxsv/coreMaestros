@@ -41,6 +41,7 @@ class CtlNivelUsoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlNivelUso);
             $em->flush($ctlNivelUso);
+            $request->getSession()->getFlashBag()->add('success', 'Nivel de uso creado');
 
             return $this->redirectToRoute('nivel_uso_show', array('id' => $ctlNivelUso->getId()));
         }
@@ -77,6 +78,7 @@ class CtlNivelUsoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Nivel de uso actualizado');
 
             return $this->redirectToRoute('nivel_uso_edit', array('id' => $ctlNivelUso->getId()));
         }
@@ -101,6 +103,7 @@ class CtlNivelUsoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlNivelUso);
             $em->flush($ctlNivelUso);
+            $request->getSession()->getFlashBag()->add('error', 'Nivel de uso eliminado');
         }
 
         return $this->redirectToRoute('nivel_uso_index');

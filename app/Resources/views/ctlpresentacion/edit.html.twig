@@ -7,4 +7,8 @@
     {{ form_end(edit_form) }}
 
 <a href="{{ path('presentacion_index') }}" class="btn">Regresar a listado</a>
+
+    {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />
+            {{ form_end(delete_form) }}
 {% endblock %}

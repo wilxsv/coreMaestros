@@ -41,6 +41,7 @@ class CtlCodificacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlCodificacion);
             $em->flush($ctlCodificacion);
+            $request->getSession()->getFlashBag()->add('success', 'Codificacion creada');
 
             return $this->redirectToRoute('codificacion_show', array('id' => $ctlCodificacion->getId()));
         }
@@ -77,6 +78,7 @@ class CtlCodificacionController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Codificacion actualizada');
 
             return $this->redirectToRoute('codificacion_edit', array('id' => $ctlCodificacion->getId()));
         }
@@ -101,6 +103,7 @@ class CtlCodificacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlCodificacion);
             $em->flush($ctlCodificacion);
+            $request->getSession()->getFlashBag()->add('error', 'Codificacion eliminada');
         }
 
         return $this->redirectToRoute('codificacion_index');

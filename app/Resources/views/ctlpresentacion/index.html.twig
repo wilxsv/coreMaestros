@@ -5,7 +5,6 @@
         <thead>
             <tr>
                 <th>Nombre de presentacion</th>
-                <th>Detalle</th>
                 <th>Fecha de registro</th>
                 <th>Operaciones</th>
             </tr>
@@ -14,8 +13,7 @@
           {% for ctlPresentacion in ctlPresentacions %}
                     <tr>
                     <td>{{ ctlPresentacion.nombrePresentacion }}</td>
-                    <td>{{ ctlPresentacion.detallePresentacion }}</td>
-                    <td>{% if ctlPresentacion.registroSchema %}{{ ctlPresentacion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if ctlPresentacion.registroSchema %}{{ ctlPresentacion.registroSchema|date('Y-m-d') }}{% endif %}</td>
                     <td>
                            <a href="{{ path('presentacion_show', { 'id': ctlPresentacion.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                            <a href="{{ path('presentacion_edit', { 'id': ctlPresentacion.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

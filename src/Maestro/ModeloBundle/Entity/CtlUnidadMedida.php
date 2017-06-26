@@ -37,9 +37,9 @@ class CtlUnidadMedida
     private $detalleUnidadMedida;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="unidades_unidad", type="text", nullable=false)
+     * @ORM\Column(name="unidades_unidad", type="integer", nullable=false)
      */
     private $unidadesUnidad;
 

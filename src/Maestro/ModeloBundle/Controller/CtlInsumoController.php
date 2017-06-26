@@ -26,10 +26,26 @@ class CtlInsumoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
-        $valida = "";
-        $habilita = "";
+        
+	        
+        /*$ctlInsumos =  $em->createQueryBuilder()
+			->select('i')
+			->from('MaestroModeloBundle:CtlInsumo', 'i')
+			->innerJoin('i.grupoid','g')
+			->innerJoin('g.suministro','s')
+			->getQuery()
+			->getResult();*/
+
+        $procesar = "";
         $denegados = "";
+        $personal = "";
+        $accion['accion'] = false;
+        $accion['suministro'] = false;
+		
         if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
+			
+			$accion =  $this->accion($auth_checker);
+			
 	        $denegados = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(-1);
 			$this->setMenu( $auth_checker );
 			if ($auth_checker->isGranted('ROLE_HABILITA')){
@@ -38,14 +54,30 @@ class CtlInsumoController extends Controller
 				$habilita = $query->getResult();
 			}
 		}
-
-
-        
+		if ($accion['accion'] == 'agrega'){
+		 $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlInsumo');
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0 AND p.userIdSchema = '.$this->getUser()->getId())->getQuery();
+		 $personal = $query->getResult();
+		}
+		if ($accion['accion'] == 'valida'){
+		 $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlInsumo');
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+		 $personal = $query->getResult();
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+		 $procesar = $query->getResult();
+		}
+		if ($accion['accion'] == 'habilita'){
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+		 $procesar = $query->getResult();
+		}
+		
 		return $this->render('ctlinsumo/public.html.twig', array(
 			'ctlInsumos' => $ctlInsumos,
-			'valida' => $valida, 
-			'habilita' => $habilita, 
-			'denegados' => $denegados
+			'procesar' => $procesar, 
+			'personal' => $personal, 
+			'denegados' => $denegados,
+			'accion' => $accion['accion'],
+			'suministro' => $accion['suministro']
 		));
     }
 
@@ -57,6 +89,10 @@ class CtlInsumoController extends Controller
     {
         $ctlInsumo = new Ctlinsumo();
         $form = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+        
+        
+        $auth_checker = $this->get('security.authorization_checker');
+        $accion =  $this->accion($auth_checker);
         
         $form->handleRequest($request);
 
@@ -79,17 +115,16 @@ class CtlInsumoController extends Controller
 
             $em->persist($ctlInsumo);
             $em->flush($ctlInsumo);
+            $request->getSession()->getFlashBag()->add('success', 'Producto solicitado');
 
             return $this->redirectToRoute('insumo_index', array('type' => 0));
-        }//elseif ($type == 0) { return $this->redirectToRoute('insumo_index');        }
-
-        if ($type == 2){ $view = 'ctlinsumo/medicamento.html.twig'; }
-        if ($type == 6){ $view = 'ctlinsumo/general.html.twig'; }
-        if ($type == 0){ $view = 'ctlinsumo/new.html.twig'; }
+        }
+        
+        $view = 'ctlinsumo/new.html.twig';
         return $this->render($view, array(
             'ctlInsumo' => $ctlInsumo,
             'form' => $form->createView(),
-            'tipo' => "Tipo insumo",
+            'tipo' => $accion['suministro'],
         ));
     }
 
@@ -97,13 +132,24 @@ class CtlInsumoController extends Controller
      * Finds and displays a ctlInsumo entity.
      *
      */
-    public function showAction(CtlInsumo $ctlInsumo)
+    public function showAction(Request $request, CtlInsumo $ctlInsumo)
     {
         $deleteForm = $this->createDeleteForm($ctlInsumo);
+        $editForm = $this->createForm('Maestro\ModeloBundle\Form\CtlInsumoType', $ctlInsumo);
+        $editForm->handleRequest($request);
+        
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $ctlInsumo->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
+            $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Producto actualizado');
+
+            return $this->redirectToRoute('insumo_index');
+        }
 
         return $this->render('ctlinsumo/show.html.twig', array(
             'ctlInsumo' => $ctlInsumo,
             'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView(),
         ));
     }
 
@@ -118,7 +164,9 @@ class CtlInsumoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $ctlInsumo->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Producto actualizado');
 
             return $this->redirectToRoute('insumo_edit', array('id' => $ctlInsumo->getId()));
         }
@@ -143,6 +191,7 @@ class CtlInsumoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($ctlInsumo);
             $em->flush($ctlInsumo);
+            $request->getSession()->getFlashBag()->add('error', 'Producto eliminado');
         }
 
         return $this->redirectToRoute('insumo_index');
@@ -213,10 +262,17 @@ class CtlInsumoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
-        $valida = "";
-        $habilita = "";
+
+        $procesar = "";
         $denegados = "";
+        $personal = "";
+        $accion['accion'] = false;
+        $accion['suministro'] = false;
+		
         if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
+			
+			$accion =  $this->accion($auth_checker);
+			
 	        $denegados = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(-1);
 			$this->setMenu( $auth_checker );
 			if ($auth_checker->isGranted('ROLE_HABILITA')){
@@ -225,58 +281,31 @@ class CtlInsumoController extends Controller
 				$habilita = $query->getResult();
 			}
 		}
+		if ($accion['accion'] == 'agrega'){
+		 $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlInsumo');
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0 AND p.userIdSchema = '.$this->getUser()->getId())->getQuery();
+		 $personal = $query->getResult();
+		}
+		if ($accion['accion'] == 'valida'){
+		 $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlInsumo');
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+		 $personal = $query->getResult();
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+		 $procesar = $query->getResult();
+		}
+		if ($accion['accion'] == 'habilita'){
+		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
+		 $procesar = $query->getResult();
+		}
 
-
-        
 		return $this->render('ctlinsumo/public.html.twig', array(
 			'ctlInsumos' => $ctlInsumos,
-			'valida' => $valida, 
-			'habilita' => $habilita, 
-			'denegados' => $denegados
+			'procesar' => $procesar, 
+			'personal' => $personal, 
+			'denegados' => $denegados,
+			'accion' => $accion['accion'],
+			'suministro' => $accion['suministro']
 		));
-    }
-
-    /**
-     *  @Security("has_role('IS_AUTHENTICATED_ANONYMOUSLY')")
-     */
-    public function homeAction()
-    {
-		
-        $em = $this->getDoctrine()->getManager();
-        $ctlEstablecimientos = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(1);
-        $denegados = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByEnableSchema(-1);
-        $pendientes = '';
-        $auth_checker = $this->get('security.authorization_checker');
-        if ($auth_checker->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$this->setMenu( $auth_checker );
-			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
-		}
-		
-        if($auth_checker->isGranted('ROLE_VALIDA')){
-			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
-			$pendientes = $query->getResult();
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
-			$enviados = $query->getResult();
-			return $this->render('ctlestablecimiento/validaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'enviados' => $enviados, 'denegados' => $denegados));
-		} elseif ($auth_checker->isGranted('ROLE_HABILITA')){
-			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
-			$pendientes = $query->getResult();
-			return $this->render('ctlestablecimiento/habilitaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes, 'denegados' => $denegados));
-		} elseif ($auth_checker->isGranted('ROLE_AGREGA')){
-			$repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlEstablecimiento');
-			$query = $repository->createQueryBuilder('p')->where('p.userIdSchema = '.$this->getUser()->getId().' AND p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
-			$pendientes = $query->getResult();
-			$personal = $em->getRepository('MaestroModeloBundle:CtlEstablecimiento')->findByUserIdSchema( $this->getUser()->getId() );
-			
-			return $this->render('ctlestablecimiento/agregaPerfil.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos,'pendientes' => $pendientes,'personal' => $personal, 'denegados' => $denegados));
-		} else
-			return $this->render('ctlestablecimiento/public.html.twig', array('ctlEstablecimientos' => $ctlEstablecimientos));
-		
- 
-        
     }
     
     private function setMenu( $rol ){
@@ -357,6 +386,51 @@ class CtlInsumoController extends Controller
 	
 	private function setDetalleSchema( $new ){
 		$id = $this->getUser()->getId();
-		return "<nodo><id>$id</id><fecha>".date("Y-m-d H:i:s")."</fecha><msg>$new</msg></nodo>";		
+		return "<nodo><id>$id</id><fecha>".date("d-m-Y h:i:s A")."</fecha><msg>$new</msg></nodo>";		
+	}
+	
+	private function accion( $rol ){
+		$em = $this->getDoctrine()->getManager();
+		$roles =  $em->createQueryBuilder()
+			->select('p.id, r.nombreRol, p.nombreSuministro')
+			->from('MaestroModeloBundle:CtlSuministro', 'p')
+			->innerJoin('p.rolSolicitaSuministro','r')
+			->getQuery()
+			->getArrayResult();
+		foreach ($roles as $rolt) {	
+			if ( $rol->isGranted( $rolt["nombreRol"] ) ){
+				$data['accion'] = 'agrega';
+				$data['suministro'] = $rolt["nombreSuministro"];
+				$this->get('session')->set('accion', 'agrega');
+				$this->get('session')->set('suministro', $rolt["nombreSuministro"]);
+				return $data;
+			}
+		}
+		$roles =  $em->createQueryBuilder()
+			->select('s.id, r.nombreRol, s.nombreSuministro')
+			->from('MaestroModeloBundle:CtlSuministro', 's')
+			->innerJoin('s.rolValidaSuministro','r')
+			->getQuery()
+			->getArrayResult();
+		foreach ($roles as $rolt) {	
+			if ( $rol->isGranted( $rolt["nombreRol"] ) ){
+				$data['accion'] = 'valida';
+				$data['suministro'] = $rolt["nombreSuministro"];
+				$this->get('session')->set('accion', 'valida');
+				$this->get('session')->set('suministro', $rolt["nombreSuministro"]);
+				return $data;
+			}
+		}
+		if ( $rol->isGranted( 'ROLE_HABILITA' ) ){
+			$data['accion'] = 'habilita';
+			$data['suministro'] = $rolt["nombreSuministro"];
+			$this->get('session')->set('accion', 'habilita');
+			$this->get('session')->set('suministro', 'all');
+			return $data;
+		}
+		$data['accion'] = false;
+		$data['suministro'] = false;
+		$this->get('session')->set('suministro', '');
+		return $data;
 	}
 }

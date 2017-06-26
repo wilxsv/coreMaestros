@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Detalle grupo</th>
+                <th>Grupo superior</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
@@ -18,7 +18,7 @@
         {% for ctlGrupo in ctlGrupos %}
             <tr>
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
-                <td>{{ ctlGrupo.detalleGrupo }}</td>
+                <td>{{ ctlGrupo.grupoId }}</td>
                 <td>
                  <a href="{{ path('grupo_show', { 'id': ctlGrupo.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                  <a href="{{ path('grupo_edit', { 'id': ctlGrupo.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

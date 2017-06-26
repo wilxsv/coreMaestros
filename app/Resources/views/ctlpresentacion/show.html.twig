@@ -12,4 +12,8 @@
 
     <a href="{{ path('presentacion_index') }}" class="btn">Regresar a listado</a>
     <a href="{{ path('presentacion_edit', { 'id': ctlPresentacion.id }) }}" class="btn btn-primary">Editar</a>
+    
+    {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />
+            {{ form_end(delete_form) }}
 {% endblock %}

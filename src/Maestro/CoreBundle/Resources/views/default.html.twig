@@ -23,6 +23,7 @@
 		<!--[if lte IE 8]> <link rel="stylesheet" href="{{ asset('assets/') }}css/ace-ie.min.css" /> <![endif]-->
 		<!--inline styles related to this page-->
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  {% block head_css %}{% endblock %}
 	</head>
 
 	<body>
@@ -59,6 +60,22 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
+							{% if app.session.flashBag.has('success') %}
+							<div  class="alert alert-block alert-success">
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('success') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
+							</div>
+							{% elseif app.session.flashBag.has('error') %}
+							<div class="alert alert-error">
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('error') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
+							</div>
+							{% elseif app.session.flashBag.has('warning') %}
+							<div class="alert alert-warning">
+								<button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+								<strong>{% for msg in app.session.flashBag.get('warning') %}<i class="icon-bullhorn"></i>{{ msg }}</br>{% endfor %}</strong>
+							</div>
+							{% endif %}
 								<h3 class="header smaller lighter blue">
 									{% block title %}{% endblock %}
 								</h3>

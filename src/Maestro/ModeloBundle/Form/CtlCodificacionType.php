@@ -13,7 +13,9 @@ class CtlCodificacionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreCodificacion')->add('metodoCodificacion')        ;
+        $builder
+        ->add('nombreCodificacion', 'text', array('label'  => 'Nombre corto (siglas)', 'required'  => true))
+        ->add('metodoCodificacion');
     }
     
     /**

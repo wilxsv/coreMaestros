@@ -54,11 +54,25 @@ class FosUserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($fosUser);
-            $em->flush($fosUser);
-
-            return $this->redirectToRoute('admin_users_show', array('id' => $fosUser->getId()));
+            $last_line = system('cd .. && php app/console fos:user:create '.$form->get('username')->getData().' '.$form->get('email')->getData().' '.$form->get('password')->getData() , $retval);
+            if (!$retval){
+				$request->getSession()->getFlashBag()->add('success', 'Usuario creado');
+				$em = $this->getDoctrine()->getManager();
+				$user = $em->getRepository('MaestroModeloBundle:FosUser')->findOneByUsername($form->get('username')->getData());
+				if (!$user) {
+					throw $this->createNotFoundException( 'Usuario no creado ' );
+				}
+				$user->setEstablecimiento( $form->get('establecimiento')->getData() );
+				$user->setFullname( $form->get('fullname')->getData() );
+				$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find($form->get('roles')->getData());
+				if (!$rol) {
+					throw $this->createNotFoundException( 'Usuario no creado ' );
+				}
+				$last_line = system('cd .. && php app/console fos:user:promote '.$form->get('username')->getData().' '.$rol->getNombreRol() , $retval);
+				$em->flush();
+				$request->getSession()->getFlashBag()->add('success', 'Rol agregado');
+				return $this->redirectToRoute('admin_users_show', array('id' => $user->getId() ) );
+			}
         }
 
         return $this->render('fosuser/new.html.twig', array(
@@ -120,8 +134,6 @@ class FosUserController extends Controller
 				$em = $this->getDoctrine()->getManager();
 				$fosUser = $em->getRepository('MaestroModeloBundle:FosUser')->findById( $fosUser->getId() );
 				$userManager = $this->get('fos_user.user_manager');
-				//$fosUser->addRole('ROLE_ADM');
-				//$userManager->updateUser($fosUser);
 			}
 			
             return $this->redirectToRoute('admin_users_index');

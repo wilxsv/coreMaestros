@@ -30,13 +30,6 @@ class CtlSuministro
     private $nombreSuministro;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="detalle_suministro", type="string", length=255, nullable=true)
-     */
-    private $detalleSuministro;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="registro_schema", type="datetime", nullable=true)
@@ -207,7 +200,15 @@ class CtlSuministro
      */
     public function setDetalleSchema($detalleSchema)
     {
-        $this->detalleSchema = $detalleSchema;
+        $tmp = $this->getDetalleSchema();
+		$pos = strpos($tmp, '<nodo>');
+		if ( $pos === false )
+		  $this->detalleSchema = $detalleSchema;
+		else
+		{
+		  $pos = strripos($tmp, 'do>');
+		  $this->detalleSchema = substr($tmp, 0, $pos+3).$detalleSchema;
+		}
 
         return $this;
     }

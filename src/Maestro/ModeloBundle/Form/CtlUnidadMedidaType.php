@@ -13,7 +13,10 @@ class CtlUnidadMedidaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreUnidad')->add('detalleUnidadMedida')->add('detalleSchema')->add('ctlUnidadMedidaid')        ;
+        $builder
+			->add('nombreUnidad')
+			->add('detalleUnidadMedida')
+			->add('unidadesUnidad', 'integer', array('label'  => 'Unidades contenidas', 'required'  => true, 'attr' => array('min' => '1')));
     }
 
     /**

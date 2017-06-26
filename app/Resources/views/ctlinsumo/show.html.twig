@@ -1,40 +1,140 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Inusmo [{{ ctlInsumo.nombreLargoInsumo }}]{% endblock %}
-{% block body %}    <table>
+{% block title %}Producto [{{ ctlInsumo.nombreLargoInsumo }}]{% endblock %}
+{% block body %}
+<div class="row-fluid">
+ <div class="span6">
+  <div class="widget-box">
+   <div class="widget-header widget-header-flat"><h4>Caracteristicas generales: {{ ctlInsumo.nombreLargoInsumo }}</h4></div>
+   <div class="widget-body">
+    <div class="widget-main">
+     <div class="row-fluid">
+     
+     <table>
         <tbody>
             <tr>
-                <th>Codigonu</th>
-                <td>{{ ctlInsumo.codigoNu }}</td>
-            </tr>
-            <tr>
-                <th>Codigosinab</th>
-                <td>{{ ctlInsumo.codigoSinab }}</td>
-            </tr>
-            <tr>
-                <th>Codificacioninsumo</th>
-                <td>{{ ctlInsumo.codificacionInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Codigosinabext</th>
-                <td>{{ ctlInsumo.codigoSinabExt }}</td>
-            </tr>
-            <tr>
-                <th>Listadooficial</th>
-                <td>{% if ctlInsumo.listadoOficial %}Si{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Nombrelargoinsumo</th>
+                <th>Nombre del producto</th>
                 <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
+            </tr>
+            <tr>
+                <th>Unidad de medida</th>
+                <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>
+            </tr>
+            <tr>
+                <th>Nivel de uso</th>
+                <td>{{ ctlInsumo.ctlNivelUsoid }}</td>
+            </tr>
+            <tr>
+                <th>Presentación</th>
+                <td>{{ ctlInsumo.ctlPresentacionid }}</td>
+            </tr>
+            <tr>
+                <th>Grupo</th>
+                <td>{{ ctlInsumo.grupoid }}</td>
             </tr>
         </tbody>
     </table>
+ 
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="span6">
+  <div class="row-fluid"></div>
+  <div class="span12 widget-container-span ui-sortable">
+   <div class="widget-box">
+    <div class="widget-header widget-header-flat"><h4>Agregar Codificación e informacion técnica</h4></div>
+    <div class="widget-body">
+     <div class="widget-main">
+      <div class="row-fluid">
+      {% if app.session.get('accion') == 'valida' and app.session.get('suministro') == 'Medicamentos' %}
+    {{ form_start(edit_form) }}
+        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}</div>
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Actualizar" class="btn btn-primary"/>
+    {{ form_end(edit_form) }}
+      {% endif %}
+      {% if app.session.get('accion') == 'valida' and app.session.get('suministro') != 'Medicamentos' %}
+		{{ form_start(edit_form) }}
+          <div class="control-group ">Codigo SINAB
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoSinab) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>
+          </div>
+          <div class="control-group ">Codigo Naciones Unidas
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoNu) }}</span>{{ form_errors(edit_form.codigoNu) }}</div>
+          </div>
+          <div class="control-group ">Observacion
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.detalleSchema) }}</span>{{ form_errors(edit_form.detalleSchema) }}</div>
+          </div>
+          <div class="control-group ">Validar
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.estadoSchema) }}</span>{{ form_errors(edit_form.estadoSchema) }}</div>
+          </div>
+			<div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}{{ form_widget(edit_form) }}</div>
+			<input type="submit" value="Actualizar" class="btn btn-primary"/>
+		{{ form_end(edit_form) }}
+      {% endif %}
+      
+      
+      {% if app.session.get('accion') == 'habilita' and app.session.get('suministro') == 'Medicamentos' %}
+    {{ form_start(edit_form) }}
+        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.estadoSchema) }}</div>
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Actualizar" class="btn btn-primary"/>
+    {{ form_end(edit_form) }}
+      {% endif %}
+      {% if app.session.get('accion') == 'habilita' and app.session.get('suministro') != 'Medicamentos' %}
+		{{ form_start(edit_form) }}
+          <div class="control-group ">Codigo SINAB
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoSinab) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>
+          </div>
+          <div class="control-group ">Codigo Naciones Unidas
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoNu) }}</span>{{ form_errors(edit_form.codigoNu) }}</div>
+          </div>
+          <div class="control-group ">Observacion
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.detalleSchema) }}</span>{{ form_errors(edit_form.detalleSchema) }}</div>
+          </div>
+          <div class="control-group ">Habilitar
+           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.enableSchema) }}</span>{{ form_errors(edit_form.enableSchema) }}</div>
+          </div>
+			<div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}{{ form_widget(edit_form) }}</div>
+			<input type="submit" value="Actualizar" class="btn btn-primary"/>
+		{{ form_end(edit_form) }}
+      {% endif %}
+      
+      
+      </div>
+     </div>
+    </div>
+   </div>
+  </div> 
+  <div class="span12 widget-container-span ui-sortable">
+   <div class="widget-box collapsed">
+    <div class="widget-header">
+     <h4>Historial de cambios</h4>
+     <div class="widget-toolbar">
+      <a href="#" data-action="settings"><i class="icon-cog"></i></a>
+      <a href="#" data-action="reload"><i class="icon-refresh"></i></a>
+      <a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a>
+      <a href="#" data-action="close"><i class="icon-remove"></i></a>
+     </div>
+    </div>
+    <div class="widget-body">
+     <div class="widget-body-inner" style="display: block;">
+      <div class="widget-main">
+       {% if app.user %}
+         {{ ctlInsumo.detalleSchema |replace({'nodo>': 'p>','<id>': '<div style="display: none;">','</id>': '</div>','</fecha>': '</fecha>&nbsp;&nbsp;' }) | raw }}
+       {% endif %}
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
 
-    {% if is_granted('ROLE_HABILITA') %}
-		<a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}" class="btn btn-primary">Validar / Habilitar o comentar registro de insumo</a>
-    {% elseif app.user and ctlInsumo.userIdSchema == app.user.id %}
-		<a href="{{ path('insumo_edit', { 'id': ctlInsumo.id }) }}" class="btn btn-primary">Modificar registro de insumo</a>
+    {% if app.user and ctlInsumo.userIdSchema == app.user.id %}
+		{{ form_start(delete_form) }}<input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
 	{% endif %}
-		
+	
     <br />
     <a href="{{ path('insumo_index') }}"  class="btn btn-grey">Regresar a la lista</a>
 {% endblock %}

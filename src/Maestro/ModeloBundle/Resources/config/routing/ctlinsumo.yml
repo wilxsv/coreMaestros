@@ -6,7 +6,7 @@ insumo_index:
 insumo_show:
     path:     /{id}/show
     defaults: { _controller: "MaestroModeloBundle:CtlInsumo:show" }
-    methods:  GET
+    methods:  [GET, POST]
 
 insumo_new:
     path:     /new
