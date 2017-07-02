@@ -21,10 +21,13 @@ class CtlInsumoController extends Controller
      * Lists all ctlInsumo entities.
      *
      */
+    
     public function indexAction($type = 3)
     {
         $em = $this->getDoctrine()->getManager();
-        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
+        
+        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findBy(array('enableSchema' => 1),array(),1000);
+//        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
         
 	        
@@ -260,7 +263,7 @@ class CtlInsumoController extends Controller
     public function publicAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
+        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findBy(array('enableSchema' => 1),array(),1000);
         $auth_checker = $this->get('security.authorization_checker');
 
         $procesar = "";
