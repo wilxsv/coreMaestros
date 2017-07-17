@@ -96,6 +96,6 @@ class CtlCodificacion
     
     public function __toString()
     {
-        return $this->getNombreCodificacion();
+		return $this->getNombreCodificacion();
     }
 }

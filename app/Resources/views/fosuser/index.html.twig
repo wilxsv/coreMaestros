@@ -21,7 +21,7 @@
                 <td>{{ fosUser.establecimiento }}</td>
                 <td>{% if fosUser.enabled %}Si{% else %}No{% endif %}</td>
                 <td>{% if fosUser.lastLogin %}{{ fosUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ fosUser.roles | join(', ') }}</td>
+                <td></td>
                 <td>
                   <a href="{{ path('admin_users_show', { 'id': fosUser.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                   <a href="{{ path('admin_users_edit', { 'id': fosUser.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
