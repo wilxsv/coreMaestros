@@ -273,4 +273,49 @@ class CtlPrincipio
     {
         return $this->enableSchema;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ctlInsumo;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ctlInsumo = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ctlInsumo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumo
+     * @return CtlPrincipio
+     */
+    public function addCtlInsumo(\Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumo)
+    {
+        $this->ctlInsumo[] = $ctlInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlInsumo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumo
+     */
+    public function removeCtlInsumo(\Maestro\ModeloBundle\Entity\CtlInsumo $ctlInsumo)
+    {
+        $this->ctlInsumo->removeElement($ctlInsumo);
+    }
+
+    /**
+     * Get ctlInsumo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlInsumo()
+    {
+        return $this->ctlInsumo;
+    }
 }

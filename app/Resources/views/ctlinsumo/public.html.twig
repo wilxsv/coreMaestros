@@ -58,7 +58,6 @@
     <table id="sample-table2" class="table table-striped table-bordered table-hover">
      <thead>
             <tr>
-                <th>Grupo</th>
                 <th>Nombre</th>
                 <th>Unidad de medida</th>
                 <th>Nivel de uso</th>
@@ -68,7 +67,6 @@
      <tbody>
         {% for p in personal %}
             <tr>
-                <td>{{ p.grupoid }}</td>
                 <td><a href="{{ path('insumo_show', { 'id': p.id }) }}">{{ p.nombreLargoInsumo }}</a></td>
                 <td>{{ p.ctlUnidadMedidaid }}</td>
                 <td>{{ p.ctlNivelUsoid }}</td>
@@ -109,7 +107,6 @@
     <table id="sample-table4" class="table table-striped table-bordered table-hover">
      <thead>
             <tr>
-                <th>Suministro</th>
                 <th>Grupo</th>
                 <th>Nombre</th>
                 <th>Unidad de medida</th>
@@ -120,7 +117,6 @@
      <tbody>
         {% for ctlInsumo in ctlInsumos %}
             <tr>
-                <td></td>
                 <td>{{ ctlInsumo.grupoid }}</td>
                 <td>{{ ctlInsumo.nombreLargoInsumo }}</td>
                 <td>{{ ctlInsumo.ctlUnidadMedidaid }}</td>

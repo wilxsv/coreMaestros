@@ -340,4 +340,49 @@ class CtlUnidadMedida
     public function __toString(){
       return $this->nombreUnidad;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $grupo;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->grupo = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add grupo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupo
+     * @return CtlUnidadMedida
+     */
+    public function addGrupo(\Maestro\ModeloBundle\Entity\CtlGrupo $grupo)
+    {
+        $this->grupo[] = $grupo;
+
+        return $this;
+    }
+
+    /**
+     * Remove grupo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupo
+     */
+    public function removeGrupo(\Maestro\ModeloBundle\Entity\CtlGrupo $grupo)
+    {
+        $this->grupo->removeElement($grupo);
+    }
+
+    /**
+     * Get grupo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
 }

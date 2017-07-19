@@ -106,14 +106,26 @@ class FosUserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-          //$ php app/console fos:user:change-password testuser newp@ssword
-          $last_line = system('cd .. && php app/console fos:user:change-password '.$editForm->get('username')->getData().' '.$editForm->get('password')->getData());
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->render('fosuser/show.html.twig', array(
-            'fosUser' => $fosUser,
-            'delete_form' => $deleteForm->createView(),
-        ));
+			$rol = null;
+			$password = null;
+			$this->getDoctrine()->getManager()->flush();
+			$em = $this->getDoctrine()->getManager();
+            if ($editForm->get('roles')->getData()){
+				$rol = $em->getRepository('MaestroModeloBundle:CtlRol')->find($editForm->get('roles')->getData());
+			}
+            if ($editForm->get('password')->getData()){
+				$last_line = system('cd .. && php app/console fos:user:change-password '.$fosUser->getUsernameCanonical().' '.$editForm->get('password')->getData(), $retval);
+            }
+            if ($rol){
+				$last_line = system('cd .. && php app/console fos:user:promote '.$fosUser->getUsernameCanonical().' '.$rol->getNombreRol() , $retval);
+			}
+		   
+          
+		  
+		  
+          /*
+          */
+          return $this->render('fosuser/show.html.twig', array('fosUser' => $fosUser, 'delete_form' => $deleteForm->createView(), ));
         }
 
         return $this->render('fosuser/edit.html.twig', array(

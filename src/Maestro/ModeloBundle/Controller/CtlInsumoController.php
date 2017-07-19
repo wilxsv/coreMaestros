@@ -30,14 +30,6 @@ class CtlInsumoController extends Controller
 //        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
         
-	        
-        /*$ctlInsumos =  $em->createQueryBuilder()
-			->select('i')
-			->from('MaestroModeloBundle:CtlInsumo', 'i')
-			->innerJoin('i.grupoid','g')
-			->innerJoin('g.suministro','s')
-			->getQuery()
-			->getResult();*/
 
         $procesar = "";
         $denegados = "";
@@ -148,11 +140,18 @@ class CtlInsumoController extends Controller
 
             return $this->redirectToRoute('insumo_index');
         }
+        
+        $result = $em->createQuery( "SELECT g.id, g.nombreGrupo FROM MinsalCoreBundle:CtlGrupo g WHERE g.suministro = ".$request->query->get('suministro')." ORDER BY g.nombreGrupo" )->getResult();
+        foreach ( $result as $r ){
+			
+		}	
+        
 
         return $this->render('ctlinsumo/show.html.twig', array(
             'ctlInsumo' => $ctlInsumo,
             'delete_form' => $deleteForm->createView(),
             'edit_form' => $editForm->createView(),
+            'pre' => 'oooo',
         ));
     }
 

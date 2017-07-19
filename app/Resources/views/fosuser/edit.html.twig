@@ -9,6 +9,7 @@
     <div class="widget-main">
      <div class="row-fluid">
        {{ form_start(edit_form) }}
+		<div style="display: none;">{{ form_widget(edit_form.roles) }}</div>
         {{ form_widget(edit_form) }}
         <input type="submit" value="Actualizar" class="btn btn-primary" />
        {{ form_end(edit_form) }}

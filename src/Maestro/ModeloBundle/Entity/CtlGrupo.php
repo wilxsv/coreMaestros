@@ -344,4 +344,105 @@ class CtlGrupo
         return $this->suministro;
     }
     
+    /**
+     * @var integer
+     */
+    private $codigoGrupo;
+
+    /**
+     * @var \Maestro\ModeloBundle\Entity\CtlGrupo
+     */
+    private $grupo;
+
+
+    /**
+     * Set codigoGrupo
+     *
+     * @param integer $codigoGrupo
+     * @return CtlGrupo
+     */
+    public function setCodigoGrupo($codigoGrupo)
+    {
+        $this->codigoGrupo = $codigoGrupo;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoGrupo
+     *
+     * @return integer 
+     */
+    public function getCodigoGrupo()
+    {
+        return $this->codigoGrupo;
+    }
+
+    /**
+     * Set grupo
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupo
+     * @return CtlGrupo
+     */
+    public function setGrupo(\Maestro\ModeloBundle\Entity\CtlGrupo $grupo = null)
+    {
+        $this->grupo = $grupo;
+
+        return $this;
+    }
+
+    /**
+     * Get grupo
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
+     */
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $unidad;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->unidad = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add unidad
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     * @return CtlGrupo
+     */
+    public function addUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    {
+        $this->unidad[] = $unidad;
+
+        return $this;
+    }
+
+    /**
+     * Remove unidad
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     */
+    public function removeUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    {
+        $this->unidad->removeElement($unidad);
+    }
+
+    /**
+     * Get unidad
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUnidad()
+    {
+        return $this->unidad;
+    }
 }

@@ -93,4 +93,65 @@ class CtlRol
     public function __toString(){
 		return $this->getNombreRol();
 	}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $acceso;
+
+
+    /**
+     * Add acceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $acceso
+     * @return CtlRol
+     */
+    public function addAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $acceso)
+    {
+        $this->acceso[] = $acceso;
+
+        return $this;
+    }
+
+    /**
+     * Remove acceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $acceso
+     */
+    public function removeAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $acceso)
+    {
+        $this->acceso->removeElement($acceso);
+    }
+
+    /**
+     * Get acceso
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAcceso()
+    {
+        return $this->acceso;
+    }
+
+    /**
+     * Add ctlAcceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     * @return CtlRol
+     */
+    public function addCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso[] = $ctlAcceso;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlAcceso
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso
+     */
+    public function removeCtlAcceso(\Maestro\ModeloBundle\Entity\CtlAcceso $ctlAcceso)
+    {
+        $this->ctlAcceso->removeElement($ctlAcceso);
+    }
 }

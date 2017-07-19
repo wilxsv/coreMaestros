@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CtlInsumo
  *
- * @ORM\Table(name="ctl_insumo", indexes={@ORM\Index(name="IDX_9DB3222DD0A3533", columns={"ctl_nivel_usoid"}), @ORM\Index(name="IDX_9DB3222BD744E62", columns={"ctl_presentacionid"}), @ORM\Index(name="IDX_9DB3222D2D8661B", columns={"ctl_unidad_medidaid"}), @ORM\Index(name="IDX_9DB32221F3126F0", columns={"ctl_productoid"}), @ORM\Index(name="IDX_9DB3222D64E375F", columns={"ctl_suministroid"}), @ORM\Index(name="IDX_9DB32226E936AAA", columns={"ctl_programaid"}), @ORM\Index(name="IDX_9DB32227A93ADB3", columns={"ctl_forma_farmaceutica_id"}), @ORM\Index(name="IDX_9DB322272F1374E", columns={"grupoid"})})
+ * @ORM\Table(name="ctl_insumo", indexes={@ORM\Index(name="IDX_9DB3222BD744E62", columns={"ctl_presentacionid"}), @ORM\Index(name="IDX_9DB322272F1374E", columns={"grupoid"}), @ORM\Index(name="IDX_9DB3222D2D8661B", columns={"ctl_unidad_medidaid"}), @ORM\Index(name="IDX_9DB32221F3126F0", columns={"ctl_productoid"}), @ORM\Index(name="IDX_9DB3222DD0A3533", columns={"ctl_nivel_usoid"}), @ORM\Index(name="IDX_9DB32227A93ADB3", columns={"ctl_forma_farmaceutica_id"})})
  * @ORM\Entity
  */
 class CtlInsumo
@@ -28,6 +28,13 @@ class CtlInsumo
      * @ORM\Column(name="codigo_nu", type="string", length=255, nullable=true)
      */
     private $codigoNu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ctl_programaid", type="integer", nullable=true)
+     */
+    private $ctlProgramaid;
 
     /**
      * @var string
@@ -60,7 +67,7 @@ class CtlInsumo
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_largo_insumo", type="text", nullable=true)
+     * @ORM\Column(name="nombre_largo_insumo", type="text", nullable=false)
      */
     private $nombreLargoInsumo;
 
@@ -114,16 +121,6 @@ class CtlInsumo
     private $detalleInsumo;
 
     /**
-     * @var \CtlNivelUso
-     *
-     * @ORM\ManyToOne(targetEntity="CtlNivelUso")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_nivel_usoid", referencedColumnName="id")
-     * })
-     */
-    private $ctlNivelUsoid;
-
-    /**
      * @var \CtlPresentacion
      *
      * @ORM\ManyToOne(targetEntity="CtlPresentacion")
@@ -132,6 +129,16 @@ class CtlInsumo
      * })
      */
     private $ctlPresentacionid;
+
+    /**
+     * @var \CtlGrupo
+     *
+     * @ORM\ManyToOne(targetEntity="CtlGrupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="grupoid", referencedColumnName="id")
+     * })
+     */
+    private $grupoid;
 
     /**
      * @var \CtlUnidadMedida
@@ -154,14 +161,14 @@ class CtlInsumo
     private $ctlProductoid;
 
     /**
-     * @var \CtlPrograma
+     * @var \CtlNivelUso
      *
-     * @ORM\ManyToOne(targetEntity="CtlPrograma")
+     * @ORM\ManyToOne(targetEntity="CtlNivelUso")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ctl_programaid", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="ctl_nivel_usoid", referencedColumnName="id")
      * })
      */
-    private $ctlProgramaid;
+    private $ctlNivelUsoid;
 
     /**
      * @var \CtlFormaFarmaceutica
@@ -174,20 +181,10 @@ class CtlInsumo
     private $ctlFormaFarmaceutica;
 
     /**
-     * @var \CtlGrupo
-     *
-     * @ORM\ManyToOne(targetEntity="CtlGrupo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="grupoid", referencedColumnName="id")
-     * })
-     */
-    private $grupoid;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="CtlConcentracion", inversedBy="ctlInsumoid")
-     * @ORM\JoinTable(name="ctl_insumo_ctl_concentracion",
+     * @ORM\JoinTable(name="insumo_concentracion",
      *   joinColumns={
      *     @ORM\JoinColumn(name="ctl_insumoid", referencedColumnName="id")
      *   },
@@ -208,23 +205,28 @@ class CtlInsumo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CtlPrincipioActivo", mappedBy="ctlInsumoid")
+     * @ORM\ManyToMany(targetEntity="CtlPrincipio", inversedBy="ctlInsumo")
+     * @ORM\JoinTable(name="insumo_principio",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ctl_insumo", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ctl_prinicipio", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $ctlPrincipioActivoid;
+    private $ctlPrinicipio;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-//        $this->ctlConcentracionid = new \Doctrine\Common\Collections\ArrayCollection();
-//        $this->ctlFormaFarmaceuticaid = new \Doctrine\Common\Collections\ArrayCollection();
-//        $this->ctlPrincipioActivoid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlConcentracionid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlFormaFarmaceuticaid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ctlPrinicipio = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    public function __toString(){
-		return $this->getNombreLargoInsumo();
-	}
+
 
     /**
      * Get id
@@ -257,6 +259,29 @@ class CtlInsumo
     public function getCodigoNu()
     {
         return $this->codigoNu;
+    }
+
+    /**
+     * Set ctlProgramaid
+     *
+     * @param integer $ctlProgramaid
+     * @return CtlInsumo
+     */
+    public function setCtlProgramaid($ctlProgramaid)
+    {
+        $this->ctlProgramaid = $ctlProgramaid;
+
+        return $this;
+    }
+
+    /**
+     * Get ctlProgramaid
+     *
+     * @return integer 
+     */
+    public function getCtlProgramaid()
+    {
+        return $this->ctlProgramaid;
     }
 
     /**
@@ -536,29 +561,6 @@ class CtlInsumo
     }
 
     /**
-     * Set ctlNivelUsoid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlNivelUso $ctlNivelUsoid
-     * @return CtlInsumo
-     */
-    public function setCtlNivelUsoid(\Maestro\ModeloBundle\Entity\CtlNivelUso $ctlNivelUsoid = null)
-    {
-        $this->ctlNivelUsoid = $ctlNivelUsoid;
-
-        return $this;
-    }
-
-    /**
-     * Get ctlNivelUsoid
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso 
-     */
-    public function getCtlNivelUsoid()
-    {
-        return $this->ctlNivelUsoid;
-    }
-
-    /**
      * Set ctlPresentacionid
      *
      * @param \Maestro\ModeloBundle\Entity\CtlPresentacion $ctlPresentacionid
@@ -579,6 +581,29 @@ class CtlInsumo
     public function getCtlPresentacionid()
     {
         return $this->ctlPresentacionid;
+    }
+
+    /**
+     * Set grupoid
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupoid
+     * @return CtlInsumo
+     */
+    public function setGrupoid(\Maestro\ModeloBundle\Entity\CtlGrupo $grupoid = null)
+    {
+        $this->grupoid = $grupoid;
+
+        return $this;
+    }
+
+    /**
+     * Get grupoid
+     *
+     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
+     */
+    public function getGrupoid()
+    {
+        return $this->grupoid;
     }
 
     /**
@@ -628,26 +653,26 @@ class CtlInsumo
     }
 
     /**
-     * Set ctlProgramaid
+     * Set ctlNivelUsoid
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlPrograma $ctlProgramaid
+     * @param \Maestro\ModeloBundle\Entity\CtlNivelUso $ctlNivelUsoid
      * @return CtlInsumo
      */
-    public function setCtlProgramaid(\Maestro\ModeloBundle\Entity\CtlPrograma $ctlProgramaid = null)
+    public function setCtlNivelUsoid(\Maestro\ModeloBundle\Entity\CtlNivelUso $ctlNivelUsoid = null)
     {
-        $this->ctlProgramaid = $ctlProgramaid;
+        $this->ctlNivelUsoid = $ctlNivelUsoid;
 
         return $this;
     }
 
     /**
-     * Get ctlProgramaid
+     * Get ctlNivelUsoid
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlPrograma 
+     * @return \Maestro\ModeloBundle\Entity\CtlNivelUso 
      */
-    public function getCtlProgramaid()
+    public function getCtlNivelUsoid()
     {
-        return $this->ctlProgramaid;
+        return $this->ctlNivelUsoid;
     }
 
     /**
@@ -671,29 +696,6 @@ class CtlInsumo
     public function getCtlFormaFarmaceutica()
     {
         return $this->ctlFormaFarmaceutica;
-    }
-
-    /**
-     * Set grupoid
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupoid
-     * @return CtlInsumo
-     */
-    public function setGrupoid(\Maestro\ModeloBundle\Entity\CtlGrupo $grupoid = null)
-    {
-        $this->grupoid = $grupoid;
-
-        return $this;
-    }
-
-    /**
-     * Get grupoid
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
-     */
-    public function getGrupoid()
-    {
-        return $this->grupoid;
     }
 
     /**
@@ -763,35 +765,95 @@ class CtlInsumo
     }
 
     /**
-     * Add ctlPrincipioActivoid
+     * Add ctlPrinicipio
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlPrincipioActivo $ctlPrincipioActivoid
+     * @param \Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrinicipio
      * @return CtlInsumo
      */
-    public function addCtlPrincipioActivoid(\Maestro\ModeloBundle\Entity\CtlPrincipioActivo $ctlPrincipioActivoid)
+    public function addCtlPrinicipio(\Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrinicipio)
     {
-        $this->ctlPrincipioActivoid[] = $ctlPrincipioActivoid;
+        $this->ctlPrinicipio[] = $ctlPrinicipio;
 
         return $this;
     }
 
     /**
-     * Remove ctlPrincipioActivoid
+     * Remove ctlPrinicipio
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlPrincipioActivo $ctlPrincipioActivoid
+     * @param \Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrinicipio
      */
-    public function removeCtlPrincipioActivoid(\Maestro\ModeloBundle\Entity\CtlPrincipioActivo $ctlPrincipioActivoid)
+    public function removeCtlPrinicipio(\Maestro\ModeloBundle\Entity\CtlPrincipio $ctlPrinicipio)
     {
-        $this->ctlPrincipioActivoid->removeElement($ctlPrincipioActivoid);
+        $this->ctlPrinicipio->removeElement($ctlPrinicipio);
     }
 
     /**
-     * Get ctlPrincipioActivoid
+     * Get ctlPrinicipio
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCtlPrincipioActivoid()
+    public function getCtlPrinicipio()
     {
-        return $this->ctlPrincipioActivoid;
+        return $this->ctlPrinicipio;
+    }
+    
+        public function __toString(){
+		return $this->getNombreLargoInsumo();
+	}
+    /**
+     * @var integer
+     */
+    private $venInsumo;
+
+    /**
+     * @var float
+     */
+    private $costoInsumo;
+
+
+    /**
+     * Set venInsumo
+     *
+     * @param integer $venInsumo
+     * @return CtlInsumo
+     */
+    public function setVenInsumo($venInsumo)
+    {
+        $this->venInsumo = $venInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get venInsumo
+     *
+     * @return integer 
+     */
+    public function getVenInsumo()
+    {
+        return $this->venInsumo;
+    }
+
+    /**
+     * Set costoInsumo
+     *
+     * @param float $costoInsumo
+     * @return CtlInsumo
+     */
+    public function setCostoInsumo($costoInsumo)
+    {
+        $this->costoInsumo = $costoInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get costoInsumo
+     *
+     * @return float 
+     */
+    public function getCostoInsumo()
+    {
+        return $this->costoInsumo;
     }
 }

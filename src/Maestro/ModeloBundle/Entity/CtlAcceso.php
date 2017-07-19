@@ -274,4 +274,108 @@ class CtlAcceso
     {
         return $this->ctlRol;
     }
+    /**
+     * @var integer
+     */
+    private $accesoId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $rol;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ctlRole;
+
+
+    /**
+     * Set accesoId
+     *
+     * @param integer $accesoId
+     * @return CtlAcceso
+     */
+    public function setAccesoId($accesoId)
+    {
+        $this->accesoId = $accesoId;
+
+        return $this;
+    }
+
+    /**
+     * Get accesoId
+     *
+     * @return integer 
+     */
+    public function getAccesoId()
+    {
+        return $this->accesoId;
+    }
+
+    /**
+     * Add rol
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rol
+     * @return CtlAcceso
+     */
+    public function addRol(\Maestro\ModeloBundle\Entity\CtlRol $rol)
+    {
+        $this->rol[] = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $rol
+     */
+    public function removeRol(\Maestro\ModeloBundle\Entity\CtlRol $rol)
+    {
+        $this->rol->removeElement($rol);
+    }
+
+    /**
+     * Get rol
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * Add ctlRole
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $ctlRole
+     * @return CtlAcceso
+     */
+    public function addCtlRole(\Maestro\ModeloBundle\Entity\CtlRol $ctlRole)
+    {
+        $this->ctlRole[] = $ctlRole;
+
+        return $this;
+    }
+
+    /**
+     * Remove ctlRole
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlRol $ctlRole
+     */
+    public function removeCtlRole(\Maestro\ModeloBundle\Entity\CtlRol $ctlRole)
+    {
+        $this->ctlRole->removeElement($ctlRole);
+    }
+
+    /**
+     * Get ctlRole
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCtlRole()
+    {
+        return $this->ctlRole;
+    }
 }

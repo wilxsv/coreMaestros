@@ -410,4 +410,10 @@ class CtlSuministro
     public function __toString(){
 		return $this->getNombreSuministro();
 	}
+    /**
+     * @var string
+     */
+    private $detalleSuministro;
+
+
 }
