@@ -7,7 +7,9 @@
   <i class="icon-coffee green"></i>
   Por favor, ingrese la informacion solicitada
 </h4>
-
+{% if error %}
+    <div>Error en las credenciales, verifique su usuario y clave</div>
+{% endif %}
 <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
