@@ -106,6 +106,8 @@ class FosUserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+          //$ php app/console fos:user:change-password testuser newp@ssword
+          $last_line = system('cd .. && php app/console fos:user:change-password '.$editForm->get('username')->getData().' '.$editForm->get('password')->getData());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->render('fosuser/show.html.twig', array(
@@ -120,7 +122,7 @@ class FosUserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
- 
+
     public function rolesAction(Request $request, FosUser $fosUser)
     {
         $editForm = $this->createForm('Maestro\ModeloBundle\Form\RolesAddType', $fosUser);
@@ -129,16 +131,16 @@ class FosUserController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 			if ($editForm->get('roles')->getData() == FALSE){
-				
+
 			} elseif ($editForm->get('roles')->getData() == TRUE ){
 				$em = $this->getDoctrine()->getManager();
 				$fosUser = $em->getRepository('MaestroModeloBundle:FosUser')->findById( $fosUser->getId() );
 				$userManager = $this->get('fos_user.user_manager');
 			}
-			
+
             return $this->redirectToRoute('admin_users_index');
         }
-        
+
 
         return $this->render('fosuser/roles.html.twig', array(
             'fosUser' => $fosUser,
