@@ -101,8 +101,7 @@
   </div>
  </div>
 </div>
-
-    {% if is_granted('ROLE_AGREGA') %}
+    {% if ( is_granted('ROLE_AGREGA') and ctlEstablecimiento.userIdSchema == app.user.id and enable != 1 ) %}
 		{{ app.session.set('id', ctlEstablecimiento.id) }}
 		{{ app.session.set('nombre', ctlEstablecimiento.nombre) }}
 		<a href="{{ path('eco_new') }}" class="btn btn-primary">Agregar ECO</a>
@@ -113,8 +112,6 @@
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
 	{% elseif is_granted('ROLE_HABILITA') %}
 		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Validar o comentar registro de establecimiento</a>
-    {% elseif app.user and ctlEstablecimiento.userIdSchema == app.user.id %}
-		<a href="{{ path('establecimiento_edit', { 'id': ctlEstablecimiento.id }) }}" class="btn btn-primary">Modificar registro de establecimiento</a>
-	{% endif %}
+    {% endif %}
 <a href="{{ path('maestro_homepage') }}" class="btn">Regresar al listado</a>
 {% endblock %}

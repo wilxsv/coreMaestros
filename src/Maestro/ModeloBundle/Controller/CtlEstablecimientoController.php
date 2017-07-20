@@ -93,6 +93,7 @@ class CtlEstablecimientoController extends Controller
             'delete_form' => $deleteForm->createView(),
             'denega_form' => $denegaForm->createView(),
             'tmp' => $tmp, 'eco' => $eco,
+            'enable' => $ctlEstablecimiento->getEnableSchema()
         ));
     }
 
@@ -110,7 +111,6 @@ class CtlEstablecimientoController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $request->getSession()->getFlashBag()->add('success', 'Establecimiento actualizado');
             $ctlEstablecimiento->setIpUserSchema($request->getClientIp());
             $ctlEstablecimiento->setRegistroSchema(new \DateTime('now'));
             $ctlEstablecimiento->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
@@ -118,27 +118,14 @@ class CtlEstablecimientoController extends Controller
 				$ctlEstablecimiento->setEstadoSchema( 1 );
 				$ctlEstablecimiento->setEnableSchema( 1 );
 				$request->getSession()->getFlashBag()->add('success', 'Establecimiento habilitado en catalogo oficial');
-			}elseif ($editForm->get('estadoSchema')->getData() == 1){
-				$ctlEstablecimiento->setEstadoSchema( 1 );
-				$ctlEstablecimiento->setEnableSchema( 0 );
-			}elseif ($editForm->get('enableSchema')->getData() == -1 OR $editForm->get('estadoSchema')->getData() == -1){
+			}elseif ($editForm->get('enableSchema')->getData() == -1 ){
 				$ctlEstablecimiento->setEstadoSchema( -1 );
 				$ctlEstablecimiento->setEnableSchema( -1 );
 				$request->getSession()->getFlashBag()->add('error', 'Establecimiento desabilitado del catalogo oficial');
+			}else{
+            $request->getSession()->getFlashBag()->add('success', 'Establecimiento actualizado');
 			}
             $this->getDoctrine()->getManager()->flush();
-            /*$url = $this->container->getParameter('api');
-            $data = array('tocken' => '$this->container->getParameter('tocken')', 'maestro' => 'establecimiento');
-            $options = array(
-				'http' => array(
-					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-					'method'  => 'POST',
-					'content' => http_build_query($data)
-				)
-			);
-            $context  = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
-            if ($result === FALSE) { /* Handle error */ //}
 
             $this->sendMessage("Actualizacion en establecimiento" , "El establecimiento tiene nuevos comentarios, por favor revisa en el sistema los cambios.", $this->getMailbyIdUser(  $ctlEstablecimiento->getUserIdSchema() ) );
             return $this->redirectToRoute('maestro_homepage');
@@ -149,7 +136,8 @@ class CtlEstablecimientoController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'denega_form' => $deleteForm->createView(),
-            'nombre' => $ctlEstablecimiento->getNombre()
+            'nombre' => $ctlEstablecimiento->getNombre(),
+            'enable' => $ctlEstablecimiento->getEnableSchema()
         ));
     }
 

@@ -40,10 +40,12 @@
     <div class="widget-main">
      <div class="row-fluid">
       {{ form_start(edit_form) }}
+		<div id="divCheckbox" style="display: none;">
+			{{ form_row(edit_form.estadoSchema) }}
+		</div>
+      {{ form_widget(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}
       {{ form_row(edit_form.enableSchema) }}
-      <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form) }}
-      </div>
        <input type="submit" value="Guardar cambios en establecimiento" class="btn btn-inverse">
       </form>      
      </div>
@@ -54,8 +56,7 @@
 </div>
 
 
-{% elseif (ctlEstablecimiento.userIdSchema == app.user.id) %}
-
+{% elseif (ctlEstablecimiento.userIdSchema == app.user.id and enable != 1 ) %}
 
 <div class="row-fluid">
  <div class="span12">
@@ -66,8 +67,9 @@
      <div class="row-fluid">
       {{ form_start(edit_form) }}
       <div id="divCheckbox" style="display: none;">
-   	   <input type="hidden" id="maestro_modelobundle_ctlestablecimiento_estadoSchema" name="maestro_modelobundle_ctlestablecimiento[estadoSchema]" value="0" />
-       {{ form_row(edit_form.enableSchema) }}
+		{% if is_granted('ROLE_AGREGA') %}
+		{% endif %}
+       {{ form_row(edit_form.enableSchema) }}       {{ form_row(edit_form.estadoSchema) }}
       </div>
       {{ form_widget(edit_form) }}
       {{ form_row(edit_form.detalleSchema) }}

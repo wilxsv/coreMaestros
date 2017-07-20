@@ -25,15 +25,16 @@ class CtlEstablecimientoType extends AbstractType
         ->add('poblacionAsignana', 'integer', array('label'  => 'Población asignada', 'attr' => array('min' => '10', 'max' => '79999999')))
         ->add('cantidadFamilia', 'integer', array('label'  => 'Cantidad de familias asignadas: ', 'attr' => array('min' => '10', 'max' => '79999999')))
         ->add('idmicrored', 'entity',array('label'  => 'Micro red a la que pertenece: ', 'class' => 'MaestroModeloBundle:CtlMicrored', 'required' => true))
-        ->add('idEstablecimientoPadre', 'entity',array('label'  => 'Seleccione el establecimiento al que pertenece su administración: ', 'class' => 'MaestroModeloBundle:CtlEstablecimiento', 'required' => false))
+        ->add('idEstablecimientoPadre', EntityType::class, array('label'  => 'SIBASI al que pertenece:', 'class' => 'MaestroModeloBundle:CtlEstablecimiento',
+			'query_builder' => function (EntityRepository $er) { return $er->createQueryBuilder('e')->where('e.id BETWEEN 6 AND 21')->orderBy('e.nombre', 'ASC');},'choice_label' => 'nombre', 'required' => true, 'multiple' => false))
         ->add('idTipoEstablecimiento', 'entity',array('label'  => 'Tipo de establecimiento: ', 'class' => 'MaestroModeloBundle:CtlTipoEstablecimiento', 'required' => true, 'attr' => array('onChange' => 'disableRed(this)')))
         ->add('idMunicipio', 'entity',array('label'  => 'Municipio: ', 'class' => 'MaestroModeloBundle:CtlMunicipio', 'required' => true))
         ->add('idSituacionLegal', 'entity',array('label'  => 'Situación legal del inmueble: ', 'class' => 'MaestroModeloBundle:CtlSituacionLegal', 'required' => true))
         ->add('ctlPrestacionid', 'entity',array('label'  => 'Prestaciones: ', 'class' => 'MaestroModeloBundle:CtlPrestacion', 'required' => false, 'multiple' => true))
         ->add('ctlRecursoHumanoid', 'entity',array('label'  => 'Recurso humano asignado: ', 'class' => 'MaestroModeloBundle:CtlRecursoHumano', 'required' => false, 'multiple' => true))
         ->add('ctlServicioid', 'entity',array('label'  => 'Servicios que presta:', 'class' => 'MaestroModeloBundle:CtlServicio', 'required' => false, 'multiple' => true))
-        ->add('latitud')
-        ->add('longitud')
+        ->add('latitud', 'text', array('label'  => 'Latitud', 'attr' => array('onkeypress' => 'return (event.charCode >= 48 && event.charCode <= 57) || (event.keyCode === 8) || (event.keyCode === 46) || (event.keyCode === 37) || (event.keyCode === 39)')))
+        ->add('longitud', 'text', array('label'  => 'Longitud', 'attr' => array('onkeypress' => 'return (event.charCode >= 48 && event.charCode <= 57) || (event.keyCode === 8) || (event.keyCode === 46) || (event.keyCode === 37) || (event.keyCode === 39)')))
         ->add('detalleSchema', 'text', array('label'  => 'Observación', 'data' => ''))
         ->add('estadoSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'Observar y enviar mensaje a quien solicito el establecimiento','-1' => 'Denegar establecimiento', '1' => 'Validar establecimiento'), 'required'  => true, ))
         ->add('enableSchema', 'choice', array('label'  => 'Opciones a tomar :', 'choices'=> array('0' => 'Observar y enviar mensaje a quien solicito el establecimiento','-1' => 'Denegar establecimiento', '1' => 'Habilitar establecimiento'), 'required'  => true, ))
@@ -41,7 +42,8 @@ class CtlEstablecimientoType extends AbstractType
         ;//, array('data' => 0)
     }
 /*
-
+->add('ctlSibasi
+       
 ->add('idCatNivelMinsal')
 ->add('codUcsf')
 ->add('cvcd4')
