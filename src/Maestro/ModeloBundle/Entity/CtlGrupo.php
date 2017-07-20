@@ -346,6 +346,7 @@ class CtlGrupo
     
     /**
      * @var integer
+     * @ORM\Column(name="codigo_grupo", type="integer", nullable=false)
      */
     private $codigoGrupo;
 

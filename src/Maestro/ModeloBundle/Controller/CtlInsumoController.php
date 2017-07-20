@@ -134,24 +134,35 @@ class CtlInsumoController extends Controller
         $editForm->handleRequest($request);
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $ctlInsumo->setCodigoSinab( $editForm->get('codigoSinab')->getData() );
             $ctlInsumo->setDetalleSchema( $this->setDetalleSchema( $editForm->get('detalleSchema')->getData() ) );
             $this->getDoctrine()->getManager()->flush();
             $request->getSession()->getFlashBag()->add('success', 'Producto actualizado');
 
             return $this->redirectToRoute('insumo_index');
         }
-        
-        $result = $em->createQuery( "SELECT g.id, g.nombreGrupo FROM MinsalCoreBundle:CtlGrupo g WHERE g.suministro = ".$request->query->get('suministro')." ORDER BY g.nombreGrupo" )->getResult();
-        foreach ( $result as $r ){
+        $em = $this->getDoctrine()->getManager();
+        $dql = "SELECT i, g FROM  MaestroModeloBundle:CtlInsumo i JOIN i.grupoid g WHERE i.id = ".$request->attributes->get('id');
+		$grupo = $em->createQuery( $dql )->getResult();
+		$pre = '';
+		foreach( $grupo as $g){
+			$dqlg = "SELECT g FROM  MaestroModeloBundle:CtlGrupo g WHERE g.nombreGrupo = '".$g->getGrupoId()."'";
+			$grupog = $em->createQuery( $dqlg )->getResult();
+			foreach( $grupog as $gg){
+				$dqls = "SELECT s FROM  MaestroModeloBundle:CtlSuministro s WHERE s.nombreSuministro = '".$gg->getSuministro()."'";
+				$grupos = $em->createQuery( $dqls )->getResult();
+				foreach( $grupos as $gs){$pre = $gs->getId(); 
+				}
+				$pre .= $gg->getCodigoGrupo(); 
+			}
 			
-		}	
+		}
         
-
         return $this->render('ctlinsumo/show.html.twig', array(
             'ctlInsumo' => $ctlInsumo,
             'delete_form' => $deleteForm->createView(),
             'edit_form' => $editForm->createView(),
-            'pre' => 'oooo',
+            'pre' => $pre,
         ));
     }
 
