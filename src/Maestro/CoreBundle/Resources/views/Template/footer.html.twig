@@ -30,11 +30,7 @@ if("ontouchend" in document) document.write("<script src='{{ asset('assets/') }}
 <script src="{{ asset('assets/') }}js/ace.min.js"></script>
 
 <script type="text/javascript">
-$.extend( $.fn.dataTable.defaults, {
-  "oLanguage": {
-    "sUrl": "{{ asset('assets/') }}js/datatable_es-es.json"
-  }
-});
+$.extend( $.fn.dataTable.defaults);
 $(function() {
   var oTable1 = $('#sample-table-2').dataTable( {
     "aoColumns": [

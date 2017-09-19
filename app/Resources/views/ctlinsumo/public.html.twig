@@ -1,5 +1,5 @@
 {% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Catalogo de productos {% endblock %}
+{% block title %}Catalogo de productos {% if accion == 'agrega' %} <a href="{{ path('insumo_new') }}" class="btn btn-primary pull-right"> <i class="icon-edit"></i>Agregar producto</a> {% endif %}{% endblock %}
 {% block body %}
 <div class="row-fluid">
  <div class="span12">
@@ -9,6 +9,7 @@
     {% if accion == 'agrega' %}
 	<li class=""><a data-toggle="tab" href="#validar">Pendientes de ser validados</a></li>
     <li class=""><a data-toggle="tab" href="#denegados"> Denegados <span class="badge badge-important">X</span></a></li>
+    <li class=""></li>
     {% endif %}
     {% if accion == 'valida' %}
 	<li class=""><a data-toggle="tab" href="#validar">Pendientes de ser validados</a></li>
@@ -50,7 +51,6 @@
    <!-- /habilita --------------------------------------------------------------------------------------------------------->
     {% endif %}
     {% if accion == 'agrega' %}
-    	<a href="{{ path('insumo_new') }}" class="btn btn-primary">Solicitar Producto</a>
     {% endif %}
     {% if accion == 'agrega' or accion == 'valida' %}
    <!--  agrega o valida --------------------------------------------------------------------------------------------------------->
@@ -123,8 +123,7 @@
                 <td>{{ ctlInsumo.ctlNivelUsoid }}</td>
                 <td>
                  <div>
-                  <img id="barcode{{ctlInsumo.id}}"/>
-                  <script>JsBarcode("#barcode{{ctlInsumo.id}}", "{{ ctlInsumo.codigoSinab }}", {  displayValue: true });</script>
+                  {{ "%08d"|format( ctlInsumo.codigoSinab ) }}
                  </div>
                 </td>
             </tr>

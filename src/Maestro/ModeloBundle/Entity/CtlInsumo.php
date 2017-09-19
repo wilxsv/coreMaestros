@@ -856,4 +856,32 @@ class CtlInsumo
     {
         return $this->costoInsumo;
     }
+    /**
+     * @var boolean
+     */
+    private $procesadoInsumo;
+
+
+    /**
+     * Set procesadoInsumo
+     *
+     * @param boolean $procesadoInsumo
+     * @return CtlInsumo
+     */
+    public function setProcesadoInsumo($procesadoInsumo)
+    {
+        $this->procesadoInsumo = $procesadoInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get procesadoInsumo
+     *
+     * @return boolean 
+     */
+    public function getProcesadoInsumo()
+    {
+        return $this->procesadoInsumo;
+    }
 }

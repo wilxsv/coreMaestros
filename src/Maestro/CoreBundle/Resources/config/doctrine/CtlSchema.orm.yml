@@ -1,0 +1,46 @@
+Maestro\CoreBundle\Entity\CtlSchema:
+    type: entity
+    table: ctl_schema
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        tablaSchema:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: tabla_schema
+        indexTablaSchema:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: index_tabla_schema
+        varsSchema:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: vars_schema
+        tipoCambioSchema:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: tipo_cambio_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: detalle_schema
+        timeschema:
+            type: datetime
+            nullable: true
+            default: '2017-02-26 21:28:36.808862'
+            column: timeSchema
+    lifecycleCallbacks: {  }

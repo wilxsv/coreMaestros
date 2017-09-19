@@ -1,0 +1,83 @@
+Maestro\CoreBundle\Entity\CtlFormaFarmaceutica:
+    type: entity
+    table: ctl_forma_farmaceutica
+    uniqueConstraints:
+        ctl_forma_farmaceutica_nombre_forma_farmaceutica_key:
+            columns:
+                - nombre_forma_farmaceutica
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreFormaFarmaceutica:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: nombre_forma_farmaceutica
+        detalleFormaFarmaceutica:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: detalle_forma_farmaceutica
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '(now())::timestamp(0) without time zone'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '1'
+            column: user_id_schema
+        ipUserSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: ip_user_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+    manyToMany:
+        ctlInsumoid:
+            targetEntity: CtlInsumo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: ctlFormaFarmaceuticaid
+            joinTable:
+                name: ctl_unidad_dispensacion
+                joinColumns:
+                    -
+                        name: ctl_forma_farmaceuticaid
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: ctl_insumoid
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

@@ -1,99 +1,91 @@
 <?php
 
-namespace Maestro\ModeloBundle\Entity;
+namespace Maestro\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CtlGrupo
- *
- * @ORM\Table(name="ctl_grupo")
- * @ORM\Entity
  */
 class CtlGrupo
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ctl_grupo_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nombre_grupo", type="string", length=255, nullable=false)
      */
     private $nombreGrupo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="detalle_grupo", type="text", nullable=true)
      */
     private $detalleGrupo;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="CtlGrupo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
-     * })
-     */
-    private $grupoId;
-
-    /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="registro_schema", type="datetime", nullable=false)
      */
     private $registroSchema;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="detalle_schema", type="text", nullable=false)
      */
     private $detalleSchema;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="user_id_schema", type="bigint", nullable=false)
      */
     private $userIdSchema;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="ip_user_schema", type="string", nullable=false)
      */
     private $ipUserSchema;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="estado_schema", type="integer", nullable=false)
      */
     private $estadoSchema;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="enable_schema", type="integer", nullable=false)
      */
     private $enableSchema;
 
+    /**
+     * @var integer
+     */
+    private $codigoGrupo;
 
+    /**
+     * @var \Maestro\CoreBundle\Entity\CtlSuministro
+     */
+    private $suministro;
+
+    /**
+     * @var \Maestro\CoreBundle\Entity\CtlGrupo
+     */
+    private $grupo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $unidad;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->unidad = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -116,7 +108,7 @@ class CtlGrupo
     /**
      * Get nombreGrupo
      *
-     * @return string
+     * @return string 
      */
     public function getNombreGrupo()
     {
@@ -139,34 +131,11 @@ class CtlGrupo
     /**
      * Get detalleGrupo
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleGrupo()
     {
         return $this->detalleGrupo;
-    }
-
-    /**
-     * Set grupoId
-     *
-     * @param integer $grupoId
-     * @return CtlGrupo
-     */
-    public function setGrupoId($grupoId)
-    {
-        $this->grupoId = $grupoId;
-
-        return $this;
-    }
-
-    /**
-     * Get grupoId
-     *
-     * @return integer
-     */
-    public function getGrupoId()
-    {
-        return $this->grupoId;
     }
 
     /**
@@ -185,7 +154,7 @@ class CtlGrupo
     /**
      * Get registroSchema
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getRegistroSchema()
     {
@@ -208,7 +177,7 @@ class CtlGrupo
     /**
      * Get detalleSchema
      *
-     * @return string
+     * @return string 
      */
     public function getDetalleSchema()
     {
@@ -231,7 +200,7 @@ class CtlGrupo
     /**
      * Get userIdSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getUserIdSchema()
     {
@@ -254,7 +223,7 @@ class CtlGrupo
     /**
      * Get ipUserSchema
      *
-     * @return string
+     * @return string 
      */
     public function getIpUserSchema()
     {
@@ -277,7 +246,7 @@ class CtlGrupo
     /**
      * Get estadoSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEstadoSchema()
     {
@@ -300,61 +269,12 @@ class CtlGrupo
     /**
      * Get enableSchema
      *
-     * @return integer
+     * @return integer 
      */
     public function getEnableSchema()
     {
         return $this->enableSchema;
     }
-
-    public function __toString() {
-      return $this->getNombreGrupo();
-    }
-    /**
-     * @var \Maestro\ModeloBundle\Entity\CtlSuministro
-     *      
-     * @ORM\ManyToOne(targetEntity="CtlSuministro")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="suministro_id", referencedColumnName="id")
-     * })
-     */
-    private $suministro;
-
-
-    /**
-     * Set suministro
-     *
-     * @param \Maestro\ModeloBundle\Entity\CtlSuministro $suministro
-     * @return CtlGrupo
-     */
-    public function setSuministro(\Maestro\ModeloBundle\Entity\CtlSuministro $suministro = null)
-    {
-        $this->suministro = $suministro;
-
-        return $this;
-    }
-
-    /**
-     * Get suministro
-     *
-     * @return \Maestro\ModeloBundle\Entity\CtlSuministro 
-     */
-    public function getSuministro()
-    {
-        return $this->suministro;
-    }
-    
-    /**
-     * @var integer
-     * @ORM\Column(name="codigo_grupo", type="integer", nullable=false)
-     */
-    private $codigoGrupo;
-
-    /**
-     * @var \Maestro\ModeloBundle\Entity\CtlGrupo
-     */
-    private $grupo;
-
 
     /**
      * Set codigoGrupo
@@ -380,12 +300,35 @@ class CtlGrupo
     }
 
     /**
-     * Set grupo
+     * Set suministro
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlGrupo $grupo
+     * @param \Maestro\CoreBundle\Entity\CtlSuministro $suministro
      * @return CtlGrupo
      */
-    public function setGrupo(\Maestro\ModeloBundle\Entity\CtlGrupo $grupo = null)
+    public function setSuministro(\Maestro\CoreBundle\Entity\CtlSuministro $suministro = null)
+    {
+        $this->suministro = $suministro;
+
+        return $this;
+    }
+
+    /**
+     * Get suministro
+     *
+     * @return \Maestro\CoreBundle\Entity\CtlSuministro 
+     */
+    public function getSuministro()
+    {
+        return $this->suministro;
+    }
+
+    /**
+     * Set grupo
+     *
+     * @param \Maestro\CoreBundle\Entity\CtlGrupo $grupo
+     * @return CtlGrupo
+     */
+    public function setGrupo(\Maestro\CoreBundle\Entity\CtlGrupo $grupo = null)
     {
         $this->grupo = $grupo;
 
@@ -395,46 +338,20 @@ class CtlGrupo
     /**
      * Get grupo
      *
-     * @return \Maestro\ModeloBundle\Entity\CtlGrupo 
+     * @return \Maestro\CoreBundle\Entity\CtlGrupo 
      */
     public function getGrupo()
     {
         return $this->grupo;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-     
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="CtlUnidadMedida", inversedBy="CtlGrupo")
-     * @ORM\JoinTable(name="unidad_grupo",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="unidad_id", referencedColumnName="id")
-     *   }
-     * )
-     */
-    private $unidad;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->unidad = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add unidad
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     * @param \Maestro\CoreBundle\Entity\CtlUnidadMedida $unidad
      * @return CtlGrupo
      */
-    public function addUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    public function addUnidad(\Maestro\CoreBundle\Entity\CtlUnidadMedida $unidad)
     {
         $this->unidad[] = $unidad;
 
@@ -444,9 +361,9 @@ class CtlGrupo
     /**
      * Remove unidad
      *
-     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     * @param \Maestro\CoreBundle\Entity\CtlUnidadMedida $unidad
      */
-    public function removeUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    public function removeUnidad(\Maestro\CoreBundle\Entity\CtlUnidadMedida $unidad)
     {
         $this->unidad->removeElement($unidad);
     }

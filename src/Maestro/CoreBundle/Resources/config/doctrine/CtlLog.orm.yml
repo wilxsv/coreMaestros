@@ -1,0 +1,25 @@
+Maestro\CoreBundle\Entity\CtlLog:
+    type: entity
+    table: ctl_log
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreLog:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_log
+        descripcionLog:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: descripcion_log
+    lifecycleCallbacks: {  }

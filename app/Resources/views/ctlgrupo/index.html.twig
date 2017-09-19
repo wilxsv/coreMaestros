@@ -9,16 +9,20 @@
     <table id="sample-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Nombre</th>
+                <th>Suministro</th>
+                <th>Grupo</th>
                 <th>Grupo superior</th>
+                <th>Unidades</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlGrupo in ctlGrupos %}
             <tr>
+                <td>{{ ctlGrupo.suministro }}</td>
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
                 <td>{{ ctlGrupo.grupoId }}</td>
+                <td>{{ ctlGrupo.unidad | join(', ') }}</td>
                 <td>
                  <a href="{{ path('grupo_show', { 'id': ctlGrupo.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
                  <a href="{{ path('grupo_edit', { 'id': ctlGrupo.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>

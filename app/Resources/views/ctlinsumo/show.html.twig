@@ -47,18 +47,21 @@
     <div class="widget-body">
      <div class="widget-main">
       <div class="row-fluid">
-      {% if app.session.get('accion') == 'valida' and app.session.get('suministro') == 'Medicamentos' %}
+      {% if app.session.get('accion') == 'valida' and pre starts with '01' %}
     {{ form_start(edit_form) }}
-        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}{{ form_widget(edit_form.codigoSinab) }}</div>
+          <div class="control-group ">Codigo SINAB
+           <div class="controls"><span class="span12 input-icon input-icon-right">
+           {{ form_widget(edit_form.codigoSinab, {'attr': {'class': 'form-control input-sm', 'value': pre, 'max': 8 }}) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>           
+          </div>
+        <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}</div>
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Actualizar" class="btn btn-primary"/>
     {{ form_end(edit_form) }}
       {% endif %}
       {% if app.session.get('accion') == 'valida' and app.session.get('suministro') != 'Medicamentos' %}
 		{{ form_start(edit_form) }}
           <div class="control-group ">Codigo SINAB
            <div class="controls"><span class="span12 input-icon input-icon-right">
-           <input id="maestro_modelobundle_ctlinsumo_codigoSinab" name="maestro_modelobundle_ctlinsumo[codigoSinab]" value="{{pre}}" type="text" maxlength="8"></span></div>
+           {{ form_widget(edit_form.codigoSinab, {'attr': {'class': 'form-control input-sm', 'value': pre, 'max': 8 }}) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>           
           </div>
           <div class="control-group ">Codigo Naciones Unidas
            <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoNu) }}</span>{{ form_errors(edit_form.codigoNu) }}</div>
@@ -75,17 +78,17 @@
       {% endif %}
       
       
-      {% if app.session.get('accion') == 'habilita' and app.session.get('suministro') == 'Medicamentos' %}
+      {% if app.session.get('accion') == 'habilita' and pre starts with '01' %}
     {{ form_start(edit_form) }}
+		{{ form_widget(edit_form.codigoSinab, {'attr': {'class': 'form-control input-sm', 'value': pre, 'max': 8 }}) }}</span>{{ form_errors(edit_form.codigoSinab) }}
         <div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.estadoSchema) }}</div>
         {{ form_widget(edit_form) }}
         <input type="submit" value="Actualizar" class="btn btn-primary"/>
     {{ form_end(edit_form) }}
-      {% endif %}
-      {% if app.session.get('accion') == 'habilita' and app.session.get('suministro') != 'Medicamentos' %}
+      {% elseif app.session.get('accion') == 'habilita' and app.session.get('suministro') != 'Medicamentos' %}
 		{{ form_start(edit_form) }}
           <div class="control-group ">Codigo SINAB
-           <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoSinab) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>
+           {{ form_widget(edit_form.codigoSinab, {'attr': {'class': 'form-control input-sm', 'value': pre, 'max': 8 }}) }}</span>{{ form_errors(edit_form.codigoSinab) }}</div>
           </div>
           <div class="control-group ">Codigo Naciones Unidas
            <div class="controls"><span class="span12 input-icon input-icon-right">{{ form_widget(edit_form.codigoNu) }}</span>{{ form_errors(edit_form.codigoNu) }}</div>
@@ -100,8 +103,6 @@
 			<input type="submit" value="Actualizar" class="btn btn-primary"/>
 		{{ form_end(edit_form) }}
       {% endif %}
-      
-      
       </div>
      </div>
     </div>

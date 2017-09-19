@@ -26,8 +26,8 @@ class CtlInsumoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findBy(array('enableSchema' => 1),array(),1000);
-//        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
+//        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findAll();//By(array('enableSchema' => 1),array(),1000);
+        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
         
 
@@ -142,19 +142,23 @@ class CtlInsumoController extends Controller
             return $this->redirectToRoute('insumo_index');
         }
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT i, g FROM  MaestroModeloBundle:CtlInsumo i JOIN i.grupoid g WHERE i.id = ".$request->attributes->get('id');
-		$grupo = $em->createQuery( $dql )->getResult();
+        $dql = "SELECT i.codigoSinab, g.codigoGrupo, s.id FROM  MaestroModeloBundle:CtlInsumo i JOIN i.grupoid g JOIN g.suministro s WHERE i.id = ".$request->attributes->get('id');
+		$grupo = $em->createQuery( $dql )->getArrayResult();
 		$pre = '';
 		foreach( $grupo as $g){
-			$dqlg = "SELECT g FROM  MaestroModeloBundle:CtlGrupo g WHERE g.nombreGrupo = '".$g->getGrupoId()."'";
-			$grupog = $em->createQuery( $dqlg )->getResult();
+			$pre .= '0'.$g['id'].$g['codigoGrupo'];
+			if ( strlen( $g['codigoSinab'] ) > 4 )
+				$pre = $g['codigoSinab'];
+			//$dqlg = "SELECT g FROM  MaestroModeloBundle:CtlGrupo g WHERE g.nombreGrupo = '".$g->getGrupoId()."'";
+			
+			/*$grupog = $em->createQuery( $dqlg )->getResult();
 			foreach( $grupog as $gg){
 				$dqls = "SELECT s FROM  MaestroModeloBundle:CtlSuministro s WHERE s.nombreSuministro = '".$gg->getSuministro()."'";
 				$grupos = $em->createQuery( $dqls )->getResult();
 				foreach( $grupos as $gs){$pre = $gs->getId(); 
 				}
-				$pre .= $gg->getCodigoGrupo(); 
-			}
+				
+			}*/
 			
 		}
         
@@ -273,7 +277,8 @@ class CtlInsumoController extends Controller
     public function publicAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findBy(array('enableSchema' => 1),array(),1000);
+        $ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findBy(array('enableSchema' => 1),array(),5000);
+        //$ctlInsumos = $em->getRepository('MaestroModeloBundle:CtlInsumo')->findByEnableSchema(1);
         $auth_checker = $this->get('security.authorization_checker');
 
         $procesar = "";
@@ -301,7 +306,8 @@ class CtlInsumoController extends Controller
 		}
 		if ($accion['accion'] == 'valida'){
 		 $repository = $this->getDoctrine()->getRepository('MaestroModeloBundle:CtlInsumo');
-		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 0 AND p.enableSchema = 0')->getQuery();
+		 $query = $repository->createQueryBuilder('i')->where('i.estadoSchema = 0 ')->getQuery();
+			//->select(' i, g, gg, s')->join( 'i.grupoid', 'gg' )->join( 'gg.grupoId', 'g' )->join( 'g.suministro', 's' )->where('i.estadoSchema = 0 AND s.id IN ('.$this->get('session')->get('suministroB').')')->getQuery();
 		 $personal = $query->getResult();
 		 $query = $repository->createQueryBuilder('p')->where('p.estadoSchema = 1 AND p.enableSchema = 0')->getQuery();
 		 $procesar = $query->getResult();
@@ -410,15 +416,17 @@ class CtlInsumoController extends Controller
 			->innerJoin('p.rolSolicitaSuministro','r')
 			->getQuery()
 			->getArrayResult();
+		$lista = "";
 		foreach ($roles as $rolt) {	
 			if ( $rol->isGranted( $rolt["nombreRol"] ) ){
 				$data['accion'] = 'agrega';
 				$data['suministro'] = $rolt["nombreSuministro"];
+				$lista .= $rolt["id"].",";
 				$this->get('session')->set('accion', 'agrega');
 				$this->get('session')->set('suministro', $rolt["nombreSuministro"]);
-				return $data;
 			}
 		}
+		$this->get('session')->set('suministroA', $lista."0" );
 		$roles =  $em->createQueryBuilder()
 			->select('s.id, r.nombreRol, s.nombreSuministro')
 			->from('MaestroModeloBundle:CtlSuministro', 's')
@@ -431,7 +439,7 @@ class CtlInsumoController extends Controller
 				$data['suministro'] = $rolt["nombreSuministro"];
 				$this->get('session')->set('accion', 'valida');
 				$this->get('session')->set('suministro', $rolt["nombreSuministro"]);
-				return $data;
+				$lista .= $rolt["id"].",";
 			}
 		}
 		if ( $rol->isGranted( 'ROLE_HABILITA' ) ){
@@ -439,11 +447,13 @@ class CtlInsumoController extends Controller
 			$data['suministro'] = $rolt["nombreSuministro"];
 			$this->get('session')->set('accion', 'habilita');
 			$this->get('session')->set('suministro', 'all');
-			return $data;
+				$lista .= $rolt["id"].",";
+//			return $data;
 		}
+		$this->get('session')->set('suministroB', $lista.'0' );
+		return $data;
 		$data['accion'] = false;
 		$data['suministro'] = false;
-		$this->get('session')->set('suministro', '');
 		return $data;
 	}
 }

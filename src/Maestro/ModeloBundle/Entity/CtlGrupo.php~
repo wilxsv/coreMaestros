@@ -346,6 +346,7 @@ class CtlGrupo
     
     /**
      * @var integer
+     * @ORM\Column(name="codigo_grupo", type="integer", nullable=false)
      */
     private $codigoGrupo;
 
@@ -399,5 +400,50 @@ class CtlGrupo
     public function getGrupo()
     {
         return $this->grupo;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $unidad;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->unidad = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add unidad
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     * @return CtlGrupo
+     */
+    public function addUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    {
+        $this->unidad[] = $unidad;
+
+        return $this;
+    }
+
+    /**
+     * Remove unidad
+     *
+     * @param \Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad
+     */
+    public function removeUnidad(\Maestro\ModeloBundle\Entity\CtlUnidadMedida $unidad)
+    {
+        $this->unidad->removeElement($unidad);
+    }
+
+    /**
+     * Get unidad
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUnidad()
+    {
+        return $this->unidad;
     }
 }
