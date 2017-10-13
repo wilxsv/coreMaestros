@@ -1,6 +1,9 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Tipo Suministro {% endblock %}
+{% extends 'base.html.twig' %}
+{% block titulo %}Suministro [ <b>{{ ctlSuministro.nombreSuministro }}</b> ]{% endblock %}
 {% block body %}
+<div class="col-sm-12">
+ <div class="white-box">
+
     <table>
         <tbody>
             <tr>
@@ -8,23 +11,43 @@
                 <td>{{ ctlSuministro.nombreSuministro }}</td>
             </tr>
             <tr>
-                <th>Codificación</th>
+                <th>Detallesuministro</th>
+                <td>{{ ctlSuministro.detalleSuministro }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlSuministro.registroSchema %}{{ ctlSuministro.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlSuministro.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlSuministro.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useripschema</th>
+                <td>{{ ctlSuministro.userIpSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlSuministro.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlSuministro.enableSchema }}</td>
+            </tr>
+            <tr>
+                <th>Codificacionsuministro</th>
                 <td>{{ ctlSuministro.codificacionSuministro }}</td>
             </tr>
-            <tr>
-                <th>Quien lo solicita</th>
-                <td>{{ ctlSuministro.rolSolicitaSuministro }}</td>
-            </tr>
-            <tr>
-                <th>Quien lo valida</th>
-                <td>{{ ctlSuministro.rolSolicitaSuministro }}</td>
-            </tr>
         </tbody>
-    </table>
-
-<a href="{{ path('suministro_index') }}" class="btn">Regresar a listado</a>
-<a href="{{ path('suministro_edit', { 'id': ctlSuministro.id }) }}" class="btn btn-primary">Editar</a>
-    {{ form_start(delete_form) }}
-                <input type="submit" value="Eliminar Suministro" class="btn btn-xs btn-danger" />
-            {{ form_end(delete_form) }}
+    </table>  
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('suministros_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="{{ path('suministros_edit', { 'id': ctlSuministro.id }) }}"><button class="btn btn-primary">Editar</button></a>
 {% endblock %}

@@ -1,22 +1,36 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Codificación ::  {{ ctlCodificacion.nombreCodificacion }}{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
+    <h1>Ctlcodificacion</h1>
+
     <table>
         <tbody>
             <tr>
-                <th>Nombre</th>
+                <th>Id</th>
+                <td>{{ ctlCodificacion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombrecodificacion</th>
                 <td>{{ ctlCodificacion.nombreCodificacion }}</td>
             </tr>
             <tr>
-                <th>Metodo</th>
+                <th>Metodocodificacion</th>
                 <td>{{ ctlCodificacion.metodoCodificacion }}</td>
             </tr>
         </tbody>
     </table>
 
-<a href="{{ path('codificacion_index') }}" class="btn">Regresar a listado</a>
-<a href="{{ path('codificacion_edit', { 'id': ctlCodificacion.id }) }}" class="btn btn-primary">Editar</a>
-    {{ form_start(delete_form) }}
-                <input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />
+    <ul>
+        <li>
+            <a href="{{ path('codificaciones_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('codificaciones_edit', { 'id': ctlCodificacion.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

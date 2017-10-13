@@ -1,0 +1,66 @@
+Minsal\SuministroBundle\Entity\CtlPrincipio:
+    type: entity
+    table: ctl_principio
+    uniqueConstraints:
+        ctl_principio_nombre_principio_key:
+            columns:
+                - nombre_principio
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombrePrincipio:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_principio
+        tipoPrincipio:
+            type: smallint
+            nullable: true
+            unsigned: false
+            comment: 'Animal, vegetal o artificial, entre otras categorias se podria clasificar como quimico, generico o comercial'
+            column: tipo_principio
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '(now())::timestamp(0) without time zone'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '1'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+    lifecycleCallbacks: {  }

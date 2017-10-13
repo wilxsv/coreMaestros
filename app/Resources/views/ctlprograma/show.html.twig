@@ -30,8 +30,8 @@
                 <td>{{ ctlPrograma.userIdSchema }}</td>
             </tr>
             <tr>
-                <th>Ipuserschema</th>
-                <td>{{ ctlPrograma.ipUserSchema }}</td>
+                <th>Useripschema</th>
+                <td>{{ ctlPrograma.userIpSchema }}</td>
             </tr>
             <tr>
                 <th>Estadoschema</th>
@@ -46,10 +46,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('programa_index') }}">Back to the list</a>
+            <a href="{{ path('programas_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('programa_edit', { 'id': ctlPrograma.id }) }}">Edit</a>
+            <a href="{{ path('programas_edit', { 'id': ctlPrograma.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

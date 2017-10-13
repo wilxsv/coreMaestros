@@ -1,0 +1,12 @@
+establecimientos_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlEstablecimiento:index" }
+    methods:  GET
+
+establecimientos_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlEstablecimiento:show" }
+    methods:  GET
+
+
+

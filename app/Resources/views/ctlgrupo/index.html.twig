@@ -1,45 +1,55 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Listado de Grupos{% endblock %}
-{% block body %}
-<div class="row-fluid">
-  <h3 class="header smaller lighter blue"></h3>
-  <div class="table-header">
-  </div>
+{% extends 'base.html.twig' %}
 
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
+{% block body %}
+    <h1>Ctlgrupos list</h1>
+
+    <table>
         <thead>
             <tr>
-                <th>Suministro</th>
-                <th>Grupo</th>
-                <th>Grupo superior</th>
-                <th>Unidades</th>
-                <th>Operaciones</th>
+                <th>Id</th>
+                <th>Nombregrupo</th>
+                <th>Detallegrupo</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Useripschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Codigogrupo</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlGrupo in ctlGrupos %}
             <tr>
-                <td>{{ ctlGrupo.suministro }}</td>
+                <td><a href="{{ path('grupos_show', { 'id': ctlGrupo.id }) }}">{{ ctlGrupo.id }}</a></td>
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
-                <td>{{ ctlGrupo.grupoId }}</td>
-                <td>{{ ctlGrupo.unidad | join(', ') }}</td>
+                <td>{{ ctlGrupo.detalleGrupo }}</td>
+                <td>{% if ctlGrupo.registroSchema %}{{ ctlGrupo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlGrupo.detalleSchema }}</td>
+                <td>{{ ctlGrupo.userIdSchema }}</td>
+                <td>{{ ctlGrupo.userIpSchema }}</td>
+                <td>{{ ctlGrupo.estadoSchema }}</td>
+                <td>{{ ctlGrupo.enableSchema }}</td>
+                <td>{{ ctlGrupo.codigoGrupo }}</td>
                 <td>
-                 <a href="{{ path('grupo_show', { 'id': ctlGrupo.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
-                 <a href="{{ path('grupo_edit', { 'id': ctlGrupo.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                    <ul>
+                        <li>
+                            <a href="{{ path('grupos_show', { 'id': ctlGrupo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('grupos_edit', { 'id': ctlGrupo.id }) }}">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('grupo_new') }}" class="btn btn-small btn-primary">Agregar nuevo grupo</a>
-{% endblock %}
-{% block footer_js %}
-
-<script type="text/javascript">
-
-  $(function() {
-    var oTable2 = $('#sample-table').dataTable();
-  })
-</script>
+    <ul>
+        <li>
+            <a href="{{ path('grupos_new') }}">Create a new ctlGrupo</a>
+        </li>
+    </ul>
 {% endblock %}

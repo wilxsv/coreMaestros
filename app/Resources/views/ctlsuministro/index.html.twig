@@ -1,36 +1,56 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Catalogo de suministros{% endblock %}
+{% extends 'base.html.twig' %}
+{% block titulo %}Catalogo de tipos de suministros{% endblock %}
 {% block body %}
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
-        <thead>
+<div class="col-sm-12">
+ <div class="white-box">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+    </tfoot>
+    <tbody>
+		{% for ctlSuministro in ctlSuministros %}
             <tr>
-                <th>Nombre de Suministro</th>
-                <th>Codificacion</th>
-                <th>Operaciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ctlSuministro in ctlSuministros %}
-            <tr>
-                <td>{{ ctlSuministro.nombreSuministro }}</td>
+                <td><a href="{{ path('suministros_show', { 'id': ctlSuministro.id }) }}">{{ ctlSuministro.nombreSuministro }}</a></td>
+                <td>{{ ctlSuministro.detalleSuministro }}</td>
+                <td>{{ ctlSuministro.rolSolicitaSuministro }}</td>
+                <td>{{ ctlSuministro.rolValidaSuministro }}</td>
+                <td>{% if ctlSuministro.enableSchema == true %}Si{% else %}No{% endif %}</td>
                 <td>{{ ctlSuministro.codificacionSuministro }}</td>
-                <td>
-                 <a href="{{ path('suministro_show', { 'id': ctlSuministro.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
-                 <a href="{{ path('suministro_edit', { 'id': ctlSuministro.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
-                </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-<a href="{{ path('suministro_new') }}" class="btn btn-primary">Registrar Suministro</a>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
 {% endblock %}
-{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}
-{% block head_js %}
-  <script src="{{ asset('assets/') }}js/barcode/JsBarcode.all.js"></script>
-  <script>
-		Number.prototype.zeroPadding = function(){
-			var ret = "" + this.valueOf();
-			return ret.length == 1 ? "0" + ret : ret;
-		};
-  </script>
+{% block breadcrumb %}<a href="{{ path('suministros_new') }}"><button class="btn btn-info">Agregar registro</button></a>{% endblock %}
+{% block footer_js %}
+    <script src="{{ asset('assets/') }}plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <!-- end - This is for export functionality only -->
+    <script>
+    $('#tabla').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+    </script>
+{% endblock %}
+
+{% block css_head %}
+    <link href="{{ asset('assets/') }}plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}

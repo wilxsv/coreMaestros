@@ -16,11 +16,12 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new Maestro\CoreBundle\MaestroCoreBundle(),
-            new Maestro\ApiBundle\MaestroApiBundle(),
-            new Maestro\ModeloBundle\MaestroModeloBundle(),
+            #bundles del proyecto
+            new Minsal\CoreBundle\MinsalCoreBundle(),
+            new Minsal\SuministroBundle\MinsalSuministroBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Maestro\InsumoBundle\MaestroInsumoBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

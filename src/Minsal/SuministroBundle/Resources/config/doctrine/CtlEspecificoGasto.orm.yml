@@ -1,0 +1,80 @@
+Minsal\SuministroBundle\Entity\CtlEspecificoGasto:
+    type: entity
+    table: ctl_especifico_gasto
+    indexes:
+        IDX_2ABC9736A9276E6C:
+            columns:
+                - tipo_id
+    uniqueConstraints:
+        un_nombre_especifico_gasto:
+            columns:
+                - nombre_especifico_gasto
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreEspecificoGasto:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_especifico_gasto
+        detalleEspecificoGasto:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: detalle_especifico_gasto
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '2017-02-26 21:27:44.60444'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '(1)::bigint'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+    manyToOne:
+        tipo:
+            targetEntity: CtlEspecificoGasto
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

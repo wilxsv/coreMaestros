@@ -1,0 +1,24 @@
+principiosactivos_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlPrincipio:index" }
+    methods:  GET
+
+principiosactivos_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlPrincipio:show" }
+    methods:  GET
+
+principiosactivos_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlPrincipio:new" }
+    methods:  [GET, POST]
+
+principiosactivos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlPrincipio:edit" }
+    methods:  [GET, POST]
+
+principiosactivos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlPrincipio:delete" }
+    methods:  DELETE

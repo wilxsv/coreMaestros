@@ -1,3 +1,0 @@
-maestro_api_homepage:
-    path:     /api
-    defaults: { _controller: MaestroApiBundle:Default:index }

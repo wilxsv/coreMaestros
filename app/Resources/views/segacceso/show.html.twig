@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Segacceso</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ segAcceso.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombreacceso</th>
+                <td>{{ segAcceso.nombreAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Pathacceso</th>
+                <td>{{ segAcceso.pathAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Publicacceso</th>
+                <td>{% if segAcceso.publicAcceso %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Accesoid</th>
+                <td>{{ segAcceso.accesoId }}</td>
+            </tr>
+            <tr>
+                <th>Ordenacceso</th>
+                <td>{{ segAcceso.ordenAcceso }}</td>
+            </tr>
+            <tr>
+                <th>Visibleacceso</th>
+                <td>{% if segAcceso.visibleAcceso %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_accesos_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_accesos_edit', { 'id': segAcceso.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

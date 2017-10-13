@@ -15,16 +15,16 @@
         <tbody>
         {% for fosGroup in fosGroups %}
             <tr>
-                <td><a href="{{ path('fosgrupo_show', { 'id': fosGroup.id }) }}">{{ fosGroup.id }}</a></td>
+                <td><a href="{{ path('admin_grupos_show', { 'id': fosGroup.id }) }}">{{ fosGroup.id }}</a></td>
                 <td>{{ fosGroup.name }}</td>
                 <td>{% if fosGroup.roles %}{{ fosGroup.roles|join(', ') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('fosgrupo_show', { 'id': fosGroup.id }) }}">show</a>
+                            <a href="{{ path('admin_grupos_show', { 'id': fosGroup.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('fosgrupo_edit', { 'id': fosGroup.id }) }}">edit</a>
+                            <a href="{{ path('admin_grupos_edit', { 'id': fosGroup.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -35,7 +35,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('fosgrupo_new') }}">Create a new fosGroup</a>
+            <a href="{{ path('admin_grupos_new') }}">Create a new fosGroup</a>
         </li>
     </ul>
 {% endblock %}

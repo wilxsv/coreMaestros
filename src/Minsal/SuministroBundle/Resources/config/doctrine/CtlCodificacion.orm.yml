@@ -1,0 +1,29 @@
+Minsal\SuministroBundle\Entity\CtlCodificacion:
+    type: entity
+    table: ctl_codificacion
+    uniqueConstraints:
+        un_nombre_codificacion:
+            columns:
+                - nombre_codificacion
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreCodificacion:
+            type: string
+            nullable: false
+            length: 250
+            fixed: false
+            column: nombre_codificacion
+        metodoCodificacion:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: metodo_codificacion
+    lifecycleCallbacks: {  }

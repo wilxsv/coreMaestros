@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlunidaddespachos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreunidaddespacho</th>
+                <th>Detalleunidaddespacho</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Useripschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlUnidadDespacho in ctlUnidadDespachos %}
+            <tr>
+                <td><a href="{{ path('unidaddespacho_show', { 'id': ctlUnidadDespacho.id }) }}">{{ ctlUnidadDespacho.id }}</a></td>
+                <td>{{ ctlUnidadDespacho.nombreUnidadDespacho }}</td>
+                <td>{{ ctlUnidadDespacho.detalleUnidadDespacho }}</td>
+                <td>{% if ctlUnidadDespacho.registroSchema %}{{ ctlUnidadDespacho.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlUnidadDespacho.detalleSchema }}</td>
+                <td>{{ ctlUnidadDespacho.userIdSchema }}</td>
+                <td>{{ ctlUnidadDespacho.userIpSchema }}</td>
+                <td>{{ ctlUnidadDespacho.estadoSchema }}</td>
+                <td>{{ ctlUnidadDespacho.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('unidaddespacho_show', { 'id': ctlUnidadDespacho.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('unidaddespacho_edit', { 'id': ctlUnidadDespacho.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('unidaddespacho_new') }}">Create a new ctlUnidadDespacho</a>
+        </li>
+    </ul>
+{% endblock %}

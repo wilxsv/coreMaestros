@@ -1,17 +1,60 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Nivel de uso: {{ ctlNivelUso.nombreNivelUso }} {% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
+    <h1>Ctlniveluso</h1>
+
     <table>
         <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlNivelUso.id }}</td>
+            </tr>
             <tr>
                 <th>Nombreniveluso</th>
                 <td>{{ ctlNivelUso.nombreNivelUso }}</td>
             </tr>
+            <tr>
+                <th>Detalleniveluso</th>
+                <td>{{ ctlNivelUso.detalleNivelUso }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlNivelUso.registroSchema %}{{ ctlNivelUso.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlNivelUso.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlNivelUso.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useripschema</th>
+                <td>{{ ctlNivelUso.userIpSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlNivelUso.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlNivelUso.enableSchema }}</td>
+            </tr>
         </tbody>
     </table>
 
-<a href="{{ path('nivel_uso_index') }}" class="btn">Regresar a listado</a>
-<a href="{{ path('nivel_uso_edit', { 'id': ctlNivelUso.id }) }}" class="btn btn-primary">Editar</a>
-
-{{ form_start(delete_form) }}<input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+    <ul>
+        <li>
+            <a href="{{ path('niveluso_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('niveluso_edit', { 'id': ctlNivelUso.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

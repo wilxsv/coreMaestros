@@ -1,0 +1,66 @@
+Minsal\SuministroBundle\Entity\CtlUnidadDespacho:
+    type: entity
+    table: ctl_unidad_despacho
+    uniqueConstraints:
+        un_unidad_despacho:
+            columns:
+                - nombre_unidad_despacho
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreUnidadDespacho:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: nombre_unidad_despacho
+        detalleUnidadDespacho:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: detalle_unidad_despacho
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '(now())::timestamp(0) without time zone'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '1'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+    lifecycleCallbacks: {  }

@@ -1,0 +1,24 @@
+tipouso_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlTipoUso:index" }
+    methods:  GET
+
+tipouso_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlTipoUso:show" }
+    methods:  GET
+
+tipouso_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlTipoUso:new" }
+    methods:  [GET, POST]
+
+tipouso_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlTipoUso:edit" }
+    methods:  [GET, POST]
+
+tipouso_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlTipoUso:delete" }
+    methods:  DELETE

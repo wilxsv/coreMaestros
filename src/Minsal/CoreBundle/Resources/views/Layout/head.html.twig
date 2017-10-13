@@ -1,0 +1,50 @@
+            <div class="navbar-header">
+                <div class="top-left-part">
+                    <!-- Logo -->
+                    <a class="logo" href="{{ path('homepage') }}"><b>
+                        <img src="{{ asset('assets/') }}images/b.png" alt="home" class="dark-logo" /><img src="{{ asset('assets/') }}images/b.png" alt="home" class="light-logo" />
+                     </b>
+                        <span class="hidden-xs">
+                        <img src="{{ asset('assets/') }}images/text.png" alt="home" class="dark-logo" /><img src="{{ asset('assets/') }}images/text.png" alt="home" class="light-logo" />
+                     </span> </a>
+                </div>
+                <!-- /Logo -->
+                <!-- Search input and Toggle icon -->
+                <ul class="nav navbar-top-links navbar-left">
+                    <h1>Catalogo maestro de suministros del Ministerio de Salud</h1><!-- top menu -->
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li>
+                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                            <input type="text" placeholder="Buscar en esta pagina..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
+                    </li>
+                    <li class="dropdown">
+                        {# Autenticacion parte verdadera para usuarios logeados y falso para usuarios anonimos #}
+                        {% if app.user %}
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('assets/') }}images/lock.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Iniciar sesión</b><span class="caret"></span> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img"><img src="{{ asset('assets/') }}images/lock.png" alt="user" /></div>
+                                    <div class="u-text">
+                                        <h4>anonimo</h4>
+                                        <p class="text-muted">varun@gmail.com</p><a href="" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                        {% else %}
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href=""> <img src="{{ asset('assets/') }}images/lock.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Iniciar sesión</b><span class="caret"></span> </a>
+                        {% endif %}
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+            </div>

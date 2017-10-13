@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+{% block titulo %}Listado oficial de productos{% endblock %}
+{% block body %}
+<div class="col-lg-12 col-sm-12 col-xs-12">
+ <div class="white-box">
+  <ul class="nav nav-tabs" role="tablist">
+   {% if not app.user %}
+   <li role="presentation" class="active"><a href="#oficial" aria-controls="oficial" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> oficial</span></a></li>
+   {% else %}
+   <li role="presentation" class=""><a href="#" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Por validación</span></a></li>
+   <li role="presentation" class=""><a href="#en" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Por habilitar</span></a></li>
+   <li role="presentation" class=""><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-settings"></i></span> <span class="hidden-xs">Denegados</span></a></li>
+   {% endif %}
+  </ul>
+  <div class="tab-content">
+   {% if not app.user %}
+   <div role="tabpanel" class="tab-pane active" id="oficial">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+    </tfoot>
+    <tbody>
+		{% for s in mntInsumos %}
+            <tr>
+                <td>{{ s.codigoMinsalInsumo }}</td>
+                <td>{{ s.nombreLargoInsumo }}</td>
+                <td>{{ s.nivelUso }}</td>
+                <td>{{ s.unidadMedidad }}</td>
+                <td>{{ s.grupo }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+   </table>
+  </div>
+   </div>
+   {% else %}
+   <div role="tabpanel" class="tab-pane" id="valida">
+   </div>
+   <div role="tabpanel" class="tab-pane" id="messages">
+   </div>
+   <div role="tabpanel" class="tab-pane" id="settings">
+   </div>
+   {% endif %}
+  </div>
+ </div>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+    <script src="{{ asset('assets/') }}plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <!-- end - This is for export functionality only -->
+    <script>
+    $('#tabla').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+    </script>
+{% endblock %}
+
+{% block css_head %}
+    <link href="{{ asset('assets/') }}plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}

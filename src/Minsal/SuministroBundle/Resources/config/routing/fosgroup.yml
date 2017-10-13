@@ -1,0 +1,24 @@
+admin_grupos_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:FosGroup:index" }
+    methods:  GET
+
+admin_grupos_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:FosGroup:show" }
+    methods:  GET
+
+admin_grupos_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:FosGroup:new" }
+    methods:  [GET, POST]
+
+admin_grupos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:FosGroup:edit" }
+    methods:  [GET, POST]
+
+admin_grupos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:FosGroup:delete" }
+    methods:  DELETE

@@ -1,17 +1,76 @@
 {% extends 'base.html.twig' %}
-{% block title %}Usuario: {{ fosUser.usernameCanonical }}{% endblock %}
+
 {% block body %}
+    <h1>Fosuser</h1>
+
     <table>
         <tbody>
-            <tr><th>Nombre corto</th><td>{{ fosUser.username }}</td></tr>
-            <tr><th>Correo</th><td>{{ fosUser.email }}</td></tr>
-            <tr><th>Forma canonica</th><td>{{ fosUser.emailCanonical }}</td></tr>
-            <tr><th>Habilitado</th><td>{% if fosUser.enabled %}Si{% else %}No{% endif %}</td></tr>
-            <tr><th>Ultimo acceso</th><td>{% if fosUser.lastLogin %}{{ fosUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td></tr>
-            <th>Roles</th><td>{% if fosUser.roles %}{{ fosUser.roles|join(', ') }}{% endif %}</td></tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ fosUser.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ fosUser.username }}</td>
+            </tr>
+            <tr>
+                <th>Usernamecanonical</th>
+                <td>{{ fosUser.usernameCanonical }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ fosUser.email }}</td>
+            </tr>
+            <tr>
+                <th>Emailcanonical</th>
+                <td>{{ fosUser.emailCanonical }}</td>
+            </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{% if fosUser.enabled %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Salt</th>
+                <td>{{ fosUser.salt }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ fosUser.password }}</td>
+            </tr>
+            <tr>
+                <th>Lastlogin</th>
+                <td>{% if fosUser.lastLogin %}{{ fosUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Confirmationtoken</th>
+                <td>{{ fosUser.confirmationToken }}</td>
+            </tr>
+            <tr>
+                <th>Passwordrequestedat</th>
+                <td>{% if fosUser.passwordRequestedAt %}{{ fosUser.passwordRequestedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{% if fosUser.roles %}{{ fosUser.roles|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fullname</th>
+                <td>{{ fosUser.fullname }}</td>
+            </tr>
         </tbody>
     </table>
 
-<a href="{{ path('admin_users_index') }}" class="btn">Regresar a listado</a>
-<a href="{{ path('admin_users_edit', { 'id': fosUser.id }) }}" class="btn btn-primary">Editar</a>
+    <ul>
+        <li>
+            <a href="{{ path('admin_personas_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_personas_edit', { 'id': fosUser.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

@@ -1,36 +1,41 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Catalogo de codificaciones del Sistema de Abastecimiento{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
-    <table id="sample-table" class="table table-striped table-bordered table-hover">
+    <h1>Ctlcodificacions list</h1>
+
+    <table>
         <thead>
             <tr>
-                <th>Nombre de Codificacion</th>
-                <th>Metodo</th>
-                <th>Operaciones</th>
+                <th>Id</th>
+                <th>Nombrecodificacion</th>
+                <th>Metodocodificacion</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for ctlCodificacion in ctlCodificacions %}
             <tr>
-                <td><a href="{{ path('codificacion_show', { 'id': ctlCodificacion.id }) }}">{{ ctlCodificacion.nombreCodificacion }}</a></td>
+                <td><a href="{{ path('codificaciones_show', { 'id': ctlCodificacion.id }) }}">{{ ctlCodificacion.id }}</a></td>
+                <td>{{ ctlCodificacion.nombreCodificacion }}</td>
                 <td>{{ ctlCodificacion.metodoCodificacion }}</td>
                 <td>
-                 <a href="{{ path('codificacion_show', { 'id': ctlCodificacion.id }) }}">Ver <i class="icon-show bigger-120"></i></a>
-                 <a href="{{ path('codificacion_edit', { 'id': ctlCodificacion.id }) }}">Editar <i class="icon-edit bigger-120"></i></a>
+                    <ul>
+                        <li>
+                            <a href="{{ path('codificaciones_show', { 'id': ctlCodificacion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('codificaciones_edit', { 'id': ctlCodificacion.id }) }}">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-<a href="{{ path('codificacion_new') }}" class="btn btn-primary">Registrar Codificación</a>
-{% endblock %}
-{% block footer_js %}<script type="text/javascript">$(function(){ var oTable2 = $('#sample-table').dataTable(); })</script>{% endblock %}
-{% block head_js %}
-  <script src="{{ asset('assets/') }}js/barcode/JsBarcode.all.js"></script>
-  <script>
-		Number.prototype.zeroPadding = function(){
-			var ret = "" + this.valueOf();
-			return ret.length == 1 ? "0" + ret : ret;
-		};
-  </script>
+
+    <ul>
+        <li>
+            <a href="{{ path('codificaciones_new') }}">Create a new ctlCodificacion</a>
+        </li>
+    </ul>
 {% endblock %}

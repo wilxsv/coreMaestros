@@ -1,0 +1,113 @@
+Minsal\SuministroBundle\Entity\FosUser:
+    type: entity
+    table: fos_user
+    indexes:
+        IDX_957A6479332BD42C:
+            columns:
+                - ctl_establecimiento
+    uniqueConstraints:
+        uniq_957a6479c05fb297:
+            columns:
+                - confirmation_token
+        uniq_957a647992fc23a8:
+            columns:
+                - username_canonical
+        uniq_957a6479a0d96fbf:
+            columns:
+                - email_canonical
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        username:
+            type: string
+            nullable: false
+            length: 180
+            fixed: false
+        usernameCanonical:
+            type: string
+            nullable: false
+            length: 180
+            fixed: false
+            column: username_canonical
+        email:
+            type: string
+            nullable: false
+            length: 180
+            fixed: false
+        emailCanonical:
+            type: string
+            nullable: false
+            length: 180
+            fixed: false
+            column: email_canonical
+        enabled:
+            type: boolean
+            nullable: false
+        salt:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        lastLogin:
+            type: datetime
+            nullable: true
+            column: last_login
+        confirmationToken:
+            type: string
+            nullable: true
+            length: 180
+            fixed: false
+            column: confirmation_token
+        passwordRequestedAt:
+            type: datetime
+            nullable: true
+            column: password_requested_at
+        roles:
+            type: array
+            nullable: false
+            length: null
+            fixed: false
+        fullname:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+    manyToOne:
+        ctlEstablecimiento:
+            targetEntity: CtlEstablecimiento
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ctl_establecimiento:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        group:
+            targetEntity: FosGroup
+            cascade: {  }
+            mappedBy: null
+            inversedBy: user
+            joinTable:
+                name: fos_user_group
+                joinColumns:
+                    -
+                        name: user_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: group_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

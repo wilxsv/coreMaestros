@@ -1,16 +1,32 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Rol [ {{ ctlRol.nombreRol }} ]{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
+    <h1>Ctlrol</h1>
+
     <table>
         <tbody>
             <tr>
-                <th>Nombre de rol</th>
+                <th>Id</th>
+                <td>{{ ctlRol.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombrerol</th>
                 <td>{{ ctlRol.nombreRol }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_roles_index') }}" class="btn">Regresar a listado</a>
-    <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}" class="btn">Editar</a>
-    {{ form_start(delete_form) }}<input type="submit" value="Eliminar rol" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+    <ul>
+        <li>
+            <a href="{{ path('admin_roles_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

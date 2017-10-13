@@ -1,0 +1,111 @@
+Minsal\SuministroBundle\Entity\CtlGrupo:
+    type: entity
+    table: ctl_grupo
+    indexes:
+        IDX_501FC6D86D7078B6:
+            columns:
+                - suministro_id
+        IDX_501FC6D89C833003:
+            columns:
+                - grupo_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreGrupo:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_grupo
+        detalleGrupo:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: detalle_grupo
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '(now())::timestamp(0) without time zone'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '(1)::bigint'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+        codigoGrupo:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: codigo_grupo
+    manyToOne:
+        suministro:
+            targetEntity: CtlSuministro
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                suministro_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        grupo:
+            targetEntity: CtlGrupo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                grupo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        unidad:
+            targetEntity: CtlUnidadMedida
+            cascade: {  }
+            mappedBy: null
+            inversedBy: grupo
+            joinTable:
+                name: unidad_grupo
+                joinColumns:
+                    -
+                        name: grupo_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: unidad_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

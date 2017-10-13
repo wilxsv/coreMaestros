@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlestablecimientos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idtipoestablecimiento</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Fax</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Idinstitucion</th>
+                <th>Anioapertura</th>
+                <th>Idcatnivelminsal</th>
+                <th>Codestabconsumos</th>
+                <th>Codestabsiaf</th>
+                <th>Coducsf</th>
+                <th>Idcattipoexpediente</th>
+                <th>Idcattipofarmacia</th>
+                <th>Idcattipoconsumo</th>
+                <th>Instmortalidad</th>
+                <th>Digitamortalidad</th>
+                <th>Cvcd4</th>
+                <th>Idcatpruebas</th>
+                <th>Activo</th>
+                <th>Idestablecimientopadre</th>
+                <th>Idusuarioreg</th>
+                <th>Fechahorareg</th>
+                <th>Idusuariomod</th>
+                <th>Fechahoramod</th>
+                <th>Idestablesimow</th>
+                <th>Idestablevigepes</th>
+                <th>Estadovigepes</th>
+                <th>Estadovacunas</th>
+                <th>Estadoseps</th>
+                <th>Estadosimow</th>
+                <th>Idestablesumeve</th>
+                <th>Estadosumeve</th>
+                <th>Cabezamicrored</th>
+                <th>Hospitalizacion</th>
+                <th>Idmicrored</th>
+                <th>Poblacionasignana</th>
+                <th>Cantidadfamilia</th>
+                <th>Idsituacionlegal</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Ipuserschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlEstablecimiento in ctlEstablecimientos %}
+            <tr>
+                <td><a href="{{ path('establecimientos_show', { 'id': ctlEstablecimiento.id }) }}">{{ ctlEstablecimiento.id }}</a></td>
+                <td>{{ ctlEstablecimiento.idTipoEstablecimiento }}</td>
+                <td>{{ ctlEstablecimiento.nombre }}</td>
+                <td>{{ ctlEstablecimiento.direccion }}</td>
+                <td>{{ ctlEstablecimiento.telefono }}</td>
+                <td>{{ ctlEstablecimiento.fax }}</td>
+                <td>{{ ctlEstablecimiento.latitud }}</td>
+                <td>{{ ctlEstablecimiento.longitud }}</td>
+                <td>{{ ctlEstablecimiento.idInstitucion }}</td>
+                <td>{{ ctlEstablecimiento.anioApertura }}</td>
+                <td>{{ ctlEstablecimiento.idCatNivelMinsal }}</td>
+                <td>{{ ctlEstablecimiento.codestabConsumos }}</td>
+                <td>{{ ctlEstablecimiento.codestabSiaf }}</td>
+                <td>{{ ctlEstablecimiento.codUcsf }}</td>
+                <td>{{ ctlEstablecimiento.idCatTipoExpediente }}</td>
+                <td>{{ ctlEstablecimiento.idCatTipoFarmacia }}</td>
+                <td>{{ ctlEstablecimiento.idCatTipoConsumo }}</td>
+                <td>{{ ctlEstablecimiento.instMortalidad }}</td>
+                <td>{{ ctlEstablecimiento.digitaMortalidad }}</td>
+                <td>{{ ctlEstablecimiento.cvcd4 }}</td>
+                <td>{{ ctlEstablecimiento.idCatPruebas }}</td>
+                <td>{% if ctlEstablecimiento.activo %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlEstablecimiento.idEstablecimientoPadre }}</td>
+                <td>{{ ctlEstablecimiento.idUsuarioReg }}</td>
+                <td>{% if ctlEstablecimiento.fechaHoraReg %}{{ ctlEstablecimiento.fechaHoraReg|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlEstablecimiento.idUsuarioMod }}</td>
+                <td>{% if ctlEstablecimiento.fechaHoraMod %}{{ ctlEstablecimiento.fechaHoraMod|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlEstablecimiento.idestablesimow }}</td>
+                <td>{{ ctlEstablecimiento.idestablevigepes }}</td>
+                <td>{{ ctlEstablecimiento.estadoVigepes }}</td>
+                <td>{{ ctlEstablecimiento.estadoVacunas }}</td>
+                <td>{{ ctlEstablecimiento.estadoSeps }}</td>
+                <td>{{ ctlEstablecimiento.estadoSimow }}</td>
+                <td>{{ ctlEstablecimiento.idestablesumeve }}</td>
+                <td>{{ ctlEstablecimiento.estadoSumeve }}</td>
+                <td>{% if ctlEstablecimiento.cabezaMicrored %}Yes{% else %}No{% endif %}</td>
+                <td>{% if ctlEstablecimiento.hospitalizacion %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ctlEstablecimiento.idmicrored }}</td>
+                <td>{{ ctlEstablecimiento.poblacionAsignana }}</td>
+                <td>{{ ctlEstablecimiento.cantidadFamilia }}</td>
+                <td>{{ ctlEstablecimiento.idSituacionLegal }}</td>
+                <td>{% if ctlEstablecimiento.registroSchema %}{{ ctlEstablecimiento.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlEstablecimiento.detalleSchema }}</td>
+                <td>{{ ctlEstablecimiento.userIdSchema }}</td>
+                <td>{{ ctlEstablecimiento.ipUserSchema }}</td>
+                <td>{{ ctlEstablecimiento.estadoSchema }}</td>
+                <td>{{ ctlEstablecimiento.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('establecimientos_show', { 'id': ctlEstablecimiento.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

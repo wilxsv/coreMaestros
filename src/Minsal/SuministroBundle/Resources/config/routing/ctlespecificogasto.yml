@@ -1,0 +1,24 @@
+uaci_especficogasto_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlEspecificoGasto:index" }
+    methods:  GET
+
+uaci_especficogasto_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlEspecificoGasto:show" }
+    methods:  GET
+
+uaci_especficogasto_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlEspecificoGasto:new" }
+    methods:  [GET, POST]
+
+uaci_especficogasto_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlEspecificoGasto:edit" }
+    methods:  [GET, POST]
+
+uaci_especficogasto_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlEspecificoGasto:delete" }
+    methods:  DELETE

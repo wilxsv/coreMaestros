@@ -1,0 +1,53 @@
+Minsal\SuministroBundle\Entity\MntCambio:
+    type: entity
+    table: mnt_cambio
+    indexes:
+        IDX_6FAA040A9E59795B:
+            columns:
+                - user_id_schema
+        IDX_6FAA040A1BDF2B2C:
+            columns:
+                - user_id_valida_cambio
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        descripcionCambio:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: descripcion_cambio
+        registroSchema:
+            type: datetime
+            nullable: false
+            column: registro_schema
+        registroCambio:
+            type: datetime
+            nullable: true
+            column: registro_cambio
+    manyToOne:
+        userSchema:
+            targetEntity: FosUser
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id_schema:
+                    referencedColumnName: id
+            orphanRemoval: false
+        userValidaCambio:
+            targetEntity: FosUser
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id_valida_cambio:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

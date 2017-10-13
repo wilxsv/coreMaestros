@@ -1,0 +1,77 @@
+minsal_suministro_admin_roles:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlrol.yml"
+    prefix:   /admin/roles
+minsal_suministro_admin_grupos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/fosgroup.yml"
+    prefix:   /admin/grupos
+minsal_suministro_admin_personas:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /admin/personas
+minsal_suministro_admin_accesos:
+        resource: "@MinsalSuministroBundle/Resources/config/routing/segacceso.yml"
+        prefix:   /admin/accesos
+
+
+
+minsal_suministro_productos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/mntinsumo.yml"
+    prefix:   /productos
+minsal_suministro_insumos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/mntinsumo.yml"
+    prefix:   /insumos
+        
+minsal_suministro_viaadministracion:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlviaadministracion.yml"
+    prefix:   /viaadministracion
+
+minsal_suministro_unidaddespacho:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlunidaddespacho.yml"
+    prefix:   /unidaddespacho
+
+minsal_suministro_tipouso:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctltipouso.yml"
+    prefix:   /tipouso
+
+minsal_suministro_suministros:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlsuministro.yml"
+    prefix:   /suministros
+
+minsal_suministro_programas:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlprograma.yml"
+    prefix:   /programas
+
+minsal_suministro_principiosactivos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlprincipio.yml"
+    prefix:   /principiosactivos
+
+minsal_suministro_presentaciones:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlpresentacion.yml"
+    prefix:   /presentaciones
+
+minsal_suministro_niveluso:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlniveluso.yml"
+    prefix:   /niveluso
+
+minsal_suministro_grupos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlgrupo.yml"
+    prefix:   /grupos
+
+minsal_suministro_formafarmaceutica:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlformafarmaceutica.yml"
+    prefix:   /formafarmaceutica
+
+minsal_suministro_establecimientos:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlestablecimiento.yml"
+    prefix:   /establecimientos
+
+minsal_suministro_uaci_especficogasto:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlespecificogasto.yml"
+    prefix:   /uaci/especficogasto
+
+minsal_suministro_codificaciones:
+    resource: "@MinsalSuministroBundle/Resources/config/routing/ctlcodificacion.yml"
+    prefix:   /codificaciones
+
+minsal_suministro_homepage:
+    path:     /
+    defaults: { _controller: MinsalSuministroBundle:Default:index }

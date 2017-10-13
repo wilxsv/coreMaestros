@@ -1,0 +1,80 @@
+Minsal\SuministroBundle\Entity\CtlTipoUso:
+    type: entity
+    table: ctl_tipo_uso
+    indexes:
+        IDX_32EDAB0DA9276E6C:
+            columns:
+                - tipo_id
+    uniqueConstraints:
+        un_nombre_tipo:
+            columns:
+                - nombre_tipo_uso
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombreTipoUso:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_tipo_uso
+        detalleTipoUso:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: detalle_tipo_uso
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '2017-02-26 21:27:44.60444'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '(1)::bigint'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+    manyToOne:
+        tipo:
+            targetEntity: CtlTipoUso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

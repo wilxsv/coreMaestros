@@ -1,0 +1,24 @@
+viaadministracion_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlViaAdministracion:index" }
+    methods:  GET
+
+viaadministracion_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlViaAdministracion:show" }
+    methods:  GET
+
+viaadministracion_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlViaAdministracion:new" }
+    methods:  [GET, POST]
+
+viaadministracion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlViaAdministracion:edit" }
+    methods:  [GET, POST]
+
+viaadministracion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlViaAdministracion:delete" }
+    methods:  DELETE

@@ -1,20 +1,64 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Grupo: {{ ctlGrupo.nombreGrupo }}{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
+    <h1>Ctlgrupo</h1>
+
     <table>
         <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlGrupo.id }}</td>
+            </tr>
             <tr>
                 <th>Nombregrupo</th>
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
             </tr>
             <tr>
-                <th>Grupo Superior</th>
-                <td>{{ ctlGrupo.grupoId }}</td>
+                <th>Detallegrupo</th>
+                <td>{{ ctlGrupo.detalleGrupo }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlGrupo.registroSchema %}{{ ctlGrupo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlGrupo.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlGrupo.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useripschema</th>
+                <td>{{ ctlGrupo.userIpSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlGrupo.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlGrupo.enableSchema }}</td>
+            </tr>
+            <tr>
+                <th>Codigogrupo</th>
+                <td>{{ ctlGrupo.codigoGrupo }}</td>
             </tr>
         </tbody>
     </table>
 
-<a href="{{ path('grupo_index') }}" class="btn">Regresar a listado</a>
-<a href="{{ path('grupo_edit', { 'id': ctlGrupo.id }) }}" class="btn btn-primary">Editar</a>
-{{ form_start(delete_form) }}<input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+    <ul>
+        <li>
+            <a href="{{ path('grupos_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('grupos_edit', { 'id': ctlGrupo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

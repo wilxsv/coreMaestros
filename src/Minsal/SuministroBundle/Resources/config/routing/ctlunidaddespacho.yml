@@ -1,0 +1,24 @@
+unidaddespacho_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlUnidadDespacho:index" }
+    methods:  GET
+
+unidaddespacho_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlUnidadDespacho:show" }
+    methods:  GET
+
+unidaddespacho_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlUnidadDespacho:new" }
+    methods:  [GET, POST]
+
+unidaddespacho_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlUnidadDespacho:edit" }
+    methods:  [GET, POST]
+
+unidaddespacho_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlUnidadDespacho:delete" }
+    methods:  DELETE

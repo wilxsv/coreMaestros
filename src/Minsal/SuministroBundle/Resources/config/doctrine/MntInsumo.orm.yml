@@ -1,0 +1,262 @@
+Minsal\SuministroBundle\Entity\MntInsumo:
+    type: entity
+    table: mnt_insumo
+    indexes:
+        IDX_81A2E0E091BDCCB:
+            columns:
+                - presentacion_id
+        IDX_81A2E0E0318D3140:
+            columns:
+                - nivel_uso_id
+        IDX_81A2E0E07A93ADB3:
+            columns:
+                - ctl_forma_farmaceutica_id
+        IDX_81A2E0E03BA3AAA1:
+            columns:
+                - tipo_uso_id
+        IDX_81A2E0E02916084F:
+            columns:
+                - especifico_gasto_id
+        IDX_81A2E0E0C45D81AB:
+            columns:
+                - via_administracion_id
+        IDX_81A2E0E0A3A87327:
+            columns:
+                - unidad_despacho
+        IDX_81A2E0E0658D94C1:
+            columns:
+                - principio_id
+        IDX_81A2E0E0906D0405:
+            columns:
+                - unidad_medidad_id
+        IDX_81A2E0E09C833003:
+            columns:
+                - grupo_id
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        codigoNuInsumo:
+            type: string
+            nullable: true
+            length: 15
+            fixed: false
+            column: codigo_nu_insumo
+        codigoMinsalInsumo:
+            type: string
+            nullable: false
+            length: 8
+            fixed: false
+            column: codigo_minsal_insumo
+        concentracionMedicamentoInsumo:
+            type: string
+            nullable: false
+            length: 250
+            fixed: false
+            default: na
+            column: concentracion_medicamento_insumo
+        codigoSinabExt:
+            type: bigint
+            nullable: false
+            unsigned: false
+            default: '0'
+            column: codigo_sinab_ext
+        listadoOficial:
+            type: boolean
+            nullable: false
+            default: false
+            column: listado_oficial
+        nombreLargoInsumo:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: nombre_largo_insumo
+        registroSchema:
+            type: datetime
+            nullable: true
+            default: '(now())::timestamp(0) without time zone'
+            column: registro_schema
+        detalleSchema:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: 'Agregado antes de gestor de maestros'
+            column: detalle_schema
+        userIdSchema:
+            type: bigint
+            nullable: true
+            unsigned: false
+            default: '1'
+            column: user_id_schema
+        userIpSchema:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: 0.0.0.0
+            column: user_ip_schema
+        estadoSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: estado_schema
+        enableSchema:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: enable_schema
+        especificacionTecnicaInsumo:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            default: na
+            column: especificacion_tecnica_insumo
+        venInsumo:
+            type: smallint
+            nullable: false
+            unsigned: false
+            comment: 'Vital, Escencial, No escencial'
+            default: '3'
+            column: ven_insumo
+        precioReferenciaInsumo:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: 'Costo del ultimo valor resgistrado'
+            default: '0::double precision'
+            column: precio_referencia_insumo
+        procesadoInsumo:
+            type: boolean
+            nullable: false
+            default: false
+            column: procesado_insumo
+        posologiaInsumo:
+            type: string
+            nullable: true
+            length: 250
+            fixed: false
+            column: posologia_insumo
+        nombreGenericoInsumo:
+            type: string
+            nullable: false
+            length: 250
+            fixed: false
+            default: '-'
+            column: nombre_generico_insumo
+        descripcionInsumo:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: descripcion_insumo
+    manyToOne:
+        presentacion:
+            targetEntity: CtlPresentacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                presentacion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        nivelUso:
+            targetEntity: CtlNivelUso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                nivel_uso_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        ctlFormaFarmaceutica:
+            targetEntity: CtlFormaFarmaceutica
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ctl_forma_farmaceutica_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipoUso:
+            targetEntity: CtlTipoUso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo_uso_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        especificoGasto:
+            targetEntity: CtlEspecificoGasto
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                especifico_gasto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        viaAdministracion:
+            targetEntity: CtlViaAdministracion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                via_administracion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        unidadDespacho:
+            targetEntity: CtlUnidadDespacho
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                unidad_despacho:
+                    referencedColumnName: id
+            orphanRemoval: false
+        principio:
+            targetEntity: CtlPrincipio
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                principio_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        unidadMedidad:
+            targetEntity: CtlUnidadMedida
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                unidad_medidad_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        grupo:
+            targetEntity: CtlGrupo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                grupo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        programa:
+            targetEntity: CtlPrograma
+            cascade: {  }
+            mappedBy: insumo
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

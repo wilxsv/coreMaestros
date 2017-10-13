@@ -1,0 +1,24 @@
+admin_roles_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlRol:index" }
+    methods:  GET
+
+admin_roles_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlRol:show" }
+    methods:  GET
+
+admin_roles_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlRol:new" }
+    methods:  [GET, POST]
+
+admin_roles_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlRol:edit" }
+    methods:  [GET, POST]
+
+admin_roles_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlRol:delete" }
+    methods:  DELETE

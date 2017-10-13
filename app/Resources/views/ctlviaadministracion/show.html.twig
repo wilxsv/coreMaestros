@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlviaadministracion</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlViaAdministracion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombreviaadministracion</th>
+                <td>{{ ctlViaAdministracion.nombreViaAdministracion }}</td>
+            </tr>
+            <tr>
+                <th>Detalleviaadministracion</th>
+                <td>{{ ctlViaAdministracion.detalleViaAdministracion }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlViaAdministracion.registroSchema %}{{ ctlViaAdministracion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlViaAdministracion.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlViaAdministracion.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useripschema</th>
+                <td>{{ ctlViaAdministracion.userIpSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlViaAdministracion.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlViaAdministracion.enableSchema }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('viaadministracion_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('viaadministracion_edit', { 'id': ctlViaAdministracion.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

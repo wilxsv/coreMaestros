@@ -1,7 +1,0 @@
-maestro_insumo_homepage:
-    path:     /
-    defaults: { _controller: MaestroInsumoBundle:Default:index }
-
-maestro_insumo_magnitud:
-    path:     /codificacion
-    defaults: { _controller: MaestroInsumoBundle:Default:codificacion }

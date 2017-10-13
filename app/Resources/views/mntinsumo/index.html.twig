@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Mntinsumos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigonuinsumo</th>
+                <th>Codigominsalinsumo</th>
+                <th>Concentracionmedicamentoinsumo</th>
+                <th>Codigosinabext</th>
+                <th>Listadooficial</th>
+                <th>Nombrelargoinsumo</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Useripschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Especificaciontecnicainsumo</th>
+                <th>Veninsumo</th>
+                <th>Precioreferenciainsumo</th>
+                <th>Procesadoinsumo</th>
+                <th>Posologiainsumo</th>
+                <th>Nombregenericoinsumo</th>
+                <th>Descripcioninsumo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mntInsumo in mntInsumos %}
+            <tr>
+                <td><a href="{{ path('productos_show', { 'id': mntInsumo.id }) }}">{{ mntInsumo.id }}</a></td>
+                <td>{{ mntInsumo.codigoNuInsumo }}</td>
+                <td>{{ mntInsumo.codigoMinsalInsumo }}</td>
+                <td>{{ mntInsumo.concentracionMedicamentoInsumo }}</td>
+                <td>{{ mntInsumo.codigoSinabExt }}</td>
+                <td>{% if mntInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
+                <td>{{ mntInsumo.nombreLargoInsumo }}</td>
+                <td>{% if mntInsumo.registroSchema %}{{ mntInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ mntInsumo.detalleSchema }}</td>
+                <td>{{ mntInsumo.userIdSchema }}</td>
+                <td>{{ mntInsumo.userIpSchema }}</td>
+                <td>{{ mntInsumo.estadoSchema }}</td>
+                <td>{{ mntInsumo.enableSchema }}</td>
+                <td>{{ mntInsumo.especificacionTecnicaInsumo }}</td>
+                <td>{{ mntInsumo.venInsumo }}</td>
+                <td>{{ mntInsumo.precioReferenciaInsumo }}</td>
+                <td>{% if mntInsumo.procesadoInsumo %}Yes{% else %}No{% endif %}</td>
+                <td>{{ mntInsumo.posologiaInsumo }}</td>
+                <td>{{ mntInsumo.nombreGenericoInsumo }}</td>
+                <td>{{ mntInsumo.descripcionInsumo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('productos_show', { 'id': mntInsumo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('productos_new') }}">Create a new mntInsumo</a>
+        </li>
+    </ul>
+{% endblock %}

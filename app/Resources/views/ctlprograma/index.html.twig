@@ -12,7 +12,7 @@
                 <th>Registroschema</th>
                 <th>Detalleschema</th>
                 <th>Useridschema</th>
-                <th>Ipuserschema</th>
+                <th>Useripschema</th>
                 <th>Estadoschema</th>
                 <th>Enableschema</th>
                 <th>Actions</th>
@@ -21,22 +21,22 @@
         <tbody>
         {% for ctlPrograma in ctlProgramas %}
             <tr>
-                <td><a href="{{ path('programa_show', { 'id': ctlPrograma.id }) }}">{{ ctlPrograma.id }}</a></td>
+                <td><a href="{{ path('programas_show', { 'id': ctlPrograma.id }) }}">{{ ctlPrograma.id }}</a></td>
                 <td>{{ ctlPrograma.nombrePrograma }}</td>
                 <td>{{ ctlPrograma.detallePrograma }}</td>
                 <td>{% if ctlPrograma.registroSchema %}{{ ctlPrograma.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ ctlPrograma.detalleSchema }}</td>
                 <td>{{ ctlPrograma.userIdSchema }}</td>
-                <td>{{ ctlPrograma.ipUserSchema }}</td>
+                <td>{{ ctlPrograma.userIpSchema }}</td>
                 <td>{{ ctlPrograma.estadoSchema }}</td>
                 <td>{{ ctlPrograma.enableSchema }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('programa_show', { 'id': ctlPrograma.id }) }}">show</a>
+                            <a href="{{ path('programas_show', { 'id': ctlPrograma.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('programa_edit', { 'id': ctlPrograma.id }) }}">edit</a>
+                            <a href="{{ path('programas_edit', { 'id': ctlPrograma.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -47,7 +47,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('programa_new') }}">Create a new ctlPrograma</a>
+            <a href="{{ path('programas_new') }}">Create a new ctlPrograma</a>
         </li>
     </ul>
 {% endblock %}

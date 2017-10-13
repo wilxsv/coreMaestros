@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctltipousos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombretipouso</th>
+                <th>Detalletipouso</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Useripschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlTipoUso in ctlTipoUsos %}
+            <tr>
+                <td><a href="{{ path('tipouso_show', { 'id': ctlTipoUso.id }) }}">{{ ctlTipoUso.id }}</a></td>
+                <td>{{ ctlTipoUso.nombreTipoUso }}</td>
+                <td>{{ ctlTipoUso.detalleTipoUso }}</td>
+                <td>{% if ctlTipoUso.registroSchema %}{{ ctlTipoUso.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlTipoUso.detalleSchema }}</td>
+                <td>{{ ctlTipoUso.userIdSchema }}</td>
+                <td>{{ ctlTipoUso.userIpSchema }}</td>
+                <td>{{ ctlTipoUso.estadoSchema }}</td>
+                <td>{{ ctlTipoUso.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tipouso_show', { 'id': ctlTipoUso.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tipouso_edit', { 'id': ctlTipoUso.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tipouso_new') }}">Create a new ctlTipoUso</a>
+        </li>
+    </ul>
+{% endblock %}

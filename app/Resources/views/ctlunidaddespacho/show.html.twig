@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlunidaddespacho</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ctlUnidadDespacho.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombreunidaddespacho</th>
+                <td>{{ ctlUnidadDespacho.nombreUnidadDespacho }}</td>
+            </tr>
+            <tr>
+                <th>Detalleunidaddespacho</th>
+                <td>{{ ctlUnidadDespacho.detalleUnidadDespacho }}</td>
+            </tr>
+            <tr>
+                <th>Registroschema</th>
+                <td>{% if ctlUnidadDespacho.registroSchema %}{{ ctlUnidadDespacho.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Detalleschema</th>
+                <td>{{ ctlUnidadDespacho.detalleSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useridschema</th>
+                <td>{{ ctlUnidadDespacho.userIdSchema }}</td>
+            </tr>
+            <tr>
+                <th>Useripschema</th>
+                <td>{{ ctlUnidadDespacho.userIpSchema }}</td>
+            </tr>
+            <tr>
+                <th>Estadoschema</th>
+                <td>{{ ctlUnidadDespacho.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Enableschema</th>
+                <td>{{ ctlUnidadDespacho.enableSchema }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('unidaddespacho_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('unidaddespacho_edit', { 'id': ctlUnidadDespacho.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

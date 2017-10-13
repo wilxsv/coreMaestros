@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ctlviaadministracions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombreviaadministracion</th>
+                <th>Detalleviaadministracion</th>
+                <th>Registroschema</th>
+                <th>Detalleschema</th>
+                <th>Useridschema</th>
+                <th>Useripschema</th>
+                <th>Estadoschema</th>
+                <th>Enableschema</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ctlViaAdministracion in ctlViaAdministracions %}
+            <tr>
+                <td><a href="{{ path('viaadministracion_show', { 'id': ctlViaAdministracion.id }) }}">{{ ctlViaAdministracion.id }}</a></td>
+                <td>{{ ctlViaAdministracion.nombreViaAdministracion }}</td>
+                <td>{{ ctlViaAdministracion.detalleViaAdministracion }}</td>
+                <td>{% if ctlViaAdministracion.registroSchema %}{{ ctlViaAdministracion.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ ctlViaAdministracion.detalleSchema }}</td>
+                <td>{{ ctlViaAdministracion.userIdSchema }}</td>
+                <td>{{ ctlViaAdministracion.userIpSchema }}</td>
+                <td>{{ ctlViaAdministracion.estadoSchema }}</td>
+                <td>{{ ctlViaAdministracion.enableSchema }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('viaadministracion_show', { 'id': ctlViaAdministracion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('viaadministracion_edit', { 'id': ctlViaAdministracion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('viaadministracion_new') }}">Create a new ctlViaAdministracion</a>
+        </li>
+    </ul>
+{% endblock %}

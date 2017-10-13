@@ -1,13 +1,15 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Editar Suministro{% endblock %}
+{% extends 'base.html.twig' %}
+{% block titulo %}Editar suministro{% endblock %}
 {% block body %}
+<div class="col-sm-12">
+ <div class="white-box">
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Actualizar" class="btn btn-primary" />
+        <input type="submit" value="Actualizar" />
     {{ form_end(edit_form) }}
-
-<a href="{{ path('suministro_index') }}" class="btn">Regresar a listado</a>
-    {{ form_start(delete_form) }}
-                <input type="submit" value="Eliminar Suministro" class="btn btn-xs btn-danger" />
-            {{ form_end(delete_form) }}
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('suministros_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}

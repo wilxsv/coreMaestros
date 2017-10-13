@@ -1,3 +1,0 @@
-maestro_plantilla_homepage:
-    path:     /
-    defaults: { _controller: MaestroPlantillaBundle:Default:index }

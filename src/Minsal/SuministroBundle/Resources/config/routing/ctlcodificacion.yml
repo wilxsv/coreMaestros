@@ -1,0 +1,24 @@
+codificaciones_index:
+    path:     /
+    defaults: { _controller: "MinsalSuministroBundle:CtlCodificacion:index" }
+    methods:  GET
+
+codificaciones_show:
+    path:     /{id}/show
+    defaults: { _controller: "MinsalSuministroBundle:CtlCodificacion:show" }
+    methods:  GET
+
+codificaciones_new:
+    path:     /new
+    defaults: { _controller: "MinsalSuministroBundle:CtlCodificacion:new" }
+    methods:  [GET, POST]
+
+codificaciones_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MinsalSuministroBundle:CtlCodificacion:edit" }
+    methods:  [GET, POST]
+
+codificaciones_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MinsalSuministroBundle:CtlCodificacion:delete" }
+    methods:  DELETE

@@ -1,12 +1,21 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Editar Nivel de uso{% endblock %}
+{% extends 'base.html.twig' %}
+
 {% block body %}
+    <h1>Ctlniveluso edit</h1>
+
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Actualizar" class="btn btn-primary" />
+        <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-<a href="{{ path('nivel_uso_index') }}" class="btn">Regresar a listado</a>
-
-{{ form_start(delete_form) }}<input type="submit" value="Eliminar" class="btn btn-xs btn-danger" />{{ form_end(delete_form) }}
+    <ul>
+        <li>
+            <a href="{{ path('niveluso_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

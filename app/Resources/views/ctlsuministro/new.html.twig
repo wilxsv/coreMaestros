@@ -1,10 +1,15 @@
-{% extends 'MaestroCoreBundle::default.html.twig' %}
-{% block title %}Registrar Tipo de Suministro (En esta seccion se agrega el metodo de codificacion de unidad tecnica){% endblock %}
+{% extends 'base.html.twig' %}
+{% block titulo %}Registrar nuevo suministro{% endblock %}
 {% block body %}
+<div class="col-sm-12">
+ <div class="white-box">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Agregar" class="btn btn-primary" />
+        <input type="submit" value="Guardar" />
     {{ form_end(form) }}
-
-<a href="{{ path('suministro_index') }}" class="btn">Regresar a listado</a>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('suministros_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}
