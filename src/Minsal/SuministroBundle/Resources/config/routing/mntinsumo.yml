@@ -22,3 +22,8 @@ productos_delete:
     path:     /{id}/delete
     defaults: { _controller: "MinsalSuministroBundle:MntInsumo:delete" }
     methods:  DELETE
+
+productos_json:
+    path:     /json/
+    defaults: { _controller: "MinsalSuministroBundle:MntInsumo:json" }
+    methods:  GET

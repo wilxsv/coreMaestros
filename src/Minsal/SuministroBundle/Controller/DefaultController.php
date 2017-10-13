@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Minsal\SuministroBundle\Entity\MntInsumo;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -15,4 +16,5 @@ class DefaultController extends Controller
         $mntInsumos = null;//$em->getRepository('MinsalSuministroBundle:MntInsumo')->findByEnableSchema(1);
         return $this->render('MinsalSuministroBundle:Default:index.html.twig', array('mntInsumos' => $mntInsumos,));
     }
+    
 }
