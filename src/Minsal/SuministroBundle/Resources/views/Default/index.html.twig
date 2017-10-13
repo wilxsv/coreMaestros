@@ -23,17 +23,6 @@
     <tfoot>
      <tr><th>Código</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
     </tfoot>
-    <tbody>
-		{% for s in mntInsumos %}
-            <tr>
-                <td>{{ s.codigoMinsalInsumo }}</td>
-                <td>{{ s.nombreLargoInsumo }}</td>
-                <td>{{ s.nivelUso }}</td>
-                <td>{{ s.unidadMedidad }}</td>
-                <td>{{ s.grupo }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
    </table>
   </div>
    </div>
@@ -69,10 +58,26 @@
         ]
     });
     $(document).ready(function() {
-		$('#tabla').DataTable( {
+		$('#abla').DataTable( {
 			"ajax": "{{ url('productos_json') }}"
 		} );
 	} );
+    $(document).ready(function() {
+    $('#tabla').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "ajax": "{{ url('productos_json') }}",
+        "columns": [
+            { "data": "codigoMinsalInsumo" },
+            { "data": "nombreLargoInsumo" },
+            { "data": "nombreNivelUso" },
+            { "data": "nombreUnidad" },
+            { "data": "nombreGrupo" }
+        ]
+    } );
+} );
     </script>
 {% endblock %}
 

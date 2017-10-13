@@ -377,4 +377,9 @@ class CtlGrupo
     {
         return $this->unidad;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreGrupo();
+    }
 }
