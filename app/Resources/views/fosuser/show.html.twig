@@ -6,15 +6,11 @@
     <table>
         <tbody>
             <tr>
-                <th>Username</th>
+                <th>Nombre de usuario</th>
                 <td>{{ fosUser.username }}</td>
             </tr>
             <tr>
-                <th>Username canonical</th>
-                <td>{{ fosUser.usernameCanonical }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
+                <th>Correo electronico</th>
                 <td>{{ fosUser.email }}</td>
             </tr>
             <tr>
@@ -30,7 +26,7 @@
                 <td>{% if fosUser.roles %}{{ fosUser.roles|join(', ') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Fullname</th>
+                <th>Nombre completo</th>
                 <td>{{ fosUser.fullname }}</td>
             </tr>
         </tbody>
