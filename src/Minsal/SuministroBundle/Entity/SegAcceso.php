@@ -46,21 +46,25 @@ class SegAcceso
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CtlRol", inversedBy="SegAcceso")
+     * @ORM\JoinTable(name="seg_role_acceso",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="acceso_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $rol;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ctlRole;
+    private $role;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->rol = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ctlRole = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->role = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -212,68 +216,35 @@ class SegAcceso
     }
 
     /**
-     * Add rol
+     * Add role
      *
-     * @param \Minsal\SuministroBundle\Entity\CtlRol $rol
+     * @param \Minsal\SuministroBundle\Entity\CtlRol $role
      * @return SegAcceso
      */
-    public function addRol(\Minsal\SuministroBundle\Entity\CtlRol $rol)
+    public function addRole(\Minsal\SuministroBundle\Entity\CtlRol $role)
     {
-        $this->rol[] = $rol;
+        $this->role[] = $role;
 
         return $this;
     }
 
     /**
-     * Remove rol
+     * Remove role
      *
-     * @param \Minsal\SuministroBundle\Entity\CtlRol $rol
+     * @param \Minsal\SuministroBundle\Entity\CtlRol $role
      */
-    public function removeRol(\Minsal\SuministroBundle\Entity\CtlRol $rol)
+    public function removeRole(\Minsal\SuministroBundle\Entity\CtlRol $role)
     {
-        $this->rol->removeElement($rol);
+        $this->role->removeElement($role);
     }
 
     /**
-     * Get rol
+     * Get role
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRol()
+    public function getRole()
     {
-        return $this->rol;
-    }
-
-    /**
-     * Add ctlRole
-     *
-     * @param \Minsal\SuministroBundle\Entity\CtlRol $ctlRole
-     * @return SegAcceso
-     */
-    public function addCtlRole(\Minsal\SuministroBundle\Entity\CtlRol $ctlRole)
-    {
-        $this->ctlRole[] = $ctlRole;
-
-        return $this;
-    }
-
-    /**
-     * Remove ctlRole
-     *
-     * @param \Minsal\SuministroBundle\Entity\CtlRol $ctlRole
-     */
-    public function removeCtlRole(\Minsal\SuministroBundle\Entity\CtlRol $ctlRole)
-    {
-        $this->ctlRole->removeElement($ctlRole);
-    }
-
-    /**
-     * Get ctlRole
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCtlRole()
-    {
-        return $this->ctlRole;
+        return $this->role;
     }
 }

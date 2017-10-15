@@ -34,7 +34,7 @@ Minsal\SuministroBundle\Entity\SegAcceso:
             column: acceso_id
         ordenAcceso:
             type: integer
-            nullable: false
+            nullable: true
             unsigned: false
             default: '1'
             column: orden_acceso
@@ -44,27 +44,20 @@ Minsal\SuministroBundle\Entity\SegAcceso:
             default: false
             column: visible_acceso
     manyToMany:
-        rol:
+        role:
             targetEntity: CtlRol
             cascade: {  }
             mappedBy: null
             inversedBy: acceso
             joinTable:
-                name: seg_permisos
+                name: seg_role_acceso
                 joinColumns:
                     -
                         name: acceso_id
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
-                        name: rol_id
+                        name: role_id
                         referencedColumnName: id
-            orderBy: null
-        ctlRole:
-            targetEntity: CtlRol
-            cascade: {  }
-            mappedBy: ctlAcceso
-            inversedBy: null
-            joinTable: null
             orderBy: null
     lifecycleCallbacks: {  }

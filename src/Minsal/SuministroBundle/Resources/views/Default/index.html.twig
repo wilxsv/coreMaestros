@@ -60,7 +60,7 @@
     </script>
 {% endblock %}
 {% block breadcrumb %}
-	 {% if app.user %}
+	 {% if app.user and app.session.get('agrega') %}
 		<a href="{{ path('productos_new') }}"><button class="btn btn-info">Solicitar creación producto</button></a>
 	{% endif %}
 {% endblock %}

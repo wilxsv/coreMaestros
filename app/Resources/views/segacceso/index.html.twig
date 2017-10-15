@@ -17,8 +17,8 @@
                 <td><a href="{{ path('admin_accesos_show', { 'id': segAcceso.id }) }}">{{ segAcceso.nombreAcceso }}</a></td>
                 <td>{{ segAcceso.pathAcceso }}</td>
                 <td>{% if segAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
-                <td>{% if segAcceso.visibleAcceso %}So{% else %}No{% endif %}</td>
-                <td>{{ segAcceso.ctlRole | join('|') }}</td>
+                <td>{% if segAcceso.visibleAcceso %}Si{% else %}No{% endif %}</td>
+                <td>{{ segAcceso.role | join('|') }}</td>
             </tr>
         {% endfor %}
     </tbody>

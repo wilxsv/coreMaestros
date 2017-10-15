@@ -27,17 +27,17 @@ class DefaultController extends Controller
     public function setAccess($rol){
 		//$grupos
 		$em = $this->getDoctrine()->getManager();
-		$data = null;
+		$data = '0';
 		
 		$roles =  $em->createQueryBuilder()
-			->select('g.nombreGrupo, r.nombreRol')
+			->select('g.id, g.nombreGrupo, r.nombreRol')
 			->from('MinsalSuministroBundle:CtlGrupo', 'g')
 			->innerJoin('g.roles','r')
 			->getQuery()
 			->getArrayResult();
 		foreach ($roles as $rolt) {	
 			if ( $rol->isGranted( $rolt["nombreRol"] ) ){
-				$data .= $rolt["nombreGrupo"];
+				$data .= ','.$rolt["id"];
 				/*
 				$data['accion'] = 'valida';
 				$this->get('session')->set('accionvalida', TRUE );
@@ -48,7 +48,8 @@ class DefaultController extends Controller
 				$lista .= $rolt["id"].",";*/
 			}
 		}
-		$this->get('session')->set('accion', 'data');
+		$this->get('session')->set('accion', $roles);
+		$this->get('session')->set('agrega', $data);
 		
 	}
     

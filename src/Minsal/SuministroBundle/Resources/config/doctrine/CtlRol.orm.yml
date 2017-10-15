@@ -27,24 +27,17 @@ Minsal\SuministroBundle\Entity\CtlRol:
         acceso:
             targetEntity: SegAcceso
             cascade: {  }
-            mappedBy: rol
-            inversedBy: null
-            joinTable: null
-            orderBy: null
-        ctlAcceso:
-            targetEntity: SegAcceso
-            cascade: {  }
             mappedBy: null
-            inversedBy: ctlRole
+            inversedBy: role
             joinTable:
                 name: seg_role_acceso
                 joinColumns:
                     -
-                        name: ctl_role_id
+                        name: role_id
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
-                        name: ctl_acceso_id
+                        name: acceso_id
                         referencedColumnName: id
             orderBy: null
     lifecycleCallbacks: {  }

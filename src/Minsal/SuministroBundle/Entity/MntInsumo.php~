@@ -932,4 +932,32 @@ class MntInsumo
     {
         return $this->multiploInsumo;
     }
+    /**
+     * @var string
+     */
+    private $historicoInsumo;
+
+
+    /**
+     * Set historicoInsumo
+     *
+     * @param string $historicoInsumo
+     * @return MntInsumo
+     */
+    public function setHistoricoInsumo($historicoInsumo)
+    {
+        $this->historicoInsumo = $historicoInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get historicoInsumo
+     *
+     * @return string 
+     */
+    public function getHistoricoInsumo()
+    {
+        return $this->historicoInsumo;
+    }
 }
