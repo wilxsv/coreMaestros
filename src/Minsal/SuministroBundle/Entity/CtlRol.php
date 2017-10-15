@@ -141,4 +141,42 @@ class CtlRol
     {
         return $this->getNombreRol();
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $grupos;
+
+
+    /**
+     * Add grupos
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlGrupo $grupos
+     * @return CtlRol
+     */
+    public function addGrupo(\Minsal\SuministroBundle\Entity\CtlGrupo $grupos)
+    {
+        $this->grupos[] = $grupos;
+
+        return $this;
+    }
+
+    /**
+     * Remove grupos
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlGrupo $grupos
+     */
+    public function removeGrupo(\Minsal\SuministroBundle\Entity\CtlGrupo $grupos)
+    {
+        $this->grupos->removeElement($grupos);
+    }
+
+    /**
+     * Get grupos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGrupos()
+    {
+        return $this->grupos;
+    }
 }

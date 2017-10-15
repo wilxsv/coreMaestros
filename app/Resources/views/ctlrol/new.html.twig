@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Registrar nuevo rol{% endblock %}
 {% block body %}
-    <h1>Ctlrol creation</h1>
-
+<div class="col-sm-12">
+ <div class="white-box">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="Guardar" />
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_roles_index') }}">Back to the list</a>
-        </li>
-    </ul>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_roles_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}

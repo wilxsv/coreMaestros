@@ -67,9 +67,10 @@ Minsal\SuministroBundle\Entity\CtlGrupo:
             default: '0'
             column: enable_schema
         codigoGrupo:
-            type: bigint
+            type: string
             nullable: true
-            unsigned: false
+            length: 2
+            fixed: false
             default: '0'
             column: codigo_grupo
     manyToOne:
@@ -92,6 +93,22 @@ Minsal\SuministroBundle\Entity\CtlGrupo:
                     referencedColumnName: id
             orphanRemoval: false
     manyToMany:
+        roles:
+            targetEntity: CtlRol
+            cascade: {  }
+            mappedBy: null
+            inversedBy: grupos
+            joinTable:
+                name: rol_solicita
+                joinColumns:
+                    -
+                        name: grupos
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: roles
+                        referencedColumnName: id
+            orderBy: null
         unidad:
             targetEntity: CtlUnidadMedida
             cascade: {  }

@@ -4,9 +4,21 @@
 <div class="col-sm-12">
  <div class="white-box">
     {{ form_start(edit_form) }}
+		{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_UNABAST') %}
+			{{ form_widget(edit_form.enableSchema) }}
+		{% else %}
+			<div id="divCheckbox" style="display: none;">{{ form_widget(edit_form.enableSchema) }}</div>
+		{% endif %}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Actualizar" />
     {{ form_end(edit_form) }}
+ </div>
+</div>
+<div class="col-sm-12">
+ <div class="white-box">
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+            {{ form_end(delete_form) }}
  </div>
 </div>
 {% endblock %}

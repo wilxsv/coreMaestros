@@ -1,16 +1,32 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Registrar nuevo acceso{% endblock %}
 {% block body %}
-    <h1>Segacceso creation</h1>
-
+<div class="col-sm-12">
+ <div class="white-box">
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_accesos_index') }}">Back to the list</a>
-        </li>
-    </ul>
+		{{ form_row(form.nombreAcceso) }}
+		<div class="control-group ">{{ form_label(form.pathAcceso) }}
+         <div class="controls">
+          <span class="span12 input-icon input-icon-right">
+           <select id="minsal_suministrobundle_segacceso_pathAcceso" name="minsal_suministrobundle_segacceso_pathAcceso[pathAcceso][]" class="form-control">
+           {% for route in routes %}
+			<option value="{{ route.name }}">{{ route.name }}</option>
+            {% endfor %}
+           </select>
+          </span>
+          </div>
+        </div>
+        {{ form_row(form.pathAcceso) }}
+        {{ form_row(form.visibleAcceso) }}
+        {{ form_row(form.publicAcceso) }}
+        {{ form_row(form.visibleAcceso) }}
+        {{ form_row(form.ctlRole) }}
+        {{ form_row(form._token) }}
+        <input type="submit" value="Agregar" class="btn btn-primary" />
+</form>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_accesos_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}

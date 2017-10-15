@@ -14,24 +14,21 @@ Minsal\SuministroBundle\Entity\MntInsumo:
         IDX_81A2E0E03BA3AAA1:
             columns:
                 - tipo_uso_id
-        IDX_81A2E0E02916084F:
-            columns:
-                - especifico_gasto_id
         IDX_81A2E0E0C45D81AB:
             columns:
                 - via_administracion_id
-        IDX_81A2E0E0A3A87327:
-            columns:
-                - unidad_despacho
-        IDX_81A2E0E0658D94C1:
-            columns:
-                - principio_id
         IDX_81A2E0E0906D0405:
             columns:
                 - unidad_medidad_id
         IDX_81A2E0E09C833003:
             columns:
                 - grupo_id
+        IDX_81A2E0E0A3A87327:
+            columns:
+                - unidad_despacho
+        IDX_81A2E0E02916084F:
+            columns:
+                - especifico_gasto_id
     id:
         id:
             type: bigint
@@ -55,16 +52,16 @@ Minsal\SuministroBundle\Entity\MntInsumo:
             column: codigo_minsal_insumo
         concentracionMedicamentoInsumo:
             type: string
-            nullable: false
+            nullable: true
             length: 250
             fixed: false
             default: na
             column: concentracion_medicamento_insumo
         codigoSinabExt:
             type: bigint
-            nullable: false
+            nullable: true
             unsigned: false
-            default: '0'
+            default: '0::bigint'
             column: codigo_sinab_ext
         listadoOficial:
             type: boolean
@@ -160,6 +157,20 @@ Minsal\SuministroBundle\Entity\MntInsumo:
             length: null
             fixed: false
             column: descripcion_insumo
+        multiploInsumo:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: 'Este valor puede ser entero o real'
+            default: '1::real'
+            column: multiplo_insumo
+        historicoInsumo:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: historico_insumo
     manyToOne:
         presentacion:
             targetEntity: CtlPresentacion
@@ -197,15 +208,6 @@ Minsal\SuministroBundle\Entity\MntInsumo:
                 tipo_uso_id:
                     referencedColumnName: id
             orphanRemoval: false
-        especificoGasto:
-            targetEntity: CtlEspecificoGasto
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                especifico_gasto_id:
-                    referencedColumnName: id
-            orphanRemoval: false
         viaAdministracion:
             targetEntity: CtlViaAdministracion
             cascade: {  }
@@ -213,24 +215,6 @@ Minsal\SuministroBundle\Entity\MntInsumo:
             inversedBy: null
             joinColumns:
                 via_administracion_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        unidadDespacho:
-            targetEntity: CtlUnidadDespacho
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                unidad_despacho:
-                    referencedColumnName: id
-            orphanRemoval: false
-        principio:
-            targetEntity: CtlPrincipio
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                principio_id:
                     referencedColumnName: id
             orphanRemoval: false
         unidadMedidad:
@@ -251,7 +235,41 @@ Minsal\SuministroBundle\Entity\MntInsumo:
                 grupo_id:
                     referencedColumnName: id
             orphanRemoval: false
+        unidadDespacho:
+            targetEntity: CtlUnidadDespacho
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                unidad_despacho:
+                    referencedColumnName: id
+            orphanRemoval: false
+        especificoGasto:
+            targetEntity: CtlEspecificoGasto
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                especifico_gasto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
     manyToMany:
+        principio:
+            targetEntity: CtlPrincipio
+            cascade: {  }
+            mappedBy: null
+            inversedBy: insumomedico
+            joinTable:
+                name: principio_insumo
+                joinColumns:
+                    -
+                        name: insumomedico_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: principio_id
+                        referencedColumnName: id
+            orderBy: null
         programa:
             targetEntity: CtlPrograma
             cascade: {  }

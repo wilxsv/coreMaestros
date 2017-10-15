@@ -881,4 +881,83 @@ class MntInsumo
     {
         return $this->programa;
     }
+
+    /**
+     * Add principio
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlPrincipio $principio
+     * @return MntInsumo
+     */
+    public function addPrincipio(\Minsal\SuministroBundle\Entity\CtlPrincipio $principio)
+    {
+        $this->principio[] = $principio;
+
+        return $this;
+    }
+
+    /**
+     * Remove principio
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlPrincipio $principio
+     */
+    public function removePrincipio(\Minsal\SuministroBundle\Entity\CtlPrincipio $principio)
+    {
+        $this->principio->removeElement($principio);
+    }
+    /**
+     * @var float
+     */
+    private $multiploInsumo;
+
+
+    /**
+     * Set multiploInsumo
+     *
+     * @param float $multiploInsumo
+     * @return MntInsumo
+     */
+    public function setMultiploInsumo($multiploInsumo)
+    {
+        $this->multiploInsumo = $multiploInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get multiploInsumo
+     *
+     * @return float 
+     */
+    public function getMultiploInsumo()
+    {
+        return $this->multiploInsumo;
+    }
+    /**
+     * @var string
+     */
+    private $historicoInsumo;
+
+
+    /**
+     * Set historicoInsumo
+     *
+     * @param string $historicoInsumo
+     * @return MntInsumo
+     */
+    public function setHistoricoInsumo($historicoInsumo)
+    {
+        $this->historicoInsumo = $historicoInsumo;
+
+        return $this;
+    }
+
+    /**
+     * Get historicoInsumo
+     *
+     * @return string 
+     */
+    public function getHistoricoInsumo()
+    {
+        return $this->historicoInsumo;
+    }
 }

@@ -39,8 +39,15 @@ class CtlGrupoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $ctlGrupo->setRegistroSchema(new \DateTime('now'));
+            $ctlGrupo->setUserIdSchema($this->getUser()->getId());
+            $ctlGrupo->setUserIpSchema($request->getClientIp());
+            $ctlGrupo->setEstadoSchema(1);
+            
             $em->persist($ctlGrupo);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Grupo generado con exito');
 
             return $this->redirectToRoute('grupos_show', array('id' => $ctlGrupo->getId()));
         }
@@ -77,6 +84,7 @@ class CtlGrupoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Grupo actualizado con exito');
 
             return $this->redirectToRoute('grupos_edit', array('id' => $ctlGrupo->getId()));
         }

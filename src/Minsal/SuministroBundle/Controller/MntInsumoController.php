@@ -42,6 +42,22 @@ class MntInsumoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            
+            $mntInsumo->setNombreLargoInsumo($mntInsumo->getNombreGenericoInsumo() );
+            $mntInsumo->setCodigoSinabExt(0);
+            $mntInsumo->setListadoOficial(FALSE);
+            $mntInsumo->setVenInsumo(3);
+            $mntInsumo->setProcesadoInsumo(0);
+            
+            
+            $mntInsumo->setRegistroSchema(new \DateTime('now'));
+            $mntInsumo->setUserIdSchema($this->getUser()->getId());
+            $mntInsumo->setUserIpSchema($request->getClientIp());
+            $mntInsumo->setEstadoSchema(0);
+            $mntInsumo->setEnableSchema(0);
+            $mntInsumo->setDetalleSchema( '' );
+            
             $em->persist($mntInsumo);
             $em->flush();
 
@@ -129,7 +145,6 @@ class MntInsumoController extends Controller
     {
 		$em = $this->getDoctrine()->getManager();
 		
-		//$em = $this->getDoctrine()->getEntityManager();
 		$dql = "SELECT i.codigoMinsalInsumo, i.nombreLargoInsumo, n.nombreNivelUso, u.nombreUnidad, g.nombreGrupo
 			FROM  MinsalSuministroBundle:MntInsumo i 
 			JOIN i.nivelUso n

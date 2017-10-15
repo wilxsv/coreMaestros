@@ -14,6 +14,7 @@ class CtlEspecificoGastoController extends Controller
 {
     /**
      * Lists all ctlEspecificoGasto entities.
+     * Security("is_granted('ROLE_UFI') and is_granted('ROLE_ADMIN')")
      *
      */
     public function indexAction()
@@ -39,7 +40,15 @@ class CtlEspecificoGastoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $ctlEspecificoGasto->setRegistroSchema(new \DateTime('now'));
+            $ctlEspecificoGasto->setUserIdSchema($this->getUser()->getId());
+            $ctlEspecificoGasto->setUserIpSchema($request->getClientIp());
+            $ctlEspecificoGasto->setEstadoSchema(1);
+            $ctlEspecificoGasto->setEnableSchema(1);
+            
             $em->persist($ctlEspecificoGasto);
+            $request->getSession()->getFlashBag()->add('success', 'Codigo generado con exito');
             $em->flush();
 
             return $this->redirectToRoute('uaci_especficogasto_show', array('id' => $ctlEspecificoGasto->getId()));
@@ -77,6 +86,7 @@ class CtlEspecificoGastoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Codigo actualizado con exito');
 
             return $this->redirectToRoute('uaci_especficogasto_edit', array('id' => $ctlEspecificoGasto->getId()));
         }

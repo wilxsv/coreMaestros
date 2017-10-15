@@ -1,60 +1,32 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Codigo  [ <b>{{ ctlEspecificoGasto.nombreEspecificoGasto }}</b> ]{% endblock %}
 {% block body %}
-    <h1>Ctlespecificogasto</h1>
-
+<div class="col-sm-12">
+ <div class="white-box">
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlEspecificoGasto.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombreespecificogasto</th>
+                <th>Codigo </th>
                 <td>{{ ctlEspecificoGasto.nombreEspecificoGasto }}</td>
             </tr>
             <tr>
-                <th>Detalleespecificogasto</th>
+                <th>Detalle especifico gasto</th>
                 <td>{{ ctlEspecificoGasto.detalleEspecificoGasto }}</td>
             </tr>
             <tr>
-                <th>Registroschema</th>
+                <th>Registro</th>
                 <td>{% if ctlEspecificoGasto.registroSchema %}{{ ctlEspecificoGasto.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlEspecificoGasto.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlEspecificoGasto.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useripschema</th>
-                <td>{{ ctlEspecificoGasto.userIpSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlEspecificoGasto.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlEspecificoGasto.enableSchema }}</td>
-            </tr>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('uaci_especficogasto_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('uaci_especficogasto_edit', { 'id': ctlEspecificoGasto.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </table>  
+ </div>
+</div>
 {% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('uaci_especficogasto_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="{{ path('uaci_especficogasto_edit', { 'id': ctlEspecificoGasto.id }) }}"><button class="btn btn-primary">Editar</button></a>
+{% endblock %}
+
+
+
+

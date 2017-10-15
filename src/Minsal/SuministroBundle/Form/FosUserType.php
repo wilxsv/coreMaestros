@@ -13,7 +13,15 @@ class FosUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username')->add('usernameCanonical')->add('email')->add('emailCanonical')->add('enabled')->add('salt')->add('password')->add('lastLogin')->add('confirmationToken')->add('passwordRequestedAt')->add('roles')->add('fullname')->add('ctlEstablecimiento')->add('group');
+        $builder
+			->add('username', 'text', array('label' => 'Login de usuaria', 'required'  => true, 'attr' => array('class' => 'form-control')))
+			->add('email', 'email', array('label' => 'Correo de usuaria', 'required'  => true, 'attr' => array('class' => 'form-control')))
+          ->add('password', 'password', array('label' => 'Clave', 'required'  => true, 'attr' => array('class' => 'form-control') ))
+          ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true, 'attr' => array('class' => 'form-control')))
+          ->add('fullname', 'text', array('label' => 'Nombre completo de la persona', 'required'  => true, 'attr' => array('class' => 'form-control') ))
+          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MinsalSuministroBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false, 'attr' => array('class' => 'form-control')))
+          //->add('ctlEstablecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MinsalSuministroBundle:CtlEstablecimiento', 'choice_label' => 'nombre',  'required' => false, 'multiple' => false, 'attr' => array('class' => 'form-control')))
+          ;//->add('group');
     }
     
     /**

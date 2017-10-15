@@ -382,4 +382,42 @@ class CtlGrupo
     {
         return $this->getNombreGrupo();
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $roles;
+
+
+    /**
+     * Add roles
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlRol $roles
+     * @return CtlGrupo
+     */
+    public function addRole(\Minsal\SuministroBundle\Entity\CtlRol $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Minsal\SuministroBundle\Entity\CtlRol $roles
+     */
+    public function removeRole(\Minsal\SuministroBundle\Entity\CtlRol $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 }

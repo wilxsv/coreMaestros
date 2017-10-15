@@ -416,4 +416,9 @@ class CtlUnidadMedida
     {
         return $this->suministro;
     }
+    
+    public function __toString()
+    {
+        return $this->getNombreUnidad();
+    }
 }

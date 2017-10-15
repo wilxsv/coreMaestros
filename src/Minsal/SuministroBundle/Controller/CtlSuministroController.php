@@ -39,8 +39,15 @@ class CtlSuministroController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $ctlSuministro->setRegistroSchema(new \DateTime('now'));
+            $ctlSuministro->setUserIdSchema($this->getUser()->getId());
+            $ctlSuministro->setUserIpSchema($request->getClientIp());            
+            $ctlSuministro->setEnableSchema(0);
+            
             $em->persist($ctlSuministro);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Suministro creado');
 
             return $this->redirectToRoute('suministros_show', array('id' => $ctlSuministro->getId()));
         }
@@ -77,6 +84,7 @@ class CtlSuministroController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Suministro actualizado');
 
             return $this->redirectToRoute('suministros_edit', array('id' => $ctlSuministro->getId()));
         }

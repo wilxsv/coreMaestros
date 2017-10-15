@@ -13,7 +13,7 @@ class MntInsumoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('codigoNuInsumo')->add('codigoMinsalInsumo')->add('concentracionMedicamentoInsumo')->add('codigoSinabExt')->add('listadoOficial')->add('nombreLargoInsumo')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('userIpSchema')->add('estadoSchema')->add('enableSchema')->add('especificacionTecnicaInsumo')->add('venInsumo')->add('precioReferenciaInsumo')->add('procesadoInsumo')->add('posologiaInsumo')->add('nombreGenericoInsumo')->add('descripcionInsumo')->add('presentacion')->add('nivelUso')->add('ctlFormaFarmaceutica')->add('tipoUso')->add('especificoGasto')->add('viaAdministracion')->add('unidadDespacho')->add('principio')->add('unidadMedidad')->add('grupo')->add('programa');
+        $builder->add('codigoNuInsumo')->add('codigoMinsalInsumo')->add('concentracionMedicamentoInsumo')->add('codigoSinabExt')->add('listadoOficial')->add('nombreLargoInsumo')->add('registroSchema')->add('detalleSchema')->add('userIdSchema')->add('userIpSchema')->add('estadoSchema')->add('enableSchema')->add('especificacionTecnicaInsumo')->add('venInsumo')->add('precioReferenciaInsumo')->add('procesadoInsumo')->add('posologiaInsumo')->add('nombreGenericoInsumo')->add('descripcionInsumo')->add('multiploInsumo')->add('presentacion')->add('nivelUso')->add('ctlFormaFarmaceutica')->add('tipoUso')->add('viaAdministracion')->add('unidadMedidad')->add('grupo')->add('unidadDespacho')->add('especificoGasto')->add('principio')->add('programa');
     }
     
     /**

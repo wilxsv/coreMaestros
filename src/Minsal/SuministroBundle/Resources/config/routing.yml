@@ -66,7 +66,7 @@ minsal_suministro_establecimientos:
 
 minsal_suministro_uaci_especficogasto:
     resource: "@MinsalSuministroBundle/Resources/config/routing/ctlespecificogasto.yml"
-    prefix:   /uaci/especficogasto
+    prefix:   /ufi/especificogasto
 
 minsal_suministro_codificaciones:
     resource: "@MinsalSuministroBundle/Resources/config/routing/ctlcodificacion.yml"

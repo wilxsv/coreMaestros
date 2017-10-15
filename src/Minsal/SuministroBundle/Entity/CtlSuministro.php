@@ -410,4 +410,32 @@ class CtlSuministro
     {
         return $this->getNombreSuministro();
     }
+    /**
+     * @var string
+     */
+    private $codigoSuministro;
+
+
+    /**
+     * Set codigoSuministro
+     *
+     * @param string $codigoSuministro
+     * @return CtlSuministro
+     */
+    public function setCodigoSuministro($codigoSuministro)
+    {
+        $this->codigoSuministro = $codigoSuministro;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoSuministro
+     *
+     * @return string 
+     */
+    public function getCodigoSuministro()
+    {
+        return $this->codigoSuministro;
+    }
 }

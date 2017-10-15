@@ -1,5 +1,16 @@
 <li> 
 	<a href="{{ path('homepage') }}" class="waves-effect">
 		<i class="mdi mdi-home fa-fw" data-icon="v"></i> 
-		<span class="hide-menu"> Inicio <span class="fa arrow"></span></span></a>
+		<span class="hide-menu"> Inicio <span class="fa arrow"></span></span>
+	</a>
 </li>
+{% if app.user %}
+	{% if is_granted('ROLE_UNABAST') %}
+		<li><a href="{{ path('uaci_especficogasto_index') }}" class="waves-effect"><i class="mdi mdi-barcode-scan " ></i><span class="hide-menu"> Codigos Especifico gasto </span></a></li>
+	{% endif %}
+	{% if is_granted('ROLE_UFI') %}
+		<li><a href="{{ path('uaci_especficogasto_index') }}" class="waves-effect"><i class="mdi mdi-barcode-scan " ></i><span class="hide-menu"> Codigos Especifico gasto </span></a></li>
+	{% endif %}
+	<li><a href="{{ path('minsal_core_feed') }}" class="waves-effect"><i class="mdi mdi-rss " ></i><span class="hide-menu"> RSS </span></a></li>
+	<li><a href="http://wiki.salud.gob.sv/wiki/P%C3%A1gina_principal" class="waves-effect"><i class="mdi mdi-hospital " ></i><span class="hide-menu"> Ayuda en linea </span></a></li>
+{% endif %}

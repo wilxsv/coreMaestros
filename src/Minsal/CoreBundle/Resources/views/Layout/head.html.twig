@@ -11,7 +11,7 @@
                 <!-- /Logo -->
                 <!-- Search input and Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
-                    <h1>Catalogo maestro de suministros del Ministerio de Salud</h1><!-- top menu -->
+                    <h2>Catalogo maestro de suministros del Ministerio de Salud</h2><!-- top menu -->
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
@@ -21,27 +21,30 @@
                     <li class="dropdown">
                         {# Autenticacion parte verdadera para usuarios logeados y falso para usuarios anonimos #}
                         {% if app.user %}
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('assets/') }}images/lock.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Iniciar sesión</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('assets/') }}images/if_user_female4_172624.svg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{% if app.user %}{{ app.user.username }} {% else %} Invitado{% endif %}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="{{ asset('assets/') }}images/lock.png" alt="user" /></div>
+                                    <div class="u-img"><img src="{{ asset('assets/') }}images/if_user_female4_172624.svg" alt="user" /></div>
                                     <div class="u-text">
-                                        <h4>anonimo</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <h4>{% if app.user %}{{ app.user.username }}{% endif %}</h4>
+                                        <p class="text-muted">{% if app.user %}{{ app.user.email }}{% endif %}</p><a href="" class="btn btn-rounded btn-danger btn-sm">Ver perfil</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+								<li><a href="{{ path('admin_accesos_index') }}"><i class="ti-link "></i> Accesos</a></li>
+								<li><a href="{{ path('admin_personas_index') }}"><i class="ti-user"></i> Personas</a></li>
+								<li><a href="{{ path('admin_roles_index') }}"><i class="ti-lock"></i> Roles</a></li>
+                            {% endif %}
+                            <li><a href=""><i class="ti-email"></i> RSS</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li><a href=""><i class="ti-settings"></i> Ayuda en linea</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-power-off"></i> Salir del sistema</a></li>
                         </ul>
                         {% else %}
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href=""> <img src="{{ asset('assets/') }}images/lock.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Iniciar sesión</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" href="{{ path('fos_user_security_login') }}"> <img src="{{ asset('assets/') }}images/lock.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Iniciar sesión</b><span class="caret"></span> </a>
                         {% endif %}
                         <!-- /.dropdown-user -->
                     </li>

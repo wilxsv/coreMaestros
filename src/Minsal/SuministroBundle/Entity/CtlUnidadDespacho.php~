@@ -248,4 +248,9 @@ class CtlUnidadDespacho
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreUnidadDespacho();
+    }
 }

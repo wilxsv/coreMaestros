@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Editar suministro{% endblock %}
 {% block body %}
-    <h1>Segacceso edit</h1>
-
-    {{ form_start(edit_form) }}
+<div class="col-sm-12">
+ <div class="white-box">
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Actualizar" class="btn btn-primary"/>
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_accesos_index') }}">Back to the list</a>
-        </li>
-        <li>
+ </div>
+</div>
+<div class="col-sm-12">
+ <div class="white-box">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Eliminar" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_accesos_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}

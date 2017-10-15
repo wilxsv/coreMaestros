@@ -7,36 +7,24 @@
     <table>
         <tbody>
             <tr>
-                <th>Nombresuministro</th>
+                <th>Nombre suministro</th>
                 <td>{{ ctlSuministro.nombreSuministro }}</td>
             </tr>
             <tr>
-                <th>Detallesuministro</th>
+                <th>Detalle suministro</th>
                 <td>{{ ctlSuministro.detalleSuministro }}</td>
             </tr>
             <tr>
-                <th>Registroschema</th>
+                <th>Registro</th>
                 <td>{% if ctlSuministro.registroSchema %}{{ ctlSuministro.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlSuministro.detalleSchema }}</td>
+                <th>Validado</th>
+                <td>{% if ctlSuministro.estadoSchema %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlSuministro.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useripschema</th>
-                <td>{{ ctlSuministro.userIpSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlSuministro.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlSuministro.enableSchema }}</td>
+                <th>Habilitado</th>
+                <td>{% if ctlSuministro.enableSchema %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Codificacionsuministro</th>

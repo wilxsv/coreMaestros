@@ -248,4 +248,9 @@ class CtlViaAdministracion
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreViaAdministracion();
+    }
 }

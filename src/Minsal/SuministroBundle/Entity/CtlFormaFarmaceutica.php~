@@ -248,4 +248,9 @@ class CtlFormaFarmaceutica
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreFormaFarmaceutica();
+    }
 }

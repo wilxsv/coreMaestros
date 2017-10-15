@@ -63,4 +63,12 @@ Minsal\SuministroBundle\Entity\CtlPrincipio:
             unsigned: false
             default: '0'
             column: enable_schema
+    manyToMany:
+        insumomedico:
+            targetEntity: MntInsumo
+            cascade: {  }
+            mappedBy: principio
+            inversedBy: null
+            joinTable: null
+            orderBy: null
     lifecycleCallbacks: {  }

@@ -248,4 +248,9 @@ class CtlPresentacion
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombrePresentacion();
+    }
 }

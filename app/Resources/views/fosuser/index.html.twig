@@ -1,61 +1,33 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Catalogo de personas registradas en el sistema{% endblock %}
 {% block body %}
-    <h1>Fosusers list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Usernamecanonical</th>
-                <th>Email</th>
-                <th>Emailcanonical</th>
-                <th>Enabled</th>
-                <th>Salt</th>
-                <th>Password</th>
-                <th>Lastlogin</th>
-                <th>Confirmationtoken</th>
-                <th>Passwordrequestedat</th>
-                <th>Roles</th>
-                <th>Fullname</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="col-sm-12">
+ <div class="white-box">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Nombre</th><th>Username</th><th>Correo</th><th>Roles</th><th>Habilitado</th><th>Ultimo acceso</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Nombre</th><th>Username</th><th>Correo</th><th>Roles</th><th>Habilitado</th><th>Ultimo acceso</th></tr>
+    </tfoot>
+    <tbody>
         {% for fosUser in fosUsers %}
             <tr>
-                <td><a href="{{ path('admin_personas_show', { 'id': fosUser.id }) }}">{{ fosUser.id }}</a></td>
-                <td>{{ fosUser.username }}</td>
-                <td>{{ fosUser.usernameCanonical }}</td>
-                <td>{{ fosUser.email }}</td>
+                <td><a href="{{ path('admin_personas_show', { 'id': fosUser.id }) }}">{{ fosUser.username }}</a></td>
+                <td><a href="{{ path('admin_personas_show', { 'id': fosUser.id }) }}">{{ fosUser.fullname }}</a></td>
                 <td>{{ fosUser.emailCanonical }}</td>
+                <td>{% if fosUser.roles %}{{ fosUser.roles|join('| ') }}{% endif %}</td>
                 <td>{% if fosUser.enabled %}Yes{% else %}No{% endif %}</td>
-                <td>{{ fosUser.salt }}</td>
-                <td>{{ fosUser.password }}</td>
                 <td>{% if fosUser.lastLogin %}{{ fosUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ fosUser.confirmationToken }}</td>
-                <td>{% if fosUser.passwordRequestedAt %}{{ fosUser.passwordRequestedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if fosUser.roles %}{{ fosUser.roles|join(', ') }}{% endif %}</td>
-                <td>{{ fosUser.fullname }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_personas_show', { 'id': fosUser.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_personas_edit', { 'id': fosUser.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_personas_new') }}">Create a new fosUser</a>
-        </li>
-    </ul>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}<a href="{{ path('admin_personas_new') }}"><button class="btn btn-info">Agregar registro</button></a>{% endblock %}
+{% block footer_js %}
 {% endblock %}

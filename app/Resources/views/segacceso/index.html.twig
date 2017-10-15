@@ -1,49 +1,32 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Catalogo de accesos{% endblock %}
 {% block body %}
-    <h1>Segaccesos list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombreacceso</th>
-                <th>Pathacceso</th>
-                <th>Publicacceso</th>
-                <th>Accesoid</th>
-                <th>Ordenacceso</th>
-                <th>Visibleacceso</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="col-sm-12">
+ <div class="white-box">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Nombre acceso</th><th>Path acceso</th><th>Publico</th><th>Visible</th><th>Permisos</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Nombre acceso</th><th>Path acceso</th><th>Publico</th><th>Visible</th><th>Permisos</th></tr>
+    </tfoot>
+    <tbody>
         {% for segAcceso in segAccesos %}
             <tr>
-                <td><a href="{{ path('admin_accesos_show', { 'id': segAcceso.id }) }}">{{ segAcceso.id }}</a></td>
-                <td>{{ segAcceso.nombreAcceso }}</td>
+                <td><a href="{{ path('admin_accesos_show', { 'id': segAcceso.id }) }}">{{ segAcceso.nombreAcceso }}</a></td>
                 <td>{{ segAcceso.pathAcceso }}</td>
-                <td>{% if segAcceso.publicAcceso %}Yes{% else %}No{% endif %}</td>
-                <td>{{ segAcceso.accesoId }}</td>
-                <td>{{ segAcceso.ordenAcceso }}</td>
-                <td>{% if segAcceso.visibleAcceso %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_accesos_show', { 'id': segAcceso.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_accesos_edit', { 'id': segAcceso.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{% if segAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
+                <td>{% if segAcceso.visibleAcceso %}So{% else %}No{% endif %}</td>
+                <td>{{ segAcceso.ctlRole | join('|') }}</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_accesos_new') }}">Create a new segAcceso</a>
-        </li>
-    </ul>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}<a href="{{ path('admin_accesos_new') }}"><button class="btn btn-info">Agregar registro</button></a>{% endblock %}
+{% block footer_js %}
 {% endblock %}

@@ -17,6 +17,13 @@ Minsal\SuministroBundle\Entity\CtlRol:
             fixed: false
             column: nombre_rol
     manyToMany:
+        grupos:
+            targetEntity: CtlGrupo
+            cascade: {  }
+            mappedBy: roles
+            inversedBy: null
+            joinTable: null
+            orderBy: null
         acceso:
             targetEntity: SegAcceso
             cascade: {  }

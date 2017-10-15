@@ -36,18 +36,25 @@ class SegAccesoController extends Controller
         $segAcceso = new Segacceso();
         $form = $this->createForm('Minsal\SuministroBundle\Form\SegAccesoType', $segAcceso);
         $form->handleRequest($request);
-
+        
+        $availableApiRoutes = [];
+		foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
+			$route = $route->compile();
+			$availableApiRoutes[] = ["name" => $name];//, "variables" => $route->getVariables()
+		}
+		
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($segAcceso);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Acceso creado');
 
             return $this->redirectToRoute('admin_accesos_show', array('id' => $segAcceso->getId()));
         }
 
         return $this->render('segacceso/new.html.twig', array(
+            'form' => $form->createView(), 'routes' => $availableApiRoutes,
             'segAcceso' => $segAcceso,
-            'form' => $form->createView(),
         ));
     }
 
@@ -77,6 +84,7 @@ class SegAccesoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Acceso actualizado');
 
             return $this->redirectToRoute('admin_accesos_edit', array('id' => $segAcceso->getId()));
         }

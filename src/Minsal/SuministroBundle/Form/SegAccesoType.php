@@ -13,7 +13,12 @@ class SegAccesoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreAcceso')->add('pathAcceso')->add('publicAcceso')->add('accesoId')->add('ordenAcceso')->add('visibleAcceso')->add('rol')->add('ctlRole');
+        $builder
+			->add('nombreAcceso', 'text', array('label'  => 'Nombre del acceso', 'attr' => array('class' => 'form-control')))
+			->add('pathAcceso', 'text', array('label'  => 'Enlace a funcionalidad', 'required'  => true, 'attr' => array('class' => 'form-control') ))
+			->add('publicAcceso', 'choice', array('label'  => 'Es publico :', 'choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, 'attr' => array('class' => 'form-control') ))
+			->add('visibleAcceso', 'choice', array('label'  => 'Aparece en el menú :', 'choices'=> array('0' => 'No', '1' => 'Si'), 'required'  => true, 'attr' => array('class' => 'form-control') ))
+			->add('ctlRole', 'entity', array('label'  => 'Roles permitidos','class' => 'MinsalSuministroBundle:CtlRol', 'required' => false, 'multiple' => true, 'attr' => array('class' => 'form-control')));
     }
     
     /**

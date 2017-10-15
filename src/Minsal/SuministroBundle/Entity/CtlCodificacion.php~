@@ -80,4 +80,9 @@ class CtlCodificacion
     {
         return $this->metodoCodificacion;
     }
+    
+    public function __toString()
+    {
+        return $this->nombreCodificacion;
+    }
 }

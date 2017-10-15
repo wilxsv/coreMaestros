@@ -13,7 +13,8 @@ class CtlRolType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreRol')->add('acceso')->add('ctlAcceso');
+        $builder
+			->add('nombreRol', 'text', array('label'  => 'Nombre de Rol', 'required'  => true, 'attr' => array('class' => 'form-control')));
     }
     
     /**

@@ -1,52 +1,37 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Acceso [ <b>{{ segAcceso.nombreAcceso | raw }}</b> ]{% endblock %}
 {% block body %}
-    <h1>Segacceso</h1>
+<div class="col-sm-12">
+ <div class="white-box">
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ segAcceso.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombreacceso</th>
+                <th>Nombre acceso</th>
                 <td>{{ segAcceso.nombreAcceso }}</td>
             </tr>
             <tr>
-                <th>Pathacceso</th>
+                <th>Path acceso</th>
                 <td>{{ segAcceso.pathAcceso }}</td>
             </tr>
             <tr>
-                <th>Publicacceso</th>
-                <td>{% if segAcceso.publicAcceso %}Yes{% else %}No{% endif %}</td>
+                <th>Acceso publico</th>
+                <td>{% if segAcceso.publicAcceso %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Accesoid</th>
-                <td>{{ segAcceso.accesoId }}</td>
+                <th>Permisos</th>
+                <td>{{ segAcceso.ctlRole | join('|') }}</td>
             </tr>
             <tr>
-                <th>Ordenacceso</th>
-                <td>{{ segAcceso.ordenAcceso }}</td>
-            </tr>
-            <tr>
-                <th>Visibleacceso</th>
-                <td>{% if segAcceso.visibleAcceso %}Yes{% else %}No{% endif %}</td>
+                <th>Visible</th>
+                <td>{% if segAcceso.visibleAcceso %}Si{% else %}No{% endif %}</td>
             </tr>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_accesos_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_accesos_edit', { 'id': segAcceso.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </table>  
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_accesos_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="{{ path('admin_accesos_edit', { 'id': segAcceso.id }) }}"><button class="btn btn-primary">Editar</button></a>
 {% endblock %}

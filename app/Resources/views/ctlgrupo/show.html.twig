@@ -1,64 +1,37 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Grupo [ <b>{{ ctlGrupo.nombreGrupo }}</b> ]{% endblock %}
 {% block body %}
-    <h1>Ctlgrupo</h1>
+<div class="col-sm-12">
+ <div class="white-box">
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlGrupo.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombregrupo</th>
+                <th>Nombre grupo</th>
                 <td>{{ ctlGrupo.nombreGrupo }}</td>
             </tr>
             <tr>
-                <th>Detallegrupo</th>
+                <th>Detalle grupo</th>
                 <td>{{ ctlGrupo.detalleGrupo }}</td>
             </tr>
             <tr>
-                <th>Registroschema</th>
+                <th>Registro</th>
                 <td>{% if ctlGrupo.registroSchema %}{{ ctlGrupo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Detalleschema</th>
-                <td>{{ ctlGrupo.detalleSchema }}</td>
+                <th>Habilitado</th>
+                <td>{% if ctlGrupo.enableSchema %}Si{% else %}No{% endif %}</td>
             </tr>
             <tr>
-                <th>Useridschema</th>
-                <td>{{ ctlGrupo.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useripschema</th>
-                <td>{{ ctlGrupo.userIpSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ ctlGrupo.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ ctlGrupo.enableSchema }}</td>
-            </tr>
-            <tr>
-                <th>Codigogrupo</th>
+                <th>Codificacion</th>
                 <td>{{ ctlGrupo.codigoGrupo }}</td>
             </tr>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('grupos_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('grupos_edit', { 'id': ctlGrupo.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </table>  
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('grupos_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="{{ path('grupos_edit', { 'id': ctlGrupo.id }) }}"><button class="btn btn-primary">Editar</button></a>
 {% endblock %}

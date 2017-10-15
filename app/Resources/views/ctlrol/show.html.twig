@@ -1,32 +1,24 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Rol [ <b>{{ ctlRol.nombreRol }}</b> ]{% endblock %}
 {% block body %}
-    <h1>Ctlrol</h1>
+<div class="col-sm-12">
+ <div class="white-box">
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ ctlRol.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombrerol</th>
+                <th>Nombre rol</th>
                 <td>{{ ctlRol.nombreRol }}</td>
             </tr>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_roles_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+    </table>  
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_roles_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="{{ path('admin_roles_edit', { 'id': ctlRol.id }) }}"><button class="btn btn-primary">Editar</button></a>
+{{ form_start(delete_form) }}
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

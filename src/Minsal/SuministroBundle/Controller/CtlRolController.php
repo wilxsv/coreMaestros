@@ -41,6 +41,7 @@ class CtlRolController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ctlRol);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Rol creado');
 
             return $this->redirectToRoute('admin_roles_show', array('id' => $ctlRol->getId()));
         }
@@ -77,6 +78,7 @@ class CtlRolController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Rol actualizado');
 
             return $this->redirectToRoute('admin_roles_edit', array('id' => $ctlRol->getId()));
         }

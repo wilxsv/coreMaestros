@@ -248,4 +248,9 @@ class CtlNivelUso
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreNivelUso();
+    }
 }

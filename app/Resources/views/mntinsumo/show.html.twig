@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Producto [ <b>{{ mntInsumo.nombreLargoInsumo }}</b> ]{% endblock %}
 {% block body %}
-    <h1>Mntinsumo</h1>
+<div class="row">
+ <div class="col-sm-6">
+  <div class="white-box">
 
+<div class="panel panel-info block4">
+                            <div class="panel-heading"> Informacion general
+                                <div class="pull-right"><a href="javascript:void(0)" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="javascript:void(0)" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+                            </div>
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ mntInsumo.id }}</td>
-            </tr>
             <tr>
                 <th>Codigonuinsumo</th>
                 <td>{{ mntInsumo.codigoNuInsumo }}</td>
@@ -18,44 +22,8 @@
                 <td>{{ mntInsumo.codigoMinsalInsumo }}</td>
             </tr>
             <tr>
-                <th>Concentracionmedicamentoinsumo</th>
-                <td>{{ mntInsumo.concentracionMedicamentoInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Codigosinabext</th>
-                <td>{{ mntInsumo.codigoSinabExt }}</td>
-            </tr>
-            <tr>
                 <th>Listadooficial</th>
                 <td>{% if mntInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Nombrelargoinsumo</th>
-                <td>{{ mntInsumo.nombreLargoInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Registroschema</th>
-                <td>{% if mntInsumo.registroSchema %}{{ mntInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Detalleschema</th>
-                <td>{{ mntInsumo.detalleSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useridschema</th>
-                <td>{{ mntInsumo.userIdSchema }}</td>
-            </tr>
-            <tr>
-                <th>Useripschema</th>
-                <td>{{ mntInsumo.userIpSchema }}</td>
-            </tr>
-            <tr>
-                <th>Estadoschema</th>
-                <td>{{ mntInsumo.estadoSchema }}</td>
-            </tr>
-            <tr>
-                <th>Enableschema</th>
-                <td>{{ mntInsumo.enableSchema }}</td>
             </tr>
             <tr>
                 <th>Especificaciontecnicainsumo</th>
@@ -87,18 +55,55 @@
             </tr>
         </tbody>
     </table>
+                                </div>
+                            </div>
+                        </div>
+ 
+  </div>
+ </div>
+ 
+ <div class="col-sm-6">
+  <div class="col-sm-12">
+   <div class="panel panel-primary block6">
+    <div class="panel-heading"> Especificaciones técnicas<div class="pull-right"><a href="javascript:void(0)" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="javascript:void(0)" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+    </div>
+                            <div class="panel-wrapper collapse in" aria-expanded="true" style="">
+                                <div class="panel-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+	<div class="col-sm-12">
+    <div class="panel panel-success block5" style="position: static;">
+                            <div class="panel-heading"> Control de cambios
+                                <div class="pull-right"><a href="javascript:void(0)" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="javascript:void(0)" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+                            </div>
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
+                                            <tr>
+                <th>Producto creado el: </th>
+                <td>{% if mntInsumo.registroSchema %}{{ mntInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+                        <tr>
+                <th>Validado: </th>
+                <td>{{ mntInsumo.estadoSchema }}</td>
+            </tr>
+            <tr>
+                <th>Habilitado: </th>
+                <td>{% if mntInsumo.enableSchema == -1 %}Denegado{% elseif mntInsumo.enableSchema == 1 %}Si{% elseif mntInsumo.enableSchema == 0 %}No{% endif %}</td>
+            </tr>
 
-    <ul>
-        <li>
-            <a href="{{ path('productos_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            
+
+                                </div>
+                            </div>
+                        </div>
+    
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('homepage') }}"><button class="btn btn-warning">Regresar a listado</button></a>
+<a href="path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
 {% endblock %}

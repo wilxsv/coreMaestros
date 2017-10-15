@@ -1,53 +1,31 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Catalogo de codigos especificos de gasto{% endblock %}
 {% block body %}
-    <h1>Ctlespecificogastos list</h1>
-
-    <table>
-        <thead>
+<div class="col-sm-12">
+ <div class="white-box">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Codigo especifico</th><th>Descripcion</th><th>Depende de</th><th>fecha generación</th><th>Validado</th><th>Habilitado</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Codigo especifico</th><th>Descripcion</th><th>Depende de</th><th>fecha generación</th><th>Validado</th><th>Habilitado</th></tr>
+    </tfoot>
+    <tbody>
+		{% for ctlEspecificoGasto in ctlEspecificoGastos %}
             <tr>
-                <th>Id</th>
-                <th>Nombreespecificogasto</th>
-                <th>Detalleespecificogasto</th>
-                <th>Registroschema</th>
-                <th>Detalleschema</th>
-                <th>Useridschema</th>
-                <th>Useripschema</th>
-                <th>Estadoschema</th>
-                <th>Enableschema</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ctlEspecificoGasto in ctlEspecificoGastos %}
-            <tr>
-                <td><a href="{{ path('uaci_especficogasto_show', { 'id': ctlEspecificoGasto.id }) }}">{{ ctlEspecificoGasto.id }}</a></td>
-                <td>{{ ctlEspecificoGasto.nombreEspecificoGasto }}</td>
+                <td><a href="{{ path('uaci_especficogasto_show', { 'id': ctlEspecificoGasto.id }) }}">{{ ctlEspecificoGasto.nombreEspecificoGasto }}</a></td>
                 <td>{{ ctlEspecificoGasto.detalleEspecificoGasto }}</td>
+                <td>{{ ctlEspecificoGasto.tipo }}</td>
                 <td>{% if ctlEspecificoGasto.registroSchema %}{{ ctlEspecificoGasto.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlEspecificoGasto.detalleSchema }}</td>
-                <td>{{ ctlEspecificoGasto.userIdSchema }}</td>
-                <td>{{ ctlEspecificoGasto.userIpSchema }}</td>
-                <td>{{ ctlEspecificoGasto.estadoSchema }}</td>
-                <td>{{ ctlEspecificoGasto.enableSchema }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('uaci_especficogasto_show', { 'id': ctlEspecificoGasto.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('uaci_especficogasto_edit', { 'id': ctlEspecificoGasto.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{% if ctlEspecificoGasto.estadoSchema == true %}Si{% else %}No{% endif %}</td>
+                <td>{% if ctlEspecificoGasto.enableSchema == true %}Si{% else %}No{% endif %}</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('uaci_especficogasto_new') }}">Create a new ctlEspecificoGasto</a>
-        </li>
-    </ul>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
 {% endblock %}
+{% block breadcrumb %}<a href="{{ path('uaci_especficogasto_new') }}"><button class="btn btn-info">Agregar registro</button></a>{% endblock %}

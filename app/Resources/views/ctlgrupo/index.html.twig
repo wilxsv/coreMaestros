@@ -1,55 +1,36 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Catalogo de grupos y sub grupos{% endblock %}
 {% block body %}
-    <h1>Ctlgrupos list</h1>
-
-    <table>
-        <thead>
+<div class="col-sm-12">
+ <div class="white-box">
+  <div class="table-responsive">
+   <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
+    <thead>
+     <tr><th>Suministro</th><th>Nombre grupo</th><th>Sub Grupo</th><th>Detalle grupo</th><th>Registro</th><th>Codigo</th><th>Solicitantes</th><th>Unidades que contiene</th><th>Activo</th></tr>
+    </thead>
+    <tfoot>
+     <tr><th>Suministro</th><th>Nombre grupo</th><th>Sub Grupo</th><th>Detalle grupo</th><th>Registro</th><th>Codigo</th><th>Solicitantes</th><th>Unidades que contiene</th><th>Activo</th></tr>
+    </tfoot>
+    <tbody>
+		{% for ctlGrupo in ctlGrupos %}
             <tr>
-                <th>Id</th>
-                <th>Nombregrupo</th>
-                <th>Detallegrupo</th>
-                <th>Registroschema</th>
-                <th>Detalleschema</th>
-                <th>Useridschema</th>
-                <th>Useripschema</th>
-                <th>Estadoschema</th>
-                <th>Enableschema</th>
-                <th>Codigogrupo</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ctlGrupo in ctlGrupos %}
-            <tr>
-                <td><a href="{{ path('grupos_show', { 'id': ctlGrupo.id }) }}">{{ ctlGrupo.id }}</a></td>
-                <td>{{ ctlGrupo.nombreGrupo }}</td>
+                <td>{{ ctlGrupo.suministro }}</td>
+                <td>{{ ctlGrupo.grupo }}</td>
+                <td><a href="{{ path('grupos_show', { 'id': ctlGrupo.id }) }}">{{ ctlGrupo.nombreGrupo }}</a></td>
                 <td>{{ ctlGrupo.detalleGrupo }}</td>
                 <td>{% if ctlGrupo.registroSchema %}{{ ctlGrupo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ ctlGrupo.detalleSchema }}</td>
-                <td>{{ ctlGrupo.userIdSchema }}</td>
-                <td>{{ ctlGrupo.userIpSchema }}</td>
-                <td>{{ ctlGrupo.estadoSchema }}</td>
-                <td>{{ ctlGrupo.enableSchema }}</td>
                 <td>{{ ctlGrupo.codigoGrupo }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('grupos_show', { 'id': ctlGrupo.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('grupos_edit', { 'id': ctlGrupo.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{{ ctlGrupo.roles |join('| ') }}</td>
+                <td>{{ ctlGrupo.unidad |join('| ') }}</td>
+                <td>{% if ctlGrupo.enableSchema == true %}Si{% else %}No{% endif %}</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('grupos_new') }}">Create a new ctlGrupo</a>
-        </li>
-    </ul>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}<a href="{{ path('grupos_new') }}"><button class="btn btn-info">Agregar registro</button></a>{% endblock %}
+{% block footer_js %}
 {% endblock %}

@@ -2,15 +2,15 @@ Minsal\SuministroBundle\Entity\CtlSuministro:
     type: entity
     table: ctl_suministro
     indexes:
-        IDX_23741A44DF5CB336:
-            columns:
-                - rol_solicita_suministro
         IDX_23741A446EB0AB02:
             columns:
                 - rol_valida_suministro
         IDX_23741A44D64E375F:
             columns:
                 - ctl_suministroid
+        IDX_23741A44DF5CB336:
+            columns:
+                - rol_solicita_suministro
         IDX_23741A44A9C99084:
             columns:
                 - codificacion_suministro
@@ -76,16 +76,14 @@ Minsal\SuministroBundle\Entity\CtlSuministro:
             unsigned: false
             default: '0'
             column: enable_schema
+        codigoSuministro:
+            type: string
+            nullable: false
+            length: 2
+            fixed: false
+            default: '00'
+            column: codigo_suministro
     manyToOne:
-        rolSolicitaSuministro:
-            targetEntity: CtlRol
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                rol_solicita_suministro:
-                    referencedColumnName: id
-            orphanRemoval: false
         rolValidaSuministro:
             targetEntity: CtlRol
             cascade: {  }
@@ -102,6 +100,15 @@ Minsal\SuministroBundle\Entity\CtlSuministro:
             inversedBy: null
             joinColumns:
                 ctl_suministroid:
+                    referencedColumnName: id
+            orphanRemoval: false
+        rolSolicitaSuministro:
+            targetEntity: CtlRol
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                rol_solicita_suministro:
                     referencedColumnName: id
             orphanRemoval: false
         codificacionSuministro:

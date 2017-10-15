@@ -248,4 +248,54 @@ class CtlPrincipio
     {
         return $this->enableSchema;
     }
+
+    public function __toString()
+    {
+        return $this->getNombrePrincipio();
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $insumomedico;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->insumomedico = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add insumomedico
+     *
+     * @param \Minsal\SuministroBundle\Entity\MntInsumo $insumomedico
+     * @return CtlPrincipio
+     */
+    public function addInsumomedico(\Minsal\SuministroBundle\Entity\MntInsumo $insumomedico)
+    {
+        $this->insumomedico[] = $insumomedico;
+
+        return $this;
+    }
+
+    /**
+     * Remove insumomedico
+     *
+     * @param \Minsal\SuministroBundle\Entity\MntInsumo $insumomedico
+     */
+    public function removeInsumomedico(\Minsal\SuministroBundle\Entity\MntInsumo $insumomedico)
+    {
+        $this->insumomedico->removeElement($insumomedico);
+    }
+
+    /**
+     * Get insumomedico
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInsumomedico()
+    {
+        return $this->insumomedico;
+    }
 }

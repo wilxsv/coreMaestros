@@ -276,4 +276,9 @@ class CtlEspecificoGasto
     {
         return $this->tipo;
     }
+
+    public function __toString()
+    {
+        return $this->getNombreEspecificoGasto();
+    }
 }

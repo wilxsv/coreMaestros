@@ -38,11 +38,26 @@ class FosUserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($fosUser);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_personas_show', array('id' => $fosUser->getId()));
+            $last_line = system('cd .. && php app/console fos:user:create '.$form->get('username')->getData().' '.$form->get('email')->getData().' '.$form->get('password')->getData() , $retval);
+            if (!$retval){
+				$request->getSession()->getFlashBag()->add('success', 'Usuario creado');
+				$em = $this->getDoctrine()->getManager();
+				$user = $em->getRepository('MinsalSuministroBundle:FosUser')->findOneByUsername($form->get('username')->getData());
+				if (!$user) {
+					throw $this->createNotFoundException( 'Usuario no creado ' );
+				}
+				//$user->setEstablecimiento( $form->get('establecimiento')->getData() );
+				$user->setFullname( $form->get('fullname')->getData() );
+				$rol = $em->getRepository('MinsalSuministroBundle:CtlRol')->find($form->get('roles')->getData());
+				if (!$rol) {
+					throw $this->createNotFoundException( 'rol no asociado ' );
+				}
+				$last_line = system('cd .. && php app/console fos:user:promote '.$form->get('username')->getData().' '.$rol->getNombreRol() , $retval);
+				$em->flush();
+				$request->getSession()->getFlashBag()->add('success', 'Rol agregado');
+				
+            return $this->redirectToRoute('admin_personas_show', array('id' => $user->getId()));
+			}
         }
 
         return $this->render('fosuser/new.html.twig', array(
