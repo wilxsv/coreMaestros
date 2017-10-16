@@ -1,21 +1,22 @@
 {% extends 'base.html.twig' %}
-
+{% block titulo %}Editar {% endblock %}
 {% block body %}
-    <h1>Fosuser edit</h1>
-
+<div class="col-sm-12">
+ <div class="white-box">
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Actualizar" class="btn btn-primary"/>
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_personas_index') }}">Back to the list</a>
-        </li>
-        <li>
+ </div>
+</div>
+<div class="col-sm-12">
+ <div class="white-box">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Eliminar" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+ </div>
+</div>
+{% endblock %}
+{% block breadcrumb %}
+<a href="{{ path('admin_personas_index') }}"><button class="btn btn-warning">Regresar a listado</button></a>
 {% endblock %}

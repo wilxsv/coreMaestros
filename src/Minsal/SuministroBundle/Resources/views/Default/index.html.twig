@@ -8,15 +8,12 @@
    <li role="presentation" class="active"><a href="#oficial" aria-controls="oficial" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> oficial</span></a></li>
    {% else %}
 	<li role="presentation" class="active"><a href="#oficial" aria-controls="oficial" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> oficial</span></a></li>
-	{% if app.session.get('agrega') %}
-		<li role="presentation" class=""><a href="#" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Por validar</span></a></li>
-	{% elseif app.session.get('valida') %}
-		<li role="presentation" class=""><a href="#" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Por validar</span></a></li>
-		<li role="presentation" class=""><a href="#en" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Por habilitar</span></a></li>
+	{% if app.session.get('agrega') or app.session.get('valida') %}
+		<li role="presentation" class=""><a href="#agregados" aria-controls="agregados" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Por validar</span></a></li>
 	{% endif %}
-	{% if is_granted('ROLE_UNABAST') %}
-		<li role="presentation" class=""><a href="#en" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Por habilitar</span></a></li>
-   	{% endif %}
+    {% if app.session.get('valida') or is_granted('ROLE_UNABAST') %}
+		<li role="presentation" class=""><a href="#habilitados" aria-controls="habilitados" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Por habilitar</span></a></li>
+	{% endif %}
     <li role="presentation" class=""><a href="#error" aria-controls="error" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-settings"></i></span> <span class="hidden-xs">Denegados</span></a></li>
    {% endif %}
   </ul>
@@ -35,12 +32,8 @@
    </div>
    {% if app.user %}
    <div role="tabpanel" class="tab-pane" id="valida">
-   </div>
-   <div role="tabpanel" class="tab-pane" id="habilita">
-   </div>
-   <div role="tabpanel" class="tab-pane" id="error">
     <div class="table-responsive">
-     <table id="denegado" class="display nowrap" cellspacing="0" width="100%">
+     <table id="validado" class="display nowrap" cellspacing="0" width="100%">
       <thead>
        <tr><th>Código</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
       </thead>
@@ -61,12 +54,84 @@
      </table>
     </div>
    </div>
+   {% if app.session.get('valida') or app.session.get('agrega')  %}
+   <div role="tabpanel" class="tab-pane" id="agregados">
+    <div class="table-responsive">
+     <table id="agregado" class="display nowrap" cellspacing="0" width="100%">
+      <thead>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </thead>
+      <tfoot>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </tfoot>
+      <tbody>
+        {% for d in agregados %}
+            <tr>
+                <td>{{ d.registroSchema |date('Y-m-d H:i:s') }}</td>
+                <td><a href="{{ path('productos_show', { 'id': d.id }) }}">{{ d.nombreLargoInsumo }}</a></td>
+                <td>{{ d.nivelUso }}</td>
+                <td>{{ d.unidadMedidad }}</td>
+                <td>{{ d.grupo }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+     </table>
+    </div>
+   </div>
+   {% endif %}
+   {% if app.session.get('valida') or is_granted('ROLE_UNABAST') %}
+   <div role="tabpanel" class="tab-pane" id="habilitados">
+    <div class="table-responsive">
+     <table id="habilitado" class="display nowrap" cellspacing="0" width="100%">
+      <thead>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </thead>
+      <tfoot>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </tfoot>
+      <tbody>
+        {% for d in habilitados %}
+            <tr>
+                <td>{{ d.registroSchema |date('Y-m-d H:i:s') }}</td>
+                <td><a href="{{ path('productos_show', { 'id': d.id }) }}">{{ d.nombreLargoInsumo }}</a></td>
+                <td>{{ d.nivelUso }}</td>
+                <td>{{ d.unidadMedidad }}</td>
+                <td>{{ d.grupo }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+     </table>
+    </div>
+   </div>
+   {% endif %}
+   <div role="tabpanel" class="tab-pane" id="error">
+    <div class="table-responsive">
+     <table id="denegado" class="display nowrap" cellspacing="0" width="100%">
+      <thead>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </thead>
+      <tfoot>
+       <tr><th>Fecha</th><th>Nombre</th><th>Nivel uso</th><th>Unidad</th><th>Grupo</th></tr>
+      </tfoot>
+      <tbody>
+        {% for d in denegados %}
+            <tr>
+                <td>{{ d.registroSchema |date('Y-m-d H:i:s') }}</td>
+                <td>{{ d.nombreLargoInsumo }}</td>
+                <td>{{ d.nivelUso }}</td>
+                <td>{{ d.unidadMedidad }}</td>
+                <td>{{ d.grupo }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+     </table>
+    </div>
+   </div>
    {% endif %}
   </div>
  </div>
 </div>
 {% endblock %}
-
 {% block footer_js %}
     <script>
     $(document).ready(function() {
@@ -85,6 +150,22 @@
         ]
 		} );
 	{% if app.user %}
+   {% if app.session.get('valida') or app.session.get('agrega') %}
+    $('#agregado').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+		} );
+   {% endif %}
+   {% if app.session.get('valida') or is_granted('ROLE_UNABAST') %}
+    $('#habilitado').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+		} );
+   {% endif %}
     $('#denegado').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -97,6 +178,6 @@
 {% endblock %}
 {% block breadcrumb %}
 	 {% if app.user and app.session.get('agrega') %}
-		<a href="{{ path('productos_new') }}"><button class="btn btn-info">Solicitar creación producto</button></a>
+		<a href="{{ path('productos_new') }}"><button class="btn btn-info">Solicitar codigo</button></a>
 	{% endif %}
 {% endblock %}

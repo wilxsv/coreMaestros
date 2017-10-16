@@ -6,6 +6,9 @@
 </li>
 {% if app.user %}
 	{{ app.session.get('menu') | raw }}
+	{% if app.user and app.session.get('agrega') %}
+		<li><a href="{{ path('productos_new') }}" class="waves-effect"><i class="mdi mdi-barcode " ></i><span class="hide-menu"> Solicitar codigo </span></a></li>
+	{% endif %}
 	{% if is_granted('ROLE_UNABAST') %}
 		<li><a href="{{ path('uaci_especficogasto_index') }}" class="waves-effect"><i class="mdi mdi-barcode-scan " ></i><span class="hide-menu"> Codigos Especifico gasto </span></a></li>
 	{% endif %}

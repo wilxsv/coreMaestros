@@ -57,6 +57,7 @@ class MntInsumoController extends Controller
             $mntInsumo->setEstadoSchema(0);
             $mntInsumo->setEnableSchema(0);
             $mntInsumo->setDetalleSchema( '' );
+            $request->getSession()->getFlashBag()->add('success', 'Solicitud generada con exito');
             
             $em->persist($mntInsumo);
             $em->flush();
@@ -80,6 +81,7 @@ class MntInsumoController extends Controller
 
         return $this->render('mntinsumo/show.html.twig', array(
             'mntInsumo' => $mntInsumo,
+            'medicamento' => false,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -96,6 +98,7 @@ class MntInsumoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Producto actualizado con exito');
 
             return $this->redirectToRoute('productos_edit', array('id' => $mntInsumo->getId()));
         }

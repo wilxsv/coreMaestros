@@ -3,7 +3,6 @@
 {% block body %}
 <div class="row">
  <div class="col-sm-6">
-  <div class="white-box">
 
 <div class="panel panel-info block4">
                             <div class="panel-heading"> Informacion general
@@ -14,9 +13,36 @@
     <table>
         <tbody>
             <tr>
-                <th>Codigonuinsumo</th>
-                <td>{{ mntInsumo.codigoNuInsumo }}</td>
+                <th>Nombre generico </th>
+                <td>{{ mntInsumo.nombreGenericoInsumo }}</td>
             </tr>
+            <tr>
+                <th>Nombre largo </th>
+                <td>{{ mntInsumo.nombreLargoInsumo }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion </th>
+                <td>{{ mntInsumo.descripcionInsumo }}</td>
+            </tr>
+            <tr>
+                <th>Unidad de medida</th>
+                <td>{{ mntInsumo.unidadMedidad }}</td>
+            </tr>
+            <tr>
+                <th>Nivel de uso</th>
+                <td>{{ mntInsumo.nivelUso }}</td>
+            </tr>
+            <tr>
+                <th>Presentación</th>
+                <td>{{ mntInsumo.presentacion }}</td>
+            </tr>
+            <tr>
+                <th>Precio referencia </th>
+                <td>{{ mntInsumo.precioReferenciaInsumo }}</td>
+            </tr>
+            
+            
+            
             <tr>
                 <th>Codigominsalinsumo</th>
                 <td>{{ mntInsumo.codigoMinsalInsumo }}</td>
@@ -34,32 +60,14 @@
                 <td>{{ mntInsumo.venInsumo }}</td>
             </tr>
             <tr>
-                <th>Precioreferenciainsumo</th>
-                <td>{{ mntInsumo.precioReferenciaInsumo }}</td>
-            </tr>
-            <tr>
                 <th>Procesadoinsumo</th>
                 <td>{% if mntInsumo.procesadoInsumo %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Posologiainsumo</th>
-                <td>{{ mntInsumo.posologiaInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Nombregenericoinsumo</th>
-                <td>{{ mntInsumo.nombreGenericoInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Descripcioninsumo</th>
-                <td>{{ mntInsumo.descripcionInsumo }}</td>
             </tr>
         </tbody>
     </table>
                                 </div>
                             </div>
                         </div>
- 
-  </div>
  </div>
  
  <div class="col-sm-6">
@@ -69,7 +77,35 @@
     </div>
                             <div class="panel-wrapper collapse in" aria-expanded="true" style="">
                                 <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+    <table>
+        <tbody>
+            <tr>
+                <th>Codigo MINSAL </th>
+                <td> {{ mntInsumo.codigoMinsalInsumo }}</td>
+            </tr>
+            <tr>
+                <th>Codigo ONU</th>
+                <td>{{ mntInsumo.codigoNuInsumo }}</td>
+            </tr>
+            <tr>
+                <th>Especificacion técnica </th>
+                <td>{{ mntInsumo.especificacionTecnicaInsumo }}</td>
+            </tr>
+            {% if not medicamento %}
+            <tr>
+                <th>Nivel VEN</th>
+                <td>{% if mntInsumo.venInsumo == 1 %}Vital{% elseif mntInsumo.venInsumo == 2 %}Escencial{% elseif mntInsumo.venInsumo == 3 %}No escencial{% endif %}</td>
+
+            </tr>
+            <tr>
+                <th>Pertenece al listado oficial</th>
+                <td>{% if mntInsumo.listadoOficial %}Si{% else %}No{% endif %}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>                                    <p>
+										<img id="insumoBC	"/><svg id="insumoBC"></svg><script>JsBarcode("#insumoBC", "{{ mntInsumo.codigoMinsalInsumo }}", {  displayValue: true, width:3 });</script>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -81,18 +117,19 @@
                             </div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
-                                            <tr>
+                   <table>                         <tr>
                 <th>Producto creado el: </th>
-                <td>{% if mntInsumo.registroSchema %}{{ mntInsumo.registroSchema|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if mntInsumo.registroSchema %} {{ mntInsumo.registroSchema|date('Y-m-d H:i:s') }} {% endif %}</td>
             </tr>
-                        <tr>
+            <tr>
                 <th>Validado: </th>
-                <td>{{ mntInsumo.estadoSchema }}</td>
+                <td>{% if mntInsumo.estadoSchema == -1 %}Denegado{% elseif mntInsumo.estadoSchema == 1 %}Si{% elseif mntInsumo.estadoSchema == 0 %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Habilitado: </th>
                 <td>{% if mntInsumo.enableSchema == -1 %}Denegado{% elseif mntInsumo.enableSchema == 1 %}Si{% elseif mntInsumo.enableSchema == 0 %}No{% endif %}</td>
             </tr>
+            </table>
 
             
 
@@ -105,5 +142,9 @@
 {% endblock %}
 {% block breadcrumb %}
 <a href="{{ path('homepage') }}"><button class="btn btn-warning">Regresar a listado</button></a>
-<a href="path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
+<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
+{% endblock %}
+
+{% block js_head %}
+<script src="{{ asset('assets/') }}js/barcode/JsBarcode.all.min.js"></script>
 {% endblock %}

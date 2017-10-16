@@ -6,17 +6,16 @@
   <div class="table-responsive">
    <table id="tabla" class="display nowrap" cellspacing="0" width="100%">
     <thead>
-     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
     </thead>
     <tfoot>
-     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Solicita</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
+     <tr><th>Tipo Suministro</th><th>Descripcion</th><th>Valida</th><th>Habilitado</th><th>Codificacion</th></tr>
     </tfoot>
     <tbody>
 		{% for ctlSuministro in ctlSuministros %}
             <tr>
                 <td><a href="{{ path('suministros_show', { 'id': ctlSuministro.id }) }}">{{ ctlSuministro.nombreSuministro }}</a></td>
                 <td>{{ ctlSuministro.detalleSuministro }}</td>
-                <td>{{ ctlSuministro.rolSolicitaSuministro }}</td>
                 <td>{{ ctlSuministro.rolValidaSuministro }}</td>
                 <td>{% if ctlSuministro.enableSchema == true %}Si{% else %}No{% endif %}</td>
                 <td>{{ ctlSuministro.codificacionSuministro }}</td>

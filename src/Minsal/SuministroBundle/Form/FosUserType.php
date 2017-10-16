@@ -19,7 +19,7 @@ class FosUserType extends AbstractType
           ->add('password', 'password', array('label' => 'Clave', 'required'  => true, 'attr' => array('class' => 'form-control') ))
           ->add('username', 'text', array('label' => 'Nombre de usuaria', 'required'  => true, 'attr' => array('class' => 'form-control')))
           ->add('fullname', 'text', array('label' => 'Nombre completo de la persona', 'required'  => true, 'attr' => array('class' => 'form-control') ))
-          ->add('roles', 'entity',array('label'  => 'Roles :', 'class' => 'MinsalSuministroBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false, 'attr' => array('class' => 'form-control')))
+          ->add('roles', 'entity',array('label'  => 'Rol :', 'class' => 'MinsalSuministroBundle:CtlRol', 'choice_label' => 'nombreRol',  'required' => false, 'multiple' => false, 'attr' => array('class' => 'form-control')))
           //->add('ctlEstablecimiento', 'entity',array('label'  => 'Establecimiento :', 'class' => 'MinsalSuministroBundle:CtlEstablecimiento', 'choice_label' => 'nombre',  'required' => false, 'multiple' => false, 'attr' => array('class' => 'form-control')))
           ;//->add('group');
     }
