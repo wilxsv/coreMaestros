@@ -15,8 +15,9 @@ class MntInsumoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			//->add('codigoNuInsumo', 'text', array('label'  => 'Codigo Naciones Unidas', 'required'  => true, 'attr' => array('class' => 'form-control')))
-			//->add('codigoMinsalInsumo', 'text', array('label'  => 'Codigo MINSAL', 'required'  => true, 'attr' => array('class' => 'form-control')))
+			->add('codigoNuInsumo', 'text', array('label'  => 'Codigo Naciones Unidas', 'required'  => false, 'attr' => array('class' => 'form-control')))
+			->add('codigoMinsalInsumo', 'text', array('label'  => 'Codigo MINSAL', 'required'  => false, 'attr' => array('class' => 'form-control')))
+			
 			->add('nombreGenericoInsumo', 'text', array('label'  => 'Nombre generico del producto', 'required'  => true, 'attr' => array('class' => 'form-control')))
 			->add('descripcionInsumo', 'text', array('label'  => 'Descripcion del producto', 'required'  => true, 'attr' => array('class' => 'form-control')))
 			
@@ -30,8 +31,8 @@ class MntInsumoType extends AbstractType
 			->add('especificacionTecnicaInsumo', 'textarea', array('label'  => 'Especificaciñon técnica', 'required'  => true, 'attr' => array('class' => 'form-control')))
 			
 			//->add('detalleSchema', 'textarea', array('label'  => 'Observación', 'data' => '', 'attr' => array('class' => 'form-control')))
-			//->add('estadoSchema', 'choice', array('label'  => 'Validar producto :', 'choices'=> array('0' => 'Observar y enviar mensaje','-1' => 'Denegar Insumo', '1' => 'Habilitar Insumo'), 'required'  => false, 'attr' => array('class' => 'form-control')))
-			//->add('enableSchema', 'choice', array('label'  => 'Habilitar :', 'choices'=> array('0' => 'Observar y enviar mensaje','-1' => 'Denegar Insumo', '1' => 'Validar Insumo'), 'required'  => false, 'attr' => array('class' => 'form-control')))
+			->add('estadoSchema', 'choice', array('label'  => 'Validar producto :', 'choices'=> array('0' => 'Observar y enviar mensaje','-1' => 'Denegar Insumo', '1' => 'Habilitar Insumo'), 'required'  => false, 'attr' => array('class' => 'form-control')))
+			->add('enableSchema', 'choice', array('label'  => 'Habilitar :', 'choices'=> array('0' => 'Observar y enviar mensaje','-1' => 'Denegar Insumo', '1' => 'Validar Insumo'), 'required'  => false, 'attr' => array('class' => 'form-control')))
 			;
     }
     

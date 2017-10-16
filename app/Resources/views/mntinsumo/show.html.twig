@@ -27,6 +27,10 @@
                 <td>{{ mntInsumo.descripcionInsumo }}</td>
             </tr>
             <tr>
+                <th>Grupo</th>
+                <td>{{ mntInsumo.grupo }}</td>
+            </tr>
+            <tr>
                 <th>Unidad de medida</th>
                 <td>{{ mntInsumo.unidadMedidad }}</td>
             </tr>
@@ -41,29 +45,6 @@
             <tr>
                 <th>Precio referencia </th>
                 <td>{{ mntInsumo.precioReferenciaInsumo }}</td>
-            </tr>
-            
-            
-            
-            <tr>
-                <th>Codigominsalinsumo</th>
-                <td>{{ mntInsumo.codigoMinsalInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Listadooficial</th>
-                <td>{% if mntInsumo.listadoOficial %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Especificaciontecnicainsumo</th>
-                <td>{{ mntInsumo.especificacionTecnicaInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Veninsumo</th>
-                <td>{{ mntInsumo.venInsumo }}</td>
-            </tr>
-            <tr>
-                <th>Procesadoinsumo</th>
-                <td>{% if mntInsumo.procesadoInsumo %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
@@ -142,9 +123,11 @@
 {% endblock %}
 {% block breadcrumb %}
 <a href="{{ path('homepage') }}"><button class="btn btn-warning">Regresar a listado</button></a>
-{% if app.user and app.user == mntInsumo.userIdSchema %}
+{% if app.user and app.user.id == mntInsumo.userIdSchema %}
 	<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
 {% elseif mntInsumo.grupo in app.session.get('valida') or is_granted('ROLE_UNABAST') %}
+	<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Actualizar estado</button></a>
+{% elseif medicamento and is_granted('ROLE_MEDICAMENTO') %}
 	<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Actualizar estado</button></a>
 {% endif %}
 {% endblock %}

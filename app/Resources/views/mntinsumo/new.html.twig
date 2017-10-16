@@ -5,6 +5,11 @@
  <div class="white-box">
     {{ form_start(form, { 'attr' : { 'class': 'form-horizontal' } }) }}
 		<div id="divCheckbox" style="display: none;">
+			{{ form_row(form.codigoNuInsumo) }}
+			{{ form_row(form.codigoMinsalInsumo) }}
+			{{ form_row(form.estadoSchema) }}
+			{{ form_row(form.enableSchema) }}
+			{{ form_row(form.especificoGasto) }}
 		</div>
         {{ form_widget(form) }}
         <input type="submit" value="Enviar" class="btn btn-success"/>
@@ -30,6 +35,12 @@ jQuery(document).ready(function() {
   $("#minsal_suministrobundle_mntinsumo_tipoUso").select2({sorter: function(data) { return data.sort(); }});
   $("#minsal_suministrobundle_mntinsumo_grupo").select2({sorter: function(data) { return data.sort(); }});
   $("#minsal_suministrobundle_mntinsumo_presentacion").select2({sorter: function(data) { return data.sort(); }});
+  {% if is_granted('ROLE_SOLICITA_MEDICAMENTO') %}
+  $("#minsal_suministrobundle_mntinsumo_ctlFormaFarmaceutica").select2({sorter: function(data) { return data.sort(); }});
+  $("#minsal_suministrobundle_mntinsumo_viaAdministracion").select2({sorter: function(data) { return data.sort(); }});
+  $("#minsal_suministrobundle_mntinsumo_unidadDespacho").select2({sorter: function(data) { return data.sort(); }});
+  $("#minsal_suministrobundle_mntinsumo_principio").select2({sorter: function(data) { return data.sort(); }});  
+  {% endif %}
 });
 </script>
 {% endblock %}

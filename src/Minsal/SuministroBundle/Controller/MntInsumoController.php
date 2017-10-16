@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Mntinsumo controller.
@@ -37,7 +39,15 @@ class MntInsumoController extends Controller
     public function newAction(Request $request)
     {
         $mntInsumo = new Mntinsumo();
-        $form = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoType', $mntInsumo);
+        
+        $auth_checker = $this->get('security.authorization_checker');
+        if ($auth_checker->isGranted('ROLE_MEDICAMENTO') or $auth_checker->isGranted('ROLE_SOLICITA_MEDICAMENTO')) {
+			$form = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoCompletoType', $mntInsumo);
+		}
+		else
+		{
+			$form = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoType', $mntInsumo);
+		}
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,7 +55,9 @@ class MntInsumoController extends Controller
             
             
             $mntInsumo->setNombreLargoInsumo($mntInsumo->getNombreGenericoInsumo() );
+            $mntInsumo->setMultiploInsumo(1);
             $mntInsumo->setCodigoSinabExt(0);
+            $mntInsumo->setCodigoMinsalInsumo(0);
             $mntInsumo->setListadoOficial(FALSE);
             $mntInsumo->setVenInsumo(3);
             $mntInsumo->setProcesadoInsumo(0);
@@ -78,10 +90,14 @@ class MntInsumoController extends Controller
     public function showAction(MntInsumo $mntInsumo)
     {
         $deleteForm = $this->createDeleteForm($mntInsumo);
+        $medicamento = false;
+        
+        
+        
 
         return $this->render('mntinsumo/show.html.twig', array(
             'mntInsumo' => $mntInsumo,
-            'medicamento' => false,
+            'medicamento' => $this->is_medicamento( $mntInsumo->getGrupo() ),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -92,8 +108,16 @@ class MntInsumoController extends Controller
      */
     public function editAction(Request $request, MntInsumo $mntInsumo)
     {
-        $deleteForm = $this->createDeleteForm($mntInsumo);
-        $editForm = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoType', $mntInsumo);
+        $deleteForm = $this->createDeleteForm($mntInsumo);        
+        
+        $auth_checker = $this->get('security.authorization_checker');
+        if ($auth_checker->isGranted('ROLE_MEDICAMENTO') or $auth_checker->isGranted('ROLE_SOLICITA_MEDICAMENTO') or $this->is_medicamento( $mntInsumo->getGrupo() ) ) {
+			$editForm = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoCompletoType', $mntInsumo);
+		}
+		else
+		{
+			$editForm = $this->createForm('Minsal\SuministroBundle\Form\MntInsumoType', $mntInsumo);
+		}
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -105,6 +129,7 @@ class MntInsumoController extends Controller
 
         return $this->render('mntinsumo/edit.html.twig', array(
             'mntInsumo' => $mntInsumo,
+            'medicamento' => $this->is_medicamento( $mntInsumo->getGrupo() ),
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -158,4 +183,13 @@ class MntInsumoController extends Controller
         $array = $query->getArrayResult();
         return new JsonResponse(array('data' => $array));
     }
+    
+    public function is_medicamento( $dato ){
+		$repository = $this->getDoctrine()->getRepository('MinsalSuministroBundle:CtlGrupo');
+		$query = $repository->createQueryBuilder('g')->where("g.nombreGrupo = '$dato'")->getQuery()->getResult();
+		foreach ($query as $q) {
+			return $q->getSuministro();
+		}
+		return null;
+	}
 }
