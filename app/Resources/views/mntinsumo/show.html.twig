@@ -9,7 +9,9 @@
                                 <div class="pull-right"><a href="javascript:void(0)" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="javascript:void(0)" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
                             </div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
-                                <div class="panel-body">
+                                <div class="panel-body"><p>
+										<center><svg id="insumoBC"></svg><script>JsBarcode("#insumoBC", "{{ mntInsumo.codigoMinsalInsumo }}", {  displayValue: true, width:3 });</script>
+                                    </center></p>
     <table>
         <tbody>
             <tr>
@@ -91,7 +93,7 @@
                 <th>Especificacion técnica </th>
                 <td>{{ mntInsumo.especificacionTecnicaInsumo }}</td>
             </tr>
-            {% if not medicamento %}
+            {% if medicamento %}
             <tr>
                 <th>Nivel VEN</th>
                 <td>{% if mntInsumo.venInsumo == 1 %}Vital{% elseif mntInsumo.venInsumo == 2 %}Escencial{% elseif mntInsumo.venInsumo == 3 %}No escencial{% endif %}</td>
@@ -103,9 +105,7 @@
             </tr>
             {% endif %}
         </tbody>
-    </table>                                    <p>
-										<img id="insumoBC	"/><svg id="insumoBC"></svg><script>JsBarcode("#insumoBC", "{{ mntInsumo.codigoMinsalInsumo }}", {  displayValue: true, width:3 });</script>
-                                    </p>
+    </table>                                    
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,11 @@
 {% endblock %}
 {% block breadcrumb %}
 <a href="{{ path('homepage') }}"><button class="btn btn-warning">Regresar a listado</button></a>
-<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
+{% if app.user and app.user == mntInsumo.userIdSchema %}
+	<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Editar</button></a>
+{% elseif mntInsumo.grupo in app.session.get('valida') or is_granted('ROLE_UNABAST') %}
+	<a href="{{ path('productos_edit', { 'id': mntInsumo.id }) }}"><button class="btn btn-primary">Actualizar estado</button></a>
+{% endif %}
 {% endblock %}
 
 {% block js_head %}
